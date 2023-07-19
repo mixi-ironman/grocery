@@ -1,0 +1,376 @@
+/* ADD TO CART */
+
+.product-view {
+    margin-top: 40px;
+}
+
+.product-img-box {
+    padding: 5px 5px 10px;
+    border: 1px dashed rgb(116, 120, 118);
+    /* border-image: linear-gradient(to right, #81ffb1, #ff6fe0) 1; */
+    border-radius: 10px !important;
+    /* box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); */
+}
+
+.product-img {
+    width: 100%;
+}
+.more-view-list {
+    display: flex;
+}
+.more-view-item {
+    border: 1px solid rgb(182, 236, 200);
+    width: 166px;
+    margin: 0 5px;
+    border-radius: 10px;
+}
+.more-view-img {
+    height: auto;
+    width: 100%;
+}
+
+.product-summary {
+    /* box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); */
+    padding: 20px;
+    border-radius: 5px;
+}
+.product-name h1 {
+    font-size: 30px;
+    margin: 0 0 2px;
+    text-align: left;
+    line-height: 1.1em;
+    padding-bottom: 12px;
+    letter-spacing: normal;
+    font-weight: 500;
+    font-family: Quicksand, sans-serif;
+    color: #253d4e;
+    font-weight: 700;
+}
+.product-rating {
+    display: flex;
+}
+.star-rating {
+    margin-right: 15px;
+}
+
+.product-price-current {
+    display: flex;
+    /* align-items: center; */
+    margin: 30px 0;
+}
+.special-price {
+    color: red;
+    padding: 0;
+    margin: 0;
+    font-size: 22px;
+    margin-right: 15px;
+}
+.old-price {
+    color: black;
+    padding: 0;
+    font-size: 18px;
+    margin: 0;
+}
+
+.product-unit,
+.product-vendor,
+.product-category,
+.product-availability {
+    display: flex;
+    margin: 20px 0;
+    align-items: center;
+}
+.title,
+.vendor-title,
+.category-title,
+.availability-title {
+    min-width: 140px;
+    font-weight: 600;
+    font-size: 20px;
+}
+
+.product-category {
+    margin: 0;
+}
+
+.category-name {
+    font-size: 16px;
+}
+
+.full-left {
+    display: flex;
+    align-items: center;
+}
+.quantity {
+    display: flex;
+    align-items: center;
+}
+
+.quantity button {
+    /* display: inline-block; */
+    border: none;
+    text-align: center;
+}
+
+.icon-minus,
+.icon-flus {
+    display: block;
+    box-shadow: none;
+    margin: 0;
+    font-size: 16px;
+    font-weight: 700;
+    display: flex;
+    padding: 13px;
+    line-height: normal;
+    text-align: center;
+    background-color: rgb(133, 207, 153);
+    border-radius: 4px;
+}
+
+.input-quantity {
+    outline: none;
+    height: 42px;
+    max-width: 60px;
+    border: none;
+    text-align: center;
+    padding: 0;
+    background-color: rgb(224, 237, 228);
+
+    /* box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); */
+}
+
+.btn-add-cart {
+    display: flex;
+    align-items: center;
+    border: none;
+    margin-left: 30px;
+    outline: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.btn-add {
+    display: block;
+    padding: 5px 10px;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.share-social {
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+.share-social p {
+    margin: 0 20px 0 0;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.share-social-link {
+    margin-right: 6px;
+}
+
+/* Product-info   */
+
+/* Tab-ui */
+.product-info {
+    /* padding: 5px; */
+    margin: 20px 0 50px;
+}
+
+.tabs {
+    display: flex;
+    position: relative;
+    margin-bottom: 15px;
+}
+.tabs .line {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 6px;
+    border-radius: 15px;
+    background-color: #c23564;
+    transition: all 0.2s ease;
+}
+.tab-item {
+    display: flex;
+    align-items: center;
+    min-width: 80px;
+    padding: 16px 20px 11px 20px;
+    /* margin-right: 15px; */
+    font-size: 20px;
+    text-align: center;
+    color: #c23564;
+    background-color: #fff;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom: 5px solid transparent;
+    opacity: 0.6;
+    cursor: pointer;
+    transition: all 0.5s ease;
+}
+
+.tab-item img {
+    margin-right: 10px;
+}
+
+.tab-item:hover {
+    opacity: 1;
+    background-color: rgba(194, 53, 100, 0.05);
+    border-color: rgba(194, 53, 100, 0.1);
+}
+
+.tab-item.active {
+    opacity: 1;
+}
+
+.tab-icon {
+    font-size: 24px;
+    width: 32px;
+    position: relative;
+    top: 2px;
+}
+
+/* tab-content */
+
+.tab-pane {
+    color: #333;
+    display: none;
+}
+.tab-pane.active {
+    display: block;
+}
+.tab-pane p {
+    text-align: justify;
+}
+
+.comment-list {
+    list-style: none;
+    padding: 0;
+    /* margin-top: 15px; */
+}
+.comment-item {
+    display: flex;
+    position: relative;
+    align-items: flex-start;
+    margin-bottom: 20px;
+    background-color: rgb(196, 227, 210, 0.2);
+    /* border: 1px solid red; */
+    padding: 10px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    /* box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); */
+}
+
+.comment-item::before {
+    position: absolute;
+    content: '';
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: #7a7c7b;
+}
+
+.comment-user-img {
+    width: 90px;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-right: 25px;
+}
+
+.comment-meta {
+    margin: 7px 0;
+}
+
+.comment-meta > *:nth-child(1) {
+    font-weight: 600;
+    color: #000000;
+}
+.comment-meta > *:nth-child(2) {
+    color: #4dde65;
+    font-weight: 600;
+}
+.comment-description {
+    text-align: justify;
+}
+
+.comment-description p {
+    display: inline-block;
+}
+
+/* Form-comment */
+
+.review-form-res {
+    padding: 15px 15px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.stars {
+    margin-top: 10px;
+}
+
+.comment-form-comment {
+    margin-bottom: 30px;
+}
+
+.comment-form-author input {
+    padding: 13px 10px;
+    outline: none;
+}
+
+.comment-form-email input {
+    padding: 13px 10px;
+    outline: none;
+}
+
+.btn-form-submit {
+    margin-top: 15px;
+    padding: 10px 10px;
+}
+
+.btn-form-submit button {
+    background: rgb(93, 168, 138);
+    padding: 10px 10px;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 400;
+}
+
+/* Related Product */
+.related-product {
+    margin-bottom: 40px;
+}
+
+.related-text-content {
+    text-align: center;
+}
+
+.related-text-content p {
+    color: rgb(93, 168, 138);
+    font-size: 22px;
+    line-height: 1;
+    letter-spacing: 2px;
+    font-family: 'Satisfy', cursive;
+}
+
+.related-text-content h4 {
+    color: rgb(0, 0, 0);
+    font-size: 55px;
+    line-height: 1;
+    letter-spacing: 2px;
+    font-family: 'Satisfy', cursive;
+}
+.related-line {
+    height: 3px;
+    width: 70px;
+    background-color: red;
+    display: inline-block;
+}

@@ -1,0 +1,124 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
+
+:root {
+    --color-bgr: rgb(93, 168, 138);
+    --color-primary: rgb(108, 176, 149);
+    --color-secondary: rgb(254, 229, 215);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: black;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+/* body {
+    overflow: auto;
+} */
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    color: black;
+}
+li {
+    list-style: none;
+}
+.col-lg-1-5 {
+    width: 20% !important;
+}
+
+.translatex {
+    transition: all 0.3s;
+}
+
+.translatex:hover {
+    /* background-color: rgb(226, 203, 166); */
+    transform: translateX(-5px);
+    color: black !important;
+}
+
+.translatey {
+    transition: all 0.3s;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    border-radius: 50% !important;
+    cursor: pointer;
+}
+
+.translatey:hover {
+    transform: translateY(-2px);
+    color: black !important;
+}
+
+.translate {
+    transition: all 0.3s;
+    /* box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); */
+    cursor: pointer;
+}
+
+.translate:hover {
+    transform: translateY(-3px);
+}
+/* Font */
+
+/* word-spacing: 15px; */
+
+.hover_::after {
+    content: '';
+    position: absolute;
+    display: block;
+    width: 30%;
+    height: 3px;
+    background: linear-gradient(to right, #81ffb1, #ff6fe0);
+
+    bottom: -5px;
+    z-index: 3;
+    transition: all 0.4s;
+}
+
+.hover_:hover::after {
+    width: 100%;
+}
+.hover-top::after {
+    content: '';
+    position: absolute;
+    display: block;
+    width: 30%;
+    height: 3px;
+    background: linear-gradient(to right, #81ffb1, #ff6fe0);
+    top: -8px;
+    z-index: 3;
+    transition: all 0.4s;
+}
+.hover-top:hover::after {
+    width: 100%;
+}
+/* Stick header */
+.sticky {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    float: left;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    /* box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.05); */
+    background: linear-gradient(to right, #8ce09d, #fff5c3) !important;
+    z-index: 100;
+    animation: slideIndown 1s linear;
+    /* transition: opacity .25s ease,transform .25s ease; */
+}
+@keyframes slideIndown {
+    0% {
+        transform: translate3d(0, -100%, 0);
+        visibility: visible;
+    }
+
+    100% {
+        transform: translate3d(0, 0%, 0);
+    }
+}
