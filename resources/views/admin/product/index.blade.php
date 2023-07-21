@@ -15,7 +15,7 @@
                         <th scope="col"style="text-align: center;vertical-align:middle;">Name</th>
                         <th scope="col"style="text-align: center;vertical-align:middle;">Image</th>
                         <th scope="col"style="text-align: center;vertical-align:middle;">slug</th>
-                        <th scope="col"style="text-align: center;vertical-align:middle;">product_id</th>
+                        <th scope="col"style="text-align: center;vertical-align:middle;">Category</th>
                         <th scope="col"style="text-align: center;vertical-align:middle;">Price</th>
                         <th scope="col"style="text-align: center;vertical-align:middle;">IsActive</th>
                         <th scope="col"style="text-align: center;vertical-align:middle;">description</th>
@@ -27,15 +27,17 @@
                     {{-- @php
                     dd($products)
                     @endphp --}}
+
                     @foreach($products as $key => $product)
                         <tr>
                             <td scope="row" style="text-align: justify;vertical-align:top;max-width:200px;white-space: wrap;overflow: hidden; text-overflow: ellipsis;">{{ $product->id }}</td>
                             <td style="text-align: justify;vertical-align:top;max-width:150;white-space: wrap;overflow: hidden; text-overflow: ellipsis;">{{ $product->name }}</td>
                             <td style="text-align: justify;vertical-align:top;max-width:200px;white-space: wrap;overflow: hidden; text-overflow: ellipsis;">
-                                <img style="width:180px;height:120px;border-radius:5px;" src="{{ $product->image }}" >
+    
+                                <img style="width:180px;height:120px;object-fit: cover;border-radius:5px;border:1px solid rgb(247, 181, 181);box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);" src="{{ asset('uploads/') }}/{{ $product->image }}" >
                             </td>
                             <td style="text-align: justify;vertical-align:top;max-width:200px;white-space: wrap;overflow: hidden; text-overflow: ellipsis;">{{ $product->slug }}</td>
-                            <td style="text-align: center;vertical-align:top;max-width:100px;white-space: wrap;overflow: hidden; text-overflow: ellipsis;">{{ $product->category_id }}</td>
+                            <td style="text-align: center;vertical-align:top;max-width:100px;white-space: wrap;overflow: hidden; text-overflow: ellipsis;">{{ $product->category->name }}</td>
                             <td style="text-align: center;vertical-align:top;max-width:200px;white-space: wrap;overflow: hidden; text-overflow: ellipsis;">{{ $product->price }}</td>
                             <td style="text-align: center;vertical-align:top;max-width:200px;white-space: wrap;overflow: hidden; text-overflow: ellipsis;">
                                 {{ $product->is_active }}

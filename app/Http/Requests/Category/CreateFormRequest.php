@@ -31,8 +31,8 @@ class CreateFormRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'name_category.required' => 'Tên bạn đang để trống',
-             'description.required' => 'Description bạn đang để trống',
+            'name_category.required' => 'Tên bạn đang để trống...',
+             'description.required' => 'Description bạn đang để trống...',
         ];
     }
 }

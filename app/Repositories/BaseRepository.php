@@ -15,15 +15,15 @@ class BaseRepository
         return $this->model->find($id);
     }
 
-    // get list category
+    // get list 
     public function getAll()
     {
-        // dd($data);
         return $this->model->all();
     }
 
     public function create($attribute = [])
     {
+        // dd($attribute);
         return $this->model->create($attribute);
     }
 

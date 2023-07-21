@@ -16,8 +16,8 @@ class CategoryRepository extends BaseRepository
 
     public function getCategories()
     {
-        // return $this->model->orderByDesc('created_at')->paginate(5);
-        return $this->model->paginate(5);
+        return $this->model->orderByDesc('created_at')->paginate(5);
+        // return $this->model->paginate(5);
         // return $this->model->all();
 
 
@@ -28,20 +28,6 @@ class CategoryRepository extends BaseRepository
         // dd($data);
         return $this->model->where('parent_id',0)->get();
     }
-
-    // get list category
-    public function getAll()
-    {
-        // dd($data);
-        return $this->model->all();
-    }
-
-    public function getCategory($id)
-    {
-        // dd($data);
-        return $this->model->find($id);
-    }
-
 
     public function delete_($id)
     {

@@ -15,9 +15,6 @@ class CategoryController extends Controller
         $this->categoryService = $categoryService;
     }
 
-    /**
-     * Display a listing of the resource.
-     */
     public function index(Request $request)
     {
         //c1 dd(Route::is('categories.index')); // định nghĩa rote name có đang đúng route đang vào không
@@ -32,9 +29,6 @@ class CategoryController extends Controller
         return view('admin.category.index', ['categories' => $categories]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         //lấy ra danh mục cha
@@ -45,32 +39,23 @@ class CategoryController extends Controller
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(CreateFormRequest $request)
+    public function store(Request $request)
     {
        //dd($request->all());
-       
        $this->categoryService->store($request);
-       
-       Session::flash('success','Thêm danh mục thành công');
-       return redirect()->back();
+
+    //    Session::flash('success','Thêm danh mục thành công');
+    //    return redirect()->back();
     //    return redirect()->route('categories.index');
+          return redirect()->route('categories.index')->with('success', 'Created Category Successfully!');
 
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
         $category = $this->categoryService->getByCategoryId($id);
@@ -82,22 +67,16 @@ class CategoryController extends Controller
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
-        // dd($id);
-        // dd($request->input());
         $this->categoryService->update($request,$id);
+        return redirect()->route('categories.index')->with('success', 'Created Category Successfully!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
-        // dd($id);
         $this->categoryService->destroy($id);
+        return redirect()->route('categories.index')->with('success', 'Created Category Successfully!');
+
     }
 }

@@ -4,49 +4,52 @@
     <div class="col-md-12">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title">Categories</h4>
+                <h4 class="card-title">Products</h4>
             </div>
             <div class="card-body">
-                <form action="{{ route('categories.update',['id' => $categories->id]) }}" method="POST">
+                <form action="{{ route('products.update',['id' => $product->id]) }}" enctype="multipart/form-data" method="POST">
                     @csrf
                     @method('PUT')
-                    <div class="mb-3">
-                        <label  class="form-label">Name Category</label>
-                        <input type="text" class="form-control"  name="name_category" aria-describedby="emailHelp" value="{{ $categories->name }}">
-                    </div>
 
                     <div class="mb-3">
-                        <label  class="form-label">Description</label>
-                        <textarea class="form-control" name="description" rows="3">{{ $categories->description }}</textarea>
+                        <label  class="form-label">Name Product</label>
+                        <input type="text" class="form-control"  name="name_product" aria-describedby="emailHelp" value="{{ $product->name }}">
                     </div>
 
-                    <div class="mb-3">
-                        <label for="parent_id" class="form-label">Parent Category</label>
-                        <select class="form-select" id="parent_id" name="parent_id" aria-label="Default select example">
+                     <div class="mb-3">
+                        <label for="category_id" class="form-label">Category</label>
+                        <select class="form-select" id="category_id" name="category_id" aria-label="Default select example">
                             <option value="0">---Chọn---</option>
-                            @foreach($category_parent as $category)
-                                @if($categories->parent_id == 0)
-                                    <option value="{{ $category->id }}" {{ ($category->id == $categories->id) ? 'selected' : '' }}>
-                                        {{ $category->name }}
-                                    </option>
-                                @else
-                                    <option value="{{ $category->id }}" {{ ($category->id == $categories->parent_id) ? 'selected' : '' }}>
-                                        {{ $category->name }}
-                                    </option>
-                                @endif
+                            @foreach($categories as $category)
+                                <option value="{{ $category->id }}" {{ ($category->id == $product->category_id) ? 'selected' : '' }}>{{ $category->name }}</option>
                             @endforeach
                         </select>
                     </div>
 
+                    <div class="mb-3">
+                        <label  class="form-label">Description</label>
+                        <textarea class="form-control" name="description" rows="3">{{ $product->description }}</textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label  class="form-label">Price</label>
+                        <input type="text" class="form-control"  name="price" aria-describedby="emailHelp" value="{{ $product->price }}">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="image"  class="form-label">Image</label>
+                        <input type="file" class="form-control" id="image" name="image" aria-describedby="emailHelp">
+                    </div>
+
                     <p>Active</p>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="is_active" checked value="1">
+                       <input class="form-check-input" type="radio" name="is_active" {{ ($product->is_active == 1) ? 'checked' : '' }} value="1">
                         <label class="form-check-label" >
                             Có
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="is_active" value="0">
+                        <input class="form-check-input" type="radio" name="is_active" {{ ($product->is_active == 0) ? 'checked' : '' }}  value="0">
                         <label class="form-check-label" >
                             Không
                         </label>
@@ -72,7 +75,7 @@
 @push('custom-script')
     <script>
         $(document).ready(function () {
-            $('#parent_id').select2({
+            $('#category_id').select2({
                 theme: 'bootstrap-5'
             });
         })

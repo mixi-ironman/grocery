@@ -25,7 +25,7 @@ class CategoryService
     //get list category 
     public function getAll()
     {
-        return $this->categoryRepository->getCategories();
+        return $this->categoryRepository->getAll();
     }
 
     //get ra parent category
@@ -37,7 +37,7 @@ class CategoryService
     //get category theo id
     public function getByCategoryId($id)
     {
-        return $this->categoryRepository->getCategory($id);
+        return $this->categoryRepository->getById($id);
     }
 
     public function store($request)
@@ -55,48 +55,47 @@ class CategoryService
            DB::commit();
            
         //    return Redirect::route('categories.index')->with('success', 'Created Category Successfully!');
-            return redirect()->route('catregories.index')->with('success', 'Created Category Successfully!');
+        //    return redirect()->route('categories.index')->with('success', 'Created Category Successfully!'); 
         } catch (\Exception $e) {
           DB::rollBack();
           return Redirect::back()->withErrors(['create' => 'Something Wrong!'])->withInput();
         }
     }
 
-    public function update($request,$id)
+    public function update($request, $id)
     {
-         // dd($request->input());
-        // $parent_id = ($request->input('parent_id') != $id) ? $request->input('parent_id') : null;
-
-         try {
-            DB::Begintransaction();
-            if($request->input('parent_id') != $id){
-                $category = $this->categoryRepository->update($id,[
-                'name' => $request->input('name_category'),
-                'slug' => Str::slug($request->input('name_category'), '-'),
-                'description' => $request->input('description'),
-                'parent_id' => $request->input('parent_id'),
-                'is_active' => $request->input('is_active'),
+        // dd($request->input());
+            // $parent_id = ($request->input('parent_id') != $id) ? $request->input('parent_id') : null;
+        try {
+            DB::beginTransaction();
+            //handle nếu không chọn category thì không update category
+            if ($request->input('parent_id') != $id) {
+                $category = $this->categoryRepository->update($id, [
+                    'name' => $request->input('name_category'),
+                    'slug' => Str::slug($request->input('name_category'), '-'),
+                    'description' => $request->input('description'),
+                    'parent_id' => $request->input('parent_id'),
+                    'is_active' => $request->input('is_active'),
                 ]);
-            }else{
-                $category = $this->categoryRepository->update($id,[
-                'name' => $request->input('name_category'),
-                'slug' => Str::slug($request->input('name_category'), '-'),
-                'description' => $request->input('description'),
-                
-                'is_active' => $request->input('is_active'),
+            } else {
+                $category = $this->categoryRepository->update($id, [
+                    'name' => $request->input('name_category'),
+                    'slug' => Str::slug($request->input('name_category'), '-'),
+                    'description' => $request->input('description'),
+                    'is_active' => $request->input('is_active'),
                 ]);
             }
-        
-           DB::commit();
-           return Redirect::route('categories.index')->with('success', 'Update Category Successfully!');
-            // return redirect()->route('catregories.index')->with('success', 'Update Category Successfully!');
 
+            DB::commit();
+
+            // return Redirect::route('categories.index')->with('success', 'Update Category Successfully!');
+            //  return redirect()->route('categories.index')->with('success', 'Created Category Successfully!');
         } catch (\Exception $e) {
-          DB::rollBack();
-          return Redirect::back()->withErrors(['update' => 'Something Wrong!'])->withInput();
+            DB::rollBack();
+            return Redirect::back()->withErrors(['update' => 'Something Wrong!'])->withInput();
         }
-        
     }
+
 
 
     public function destroy($id)

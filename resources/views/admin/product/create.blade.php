@@ -4,45 +4,39 @@
     <div class="col-md-12">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title">Categories</h4>
+                <h4 class="card-title">Products</h4>
             </div>
             <div class="card-body">
-                <form action="{{ route('categories.store') }}" method="POST">
+                <form action="{{ route('products.store') }}" enctype="multipart/form-data" method="POST">
                     @csrf
                     <div class="mb-3">
-                        <label  class="form-label">Name Category</label>
-                        <input type="text" class="form-control"  name="name_category" aria-describedby="emailHelp">
+                        <label  class="form-label">Name Product</label>
+                        <input type="text" class="form-control"  name="name_product" aria-describedby="emailHelp">
                     </div>
 
-                    {{-- <div class="mb-3">
-                        <label  class="form-label">Slug</label>
-                        <input type="text" class="form-control" name="slug" aria-describedby="emailHelp">
-                    </div> --}}
+                     <div class="mb-3">
+                        <label for="category_id" class="form-label">Category</label>
+                        <select class="form-select" id="category_id" name="category_id" aria-label="Default select example">
+                            <option value="0">---Chọn---</option>
+                            @foreach($categories as $category)
+                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
 
                     <div class="mb-3">
                         <label  class="form-label">Description</label>
                         <textarea class="form-control" name="description" rows="3"></textarea>
                     </div>
 
-                    {{-- <div class="mb-3">
-                    <label  class="form-label" id="parent_id">Tên danh mục</label>
-                        <select class="form-select" aria-label="Default select example" id="parent_id" name="parent_id">
-                            <option selected value="0">---Chọn---</option>
-                            @foreach($category_parent as $category)
-                                <option  value="{{ $category->id }}">{{ $category->name }}</option>
-                            @endforeach
-                            
-                        </select>
-                    </div> --}}
+                    <div class="mb-3">
+                        <label  class="form-label">Price</label>
+                        <input type="text" class="form-control"  name="price" aria-describedby="emailHelp">
+                    </div>
 
                     <div class="mb-3">
-                        <label for="parent_id" class="form-label">Parent Category</label>
-                        <select class="form-select" id="parent_id" name="parent_id" aria-label="Default select example">
-                            <option value="0">---Chọn---</option>
-                            @foreach($category_parent as $category)
-                                <option value="{{ $category->id }}">{{ $category->name }}</option>
-                            @endforeach
-                        </select>
+                        <label for="image"  class="form-label">Image</label>
+                        <input type="file" class="form-control" id="image" name="image" aria-describedby="emailHelp">
                     </div>
 
                     <p>Active</p>
@@ -79,7 +73,7 @@
 @push('custom-script')
     <script>
         $(document).ready(function () {
-            $('#parent_id').select2({
+            $('#category_id').select2({
                 theme: 'bootstrap-5'
             });
         })

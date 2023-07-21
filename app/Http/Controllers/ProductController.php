@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-// use App\Http\Requests\Category\CreateFormRequest;
 use App\Services\ProductService;
 use App\Services\CategoryService;
-
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 class ProductController extends Controller
 {
@@ -23,60 +22,55 @@ class ProductController extends Controller
     public function index()
     {
         $products = $this->productService->getAllProduct();
-        $categories = $this->categoryService->getAll();
-        dd( $categories);
+
         // dd($products);
         return view('admin.product.index', ['products' => $products]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+ 
     public function create()
     {
         //lấy ra danh sách category
-        $category_parent = $this->productService->getParentCategory();
-        return view('admin.category.create',[
-            'title'=>'Add Category',
-            'category_parent' => $category_parent,
+        $categories = $this->categoryService->getAll();
+        return view('admin.product.create',[
+            'title'=>'Add Product',
+            'categories' => $categories,
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $this->productService->store($request);
+        return redirect()->route('products.create')->with('success', 'Created Products Successfully!');
+            // return Redirect::route('products.index')->with('success', 'Created Product Successfully!');
     }
 
-    /**
-     * Display the specified resource.
-     */
+
     public function show(string $id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+
     public function edit(string $id)
     {
-        //
+        $product = $this->productService->getByProductId($id);
+        $categories = $this->categoryService->getAll();
+        // dd($product);
+        return view('admin.product.edit',[
+            'title'=>'Edit Product',
+            // 'category_parent' => $category_parent,
+            'product' => $product,
+            'categories' => $categories,
+        ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
-        //
+         $this->productService->update($request,$id);
+        return redirect()->route('products.index')->with('success', 'Update Product Successfully!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
         //
