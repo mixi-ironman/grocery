@@ -22,6 +22,8 @@ class CategoryFactory extends Factory
             'slug' => $this->faker->slug,
             'description' => $this->faker->paragraph,
             'parent_id' => $this->faker->numberBetween($min = 0, $max = 1),
+            'price' => $this->faker->numberBetween($min = 0, $max = 1),
+
             'is_active' => $this->faker->boolean(80), // Sử dụng faker để tạo giá trị true/false với tỷ lệ 80% true
             'updated_at' => now(),
             'created_at' => now(),

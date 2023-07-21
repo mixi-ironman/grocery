@@ -14,4 +14,28 @@ class BaseRepository
     {
         return $this->model->find($id);
     }
+
+    // get list category
+    public function getAll()
+    {
+        // dd($data);
+        return $this->model->all();
+    }
+
+    public function create($attribute = [])
+    {
+        return $this->model->create($attribute);
+    }
+
+    public function update($id, $attribute = [])
+    {
+        return $this->model->where('id',$id)
+                           ->update($attribute);
+    }
+
+    public function delete($id)
+    {
+        return $this->model->where('id',$id)
+                           ->delete();
+    }
 }
