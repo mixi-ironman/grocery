@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         <link
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -25,6 +25,8 @@
         />
         <link rel="stylesheet" href="{{ url('client') }}/assets/css/global.css" />
         <link rel="stylesheet" href="{{ asset('client/assets/css/main.css') }}" />
+        {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
+
         <title>Mixi-Market</title>
     </head>
     <body>
@@ -34,19 +36,18 @@
             <!-- End header -->
 
             <!-- Slider -->
-            <!-- <div class="container-fluid"> -->
             <div class="container">
-            @include('client.components.slider')
+                @include('client.components.slider')
             </div>
             <!-- End slider -->
 
-            <!-- Main -->
+             <!-- Main -->
             <div class="content">
                 <!-- Feature-Category -->
-                
+                @include('client.components.featured_category')
                 <!--End Feature-Category -->
 
-                <!-- banner -->
+                <!-- banner Category -->
                 <div class="container banner-wrapper">
                     <div class="row banner-wrapper-list g-3">
                         <div class="col-lg-4 col-md-6">
@@ -123,817 +124,8 @@
                             </div>
                         </div>
                         <div class="col-md-12">
-                            <div class="product-grid row g-3">
-                                <div class="col-lg-1-5">
-                                    <div class="product-cart">
-                                        <div class="product-img-action">
-                                            <div class="product-cart-img">
-                                                <a href="#">
-                                                    <img
-                                                        class="default-img"
-                                                        src="{{ url('client') }}/assets/img/product-1-1.jpg"
-                                                        alt=""
-                                                    />
-                                                    <img class="hover-img" src="{{ url('client') }}/assets/img/product-mg.jpg" alt="" />
-                                                </a>
-                                                <div class="product-action">
-                                                    <a href="#" class="product-action-icon">
-                                                        <img
-                                                            width="35"
-                                                            height="35"
-                                                            class="translatex"
-                                                            src="https://img.icons8.com/external-ddara-fill-ddara/64/external-eye-eye-ddara-fill-ddara.png"
-                                                            alt="external-eye-eye-ddara-fill-ddara"
-                                                        />
-                                                    </a>
-                                                    <a href="#" class="product-action-icon">
-                                                        <img
-                                                            class="translatex"
-                                                            width="37"
-                                                            height="37"
-                                                            src="https://img.icons8.com/bubbles/50/half-heart.png"
-                                                            alt="half-heart"
-                                                        />
-                                                    </a>
-                                                    <a href="#" class="product-action-icon">
-                                                        <img
-                                                            class="translatex"
-                                                            width="35"
-                                                            height="35"
-                                                            src="https://img.icons8.com/doodle/48/shopping-cart--v1.png"
-                                                            alt="shopping-cart--v1"
-                                                        />
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <!-- sao cho ở ngoài position lại ăn theo body -->
-                                            <!-- <div class="product-action">
-                                                <p>a</p>
-                                                <p>b</p>
-                                            </div> -->
-                                            <!-- button hiển thị giá trị gảim giá của 1 cart là bao nhiêu -->
-                                            <div class="product-badges"></div>
-                                        </div>
-                                        <div class="product-content">
-                                            <div class="product-category">Snack</div>
-                                            <h2 class="product-name">
-                                                <a href="#"> Seeds of Change Organic Quinoa, Brown </a>
-                                            </h2>
-                                            <div class="product-rate-cover">
-                                                <div class="product-rate">
-                                                    <i class="fa-regular fa-star"></i>
-                                                    <i class="fa-regular fa-star"></i>
-                                                    <i class="fa-regular fa-star"></i>
-                                                    <i class="fa-regular fa-star"></i>
-                                                    <i class="fa-regular fa-star"></i>
-                                                </div>
-                                                <div class="product-jubge" style="display: none"></div>
-                                            </div>
-                                            <div class="product-cart-bottom">
-                                                <p>1000$</p>
-                                                <p class="old-price">2000đ</p>
-                                                <div class="product-price">
-                                                    <p>1000$</p>
-                                                    <p class="old-price">2000đ</p>
-                                                </div>
-                                                <div class="add-cart">
-                                                    <a href="#">
-                                                        <i class="me-2 fa-solid fa-cart-shopping"></i><span>Add</span>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-1-5">
-                                    <div class="product-cart">
-                                        <div class="product-img-action">
-                                            <div class="product-cart-img">
-                                                <a href="#">
-                                                    <img
-                                                        class="default-img"
-                                                        src="{{ url('client') }}/assets/img/product-1-1.jpg"
-                                                        alt=""
-                                                    />
-                                                    <!-- <img class="hover-img" src="{{ url('client') }}/assets/img/product-1-2.jpg" alt="" /> -->
-                                                </a>
-                                                <div class="product-action">
-                                                    <a href="#" class="product-action-icon">
-                                                        <img
-                                                            width="35"
-                                                            height="35"
-                                                            class="translatex"
-                                                            src="https://img.icons8.com/external-ddara-fill-ddara/64/external-eye-eye-ddara-fill-ddara.png"
-                                                            alt="external-eye-eye-ddara-fill-ddara"
-                                                        />
-                                                    </a>
-                                                    <a href="#" class="product-action-icon">
-                                                        <img
-                                                            class="translatex"
-                                                            width="37"
-                                                            height="37"
-                                                            src="https://img.icons8.com/bubbles/50/half-heart.png"
-                                                            alt="half-heart"
-                                                        />
-                                                    </a>
-                                                    <a href="#" class="product-action-icon">
-                                                        <img
-                                                            class="translatex"
-                                                            width="35"
-                                                            height="35"
-                                                            src="https://img.icons8.com/doodle/48/shopping-cart--v1.png"
-                                                            alt="shopping-cart--v1"
-                                                        />
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <!-- sao cho ở ngoài position lại ăn theo body -->
-                                            <!-- <div class="product-action">
-                                                <p>a</p>
-                                                <p>b</p>
-                                            </div> -->
-                                            <!-- button hiển thị giá trị gảim giá của 1 cart là bao nhiêu -->
-                                            <div class="product-badges"></div>
-                                        </div>
-                                        <div class="product-content">
-                                            <div class="product-category">Snack</div>
-                                            <h2 class="product-name">
-                                                <a href="#"> Seeds of Change Organic Quinoa, Brown </a>
-                                            </h2>
-                                            <div class="product-rate-cover">
-                                                <div class="product-rate">
-                                                    <i class="fa-regular fa-star"></i>
-                                                    <i class="fa-regular fa-star"></i>
-                                                    <i class="fa-regular fa-star"></i>
-                                                    <i class="fa-regular fa-star"></i>
-                                                    <i class="fa-regular fa-star"></i>
-                                                </div>
-                                                <div class="product-jubge" style="display: none"></div>
-                                            </div>
-                                            <div class="product-cart-bottom">
-                                                <p>1000$</p>
-                                                <p class="old-price">2000đ</p>
-                                                <div class="product-price">
-                                                    <p>1000$</p>
-                                                    <p class="old-price">2000đ</p>
-                                                </div>
-                                                <div class="add-cart">
-                                                    <a href="#">
-                                                        <i class="me-2 fa-solid fa-cart-shopping"></i><span>Add</span>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-1-5">
-                                    <div class="product-cart">
-                                        <div class="product-img-action">
-                                            <div class="product-cart-img">
-                                                <a href="#">
-                                                    <img
-                                                        class="default-img"
-                                                        src="{{ url('client') }}/assets/img/product-1-1.jpg"
-                                                        alt=""
-                                                    />
-                                                    <!-- <img class="hover-img" src="{{ url('client') }}/assets/img/product-1-2.jpg" alt="" /> -->
-                                                </a>
-                                                <div class="product-action">
-                                                    <a href="#" class="product-action-icon">
-                                                        <img
-                                                            width="35"
-                                                            height="35"
-                                                            class="translatex"
-                                                            src="https://img.icons8.com/external-ddara-fill-ddara/64/external-eye-eye-ddara-fill-ddara.png"
-                                                            alt="external-eye-eye-ddara-fill-ddara"
-                                                        />
-                                                    </a>
-                                                    <a href="#" class="product-action-icon">
-                                                        <img
-                                                            class="translatex"
-                                                            width="37"
-                                                            height="37"
-                                                            src="https://img.icons8.com/bubbles/50/half-heart.png"
-                                                            alt="half-heart"
-                                                        />
-                                                    </a>
-                                                    <a href="#" class="product-action-icon">
-                                                        <img
-                                                            class="translatex"
-                                                            width="35"
-                                                            height="35"
-                                                            src="https://img.icons8.com/doodle/48/shopping-cart--v1.png"
-                                                            alt="shopping-cart--v1"
-                                                        />
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <!-- sao cho ở ngoài position lại ăn theo body -->
-                                            <!-- <div class="product-action">
-                                                <p>a</p>
-                                                <p>b</p>
-                                            </div> -->
-                                            <!-- button hiển thị giá trị gảim giá của 1 cart là bao nhiêu -->
-                                            <div class="product-badges"></div>
-                                        </div>
-                                        <div class="product-content">
-                                            <div class="product-category">Snack</div>
-                                            <h2 class="product-name">
-                                                <a href="#"> Seeds of Change Organic Quinoa, Brown </a>
-                                            </h2>
-                                            <div class="product-rate-cover">
-                                                <div class="product-rate">
-                                                    <i class="fa-regular fa-star"></i>
-                                                    <i class="fa-regular fa-star"></i>
-                                                    <i class="fa-regular fa-star"></i>
-                                                    <i class="fa-regular fa-star"></i>
-                                                    <i class="fa-regular fa-star"></i>
-                                                </div>
-                                                <div class="product-jubge" style="display: none"></div>
-                                            </div>
-                                            <div class="product-cart-bottom">
-                                                <p>1000$</p>
-                                                <p class="old-price">2000đ</p>
-                                                <div class="product-price">
-                                                    <p>1000$</p>
-                                                    <p class="old-price">2000đ</p>
-                                                </div>
-                                                <div class="add-cart">
-                                                    <a href="#">
-                                                        <i class="me-2 fa-solid fa-cart-shopping"></i><span>Add</span>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-1-5">
-                                    <div class="product-cart">
-                                        <div class="product-img-action">
-                                            <div class="product-cart-img">
-                                                <a href="#">
-                                                    <img
-                                                        class="default-img"
-                                                        src="{{ url('client') }}/assets/img/product-1-1.jpg"
-                                                        alt=""
-                                                    />
-                                                    <!-- <img class="hover-img" src="{{ url('client') }}/assets/img/product-1-2.jpg" alt="" /> -->
-                                                </a>
-                                                <div class="product-action">
-                                                    <a href="#" class="product-action-icon">
-                                                        <img
-                                                            width="35"
-                                                            height="35"
-                                                            class="translatex"
-                                                            src="https://img.icons8.com/external-ddara-fill-ddara/64/external-eye-eye-ddara-fill-ddara.png"
-                                                            alt="external-eye-eye-ddara-fill-ddara"
-                                                        />
-                                                    </a>
-                                                    <a href="#" class="product-action-icon">
-                                                        <img
-                                                            class="translatex"
-                                                            width="37"
-                                                            height="37"
-                                                            src="https://img.icons8.com/bubbles/50/half-heart.png"
-                                                            alt="half-heart"
-                                                        />
-                                                    </a>
-                                                    <a href="#" class="product-action-icon">
-                                                        <img
-                                                            class="translatex"
-                                                            width="35"
-                                                            height="35"
-                                                            src="https://img.icons8.com/doodle/48/shopping-cart--v1.png"
-                                                            alt="shopping-cart--v1"
-                                                        />
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <!-- sao cho ở ngoài position lại ăn theo body -->
-                                            <!-- <div class="product-action">
-                                                <p>a</p>
-                                                <p>b</p>
-                                            </div> -->
-                                            <!-- button hiển thị giá trị gảim giá của 1 cart là bao nhiêu -->
-                                            <div class="product-badges"></div>
-                                        </div>
-                                        <div class="product-content">
-                                            <div class="product-category">Snack</div>
-                                            <h2 class="product-name">
-                                                <a href="#"> Seeds of Change Organic Quinoa, Brown </a>
-                                            </h2>
-                                            <div class="product-rate-cover">
-                                                <div class="product-rate">
-                                                    <i class="fa-regular fa-star"></i>
-                                                    <i class="fa-regular fa-star"></i>
-                                                    <i class="fa-regular fa-star"></i>
-                                                    <i class="fa-regular fa-star"></i>
-                                                    <i class="fa-regular fa-star"></i>
-                                                </div>
-                                                <div class="product-jubge" style="display: none"></div>
-                                            </div>
-                                            <div class="product-cart-bottom">
-                                                <p>1000$</p>
-                                                <p class="old-price">2000đ</p>
-                                                <div class="product-price">
-                                                    <p>1000$</p>
-                                                    <p class="old-price">2000đ</p>
-                                                </div>
-                                                <div class="add-cart">
-                                                    <a href="#">
-                                                        <i class="me-2 fa-solid fa-cart-shopping"></i><span>Add</span>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-1-5">
-                                    <div class="product-cart">
-                                        <div class="product-img-action">
-                                            <div class="product-cart-img">
-                                                <a href="#">
-                                                    <img
-                                                        class="default-img"
-                                                        src="{{ url('client') }}/assets/img/product-1-1.jpg"
-                                                        alt=""
-                                                    />
-                                                    <!-- <img class="hover-img" src="{{ url('client') }}/assets/img/product-1-2.jpg" alt="" /> -->
-                                                </a>
-                                                <div class="product-action">
-                                                    <a href="#" class="product-action-icon">
-                                                        <img
-                                                            width="35"
-                                                            height="35"
-                                                            class="translatex"
-                                                            src="https://img.icons8.com/external-ddara-fill-ddara/64/external-eye-eye-ddara-fill-ddara.png"
-                                                            alt="external-eye-eye-ddara-fill-ddara"
-                                                        />
-                                                    </a>
-                                                    <a href="#" class="product-action-icon">
-                                                        <img
-                                                            class="translatex"
-                                                            width="37"
-                                                            height="37"
-                                                            src="https://img.icons8.com/bubbles/50/half-heart.png"
-                                                            alt="half-heart"
-                                                        />
-                                                    </a>
-                                                    <a href="#" class="product-action-icon">
-                                                        <img
-                                                            class="translatex"
-                                                            width="35"
-                                                            height="35"
-                                                            src="https://img.icons8.com/doodle/48/shopping-cart--v1.png"
-                                                            alt="shopping-cart--v1"
-                                                        />
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <!-- sao cho ở ngoài position lại ăn theo body -->
-                                            <!-- <div class="product-action">
-                                                <p>a</p>
-                                                <p>b</p>
-                                            </div> -->
-                                            <!-- button hiển thị giá trị gảim giá của 1 cart là bao nhiêu -->
-                                            <div class="product-badges"></div>
-                                        </div>
-                                        <div class="product-content">
-                                            <div class="product-category">Snack</div>
-                                            <h2 class="product-name">
-                                                <a href="#"> Seeds of Change Organic Quinoa, Brown </a>
-                                            </h2>
-                                            <div class="product-rate-cover">
-                                                <div class="product-rate">
-                                                    <i class="fa-regular fa-star"></i>
-                                                    <i class="fa-regular fa-star"></i>
-                                                    <i class="fa-regular fa-star"></i>
-                                                    <i class="fa-regular fa-star"></i>
-                                                    <i class="fa-regular fa-star"></i>
-                                                </div>
-                                                <div class="product-jubge" style="display: none"></div>
-                                            </div>
-                                            <div class="product-cart-bottom">
-                                                <p>1000$</p>
-                                                <p class="old-price">2000đ</p>
-                                                <div class="product-price">
-                                                    <p>1000$</p>
-                                                    <p class="old-price">2000đ</p>
-                                                </div>
-                                                <div class="add-cart">
-                                                    <a href="#">
-                                                        <i class="me-2 fa-solid fa-cart-shopping"></i><span>Add</span>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-1-5">
-                                    <div class="product-cart">
-                                        <div class="product-img-action">
-                                            <div class="product-cart-img">
-                                                <a href="#">
-                                                    <img
-                                                        class="default-img"
-                                                        src="{{ url('client') }}/assets/img/product-1-1.jpg"
-                                                        alt=""
-                                                    />
-                                                    <!-- <img class="hover-img" src="{{ url('client') }}/assets/img/product-1-2.jpg" alt="" /> -->
-                                                </a>
-                                                <div class="product-action">
-                                                    <a href="#" class="product-action-icon">
-                                                        <img
-                                                            width="35"
-                                                            height="35"
-                                                            class="translatex"
-                                                            src="https://img.icons8.com/external-ddara-fill-ddara/64/external-eye-eye-ddara-fill-ddara.png"
-                                                            alt="external-eye-eye-ddara-fill-ddara"
-                                                        />
-                                                    </a>
-                                                    <a href="#" class="product-action-icon">
-                                                        <img
-                                                            class="translatex"
-                                                            width="37"
-                                                            height="37"
-                                                            src="https://img.icons8.com/bubbles/50/half-heart.png"
-                                                            alt="half-heart"
-                                                        />
-                                                    </a>
-                                                    <a href="#" class="product-action-icon">
-                                                        <img
-                                                            class="translatex"
-                                                            width="35"
-                                                            height="35"
-                                                            src="https://img.icons8.com/doodle/48/shopping-cart--v1.png"
-                                                            alt="shopping-cart--v1"
-                                                        />
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <!-- sao cho ở ngoài position lại ăn theo body -->
-                                            <!-- <div class="product-action">
-                                                <p>a</p>
-                                                <p>b</p>
-                                            </div> -->
-                                            <!-- button hiển thị giá trị gảim giá của 1 cart là bao nhiêu -->
-                                            <div class="product-badges"></div>
-                                        </div>
-                                        <div class="product-content">
-                                            <div class="product-category">Snack</div>
-                                            <h2 class="product-name">
-                                                <a href="#"> Seeds of Change Organic Quinoa, Brown </a>
-                                            </h2>
-                                            <div class="product-rate-cover">
-                                                <div class="product-rate">
-                                                    <i class="fa-regular fa-star"></i>
-                                                    <i class="fa-regular fa-star"></i>
-                                                    <i class="fa-regular fa-star"></i>
-                                                    <i class="fa-regular fa-star"></i>
-                                                    <i class="fa-regular fa-star"></i>
-                                                </div>
-                                                <div class="product-jubge" style="display: none"></div>
-                                            </div>
-                                            <div class="product-cart-bottom">
-                                                <p>1000$</p>
-                                                <p class="old-price">2000đ</p>
-                                                <div class="product-price">
-                                                    <p>1000$</p>
-                                                    <p class="old-price">2000đ</p>
-                                                </div>
-                                                <div class="add-cart">
-                                                    <a href="#">
-                                                        <i class="me-2 fa-solid fa-cart-shopping"></i><span>Add</span>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-1-5">
-                                    <div class="product-cart">
-                                        <div class="product-img-action">
-                                            <div class="product-cart-img">
-                                                <a href="#">
-                                                    <img
-                                                        class="default-img"
-                                                        src="{{ url('client') }}/assets/img/product-1-1.jpg"
-                                                        alt=""
-                                                    />
-                                                    <!-- <img class="hover-img" src="{{ url('client') }}/assets/img/product-1-2.jpg" alt="" /> -->
-                                                </a>
-                                                <div class="product-action">
-                                                    <a href="#" class="product-action-icon">
-                                                        <img
-                                                            width="35"
-                                                            height="35"
-                                                            class="translatex"
-                                                            src="https://img.icons8.com/external-ddara-fill-ddara/64/external-eye-eye-ddara-fill-ddara.png"
-                                                            alt="external-eye-eye-ddara-fill-ddara"
-                                                        />
-                                                    </a>
-                                                    <a href="#" class="product-action-icon">
-                                                        <img
-                                                            class="translatex"
-                                                            width="37"
-                                                            height="37"
-                                                            src="https://img.icons8.com/bubbles/50/half-heart.png"
-                                                            alt="half-heart"
-                                                        />
-                                                    </a>
-                                                    <a href="#" class="product-action-icon">
-                                                        <img
-                                                            class="translatex"
-                                                            width="35"
-                                                            height="35"
-                                                            src="https://img.icons8.com/doodle/48/shopping-cart--v1.png"
-                                                            alt="shopping-cart--v1"
-                                                        />
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <!-- sao cho ở ngoài position lại ăn theo body -->
-                                            <!-- <div class="product-action">
-                                                <p>a</p>
-                                                <p>b</p>
-                                            </div> -->
-                                            <!-- button hiển thị giá trị gảim giá của 1 cart là bao nhiêu -->
-                                            <div class="product-badges"></div>
-                                        </div>
-                                        <div class="product-content">
-                                            <div class="product-category">Snack</div>
-                                            <h2 class="product-name">
-                                                <a href="#"> Seeds of Change Organic Quinoa, Brown </a>
-                                            </h2>
-                                            <div class="product-rate-cover">
-                                                <div class="product-rate">
-                                                    <i class="fa-regular fa-star"></i>
-                                                    <i class="fa-regular fa-star"></i>
-                                                    <i class="fa-regular fa-star"></i>
-                                                    <i class="fa-regular fa-star"></i>
-                                                    <i class="fa-regular fa-star"></i>
-                                                </div>
-                                                <div class="product-jubge" style="display: none"></div>
-                                            </div>
-                                            <div class="product-cart-bottom">
-                                                <p>1000$</p>
-                                                <p class="old-price">2000đ</p>
-                                                <div class="product-price">
-                                                    <p>1000$</p>
-                                                    <p class="old-price">2000đ</p>
-                                                </div>
-                                                <div class="add-cart">
-                                                    <a href="#">
-                                                        <i class="me-2 fa-solid fa-cart-shopping"></i><span>Add</span>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-1-5">
-                                    <div class="product-cart">
-                                        <div class="product-img-action">
-                                            <div class="product-cart-img">
-                                                <a href="#">
-                                                    <img
-                                                        class="default-img"
-                                                        src="{{ url('client') }}/assets/img/product-1-1.jpg"
-                                                        alt=""
-                                                    />
-                                                    <!-- <img class="hover-img" src="{{ url('client') }}/assets/img/product-1-2.jpg" alt="" /> -->
-                                                </a>
-                                                <div class="product-action">
-                                                    <a href="#" class="product-action-icon">
-                                                        <img
-                                                            width="35"
-                                                            height="35"
-                                                            class="translatex"
-                                                            src="https://img.icons8.com/external-ddara-fill-ddara/64/external-eye-eye-ddara-fill-ddara.png"
-                                                            alt="external-eye-eye-ddara-fill-ddara"
-                                                        />
-                                                    </a>
-                                                    <a href="#" class="product-action-icon">
-                                                        <img
-                                                            class="translatex"
-                                                            width="37"
-                                                            height="37"
-                                                            src="https://img.icons8.com/bubbles/50/half-heart.png"
-                                                            alt="half-heart"
-                                                        />
-                                                    </a>
-                                                    <a href="#" class="product-action-icon">
-                                                        <img
-                                                            class="translatex"
-                                                            width="35"
-                                                            height="35"
-                                                            src="https://img.icons8.com/doodle/48/shopping-cart--v1.png"
-                                                            alt="shopping-cart--v1"
-                                                        />
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <!-- sao cho ở ngoài position lại ăn theo body -->
-                                            <!-- <div class="product-action">
-                                                <p>a</p>
-                                                <p>b</p>
-                                            </div> -->
-                                            <!-- button hiển thị giá trị gảim giá của 1 cart là bao nhiêu -->
-                                            <div class="product-badges"></div>
-                                        </div>
-                                        <div class="product-content">
-                                            <div class="product-category">Snack</div>
-                                            <h2 class="product-name">
-                                                <a href="#"> Seeds of Change Organic Quinoa, Brown </a>
-                                            </h2>
-                                            <div class="product-rate-cover">
-                                                <div class="product-rate">
-                                                    <i class="fa-regular fa-star"></i>
-                                                    <i class="fa-regular fa-star"></i>
-                                                    <i class="fa-regular fa-star"></i>
-                                                    <i class="fa-regular fa-star"></i>
-                                                    <i class="fa-regular fa-star"></i>
-                                                </div>
-                                                <div class="product-jubge" style="display: none"></div>
-                                            </div>
-                                            <div class="product-cart-bottom">
-                                                <p>1000$</p>
-                                                <p class="old-price">2000đ</p>
-                                                <div class="product-price">
-                                                    <p>1000$</p>
-                                                    <p class="old-price">2000đ</p>
-                                                </div>
-                                                <div class="add-cart">
-                                                    <a href="#">
-                                                        <i class="me-2 fa-solid fa-cart-shopping"></i><span>Add</span>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-1-5">
-                                    <div class="product-cart">
-                                        <div class="product-img-action">
-                                            <div class="product-cart-img">
-                                                <a href="#">
-                                                    <img
-                                                        class="default-img"
-                                                        src="{{ url('client') }}/assets/img/product-1-1.jpg"
-                                                        alt=""
-                                                    />
-                                                    <!-- <img class="hover-img" src="{{ url('client') }}/assets/img/product-1-2.jpg" alt="" /> -->
-                                                </a>
-                                                <div class="product-action">
-                                                    <a href="#" class="product-action-icon">
-                                                        <img
-                                                            width="35"
-                                                            height="35"
-                                                            class="translatex"
-                                                            src="https://img.icons8.com/external-ddara-fill-ddara/64/external-eye-eye-ddara-fill-ddara.png"
-                                                            alt="external-eye-eye-ddara-fill-ddara"
-                                                        />
-                                                    </a>
-                                                    <a href="#" class="product-action-icon">
-                                                        <img
-                                                            class="translatex"
-                                                            width="37"
-                                                            height="37"
-                                                            src="https://img.icons8.com/bubbles/50/half-heart.png"
-                                                            alt="half-heart"
-                                                        />
-                                                    </a>
-                                                    <a href="#" class="product-action-icon">
-                                                        <img
-                                                            class="translatex"
-                                                            width="35"
-                                                            height="35"
-                                                            src="https://img.icons8.com/doodle/48/shopping-cart--v1.png"
-                                                            alt="shopping-cart--v1"
-                                                        />
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <!-- sao cho ở ngoài position lại ăn theo body -->
-                                            <!-- <div class="product-action">
-                                                <p>a</p>
-                                                <p>b</p>
-                                            </div> -->
-                                            <!-- button hiển thị giá trị gảim giá của 1 cart là bao nhiêu -->
-                                            <div class="product-badges"></div>
-                                        </div>
-                                        <div class="product-content">
-                                            <div class="product-category">Snack</div>
-                                            <h2 class="product-name">
-                                                <a href="#"> Seeds of Change Organic Quinoa, Brown </a>
-                                            </h2>
-                                            <div class="product-rate-cover">
-                                                <div class="product-rate">
-                                                    <i class="fa-regular fa-star"></i>
-                                                    <i class="fa-regular fa-star"></i>
-                                                    <i class="fa-regular fa-star"></i>
-                                                    <i class="fa-regular fa-star"></i>
-                                                    <i class="fa-regular fa-star"></i>
-                                                </div>
-                                                <div class="product-jubge" style="display: none"></div>
-                                            </div>
-                                            <div class="product-cart-bottom">
-                                                <p>1000$</p>
-                                                <p class="old-price">2000đ</p>
-                                                <div class="product-price">
-                                                    <p>1000$</p>
-                                                    <p class="old-price">2000đ</p>
-                                                </div>
-                                                <div class="add-cart">
-                                                    <a href="#">
-                                                        <i class="me-2 fa-solid fa-cart-shopping"></i><span>Add</span>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-1-5">
-                                    <div class="product-cart">
-                                        <div class="product-img-action">
-                                            <div class="product-cart-img">
-                                                <a href="#">
-                                                    <img
-                                                        class="default-img"
-                                                        src="{{ url('client') }}/assets/img/product-1-1.jpg"
-                                                        alt=""
-                                                    />
-                                                    <!-- <img class="hover-img" src="{{ url('client') }}/assets/img/product-1-2.jpg" alt="" /> -->
-                                                </a>
-                                                <div class="product-action">
-                                                    <a href="#" class="product-action-icon">
-                                                        <img
-                                                            width="35"
-                                                            height="35"
-                                                            class="translatex"
-                                                            src="https://img.icons8.com/external-ddara-fill-ddara/64/external-eye-eye-ddara-fill-ddara.png"
-                                                            alt="external-eye-eye-ddara-fill-ddara"
-                                                        />
-                                                    </a>
-                                                    <a href="#" class="product-action-icon">
-                                                        <img
-                                                            class="translatex"
-                                                            width="37"
-                                                            height="37"
-                                                            src="https://img.icons8.com/bubbles/50/half-heart.png"
-                                                            alt="half-heart"
-                                                        />
-                                                    </a>
-                                                    <a href="#" class="product-action-icon">
-                                                        <img
-                                                            class="translatex"
-                                                            width="35"
-                                                            height="35"
-                                                            src="https://img.icons8.com/doodle/48/shopping-cart--v1.png"
-                                                            alt="shopping-cart--v1"
-                                                        />
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <!-- sao cho ở ngoài position lại ăn theo body -->
-                                            <!-- <div class="product-action">
-                                                <p>a</p>
-                                                <p>b</p>
-                                            </div> -->
-                                            <!-- button hiển thị giá trị gảim giá của 1 cart là bao nhiêu -->
-                                            <div class="product-badges"></div>
-                                        </div>
-                                        <div class="product-content">
-                                            <div class="product-category">Snack</div>
-                                            <h2 class="product-name">
-                                                <a href="#"> Seeds of Change Organic Quinoa, Brown </a>
-                                            </h2>
-                                            <div class="product-rate-cover">
-                                                <div class="product-rate">
-                                                    <i class="fa-regular fa-star"></i>
-                                                    <i class="fa-regular fa-star"></i>
-                                                    <i class="fa-regular fa-star"></i>
-                                                    <i class="fa-regular fa-star"></i>
-                                                    <i class="fa-regular fa-star"></i>
-                                                </div>
-                                                <div class="product-jubge" style="display: none"></div>
-                                            </div>
-                                            <div class="product-cart-bottom">
-                                                <p>1000$</p>
-                                                <p class="old-price">2000đ</p>
-                                                <div class="product-price">
-                                                    <p>1000$</p>
-                                                    <p class="old-price">2000đ</p>
-                                                </div>
-                                                <div class="add-cart">
-                                                    <a href="#">
-                                                        <i class="me-2 fa-solid fa-cart-shopping"></i><span>Add</span>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                            <div class="product-grid row g-3" id="load-product">
+                                @include('client.components.product_cart_item')
                             </div>
                         </div>
                     </div>
@@ -988,7 +180,7 @@
                             <div class="product-grid row product-featured">
                                 <div class="col-md-4">
                                     <div class="product-cart">
-                                        <div class="product-img-action">
+                                        <div class="product-img-action btn_add_to_cart">
                                             <div class="product-cart-img">
                                                 <a href="#">
                                                     <img
@@ -999,7 +191,7 @@
                                                     <!-- <img class="hover-img" src="{{ url('client') }}/assets/img/product-1-2.jpg" alt="" /> -->
                                                 </a>
                                                 <div class="product-action">
-                                                    <a href="#" class="product-action-icon">
+                                                    <button class="product-action-icon">
                                                         <img
                                                             width="35"
                                                             height="35"
@@ -1007,8 +199,8 @@
                                                             src="https://img.icons8.com/external-ddara-fill-ddara/64/external-eye-eye-ddara-fill-ddara.png"
                                                             alt="external-eye-eye-ddara-fill-ddara"
                                                         />
-                                                    </a>
-                                                    <a href="#" class="product-action-icon">
+                                                    </button>
+                                                    <button style="display:none" class="product-action-icon">
                                                         <img
                                                             class="translatex"
                                                             width="37"
@@ -1016,8 +208,8 @@
                                                             src="https://img.icons8.com/bubbles/50/half-heart.png"
                                                             alt="half-heart"
                                                         />
-                                                    </a>
-                                                    <a href="#" class="product-action-icon">
+                                                    </button>
+                                                    <button class="product-action-icon">
                                                         <img
                                                             class="translatex"
                                                             width="35"
@@ -1025,7 +217,7 @@
                                                             src="https://img.icons8.com/doodle/48/shopping-cart--v1.png"
                                                             alt="shopping-cart--v1"
                                                         />
-                                                    </a>
+                                                    </button>
                                                 </div>
                                             </div>
                                             <!-- sao cho ở ngoài position lại ăn theo body -->
@@ -1069,7 +261,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="product-cart">
-                                        <div class="product-img-action">
+                                        <div class="product-img-action btn_add_to_cart">
                                             <div class="product-cart-img">
                                                 <a href="#">
                                                     <img
@@ -1080,7 +272,7 @@
                                                     <!-- <img class="hover-img" src="{{ url('client') }}/assets/img/product-1-2.jpg" alt="" /> -->
                                                 </a>
                                                 <div class="product-action">
-                                                    <a href="#" class="product-action-icon">
+                                                    <button class="product-action-icon">
                                                         <img
                                                             width="35"
                                                             height="35"
@@ -1088,8 +280,8 @@
                                                             src="https://img.icons8.com/external-ddara-fill-ddara/64/external-eye-eye-ddara-fill-ddara.png"
                                                             alt="external-eye-eye-ddara-fill-ddara"
                                                         />
-                                                    </a>
-                                                    <a href="#" class="product-action-icon">
+                                                    </button>
+                                                    <button style="display:none" class="product-action-icon">
                                                         <img
                                                             class="translatex"
                                                             width="37"
@@ -1097,8 +289,8 @@
                                                             src="https://img.icons8.com/bubbles/50/half-heart.png"
                                                             alt="half-heart"
                                                         />
-                                                    </a>
-                                                    <a href="#" class="product-action-icon">
+                                                    </button>
+                                                    <button class="product-action-icon">
                                                         <img
                                                             class="translatex"
                                                             width="35"
@@ -1106,7 +298,7 @@
                                                             src="https://img.icons8.com/doodle/48/shopping-cart--v1.png"
                                                             alt="shopping-cart--v1"
                                                         />
-                                                    </a>
+                                                    </button>
                                                 </div>
                                             </div>
                                             <!-- sao cho ở ngoài position lại ăn theo body -->
@@ -1150,7 +342,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="product-cart">
-                                        <div class="product-img-action">
+                                        <div class="product-img-action btn_add_to_cart">
                                             <div class="product-cart-img">
                                                 <a href="#">
                                                     <img
@@ -1161,7 +353,7 @@
                                                     <!-- <img class="hover-img" src="{{ url('client') }}/assets/img/product-1-2.jpg" alt="" /> -->
                                                 </a>
                                                 <div class="product-action">
-                                                    <a href="#" class="product-action-icon">
+                                                    <button class="product-action-icon">
                                                         <img
                                                             width="35"
                                                             height="35"
@@ -1169,8 +361,8 @@
                                                             src="https://img.icons8.com/external-ddara-fill-ddara/64/external-eye-eye-ddara-fill-ddara.png"
                                                             alt="external-eye-eye-ddara-fill-ddara"
                                                         />
-                                                    </a>
-                                                    <a href="#" class="product-action-icon">
+                                                    </button>
+                                                    <button style="display:none" class="product-action-icon">
                                                         <img
                                                             class="translatex"
                                                             width="37"
@@ -1178,8 +370,8 @@
                                                             src="https://img.icons8.com/bubbles/50/half-heart.png"
                                                             alt="half-heart"
                                                         />
-                                                    </a>
-                                                    <a href="#" class="product-action-icon">
+                                                    </button>
+                                                    <button class="product-action-icon">
                                                         <img
                                                             class="translatex"
                                                             width="35"
@@ -1187,7 +379,7 @@
                                                             src="https://img.icons8.com/doodle/48/shopping-cart--v1.png"
                                                             alt="shopping-cart--v1"
                                                         />
-                                                    </a>
+                                                    </button>
                                                 </div>
                                             </div>
                                             <!-- sao cho ở ngoài position lại ăn theo body -->
@@ -1231,7 +423,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="product-cart">
-                                        <div class="product-img-action">
+                                        <div class="product-img-action btn_add_to_cart">
                                             <div class="product-cart-img">
                                                 <a href="#">
                                                     <img
@@ -1242,7 +434,7 @@
                                                     <!-- <img class="hover-img" src="{{ url('client') }}/assets/img/product-1-2.jpg" alt="" /> -->
                                                 </a>
                                                 <div class="product-action">
-                                                    <a href="#" class="product-action-icon">
+                                                    <button class="product-action-icon">
                                                         <img
                                                             width="35"
                                                             height="35"
@@ -1250,8 +442,8 @@
                                                             src="https://img.icons8.com/external-ddara-fill-ddara/64/external-eye-eye-ddara-fill-ddara.png"
                                                             alt="external-eye-eye-ddara-fill-ddara"
                                                         />
-                                                    </a>
-                                                    <a href="#" class="product-action-icon">
+                                                    </button>
+                                                    <button style="display:none" class="product-action-icon">
                                                         <img
                                                             class="translatex"
                                                             width="37"
@@ -1259,8 +451,8 @@
                                                             src="https://img.icons8.com/bubbles/50/half-heart.png"
                                                             alt="half-heart"
                                                         />
-                                                    </a>
-                                                    <a href="#" class="product-action-icon">
+                                                    </button>
+                                                    <button class="product-action-icon">
                                                         <img
                                                             class="translatex"
                                                             width="35"
@@ -1268,7 +460,7 @@
                                                             src="https://img.icons8.com/doodle/48/shopping-cart--v1.png"
                                                             alt="shopping-cart--v1"
                                                         />
-                                                    </a>
+                                                    </button>
                                                 </div>
                                             </div>
                                             <!-- sao cho ở ngoài position lại ăn theo body -->
@@ -1312,7 +504,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="product-cart">
-                                        <div class="product-img-action">
+                                        <div class="product-img-action btn_add_to_cart">
                                             <div class="product-cart-img">
                                                 <a href="#">
                                                     <img
@@ -1323,7 +515,7 @@
                                                     <!-- <img class="hover-img" src="{{ url('client') }}/assets/img/product-1-2.jpg" alt="" /> -->
                                                 </a>
                                                 <div class="product-action">
-                                                    <a href="#" class="product-action-icon">
+                                                    <button class="product-action-icon">
                                                         <img
                                                             width="35"
                                                             height="35"
@@ -1331,8 +523,8 @@
                                                             src="https://img.icons8.com/external-ddara-fill-ddara/64/external-eye-eye-ddara-fill-ddara.png"
                                                             alt="external-eye-eye-ddara-fill-ddara"
                                                         />
-                                                    </a>
-                                                    <a href="#" class="product-action-icon">
+                                                    </button>
+                                                    <button style="display:none" class="product-action-icon">
                                                         <img
                                                             class="translatex"
                                                             width="37"
@@ -1340,8 +532,8 @@
                                                             src="https://img.icons8.com/bubbles/50/half-heart.png"
                                                             alt="half-heart"
                                                         />
-                                                    </a>
-                                                    <a href="#" class="product-action-icon">
+                                                    </button>
+                                                    <button class="product-action-icon">
                                                         <img
                                                             class="translatex"
                                                             width="35"
@@ -1349,7 +541,7 @@
                                                             src="https://img.icons8.com/doodle/48/shopping-cart--v1.png"
                                                             alt="shopping-cart--v1"
                                                         />
-                                                    </a>
+                                                    </button>
                                                 </div>
                                             </div>
                                             <!-- sao cho ở ngoài position lại ăn theo body -->
@@ -1393,7 +585,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="product-cart">
-                                        <div class="product-img-action">
+                                        <div class="product-img-action btn_add_to_cart">
                                             <div class="product-cart-img">
                                                 <a href="#">
                                                     <img
@@ -1404,7 +596,7 @@
                                                     <!-- <img class="hover-img" src="{{ url('client') }}/assets/img/product-1-2.jpg" alt="" /> -->
                                                 </a>
                                                 <div class="product-action">
-                                                    <a href="#" class="product-action-icon">
+                                                    <button class="product-action-icon">
                                                         <img
                                                             width="35"
                                                             height="35"
@@ -1412,8 +604,8 @@
                                                             src="https://img.icons8.com/external-ddara-fill-ddara/64/external-eye-eye-ddara-fill-ddara.png"
                                                             alt="external-eye-eye-ddara-fill-ddara"
                                                         />
-                                                    </a>
-                                                    <a href="#" class="product-action-icon">
+                                                    </button>
+                                                    <button style="display:none" class="product-action-icon">
                                                         <img
                                                             class="translatex"
                                                             width="37"
@@ -1421,8 +613,8 @@
                                                             src="https://img.icons8.com/bubbles/50/half-heart.png"
                                                             alt="half-heart"
                                                         />
-                                                    </a>
-                                                    <a href="#" class="product-action-icon">
+                                                    </button>
+                                                    <button class="product-action-icon">
                                                         <img
                                                             class="translatex"
                                                             width="35"
@@ -1430,7 +622,7 @@
                                                             src="https://img.icons8.com/doodle/48/shopping-cart--v1.png"
                                                             alt="shopping-cart--v1"
                                                         />
-                                                    </a>
+                                                    </button>
                                                 </div>
                                             </div>
                                             <!-- sao cho ở ngoài position lại ăn theo body -->
@@ -1475,7 +667,7 @@
 
                                 <div class="col-md-4">
                                     <div class="product-cart">
-                                        <div class="product-img-action">
+                                        <div class="product-img-action btn_add_to_cart">
                                             <div class="product-cart-img">
                                                 <a href="#">
                                                     <img
@@ -1486,7 +678,7 @@
                                                     <!-- <img class="hover-img" src="{{ url('client') }}/assets/img/product-1-2.jpg" alt="" /> -->
                                                 </a>
                                                 <div class="product-action">
-                                                    <a href="#" class="product-action-icon">
+                                                    <button class="product-action-icon">
                                                         <img
                                                             width="35"
                                                             height="35"
@@ -1494,8 +686,8 @@
                                                             src="https://img.icons8.com/external-ddara-fill-ddara/64/external-eye-eye-ddara-fill-ddara.png"
                                                             alt="external-eye-eye-ddara-fill-ddara"
                                                         />
-                                                    </a>
-                                                    <a href="#" class="product-action-icon">
+                                                    </button>
+                                                    <button style="display:none" class="product-action-icon">
                                                         <img
                                                             class="translatex"
                                                             width="37"
@@ -1503,8 +695,8 @@
                                                             src="https://img.icons8.com/bubbles/50/half-heart.png"
                                                             alt="half-heart"
                                                         />
-                                                    </a>
-                                                    <a href="#" class="product-action-icon">
+                                                    </button>
+                                                    <button class="product-action-icon">
                                                         <img
                                                             class="translatex"
                                                             width="35"
@@ -1512,7 +704,7 @@
                                                             src="https://img.icons8.com/doodle/48/shopping-cart--v1.png"
                                                             alt="shopping-cart--v1"
                                                         />
-                                                    </a>
+                                                    </button>
                                                 </div>
                                             </div>
                                             <!-- sao cho ở ngoài position lại ăn theo body -->
@@ -1591,7 +783,7 @@
                             <div class="product-grid row g-3 product-featured">
                                 <div class="col-md-3">
                                     <div class="product-cart">
-                                        <div class="product-img-action">
+                                        <div class="product-img-action btn_add_to_cart">
                                             <div class="product-cart-img">
                                                 <a href="#">
                                                     <img
@@ -1602,7 +794,7 @@
                                                     <!-- <img class="hover-img" src="{{ url('client') }}/assets/img/product-1-2.jpg" alt="" /> -->
                                                 </a>
                                                 <div class="product-action">
-                                                    <a href="#" class="product-action-icon">
+                                                    <button class="product-action-icon">
                                                         <img
                                                             width="35"
                                                             height="35"
@@ -1610,8 +802,8 @@
                                                             src="https://img.icons8.com/external-ddara-fill-ddara/64/external-eye-eye-ddara-fill-ddara.png"
                                                             alt="external-eye-eye-ddara-fill-ddara"
                                                         />
-                                                    </a>
-                                                    <a href="#" class="product-action-icon">
+                                                    </button>
+                                                    <button style="display:none" class="product-action-icon">
                                                         <img
                                                             class="translatex"
                                                             width="37"
@@ -1619,8 +811,8 @@
                                                             src="https://img.icons8.com/bubbles/50/half-heart.png"
                                                             alt="half-heart"
                                                         />
-                                                    </a>
-                                                    <a href="#" class="product-action-icon">
+                                                    </button>
+                                                    <button class="product-action-icon">
                                                         <img
                                                             class="translatex"
                                                             width="35"
@@ -1628,7 +820,7 @@
                                                             src="https://img.icons8.com/doodle/48/shopping-cart--v1.png"
                                                             alt="shopping-cart--v1"
                                                         />
-                                                    </a>
+                                                    </button>
                                                 </div>
                                             </div>
                                             <!-- sao cho ở ngoài position lại ăn theo body -->
@@ -1672,7 +864,7 @@
                                 </div>
                                 <div class="col-md-3">
                                     <div class="product-cart">
-                                        <div class="product-img-action">
+                                        <div class="product-img-action btn_add_to_cart">
                                             <div class="product-cart-img">
                                                 <a href="#">
                                                     <img
@@ -1683,7 +875,7 @@
                                                     <!-- <img class="hover-img" src="{{ url('client') }}/assets/img/product-1-2.jpg" alt="" /> -->
                                                 </a>
                                                 <div class="product-action">
-                                                    <a href="#" class="product-action-icon">
+                                                    <button class="product-action-icon">
                                                         <img
                                                             width="35"
                                                             height="35"
@@ -1691,8 +883,8 @@
                                                             src="https://img.icons8.com/external-ddara-fill-ddara/64/external-eye-eye-ddara-fill-ddara.png"
                                                             alt="external-eye-eye-ddara-fill-ddara"
                                                         />
-                                                    </a>
-                                                    <a href="#" class="product-action-icon">
+                                                    </button>
+                                                    <button style="display:none" class="product-action-icon">
                                                         <img
                                                             class="translatex"
                                                             width="37"
@@ -1700,8 +892,8 @@
                                                             src="https://img.icons8.com/bubbles/50/half-heart.png"
                                                             alt="half-heart"
                                                         />
-                                                    </a>
-                                                    <a href="#" class="product-action-icon">
+                                                    </button>
+                                                    <button class="product-action-icon">
                                                         <img
                                                             class="translatex"
                                                             width="35"
@@ -1709,7 +901,7 @@
                                                             src="https://img.icons8.com/doodle/48/shopping-cart--v1.png"
                                                             alt="shopping-cart--v1"
                                                         />
-                                                    </a>
+                                                    </button>
                                                 </div>
                                             </div>
                                             <!-- sao cho ở ngoài position lại ăn theo body -->
@@ -1753,7 +945,7 @@
                                 </div>
                                 <div class="col-md-3">
                                     <div class="product-cart">
-                                        <div class="product-img-action">
+                                        <div class="product-img-action btn_add_to_cart">
                                             <div class="product-cart-img">
                                                 <a href="#">
                                                     <img
@@ -1764,7 +956,7 @@
                                                     <!-- <img class="hover-img" src="{{ url('client') }}/assets/img/product-1-2.jpg" alt="" /> -->
                                                 </a>
                                                 <div class="product-action">
-                                                    <a href="#" class="product-action-icon">
+                                                    <button class="product-action-icon">
                                                         <img
                                                             width="35"
                                                             height="35"
@@ -1772,8 +964,8 @@
                                                             src="https://img.icons8.com/external-ddara-fill-ddara/64/external-eye-eye-ddara-fill-ddara.png"
                                                             alt="external-eye-eye-ddara-fill-ddara"
                                                         />
-                                                    </a>
-                                                    <a href="#" class="product-action-icon">
+                                                    </button>
+                                                    <button style="display:none" class="product-action-icon">
                                                         <img
                                                             class="translatex"
                                                             width="37"
@@ -1781,8 +973,8 @@
                                                             src="https://img.icons8.com/bubbles/50/half-heart.png"
                                                             alt="half-heart"
                                                         />
-                                                    </a>
-                                                    <a href="#" class="product-action-icon">
+                                                    </button>
+                                                    <button class="product-action-icon">
                                                         <img
                                                             class="translatex"
                                                             width="35"
@@ -1790,7 +982,7 @@
                                                             src="https://img.icons8.com/doodle/48/shopping-cart--v1.png"
                                                             alt="shopping-cart--v1"
                                                         />
-                                                    </a>
+                                                    </button>
                                                 </div>
                                             </div>
                                             <!-- sao cho ở ngoài position lại ăn theo body -->
@@ -1834,7 +1026,7 @@
                                 </div>
                                 <div class="col-md-3">
                                     <div class="product-cart">
-                                        <div class="product-img-action">
+                                        <div class="product-img-action btn_add_to_cart">
                                             <div class="product-cart-img">
                                                 <a href="#">
                                                     <img
@@ -1845,7 +1037,7 @@
                                                     <!-- <img class="hover-img" src="{{ url('client') }}/assets/img/product-1-2.jpg" alt="" /> -->
                                                 </a>
                                                 <div class="product-action">
-                                                    <a href="#" class="product-action-icon">
+                                                    <button class="product-action-icon">
                                                         <img
                                                             width="35"
                                                             height="35"
@@ -1853,8 +1045,8 @@
                                                             src="https://img.icons8.com/external-ddara-fill-ddara/64/external-eye-eye-ddara-fill-ddara.png"
                                                             alt="external-eye-eye-ddara-fill-ddara"
                                                         />
-                                                    </a>
-                                                    <a href="#" class="product-action-icon">
+                                                    </button>
+                                                    <button style="display:none" class="product-action-icon">
                                                         <img
                                                             class="translatex"
                                                             width="37"
@@ -1862,8 +1054,8 @@
                                                             src="https://img.icons8.com/bubbles/50/half-heart.png"
                                                             alt="half-heart"
                                                         />
-                                                    </a>
-                                                    <a href="#" class="product-action-icon">
+                                                    </button>
+                                                    <button class="product-action-icon">
                                                         <img
                                                             class="translatex"
                                                             width="35"
@@ -1871,7 +1063,7 @@
                                                             src="https://img.icons8.com/doodle/48/shopping-cart--v1.png"
                                                             alt="shopping-cart--v1"
                                                         />
-                                                    </a>
+                                                    </button>
                                                 </div>
                                             </div>
                                             <!-- sao cho ở ngoài position lại ăn theo body -->
@@ -1915,7 +1107,7 @@
                                 </div>
                                 <div class="col-md-3">
                                     <div class="product-cart">
-                                        <div class="product-img-action">
+                                        <div class="product-img-action btn_add_to_cart">
                                             <div class="product-cart-img">
                                                 <a href="#">
                                                     <img
@@ -1926,7 +1118,7 @@
                                                     <!-- <img class="hover-img" src="{{ url('client') }}/assets/img/product-1-2.jpg" alt="" /> -->
                                                 </a>
                                                 <div class="product-action">
-                                                    <a href="#" class="product-action-icon">
+                                                    <button class="product-action-icon">
                                                         <img
                                                             width="35"
                                                             height="35"
@@ -1934,8 +1126,8 @@
                                                             src="https://img.icons8.com/external-ddara-fill-ddara/64/external-eye-eye-ddara-fill-ddara.png"
                                                             alt="external-eye-eye-ddara-fill-ddara"
                                                         />
-                                                    </a>
-                                                    <a href="#" class="product-action-icon">
+                                                    </button>
+                                                    <button style="display:none" class="product-action-icon">
                                                         <img
                                                             class="translatex"
                                                             width="37"
@@ -1943,8 +1135,8 @@
                                                             src="https://img.icons8.com/bubbles/50/half-heart.png"
                                                             alt="half-heart"
                                                         />
-                                                    </a>
-                                                    <a href="#" class="product-action-icon">
+                                                    </button>
+                                                    <button class="product-action-icon">
                                                         <img
                                                             class="translatex"
                                                             width="35"
@@ -1952,7 +1144,7 @@
                                                             src="https://img.icons8.com/doodle/48/shopping-cart--v1.png"
                                                             alt="shopping-cart--v1"
                                                         />
-                                                    </a>
+                                                    </button>
                                                 </div>
                                             </div>
                                             <!-- sao cho ở ngoài position lại ăn theo body -->
@@ -1996,7 +1188,7 @@
                                 </div>
                                 <div class="col-md-3">
                                     <div class="product-cart">
-                                        <div class="product-img-action">
+                                        <div class="product-img-action btn_add_to_cart">
                                             <div class="product-cart-img">
                                                 <a href="#">
                                                     <img
@@ -2007,7 +1199,7 @@
                                                     <!-- <img class="hover-img" src="{{ url('client') }}/assets/img/product-1-2.jpg" alt="" /> -->
                                                 </a>
                                                 <div class="product-action">
-                                                    <a href="#" class="product-action-icon">
+                                                    <button class="product-action-icon">
                                                         <img
                                                             width="35"
                                                             height="35"
@@ -2015,8 +1207,8 @@
                                                             src="https://img.icons8.com/external-ddara-fill-ddara/64/external-eye-eye-ddara-fill-ddara.png"
                                                             alt="external-eye-eye-ddara-fill-ddara"
                                                         />
-                                                    </a>
-                                                    <a href="#" class="product-action-icon">
+                                                    </button>
+                                                    <button style="display:none" class="product-action-icon">
                                                         <img
                                                             class="translatex"
                                                             width="37"
@@ -2024,8 +1216,8 @@
                                                             src="https://img.icons8.com/bubbles/50/half-heart.png"
                                                             alt="half-heart"
                                                         />
-                                                    </a>
-                                                    <a href="#" class="product-action-icon">
+                                                    </button>
+                                                    <button class="product-action-icon">
                                                         <img
                                                             class="translatex"
                                                             width="35"
@@ -2033,7 +1225,7 @@
                                                             src="https://img.icons8.com/doodle/48/shopping-cart--v1.png"
                                                             alt="shopping-cart--v1"
                                                         />
-                                                    </a>
+                                                    </button>
                                                 </div>
                                             </div>
                                             <!-- sao cho ở ngoài position lại ăn theo body -->
@@ -2077,7 +1269,7 @@
                                 </div>
                                 <div class="col-md-3">
                                     <div class="product-cart">
-                                        <div class="product-img-action">
+                                        <div class="product-img-action btn_add_to_cart">
                                             <div class="product-cart-img">
                                                 <a href="#">
                                                     <img
@@ -2088,7 +1280,7 @@
                                                     <!-- <img class="hover-img" src="{{ url('client') }}/assets/img/product-1-2.jpg" alt="" /> -->
                                                 </a>
                                                 <div class="product-action">
-                                                    <a href="#" class="product-action-icon">
+                                                    <button class="product-action-icon">
                                                         <img
                                                             width="35"
                                                             height="35"
@@ -2096,8 +1288,8 @@
                                                             src="https://img.icons8.com/external-ddara-fill-ddara/64/external-eye-eye-ddara-fill-ddara.png"
                                                             alt="external-eye-eye-ddara-fill-ddara"
                                                         />
-                                                    </a>
-                                                    <a href="#" class="product-action-icon">
+                                                    </button>
+                                                    <button style="display:none" class="product-action-icon">
                                                         <img
                                                             class="translatex"
                                                             width="37"
@@ -2105,8 +1297,8 @@
                                                             src="https://img.icons8.com/bubbles/50/half-heart.png"
                                                             alt="half-heart"
                                                         />
-                                                    </a>
-                                                    <a href="#" class="product-action-icon">
+                                                    </button>
+                                                    <button class="product-action-icon">
                                                         <img
                                                             class="translatex"
                                                             width="35"
@@ -2114,7 +1306,7 @@
                                                             src="https://img.icons8.com/doodle/48/shopping-cart--v1.png"
                                                             alt="shopping-cart--v1"
                                                         />
-                                                    </a>
+                                                    </button>
                                                 </div>
                                             </div>
                                             <!-- sao cho ở ngoài position lại ăn theo body -->
@@ -2158,7 +1350,7 @@
                                 </div>
                                 <div class="col-md-3">
                                     <div class="product-cart">
-                                        <div class="product-img-action">
+                                        <div class="product-img-action btn_add_to_cart">
                                             <div class="product-cart-img">
                                                 <a href="#">
                                                     <img
@@ -2169,7 +1361,7 @@
                                                     <!-- <img class="hover-img" src="{{ url('client') }}/assets/img/product-1-2.jpg" alt="" /> -->
                                                 </a>
                                                 <div class="product-action">
-                                                    <a href="#" class="product-action-icon">
+                                                    <button class="product-action-icon">
                                                         <img
                                                             width="35"
                                                             height="35"
@@ -2177,8 +1369,8 @@
                                                             src="https://img.icons8.com/external-ddara-fill-ddara/64/external-eye-eye-ddara-fill-ddara.png"
                                                             alt="external-eye-eye-ddara-fill-ddara"
                                                         />
-                                                    </a>
-                                                    <a href="#" class="product-action-icon">
+                                                    </button>
+                                                    <button style="display:none" class="product-action-icon">
                                                         <img
                                                             class="translatex"
                                                             width="37"
@@ -2186,8 +1378,8 @@
                                                             src="https://img.icons8.com/bubbles/50/half-heart.png"
                                                             alt="half-heart"
                                                         />
-                                                    </a>
-                                                    <a href="#" class="product-action-icon">
+                                                    </button>
+                                                    <button class="product-action-icon">
                                                         <img
                                                             class="translatex"
                                                             width="35"
@@ -2195,7 +1387,7 @@
                                                             src="https://img.icons8.com/doodle/48/shopping-cart--v1.png"
                                                             alt="shopping-cart--v1"
                                                         />
-                                                    </a>
+                                                    </button>
                                                 </div>
                                             </div>
                                             <!-- sao cho ở ngoài position lại ăn theo body -->
@@ -2324,183 +1516,13 @@
             </div>
 
             <!-- Position -->
-            <!-- --Cart-sidebar -->
-            <div class="cart-sidebar">
-                <div class="header-cart-sidebar">
-                    <h3>Giỏ hàng</h3>
-                    <p class="icon-close-cart">
-                        <img
-                            width="25"
-                            height="25"
-                            src="https://img.icons8.com/fluency/48/multiply.png"
-                            alt="multiply"
-                        />
-                    </p>
-                </div>
-                <hr />
-                <div class="body-cart-main">
-                    <div class="body-cart-sidebar">
-                        <ul class="cart-product-list">
-                            <li class="cart-product-item translate">
-                                <div class="cart-product-image">
-                                    <a href="#">
-                                        <img alt="" src="{{ url('client') }}/assets/img/apple.png" />
-                                    </a>
-                                </div>
-                                <div class="cart-product-meta">
-                                    <div class="cart-product-des">
-                                        <h3>
-                                            <a class="cart-product-des-link" href="#"
-                                                >Chicken Thighs From mixi with love Chicken Thighs From mixi with love
-                                                Chicken Thighs From mixi with love Chicken Thighs From mixi with love</a
-                                            >
-                                        </h3>
-                                        <div class="product-quantity">
-                                            <span class="cart-product-price">1 x $23.00</span>
-                                            <div class="cart-product-quantity">
-                                                <!-- <div class="quantity-button cart-minus">-</div> -->
-                                                <input
-                                                    type="number"
-                                                    class="cart-product-quantity-input"
-                                                    value="1"
-                                                    min="0"
-                                                    max="10"
-                                                    inputmode="numeric"
-                                                    onchange="()=>{
-                                                        saveInputValue(this)
-                                                    }"
-                                                />
-                                                <!-- <div class="quantity-button cart-flus">+</div> -->
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <a href="#"><i class="fa-solid fa-xmark"></i></a>
-                                </div>
-                            </li>
+            @include('client.components.cart_list')
 
-                            <li class="cart-product-item translate">
-                                <div class="cart-product-image">
-                                    <a href="#">
-                                        <img alt="" src="{{ url('client') }}/assets/img/apple.png" />
-                                    </a>
-                                </div>
-                                <div class="cart-product-meta">
-                                    <div class="cart-product-des">
-                                        <h3>
-                                            <a class="cart-product-des-link" href="#"
-                                                >Chicken Thighs From mixi with love Chicken Thighs From mixi with love
-                                                Chicken Thighs From mixi with love Chicken Thighs From mixi with love</a
-                                            >
-                                        </h3>
-                                        <div class="product-quantity">
-                                            <span class="cart-product-price">1 x $23.00</span>
-                                            <div class="cart-product-quantity">
-                                                <!-- <div class="quantity-button cart-minus">-</div> -->
-                                                <input
-                                                    type="number"
-                                                    class="cart-product-quantity-input"
-                                                    value="1"
-                                                    min="0"
-                                                    max="10"
-                                                    inputmode="numeric"
-                                                    onchange="()=>{
-                                                        saveInputValue(this)
-                                                    }"
-                                                />
-                                                <!-- <div class="quantity-button cart-flus">+</div> -->
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <a href="#"><i class="fa-solid fa-xmark"></i></a>
-                                </div>
-                            </li>
-
-                            <li class="cart-product-item translate">
-                                <div class="cart-product-image">
-                                    <a href="#">
-                                        <img alt="" src="{{ url('client') }}/assets/img/apple.png" />
-                                    </a>
-                                </div>
-                                <div class="cart-product-meta">
-                                    <div class="cart-product-des">
-                                        <h3>
-                                            <a class="cart-product-des-link" href="#"
-                                                >Chicken Thighs From mixi with love Chicken Thighs From mixi with love
-                                                Chicken Thighs From mixi with love Chicken Thighs From mixi with love</a
-                                            >
-                                        </h3>
-                                        <div class="product-quantity">
-                                            <span class="cart-product-price">1 x $23.00</span>
-                                            <div class="cart-product-quantity">
-                                                <!-- <div class="quantity-button cart-minus">-</div> -->
-                                                <input
-                                                    type="number"
-                                                    class="cart-product-quantity-input"
-                                                    value="1"
-                                                    min="0"
-                                                    max="10"
-                                                    inputmode="numeric"
-                                                    onchange="()=>{
-                                                        saveInputValue(this)
-                                                    }"
-                                                />
-                                                <!-- <div class="quantity-button cart-flus">+</div> -->
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <a href="#"><i class="fa-solid fa-xmark"></i></a>
-                                </div>
-                            </li>
-
-                            <li class="cart-product-item translate">
-                                <div class="cart-product-image">
-                                    <a href="#">
-                                        <img alt="" src="{{ url('client') }}/assets/img/apple.png" />
-                                    </a>
-                                </div>
-                                <div class="cart-product-meta">
-                                    <div class="cart-product-des">
-                                        <h3>
-                                            <a class="cart-product-des-link" href="#"
-                                                >Chicken Thighs From mixi with love Chicken Thighs From mixi with love
-                                                Chicken Thighs From mixi with love Chicken Thighs From mixi with love</a
-                                            >
-                                        </h3>
-                                        <div class="product-quantity">
-                                            <span class="cart-product-price">1 x $23.00</span>
-                                            <div class="cart-product-quantity">
-                                                <!-- <div class="quantity-button cart-minus">-</div> -->
-                                                <input
-                                                    type="number"
-                                                    class="cart-product-quantity-input"
-                                                    value="1"
-                                                    min="0"
-                                                    max="10"
-                                                    inputmode="numeric"
-                                                    onchange="()=>{
-                                                        saveInputValue(this)
-                                                    }"
-                                                />
-                                                <!-- <div class="quantity-button cart-flus">+</div> -->
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <a href="#"><i class="fa-solid fa-xmark"></i></a>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="footer-cart-sidebar">
-                        <p class="cart-total">Tổng: <span class="cart-product-price">$58.11</span></p>
-                        <p class="btn-cart">
-                            <a href="#" class="btn-view-cart">View Cart</a>
-                            <a href="#" class="btn-check-out translate">Check out</a>
-                        </p>
-                    </div>
-                </div>
-            </div>
+            <!-- --Toast Messeage -->
+            <div id="toast"></div>
         </div>
-
+                      {{-- thêm jquery --}}
+        <script src="{{ asset('js/jquery-3.7.0.min.js') }}"></script>
         <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
         <script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
         <script
@@ -2519,6 +1541,15 @@
             integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
             crossorigin="anonymous"
         ></script>
+
         <script src="{{ url('client') }}/assets/js/main.js"></script>
+        <script src="{{ url('client') }}/assets/js/toast_msg.js"></script>
+        
+
+        @stack('custom-script')
     </body>
 </html>
+
+{{-- php artisan key:
+
+php artisan cache: --}}

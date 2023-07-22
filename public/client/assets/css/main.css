@@ -15,7 +15,10 @@
 
 .header-logo img {
     border-radius: 10px;
-    max-width: 120px;
+    max-width: 100px;
+    max-height: 100px;
+
+    border-radius: 5px;
     /* height: 75px; */
     /* margin-left: 20px; */
 }
@@ -742,10 +745,18 @@ chuyển dịch từ giữa ra 2 bên */
 
 .product-cart {
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-    padding: 0 10px 10px;
+    padding: 10px 10px;
     border-radius: 5px;
     transition: all 0.3s;
     overflow: hidden;
+    /* height: 100%; */
+    height: 400px;
+    position: relative;
+
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .product-cart:hover {
@@ -755,13 +766,25 @@ chuyển dịch từ giữa ra 2 bên */
     transform: translateX(0);
 }
 .product-cart-img {
-    position: relative;
+    /* height: 220px;
+    line-height: 220px; */
 }
 .product-img-action {
+    /* position: relative; */
+    background-color: #fff;
+    overflow: hidden;
+    max-height: 300px;
 }
 
 .default-img {
     width: 100%;
+    height: 250px;
+    line-height: 250px;
+    /* max-height: 300px; */
+    /* height: 100%; */
+    /* height: max-content; */
+
+    object-fit: cover;
 }
 .hover-img {
     width: 100%;
@@ -781,17 +804,27 @@ chuyển dịch từ giữa ra 2 bên */
     transform: scale(1.1);
 }
 .product-action {
+    background-color: white;
     position: absolute;
-    top: 15px;
-    right: 2px;
+    top: 0%;
+    right: 10px;
     display: flex;
     flex-direction: column;
     transform: translateX(250%);
     transition: all 0.5s;
     text-align: center;
+    padding: 5px 5px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    /* border: 1px solid rgb(10, 51, 233); */
+    border: 3px dashed rgb(135, 208, 161);
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
 }
 .product-action-icon {
     text-decoration: none;
+    outline: none;
+    border: none;
+    background-color: transparent;
 }
 .product-action-icon i {
     display: block;
@@ -813,12 +846,13 @@ chuyển dịch từ giữa ra 2 bên */
 .product-content {
     display: flex;
     flex-direction: column;
+    margin-top: 5px;
 }
 
 .product-category {
     margin-bottom: 5px;
     font-size: 12px;
-    font-weight: 100;
+    font-weight: bold;
 }
 .product-name a {
     display: inline-block;
@@ -831,6 +865,17 @@ chuyển dịch từ giữa ra 2 bên */
     font-family: "Satisfy", cursive;
     margin-bottom: 5px;
     padding: 0;
+    width: 100%;
+    /* text-align: initial;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    -webkit-line-clamp: 2; /* Số hàng muốn hiển thị */
+    line-clamp: 2; /* Số hàng muốn hiển thị, sử dụng cho Firefox và trình duyệt hỗ trợ */
+    text-overflow: ellipsis; /* Hiển thị dấu "..." khi văn bản bị tràn */
 }
 .product-rate-cover {
     display: flex;
@@ -849,15 +894,16 @@ chuyển dịch từ giữa ra 2 bên */
     justify-content: space-between;
     font-size: 15px;
     font-weight: 600;
+    margin-top: 5px;
 }
-.product-cart-bottom p {
+/* .product-cart-bottom p {
     margin: 0;
-}
+} */
 .product-price {
-    display: none;
+    display: flex;
+    width: 100%;
     /* letter-spacing: 0.5px; */
     word-spacing: 5px;
-    /* display: flex; */
     justify-content: space-between;
     align-items: center;
 }
@@ -865,6 +911,7 @@ chuyển dịch từ giữa ra 2 bên */
     text-decoration: line-through;
     color: red;
     font-size: 12px;
+    margin-left: 10px;
 }
 .add-cart {
     background-color: rgb(108, 176, 149);
@@ -1253,7 +1300,7 @@ chuyển dịch từ giữa ra 2 bên */
     z-index: 100;
     top: 0;
     right: 0;
-    width: 350px;
+    width: 370px;
     height: 100vh;
     background-color: white;
     padding: 20px 15px;
@@ -1431,4 +1478,173 @@ span {
     padding: 6px 15px;
     border-radius: 5px;
     font-size: 15px;
+}
+
+/* =========Toast Message ============*/
+
+/* ======= Buttons ======== */
+
+/* Block */
+.btn {
+    display: inline-block;
+    text-decoration: none;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    color: #fff;
+    padding: 12px 48px;
+    border-radius: 50px;
+    cursor: pointer;
+    min-width: 120px;
+    transition: opacity 0.2s ease;
+}
+
+/* Modifier */
+.btn--size-l {
+    padding: 16px 56px;
+}
+
+.btn--size-s {
+    padding: 8px 32px;
+}
+
+.btn:hover {
+    opacity: 0.8;
+}
+
+.btn + .btn {
+    margin-left: 16px;
+}
+
+.btn--success {
+    background-color: #71be34;
+}
+
+.btn--warn {
+    background-color: #ffb702;
+}
+
+.btn--danger {
+    background-color: #ff623d;
+}
+
+.btn--disabled {
+    opacity: 0.5 !important;
+    cursor: default;
+}
+
+/* ======= Toast message ======== */
+
+#toast {
+    position: fixed;
+    top: 32px;
+    right: 32px;
+    z-index: 999999;
+}
+
+.toast {
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 2px;
+    padding: 20px 0;
+    min-width: 300px;
+    max-width: 350px;
+    border-left: 4px solid;
+    box-shadow: 0 5px 8px rgba(0, 0, 0, 0.08);
+    transform: translateX(0%);
+    transition: all linear 0.3s;
+    border-radius: 5px;
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(calc(100% + 32px));
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeOut {
+    to {
+        opacity: 0;
+    }
+}
+
+.toast--success {
+    border-color: #47d864;
+}
+
+.toast--success .toast__icon i {
+    color: #47d864;
+}
+
+.toast--info {
+    border-color: #2f86eb;
+}
+
+.toast--info .toast__icon {
+    color: #2f86eb;
+}
+
+.toast--warning {
+    border-color: #ffc021;
+}
+
+.toast--warning .toast__icon {
+    color: #ffc021;
+}
+
+.toast--error {
+    border-color: #ff623d;
+}
+
+.toast--error .toast__icon {
+    color: #ff623d;
+}
+
+.toast + .toast {
+    margin-top: 24px;
+}
+
+.toast:not(.show) {
+    display: flex;
+}
+.toast__icon {
+    font-size: 24px;
+}
+
+.toast__icon,
+.toast__close {
+    padding: 0 16px;
+}
+
+.toast__body {
+    flex-grow: 1;
+}
+
+.toast__title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+}
+
+.toast__msg {
+    font-size: 14px;
+    color: #888;
+    margin-top: 6px;
+    line-height: 1.5;
+}
+
+.toast__close {
+    font-size: 20px;
+    color: rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+}
+
+.toast_active {
+    display: block;
 }

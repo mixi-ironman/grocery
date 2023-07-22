@@ -37,6 +37,11 @@
                     </div>
 
                     <div class="mb-3">
+                        <label  class="form-label">Old Price</label>
+                        <input type="text" class="form-control"  name="old_price" aria-describedby="emailHelp" value="{{ $product->old_price }}">
+                    </div>
+
+                    <div class="mb-3">
                         <label for="image"  class="form-label">Image</label>
                         <input type="file" class="form-control" id="image" name="image" aria-describedby="emailHelp">
                     </div>

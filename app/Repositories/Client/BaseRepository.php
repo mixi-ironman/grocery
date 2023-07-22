@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Repositories\Client;
 
 class BaseRepository
 {
@@ -21,9 +21,11 @@ class BaseRepository
         return $this->model->all();
     }
 
+    
+
     public function create($attribute = [])
     {
-        dd($attribute);
+        // dd($attribute);
         return $this->model->create($attribute);
     }
 

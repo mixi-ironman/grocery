@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Home\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,12 +14,25 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/home', function () {
+    return view('client.layouts.master_layout');
+    
 });
 
-Route::get('/home', function () {
-    return view('client.layouts.layout');
-});
+//Home
+Route::get('/',[HomeController::class,'index']);
+Route::post('/load-product',[HomeController::class,'loadProduct'])->name('loadproduct');
+Route::post('danhmuc/{id}-{slug}.html',[MenuController::class,'index'])->name('index');
+
+Route::get('/product/{id}',[HomeController::class,'productDetail'])->name('view-product');
+
+    // Route::get('/home',[HomeController::class,'index'])->name('home');
+    // Route::get('/logout',[HomeController::class,'logout'])->name('customer-logout');
+    // Route::get('/category/{id}',[HomeController::class,'showCategoryItems'])->name('category');
+    // Route::get('/product',[HomeController::class,'getAll'])->name('all-product');
+    // Route::get('/product/{id}',[HomeController::class,'productDetail'])->name('view-product');
+    // Route::post('/search',[HomeController::class,'search'])->name('search');
+    // Route::get('/add-to-cart',[CartController::class,'add'])->name('add-to-cart');
+    // Route::get('/view-cart',[CartController::class,'index'])->name('view-cart');
 
 

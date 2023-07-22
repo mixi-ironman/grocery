@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\Client;
 
-use App\Repositories\ProductRepository;
+use App\Repositories\Client\ProductRepository;
 use Illuminate\Support\Str;
 use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\DB;
@@ -17,50 +17,6 @@ class ProductService
     {
         $this->productRepository = $productRepository;
     }
-
-    //get all category
-    public function getAllProduct()
-    {
-        return $this->productRepository->getProducts();
-    }
-
-    //get product theo id
-    public function getByProductId($id)
-    {
-        return $this->productRepository->getById($id);
-    }
-
-    // public function store($request)
-    // {
-    //     // dd($request->all());
-    //     try {
-    //         DB::Begintransaction();
-    //         // Xử lý file hình ảnh
-    //         if ($request->hasFile('image') && $request->file('image')->isValid()) {
-    //             $imagePath = 'image'.time().'-'.uniqid().'.'.$request->file('image')->extension();
-    //             //cách 1 move file
-    //             $request->file('image')->move(public_path('uploads'), $imagePath);
-    //             $imagePath = $request->file('image')->store('products', 'public'); // Lưu hình ảnh vào thư mục 'products' trong ổ đĩa 'public'
-
-    //         } else {
-    //             $imagePath = null; // Hoặc bạn có thể gán một giá trị mặc định nếu không có hình ảnh được tải lên
-    //         }
-    //         $product = $this->productRepository->create([
-    //         'name' => $request->input('name_category'),
-    //         'slug' => Str::slug($request->input('name_category'), '-'),
-    //         'description' => $request->input('description'),
-    //         'category_id' => $request->input('category_id'),
-    //         'image' => $imagePath,
-    //         'is_active' => $request->input('is_active'),
-    //       ]);
-    //        DB::commit();
-           
-    //        return Redirect::route('products.index')->with('success', 'Created Product Successfully!');
-    //     } catch (\Exception $e) {
-    //       DB::rollBack();
-    //       return Redirect::back()->withErrors(['create' => 'Something Wrong!'])->withInput();
-    //     }
-    // }
 
     public function store($request)
     {
@@ -139,8 +95,6 @@ class ProductService
                 'description' => $request->input('description'),
                 'category_id' => $request->input('category_id'),
                 'price' => $request->input('price'),
-                'old_price' => $request->input('old_price'),
-
                 'image' => $imagePath,
                 'is_active' => $request->input('is_active'),
             ]);
@@ -160,4 +114,24 @@ class ProductService
     {
         $category = $this->productRepository->delete($id);
     }
+    
+    //get all category
+    public function getProducts()
+    {
+        return $this->productRepository->getProducts();
+    }
+
+    //get product theo id
+    public function getByProductId($id)
+    {
+        return $this->productRepository->getById($id);
+    }
+
+    //load product
+    public function loadProduct($page = null)
+    {
+        return $this->productRepository->loadProducts($page);
+    }
+
+  
 }

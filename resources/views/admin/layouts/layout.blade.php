@@ -254,6 +254,8 @@
         <script src="{{ url('./mixi') }}/assets/js/plugins/perfect-scrollbar.min.js"></script>
         <script src="{{ url('./mixi') }}/assets/js/plugins/smooth-scrollbar.min.js"></script>
         <script src="{{ url('./mixi') }}/assets/js/plugins/chartjs.min.js"></script>
+        
+        {{-- thêm jquery --}}
         <script src="{{ asset('js/jquery-3.7.0.min.js') }}"></script>
         <script src="{{ asset('libs/select2/js/select2.min.js') }}"></script>
         <script>
