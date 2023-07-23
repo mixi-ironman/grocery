@@ -25,6 +25,8 @@
         />
         <link rel="stylesheet" href="{{ url('client') }}/assets/css/global.css" />
         <link rel="stylesheet" href="{{ asset('client/assets/css/main.css') }}" />
+        <link rel="stylesheet" href="{{ asset('client/assets/css/detail.css') }}" />
+
         <title>Mixi-Market</title>
     </head>
     <body>
@@ -38,7 +40,7 @@
             <!-- End slider --> --}}
 
             <!-- Main -->
-            <div class="content">
+            <div class="container content">
                 @yield('content')
             </div>
 
@@ -52,6 +54,9 @@
             <!-- --Toast Messeage -->
             <div id="toast"></div>
         </div>
+        
+         @stack('custom-script')
+
         {{-- thêm jquery --}}
         <script src="{{ asset('js/jquery-3.7.0.min.js') }}"></script>
         <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
@@ -76,6 +81,7 @@
         {{-- <script src="{{ url('client') }}/assets/js/jquery-3.7.0.min.js"></script> --}}
 
         <script src="{{ url('client') }}/assets/js/toast_msg.js"></script>
-         @stack('custom-script')
+
+         
     </body>
 </html>

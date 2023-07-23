@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Home\HomeController;
+use App\Http\Controllers\Home\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,11 +21,11 @@ Route::get('/home', function () {
 });
 
 //Home
-Route::get('/',[HomeController::class,'index']);
+Route::get('/',[HomeController::class,'index'])->name('home');
 Route::post('/load-product',[HomeController::class,'loadProduct'])->name('loadproduct');
 Route::post('danhmuc/{id}-{slug}.html',[MenuController::class,'index'])->name('index');
 
-Route::get('/product/{id}',[HomeController::class,'productDetail'])->name('view-product');
+Route::get('/product/{id}-{slug}.html',[ProductController::class,'index'])->name('view-product');
 
     // Route::get('/home',[HomeController::class,'index'])->name('home');
     // Route::get('/logout',[HomeController::class,'logout'])->name('customer-logout');

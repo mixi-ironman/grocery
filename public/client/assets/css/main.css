@@ -1537,7 +1537,7 @@ span {
 
 #toast {
     position: fixed;
-    top: 32px;
+    top: 11%;
     right: 32px;
     z-index: 999999;
 }

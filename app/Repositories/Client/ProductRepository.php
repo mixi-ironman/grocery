@@ -31,4 +31,20 @@ class ProductRepository extends BaseRepository
                             ->limit(10)
                             ->get();
     }
+
+    public function getDetailProduct($id)
+    {
+       return $this->model->where('id', $id)->where('is_active', 1)->firstOrFail();
+
+    }
+
+    //lấy ra sản phẩm liên quan
+    // public function relatedProducts( $id=null,)
+    // {
+    //    return $this->model->where('id','!=', $id)
+    //                         ->where('is_active', 1)
+    //                         ->orderByDesc('id')
+    //                         ->limit(8)
+    //                         ->get();
+    // }
 }

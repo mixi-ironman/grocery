@@ -7,7 +7,7 @@
                 <div class="slider-wraper_item">
                     <div class="slider-item_img"></div>
                     <div class="slider-item_description">
-                        <p>100$ Ỏganic</p>
+                        <p>Organic</p>
                         <p>Farm Fresh Produce Right to Your Door</p>
                         <a href="#"
                             >Shop Now!

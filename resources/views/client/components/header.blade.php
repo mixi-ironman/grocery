@@ -5,7 +5,7 @@
             <div class="col-lg-3 col-md-3 col-sm-12">
                 <!-- Header-logo -->
                 <div class="header-logo">
-                    <a href="#">
+                    <a href="{{ route('home') }}">
                         <img src="{{ url('client') }}/assets/img/nlogo.png" alt="logo" />
                     </a>
                 </div>

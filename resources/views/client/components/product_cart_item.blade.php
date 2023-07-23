@@ -1,10 +1,10 @@
 
 @foreach($products as $product)
-<div class="col-lg-1-5">
+<div class="col-lg-{{ $itemsPerRow }}">
         <div class="product-cart">
             <div class="product-img-action">
                 <div class="product-cart-img">
-                    <a href="#">
+                    <a href="{{ route('view-product',['id' => $product->id, 'slug' => Str::slug($product->name)]) }}">
                         <img
                             class="default-img"
                             src="{{ asset('uploads/') }}/{{ $product->image }}"
@@ -13,7 +13,7 @@
                         {{-- <img class="hover-img" src="{{ url('client') }}/assets/img/product-mg.jpg" alt="" /> --}}
                     </a>
                     <div class="product-action">
-                        <button class="product-action-icon">
+                        <a href={{ route('view-product',['id' => $product->id, 'slug' => Str::slug($product->name)]) }} class="product-action-icon">
                             <img
                                 width="35"
                                 height="35"
@@ -21,7 +21,7 @@
                                 src="https://img.icons8.com/external-ddara-fill-ddara/64/external-eye-eye-ddara-fill-ddara.png"
                                 alt="external-eye-eye-ddara-fill-ddara"
                             />
-                        </button>
+                        </a>
                         <button style="display:none" class="product-action-icon">
                             <img  class="translatex"
                                 width="37"
@@ -49,7 +49,9 @@
             <div class="product-content">
                 <div class="product-category">{{ $product->category->name }}</div>
                 <h2 class="product-name">
-                    <a href="/san-pham/{{ $product->id }}-{{ Str::slug($product->name) }}">{{ $product->name }}</a>
+                    {{-- <a href="/san-pham/{{ $product->id }}-{{ Str::slug($product->name) }}">{{ $product->name }}</a> --}}
+                    <a href="{{ route('view-product',['id' => $product->id, 'slug' => Str::slug($product->name)]) }}">{{ $product->name }}</a>
+
                 </h2>
                 <div class="product-rate-cover">
                     <div class="product-rate">
@@ -65,9 +67,8 @@
                     {{-- <p>1000$</p>
                     <p class="old-price">2000đ</p> --}}
                     <div class="product-price">
-                        <p>{{ number_format($product->price) }}đ</p>
-                        <p class="old-price">{{ number_format($product->old_price) }}đ</p>
-                        {{-- {!! \App\Helpers\Helper::price( number_format($product->old_price,$product->old_price)) !!} --}}
+                        {!! \App\Helpers\Helper::price( $product->price) !!}
+                        {!! \App\Helpers\Helper::oldPrice( $product->old_price) !!}
                     </div>
                     <div class="add-cart">
                         <a href="#">
@@ -81,7 +82,7 @@
 
 @endforeach
 
-@if(count($products) >= 10)
+@if(count($products) >= 10 && $itemsPerRow == '1-5')
 <div class="product-grid row g-3">
     <input type="hidden" value="1" id ="page" name = "page">
     <div class="col-md-12" >

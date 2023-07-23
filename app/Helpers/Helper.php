@@ -90,17 +90,24 @@ class Helper
         return $html;
     }
 
-    public static function price( $price = 0, $priceSale = 0)
+    public static function price($price = 0)
+{
+    if ($price != 0) {
+        return '<p>' . number_format($price) . 'đ</p>';
+    } else {
+        return '<a href="/lien-he.html">Liên hệ</a>';
+    }
+}
+
+
+    public static function oldPrice( $priceSale = 0)
     {
         if($priceSale != 0 ){
-            return $priceSale;
+            return '<p class="old-price">' . number_format($priceSale) . 'đ</p>';
+            // return number_format($priceSale);
+        }else{
+            // return '<a href="/lien-he.html">Lien hệ</a>';
         }
-
-        if($price != 0 ){
-            return $price;
-        }
-
-        return '<a href="/lien-he.html">Lien hệ</a>';
     }
 
 }
