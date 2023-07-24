@@ -63,18 +63,44 @@ class CartController extends Controller
         // print_r(session()->get('cart'));
         // echo"</pre>";
 
-        $carts = session()->get('cart');
+        $carts = session()->get('cart',[]);
         return view('client.layouts.pages.view-cart-detail',['carts' => $carts]);
+     }
+
+     public function updateCart(Request $request)
+     {
+        if($request->id && $request->quantity)
+        {
+            $carts = session()->get('cart',[]);
+            $carts[$request->id]['quantity'] = $request->quantity;
+            session()->put('cart', $carts);
+            $cartComponent = view('client.components.cart_component',['carts' => $carts])->render();
+            return response()->json([
+                'code'=>200,
+                'msg'=>'Cập nhật số lượng thành công!',
+                'cart_component' => $cartComponent,
+            ]);
+
+        }
+       
      }
 
      public function deleteCart(Request $request)
      {
-        // echo"<pre>";
-        // print_r(session()->get('cart'));
-        // echo"</pre>";
+       if($request->id )
+        {
+            $carts = session()->get('cart',[]);
+            unset($carts[$request->id]);
+            session()->put('cart', $carts);
+            
+            $cartComponent = view('client.components.cart_component',['carts' => $carts])->render();
+            return response()->json([
+                'code'=>200,
+                'msg'=>'Xóa sản phẩm thành công!',
+                'cart_component' => $cartComponent,
+            ]);
 
-        $carts = session()->get('cart');
-        return view('client.layouts.pages.view-cart-detail',['carts' => $carts]);
+        }
      }
 
 

@@ -45,13 +45,15 @@
             </div>
 
             <!-- Position -->
-            @include('client.components.cart_list')
+            {{-- @include('client.components.cart_list') --}}
             {{-- @include('client.components.cart_list',['carts' => $carts]) --}}
+
             <!-- --Toast Messeage -->
             <div id="toast"></div>
+            <!-- --End Toast Messeage -->
+
         </div>
         
-         @stack('custom-script')
 
         {{-- thêm jquery --}}
         {{-- <script src="{{ asset('js/jquery-3.7.0.min.js') }}"></script> --}}
@@ -81,5 +83,7 @@
 
         <script src="{{ url('client') }}/assets/js/toast_msg.js"></script>
         <script src="{{ url('client') }}/assets/js/add_cart.js"></script>
+         @stack('custom-script')
+
     </body>
 </html>

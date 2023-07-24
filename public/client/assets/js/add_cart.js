@@ -19,7 +19,8 @@ function addToCart(event) {
     });
 }
 $(document).ready(function () {
-    $(".btn_add_to_cart").on("click", addToCart);
+    // $(".btn_add_to_cart").on("click", addToCart);
+    $(document).on("click", ".btn_add_to_cart", addToCart);
 });
 
 // $(".btn_add_to_cart").on("click", function (e) {

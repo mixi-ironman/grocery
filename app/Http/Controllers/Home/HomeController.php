@@ -19,13 +19,8 @@ class HomeController extends Controller
     public function index()
     {
         $products = $this->productService->getProducts();
-        $carts = session()->get('cart');
-        if(count($carts) == 0)
-        {
-            $carts = [];
-        }
+        $carts = session()->get('cart',[]);
         // dd($carts);
-
         return view('client.layouts.pages.home',['products' => $products, 'carts' => $carts]); 
     }
 

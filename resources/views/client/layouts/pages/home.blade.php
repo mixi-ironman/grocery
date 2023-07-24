@@ -309,8 +309,8 @@
             </div>
 
             <!-- Position -->
-            @include('client.components.cart_list',['carts' => $carts])
-            {{-- @include('client.components.cart_list') --}}
+            {{-- @include('client.components.cart_list',['carts' => $carts]) --}}
+            @include('client.components.cart_list')
 
             <!-- --Toast Messeage -->
             <div id="toast"></div>

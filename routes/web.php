@@ -32,6 +32,8 @@ Route::get('/product/{id}-{slug}.html',[ProductController::class,'index'])->name
 Route::get('products/add-to-cart/{id}',[CartController::class,'addToCart'])->name('add-to-cart');
 //show cart
 Route::get('products/show-cart',[CartController::class,'showCart'])->name('show-cart');
+//update cart
+Route::get('products/update-cart',[CartController::class,'updateCart'])->name('update-cart');
 //delete cart
 Route::get('products/delete-cart',[CartController::class,'deleteCart'])->name('delete-cart');
 

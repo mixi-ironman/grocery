@@ -52,7 +52,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <a  href="#"><i class="fa-solid fa-trash"></i></a>
+                                <a style="display:none" href="#"><i class="fa-solid fa-trash"></i></a>
                             </div>
                         </li>
                         @php
