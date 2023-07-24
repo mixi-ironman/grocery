@@ -83,6 +83,9 @@ class ProductService
 
                 $imagePath = null; 
             }
+            // cách khác
+            // $product = $this->getById($id);
+            // $product->create([]);
 
             $product = $this->productRepository->create([
                 'name' => $request->input('name_product'),

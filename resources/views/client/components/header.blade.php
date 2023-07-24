@@ -103,7 +103,8 @@
                                 <div class="mega-menu-title hover-top">
                                     <!-- <i class="fa-solid fa-face-grin-tongue-wink menu-icon"></i> -->
                                     <i class="fa-solid fa-chart-gantt menu-icon"></i>
-                                    <h3>All Categories</h3>
+                                    {{-- <h3>All Categories</h3> --}}
+                                    <h3>Mixi Grocery</h3>
                                 </div>
                             </div>
                             <!-- mega-all-categories -->

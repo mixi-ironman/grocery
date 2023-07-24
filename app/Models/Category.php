@@ -29,6 +29,17 @@ class Category extends Model
         return $this->hasMany(Product::class, 'category_id', 'id');
     }
 
+    //lấy ra category cha khi mà trả ra 1 object rồi 1 object khác trỏ đến attribute sẽ bị lỗi nên dùng ?->  model ?-> atribute
+    public function parentCategory()
+    {
+        return $this->belongsTo(Category::class, 'parent_id', 'id');
+    }
+
+    public function childrentCategory()
+    {
+        return $this->hasMany(Category::class, 'parent_id');
+    }
+
     /*
     Tạo một sản phẩm mới và liên kết nó với một danh mục cụ thể:
     $category = Category::find(1);

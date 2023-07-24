@@ -27,19 +27,19 @@
 
                     @foreach($sliders as $key => $slider)
                         <tr>
-                            <td scope="row" style="text-align: justify;vertical-align:top;max-width:200px;white-space: wrap;overflow: hidden; text-overflow: ellipsis;">{{ $slider->id }}</td>
-                            <td style="max-width:200px; text-align: justify;vertical-align:top;max-width:150;white-space: wrap;overflow: hidden; text-overflow: ellipsis;">{{ $slider->name }}</td>
-                            <td style="text-align: justify;vertical-align:top;max-width:200px;white-space: wrap;overflow: hidden; text-overflow: ellipsis;">
+                            <td scope="row" style="text-align: justify;vertical-align:middle;max-width:200px;white-space: wrap;overflow: hidden; text-overflow: ellipsis;">{{ $slider->id }}</td>
+                            <td style="max-width:200px; text-align: justify;vertical-align:middle;max-width:150;white-space: wrap;overflow: hidden; text-overflow: ellipsis;">{{ $slider->name }}</td>
+                            <td style="text-align: justify;vertical-align:middle;max-width:200px;white-space: wrap;overflow: hidden; text-overflow: ellipsis;">
                                 <img style="width:180px;height:120px;object-fit: cover;border-radius:5px;border:1px solid rgb(247, 181, 181);box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);" src="{{ asset('uploads/') }}/{{ $slider->image }}" >
                             </td>
 
-                            <td style="text-align: center;vertical-align:top;max-width:200px;white-space: wrap;overflow: hidden; text-overflow: ellipsis;">
+                            <td style="text-align: center;vertical-align:middle;max-width:200px;white-space: wrap;overflow: hidden; text-overflow: ellipsis;">
                                 {{ $slider->is_active }}
                             </td>
                            
-                            <td style="text-align: justify;vertical-align:top;max-width:350;white-space: wrap;overflow: hidden; text-overflow: ellipsis;">{{ $slider->description }}</td>
-                            <td style="text-align: center;vertical-align:top;max-width:200px;white-space: wrap;overflow: hidden; text-overflow: ellipsis;">{{ $slider->created_at->format('d/m/Y h:i:s') }}</td>
-                            <td >
+                            <td style="text-align: justify;vertical-align:middle;max-width:350;white-space: wrap;overflow: hidden; text-overflow: ellipsis;">{{ $slider->description }}</td>
+                            <td style="text-align: center;vertical-align:middle;max-width:200px;white-space: wrap;overflow: hidden; text-overflow: ellipsis;">{{ $slider->created_at->format('d/m/Y h:i:s') }}</td>
+                            <td style="text-align:center;vertical-align:middle" >
                                 <form action="{{ route('sliders.destroy',['id'=>$slider->id]) }}" method="post" style="display:block;padding:10px">
                                     @csrf
                                     @method('DELETE')

@@ -11,12 +11,7 @@
             crossorigin="anonymous"
             referrerpolicy="no-referrer"
         />
-        <link
-            href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
-            rel="stylesheet"
-            integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
-            crossorigin="anonymous"
-        />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 
         <link
             rel="stylesheet"
@@ -51,6 +46,7 @@
 
             <!-- Position -->
             @include('client.components.cart_list')
+            {{-- @include('client.components.cart_list',['carts' => $carts]) --}}
             <!-- --Toast Messeage -->
             <div id="toast"></div>
         </div>
@@ -58,7 +54,10 @@
          @stack('custom-script')
 
         {{-- thêm jquery --}}
-        <script src="{{ asset('js/jquery-3.7.0.min.js') }}"></script>
+        {{-- <script src="{{ asset('js/jquery-3.7.0.min.js') }}"></script> --}}
+        <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+
+
         <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
         <script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
         <script
@@ -72,16 +71,15 @@
             integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
             crossorigin="anonymous"
         ></script>
-        <script
-            src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
-            integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
-            crossorigin="anonymous"
-        ></script>
+
+        {{-- add bootstrap --}}
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
+
         <script src="{{ url('client') }}/assets/js/main.js"></script>
         {{-- <script src="{{ url('client') }}/assets/js/jquery-3.7.0.min.js"></script> --}}
 
         <script src="{{ url('client') }}/assets/js/toast_msg.js"></script>
-
-         
+        <script src="{{ url('client') }}/assets/js/add_cart.js"></script>
     </body>
 </html>

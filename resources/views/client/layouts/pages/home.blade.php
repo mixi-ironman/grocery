@@ -30,6 +30,12 @@
         <title>Mixi-Market</title>
     </head>
     <body>
+        {{-- @php
+        dd($carts);
+        // echo"<pre>";
+        // print_r($carts);
+        // echo"</pre>";
+        @endphp --}}
         <div class="app">
             <!-- Header -->
             @include('client.components.header')
@@ -124,7 +130,7 @@
                             </div>
                         </div>
                         <div class="col-md-12">
-                            <div class="product-grid row g-3" id="load-product">
+                            <div class="product-grid row g-3" id="list-product">
                                 {{-- @include('client.components.product_cart_item',[@include('cart-products', ['cartProducts' => $cartProducts, 'itemsPerRow' => 3])]) --}}
                                 @include('client.components.product_cart_item', ['itemsPerRow' =>'1-5'])
                             </div>
@@ -162,7 +168,7 @@
                                     <h2>Featured</h2>
                                 </div>
                             </div>
-                            <div class="nav-tab-icon" style="text-align: end">
+                            <div class="nav-tab-icon" style="text-align: end;display:none">
                                 <img
                                     class="translatey"
                                     width="40"
@@ -198,7 +204,7 @@
                                     <h2>Top Sale</h2>
                                 </div>
                             </div>
-                            <div class="nav-tab-icon" style="text-align: end">
+                            <div class="nav-tab-icon" style="text-align: end;display:none">
                                 <img
                                     class="translatey"
                                     width="40"
@@ -303,13 +309,16 @@
             </div>
 
             <!-- Position -->
-            @include('client.components.cart_list')
+            @include('client.components.cart_list',['carts' => $carts])
+            {{-- @include('client.components.cart_list') --}}
 
             <!-- --Toast Messeage -->
             <div id="toast"></div>
         </div>
                       {{-- thêm jquery --}}
         <script src="{{ asset('js/jquery-3.7.0.min.js') }}"></script>
+        {{-- <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script> --}}
+
         <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
         <script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
         <script
@@ -331,8 +340,8 @@
 
         <script src="{{ url('client') }}/assets/js/main.js"></script>
         <script src="{{ url('client') }}/assets/js/toast_msg.js"></script>
-        
 
+        <script src="{{ url('client') }}/assets/js/add_cart.js"></script>
         @stack('custom-script')
     </body>
 </html>

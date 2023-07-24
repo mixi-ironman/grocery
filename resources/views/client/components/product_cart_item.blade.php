@@ -27,7 +27,7 @@
                                 width="37"
                                 height="37" src="https://img.icons8.com/external-creatype-glyph-colourcreatype/64/external-eye-essential-ui-v2-creatype-glyph-colourcreatype-2.png" alt="external-eye-essential-ui-v2-creatype-glyph-colourcreatype-2"/>
                         </button>
-                        <button class="product-action-icon btn_add_to_cart">
+                        <a href="#" class="product-action-icon btn_add_to_cart" data-url="{{ route('add-to-cart',['id' => $product->id]) }}">
                             <img
                                 class="translatex"
                                 width="35"
@@ -35,14 +35,10 @@
                                 src="https://img.icons8.com/doodle/48/shopping-cart--v1.png"
                                 alt="shopping-cart--v1"
                             />
-                        </button>
+                        </a>
                     </div>
                 </div>
-                <!-- sao cho ở ngoài position lại ăn theo body -->
-                <!-- <div class="product-action">
-                    <p>a</p>
-                    <p>b</p>
-                </div> -->
+              
                 <!-- button hiển thị giá trị gảim giá của 1 cart là bao nhiêu -->
                 <div class="product-badges"></div>
             </div>
@@ -91,13 +87,13 @@
 </div>
 @endif
 
-@push('custom-script')
-    <script>
-    $.ajaxSetup({
-    headers: {
-    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    }
-    });
+{{-- @push('custom-script')
+<script>
+$.ajaxSetup({
+headers: {
+'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+}
+});
 
 $(document).ready(function () {
     $('.btn-load_product').on('click', function () {
@@ -110,8 +106,10 @@ $(document).ready(function () {
     function loadMore(url) {
         console.log(url);
         let page = $('#page').val();
+        console.log(page);
+
         $.ajax({
-            type: 'POST',
+            method: 'GET',
             dataType: 'JSON',
 
             data: {
@@ -125,10 +123,11 @@ $(document).ready(function () {
 
             success: function(response) {
                 // Xử lý phản hồi từ server (nếu cần)
-                alert('Sản phẩm đã được thêm vào giỏ hàng');
-                if(!empty(response.html)){
+                alert('Load product thành công');
+                if(response.html){
+                    // console.log(response.html)
                     $("#list-product").append(response.html);
-                    page = $('#page').val($page+1)
+                    $('#page').val(response.page+1)
                 }
             },
             error: function(error) {
@@ -140,4 +139,4 @@ $(document).ready(function () {
 });
     </script>
 @endpush
-
+ --}}

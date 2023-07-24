@@ -15,7 +15,7 @@
                         <th scope="col"style="text-align: center;vertical-align:middle;">Name</th>
                         <th scope="col"style="text-align: center;vertical-align:middle;">slug</th>
                         <th scope="col">description</th>
-                        <th scope="col"style="text-align: center;vertical-align:middle;">parent_id</th>
+                        <th scope="col"style="text-align: center;vertical-align:middle;">Parent_category</th>
                         <th scope="col"style="text-align: center;vertical-align:middle;">is_active</th>
                         <th scope="col"style="text-align: center;vertical-align:middle;">Created At</th>
                         <td style="text-align: center;vertical-align:middle;">Action</td>
@@ -29,12 +29,19 @@
                             <td style="text-align: justify;vertical-align:middle;">{{ $category->name }}</td>
                             <td style="text-align: justify;vertical-align:middle;">{{ $category->slug }}</td>
                             <td style="text-align: justify;vertical-align:middle;max-width:350px;white-space: wrap;overflow: hidden; text-overflow: ellipsis;">{{ $category->description }}</td>
-                            <td style="text-align: center;vertical-align:middle;">{{ $category->parent_id }}</td>
+                            {{-- <td style="text-align: center;vertical-align:middle;">{{ $category->parent_id }}</td> --}}
+                            <td style="text-align: center;vertical-align:middle;">{{ $category?->parentCategory?->name }}</td>
+
                             <td style="text-align: center;vertical-align:middle;">
-                                {{ $category->is_active }}
+                                   {{ $category->is_active }}
+                                {{-- @if($category->is_active == 1)
+                                <a href="{{ route('categories.update'['id' => $category->id]) }}" class="change-status" data-status = "{{ $category->is_active }}"><i class="fa-solid fa-eye"></i></a>
+                                @elseif($category->is_active == 0)
+                                <a href="{{ route('categories.update'['id' => $category->id]) }}" class="change-status" data-status = "{{ $category->is_active }}"><i class="fa-regular fa-eye-slash"></i></a>
+                                @endif --}}
                             </td>
                             <td style="text-align: center;vertical-align:middle;">{{ $category->created_at->format('d/m/Y h:i:s') }}</td>
-                            <td >
+                            <td style="text-align:center;vertical-align:middle">
                                 <form action="{{ route('categories.destroy',['id'=>$category->id]) }}" method="post" style="display:block;padding:10px">
                                     @csrf
                                     @method('DELETE')
@@ -55,4 +62,31 @@
         </div>
     </div>
 @endsection
+
+{{-- @push('custom-script')
+    <script>
+        $(document).ready(function () {
+            $('#change-status').on('click', function(e){
+                e.preventDefault();
+                let = url = $(this).attr('href');
+                let is_active = $(this).data('status');
+                console.log('is_active');
+                $.ajax({
+                    method: 'PUT',
+                    url : url,
+                    data : {
+                        _tocken: '{{ csrf_tocken}}'
+                        is_active: is_active == 1 ? '0' : '1'
+                    },
+                    dataType:'json',
+                    success: function(data) {
+                    // Xử lý phản hồi từ server (nếu cần)
+                    alert('Load product thành công');
+                    
+                    },
+                })
+            })
+        })
+    </script>
+@endpush --}}
 

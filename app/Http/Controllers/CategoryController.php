@@ -58,6 +58,7 @@ class CategoryController extends Controller
 
     public function edit(string $id)
     {
+
         $category = $this->categoryService->getByCategoryId($id);
         $category_parent = $this->categoryService->getParentCategory();
         return view('admin.category.edit',[

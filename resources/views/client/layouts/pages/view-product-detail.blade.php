@@ -154,7 +154,7 @@
             <div class="col-md-6 review-comment">
                 <ol class="comment-list">
                     <li class="comment-item">
-                        <img class="comment-user-img" src="./assets/img/girl.jpg" alt="">
+                        <img class="comment-user-img" src="#" alt="">
                         <div class="comment-text">
                             <div class="star-cmt">
                                 <i class="fa-regular fa-star"></i>
@@ -180,7 +180,7 @@
                     </li>
 
                     <li class="comment-item">
-                        <img class="comment-user-img" src="./assets/img/girl.jpg" alt="">
+                        <img class="comment-user-img" src="#" alt="">
                         <div class="comment-text">
                             <div class="star-cmt">
                                 <i class="fa-regular fa-star"></i>
@@ -206,7 +206,7 @@
                     </li>
 
                     <li class="comment-item">
-                        <img class="comment-user-img" src="./assets/img/girl.jpg" alt="">
+                        <img class="comment-user-img" src="#" alt="">
                         <div class="comment-text">
                             <div class="star-cmt">
                                 <i class="fa-regular fa-star"></i>
@@ -232,7 +232,7 @@
                     </li>
 
                     <li class="comment-item">
-                        <img class="comment-user-img" src="./assets/img/girl.jpg" alt="">
+                        <img class="comment-user-img" src="#" alt="">
                         <div class="comment-text">
                             <div class="star-cmt">
                                 <i class="fa-regular fa-star"></i>
@@ -393,7 +393,23 @@
 
 @push('custom-script')
 <script>
-const app = {
+let app = {
+     scrollHeader() {
+                window.addEventListener('scroll', function () {
+                    var stickyElement = document.querySelector('.nav-container');
+                    var contentOffsetTop = document.querySelector('.product-view');
+
+                    if (contentOffsetTop) {
+                        // Kiểm tra xem phần tử có tồn tại hay không
+                        const topPosition = contentOffsetTop.offsetTop;
+                        if (window.scrollY >= topPosition) {
+                            stickyElement.classList.add('sticky');
+                        } else {
+                            stickyElement.classList.remove('sticky');
+                        }
+                    }
+                });
+            },
 
     quantityInput() {
         const $ = document.querySelector.bind(document);
@@ -446,12 +462,13 @@ const app = {
         //     });
         // });
     },
-    run() {
-        this.quantityInput();
-        this.toggleTabUi();
-    },
-};
+     run() {
+                this.scrollHeader();
+                this.quantityInput();
+                this.toggleTabUi();
+            },
+        };
 
-app.run();
+        app.run();
 </script>
 @endpush

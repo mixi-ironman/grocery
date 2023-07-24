@@ -30,7 +30,7 @@ class ProductService
     }
 
     //get product theo id
-    public function getByProductId($id)
+    public function getProductById($id)
     {
         return $this->productRepository->getById($id);
     }

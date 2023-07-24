@@ -1,15 +1,15 @@
-const app = {
+let app = {
     currentItemIndex: 0,
     //Typing Efect
     typingAnimation() {
-        let typingText = document.querySelector('.mixi');
+        let typingText = document.querySelector(".mixi");
 
-        const textList = ['Wellcome to Mixi-Grocery'];
-        let currentText = '';
+        const textList = ["Wellcome to Mixi-Grocery"];
+        let currentText = "";
         let currentIndex = 0;
         if (textList.length > 0) {
             currentText = textList[currentIndex];
-            typingText.innerHTML = '';
+            typingText.innerHTML = "";
             let i = 0;
             var time = setInterval(() => {
                 typingText.innerHTML += currentText.charAt(i);
@@ -27,62 +27,66 @@ const app = {
 
     //Position: Sticky use javascript
     headerScroll() {
-        window.addEventListener('scroll', function () {
-            var stickyElement = document.querySelector('.nav-container');
-            var contentOffsetTop = document.querySelector('.slider-wraper').offsetTop;
+        window.addEventListener("scroll", function () {
+            var stickyElement = document.querySelector(".nav-container");
+            var contentOffsetTop =
+                document.querySelector(".slider-wraper").offsetTop;
 
             if (window.scrollY >= contentOffsetTop) {
-                stickyElement.classList.add('sticky');
+                stickyElement.classList.add("sticky");
             } else {
-                stickyElement.classList.remove('sticky');
+                stickyElement.classList.remove("sticky");
             }
         });
     },
 
     //Title change khi when scroll
     titleScroll() {
-        window.addEventListener('scroll', function () {
+        window.addEventListener("scroll", function () {
             var scrollPosition_ = window.scrollY;
             var translateY_ = scrollPosition_ - 2800; // Thay đổi tỷ lệ theo ý muốn
-            var scrollingText_ = document.querySelector('.scrolling-text_');
+            var scrollingText_ = document.querySelector(".scrolling-text_");
             var pos_ = scrollingText_.getBoundingClientRect();
 
             if (translateY_ > pos_.top) {
-                scrollingText_.style.transform = 'translateX(0)';
+                scrollingText_.style.transform = "translateX(0)";
             } else {
-                scrollingText_.style.transform = 'translateX(120px)';
+                scrollingText_.style.transform = "translateX(120px)";
             }
             var scrollPosition = window.scrollY;
             var translateY = scrollPosition - 1700; // Thay đổi tỷ lệ theo ý muốn
 
-            var scrollingText = document.querySelector('.scrolling-text');
+            var scrollingText = document.querySelector(".scrolling-text");
             var pos = scrollingText.getBoundingClientRect();
 
             if (translateY > pos.top) {
-                scrollingText.style.transform = 'translateX(0)';
+                scrollingText.style.transform = "translateX(0)";
             } else {
-                scrollingText.style.transform = 'translateX(-120px)';
+                scrollingText.style.transform = "translateX(-120px)";
             }
         });
     },
 
     //Carousel for Feature code thuần
     carouselFeatured: function () {
-        let listCategorys = [...document.querySelectorAll('.slider-product-item')];
+        let listCategorys = [
+            ...document.querySelectorAll(".slider-product-item"),
+        ];
 
         console.log(listCategorys[0].getBoundingClientRect().width);
         console.log(listCategorys.length);
 
         setInterval(() => {
-            console.log('hihi');
+            console.log("hihi");
             this.autoSwitchItem(listCategorys);
         }, 1400);
     },
 
     autoSwitchItem(listCategorys) {
-        const wrapList = document.querySelector('.slider-product-list');
+        const wrapList = document.querySelector(".slider-product-list");
         const widthItem = listCategorys[0].offsetWidth;
-        this.currentItemIndex = (this.currentItemIndex + 1) % listCategorys.length;
+        this.currentItemIndex =
+            (this.currentItemIndex + 1) % listCategorys.length;
         console.log(this.currentItemIndex);
         wrapList.scrollLeft = this.currentItemIndex * widthItem;
         console.log(this.currentItemIndex * widthItem);
@@ -91,7 +95,7 @@ const app = {
     //Carousel use slick
     autoplay() {
         $(document).ready(function () {
-            $('.product-featured').slick({
+            $(".product-featured").slick({
                 slidesToShow: 4,
                 slidesToScroll: 1,
                 arrows: false,
@@ -116,7 +120,7 @@ const app = {
             //     }
             // });
 
-            $('.slider-product-list').slick({
+            $(".slider-product-list").slick({
                 slidesToShow: 8,
                 slidesToScroll: 1,
                 infinite: true,
@@ -150,7 +154,7 @@ const app = {
             //     console.log(visibleItems);
             // });
 
-            $('.brand-list').slick({
+            $(".brand-list").slick({
                 slidesToShow: 6,
                 slidesToScroll: 1,
                 arrows: false,
@@ -162,14 +166,16 @@ const app = {
     },
     //ẩn text quá giới hạn item cart sidebar
     hiddenText() {
-        const textContainers = document.querySelectorAll('.cart-product-des-link');
+        const textContainers = document.querySelectorAll(
+            ".cart-product-des-link"
+        );
         const maxLength = 50;
 
         textContainers.forEach((textContainer) => {
             const text = textContainer.innerText;
 
             if (text.length > maxLength) {
-                const truncatedText = text.slice(0, maxLength) + '...';
+                const truncatedText = text.slice(0, maxLength) + "...";
                 textContainer.innerText = truncatedText;
             }
         });
@@ -177,27 +183,27 @@ const app = {
 
     //slide-cart ()khi click vào giỏ hàng sẽ hiện các item có trong giỏ hàng
     sideCart() {
-        const cartIcon = document.querySelector('.mini-cart');
-        const cartSidebar = document.querySelector('.cart-sidebar');
-        const cartIconClose = document.querySelector('.icon-close-cart');
+        const cartIcon = document.querySelector(".mini-cart");
+        const cartSidebar = document.querySelector(".cart-sidebar");
+        const cartIconClose = document.querySelector(".icon-close-cart");
 
-        cartIcon.addEventListener('click', function () {
-            cartSidebar.classList.toggle('cart-sidebar-show');
+        cartIcon.addEventListener("click", function () {
+            cartSidebar.classList.toggle("cart-sidebar-show");
         });
 
-        cartIconClose.addEventListener('click', function () {
-            cartSidebar.classList.remove('cart-sidebar-show');
+        cartIconClose.addEventListener("click", function () {
+            cartSidebar.classList.remove("cart-sidebar-show");
         });
     },
 
     //save value input cart
     saveInputValue: function (input) {
-        localStorage.setItem('inputValue', input.value);
+        localStorage.setItem("inputValue", input.value);
     },
 
     loadInputValue: function () {
-        var input = document.querySelector('.cart-product-quantity-input');
-        var storedValue = localStorage.getItem('inputValue');
+        var input = document.querySelector(".cart-product-quantity-input");
+        var storedValue = localStorage.getItem("inputValue");
 
         if (storedValue) {
             input.value = storedValue;
@@ -212,9 +218,9 @@ const app = {
         this.sideCart();
         this.loadInputValue();
         //save value input cart khi f5 trang
-        window.addEventListener('DOMContentLoaded', function () {
-            var input = document.querySelector('.cart-product-quantity-input');
-            input.addEventListener('change', function () {
+        window.addEventListener("DOMContentLoaded", function () {
+            var input = document.querySelector(".cart-product-quantity-input");
+            input.addEventListener("change", function () {
                 app.saveInputValue(this);
             });
         });
@@ -224,3 +230,5 @@ const app = {
 };
 
 app.run();
+
+// console.log("Detail");
