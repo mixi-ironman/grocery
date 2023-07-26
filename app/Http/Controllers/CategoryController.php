@@ -77,7 +77,7 @@ class CategoryController extends Controller
     public function destroy(string $id)
     {
         $this->categoryService->destroy($id);
-        return redirect()->route('categories.index')->with('success', 'Created Category Successfully!');
+        return redirect()->route('categories.index')->with('success', 'Delete Category Successfully!');
 
     }
 }

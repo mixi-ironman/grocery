@@ -11,63 +11,62 @@
         </div>
         <div class="row">
             <div class="col-lg-8">
-                <div class="table-responsive shopping-summery delete_cart_url" data-url="{{ route('delete-cart') }}">
-                  <table class="table update_cart_url" data-url="{{ route('update-cart') }}">
-                <thead>
-                   
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Image</th>
-                        <th style="text-align:center" scope="col">Quantity</th>
-                        <th style="text-align:center" scope="col">Price</th>
-                        <th style="text-align:center" scope="col">Total Price</th>
-                        <th style="text-align:center" scope="col">Action</th>
-    
-                    </tr>
-                </thead>
-                <tbody>
-                @php
-                    $total = 0
-                @endphp
-                @foreach($carts as $id => $cart)
-                    <tr>
-                        <th style="text-align:center;vertical-align:middle" scope="row">{{ $id }}</th>
-                        <td  style="text-align:center;vertical-align:middle">{{ $cart['name'] }}</td>
-                        <td  style="text-align:center;vertical-align:middle"><img style="width:160px;height:100px;line-height:100px;object-fit: cover;border-radius:5px;border:1px solid rgb(247, 181, 181);box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);object-position: center;" src="{{ asset('uploads/') }}/{{ $cart['image'] }}" ></td>
-                        <td style="text-align:center;vertical-align:middle;" ><input type = "number" class="quantity" value="{{ $cart['quantity'] }}" style="width:60px;border-top-left-radius: 12px;border-bottom-right-radius: 12px;border:2px solid green;text-align:center;outline:none" min="1" max="10"></td>
-                        {{-- <td>
-                            <div class="detail-extralink mr-15">
-                                <div class="detail-qty border radius">
-                                    <a href="#" class="qty-down"><i class="fi-rs-angle-small-down"></i></a>
-                                    <span class="qty-val">1</span>
-                                    <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
-                                </div>
-                            </div>
-                        </td> --}}
-                        <td style="text-align:center;vertical-align:middle">{{ number_format($cart['price']) }}đ</td>
-                        <td style="text-align:center;vertical-align:middle">{{ number_format($cart['price'] * $cart['quantity']) }}đ</td>
-                        <td style="text-align:center;vertical-align:middle">
-                            <a href = "#" class="cart_update" data-id="{{ $id }}" style="margin-right:5px; display:inline-block"><i class="fa-solid fa-rotate-right"></i></a>
-                            <a href = "#" class="cart_delete" data-id="{{ $id }}" style="margin-left:5px;display:inline-block"><i class="fa-solid fa-trash"></i></a>
-                        </td>
-                    </tr>
+                <div class="table-responsive shopping-summery delete_cart_url" data-url="{{ route('delete-cart') }}" style="height:633px;overflow: auto;scroll-behavior: smooth;">
+                <table class="table update_cart_url" data-url="{{ route('update-cart') }}">
+                    <thead>
                     
-                @php
-                $total += $cart['price'] * $cart['quantity']
-                @endphp
-                @endforeach
-                </tbody>
+                        <tr>
+                            <th style="text-align:center" scope="col">#</th>
+                            <th style="text-align:center" scope="col">Tên SP</th>
+                            <th style="text-align:center" scope="col">Hình Ảnh</th>
+                            <th style="text-align:center" scope="col">Số lượng</th>
+                            <th style="text-align:center" scope="col">Giá</th>
+                            <th style="text-align:center" scope="col">Thành Tiền</th>
+                            <th style="text-align:center" scope="col">Action</th>
+        
+                        </tr>
+                    </thead>
+                    <tbody>
+                    @php
+                        $total = 0
+                    @endphp
+                    @foreach($carts as $id => $cart)
+                        <tr>
+                            <th style="text-align:center;vertical-align:middle" scope="row">{{ $id }}</th>
+                            <td  style="text-align:center;vertical-align:middle">{{ $cart['name'] }}</td>
+                            <td  style="text-align:center;vertical-align:middle"><img style="width:160px;height:100px;line-height:100px;object-fit: cover;border-radius:5px;border:1px solid rgb(247, 181, 181);box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);object-position: center;" src="{{ asset('uploads/') }}/{{ $cart['image'] }}" ></td>
+                            <td style="text-align:center;vertical-align:middle;" ><input type = "number" class="quantity" value="{{ $cart['quantity'] }}" style="width:60px;border-top-left-radius: 12px;border-bottom-right-radius: 12px;border:2px solid green;text-align:center;outline:none" min="1" max="100"></td>
+                            {{-- <td>
+                                <div class="detail-extralink mr-15">
+                                    <div class="detail-qty border radius">
+                                        <a href="#" class="qty-down"><i class="fi-rs-angle-small-down"></i></a>
+                                        <span class="qty-val">1</span>
+                                        <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
+                                    </div>
+                                </div>
+                            </td> --}}
+                            <td style="text-align:center;vertical-align:middle">{{ number_format($cart['price']) }}đ</td>
+                            <td style="text-align:center;vertical-align:middle">{{ number_format($cart['price'] * $cart['quantity']) }}đ</td>
+                            <td style="text-align:center;vertical-align:middle">
+                                <a href = "#" class="cart_update" data-id="{{ $id }}" style="margin-right:5px; display:inline-block"><i class="fa-solid fa-rotate-right"></i></a>
+                                <a href = "#" class="cart_delete" data-id="{{ $id }}" style="margin-left:5px;display:inline-block"><i class="fa-solid fa-trash"></i></a>
+                            </td>
+                        </tr>
+                        
+                    @php
+                    $total += $cart['price'] * $cart['quantity']
+                    @endphp
+                    @endforeach
+                    </tbody>
                 </table>
-                <p>Tổng: {{ number_format($total) }}</p>
                 </div>
                 <div class="divider-2 mb-3"></div>
                 
                 <div class="cart-action d-flex justify-content-between">
                     {{-- <a href={{route('home')}} class="btn"><i class="bi bi-arrow-left me-2" style="width:150px;height:50px;background-color:red;"></i>Continue Shopping</a>
                     <a class="btn  me-2 mb-sm-2"><i class="bi bi-arrow-clockwise me-2"></i>Update Cart</a> --}}
-                    <a href={{route('home')}} class="translate hover_"  style="background-color:rgb(93,168,138,0.8);display:inline-block; padding:10px 15px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);border-top-left-radius: 12px;border-bottom-right-radius: 12px;color:black;font-weight:600;font-size:16px;position:relative"><i class="bi bi-arrow-left me-2"></i>Continue Shopping</a>
-
+                    <a href="{{route('home')}}" class="translatex hover-top"  style="background-color:rgb(93,168,138,0.8);display:inline-block; padding:10px 15px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);border-top-left-radius: 12px;border-bottom-right-radius: 12px;color:black;font-weight:600;font-size:16px;position:relative"><i class="bi bi-arrow-left me-2"></i>Continue Shopping</a>
+                    <p style="text-align: right;font-size:20px;"><strong style="box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);border-top-left-radius: 12px;border-bottom-right-radius: 12px;padding:5px 20px;border:4px solid rgb(93,168,138);">Tổng: {{ number_format($total).' đ' }}</strong></p>
                 </div>
                 {{-- <div class="row mt-4">
                     <div class="col-lg-7">
@@ -116,17 +115,18 @@
                 </div> --}}
             </div>
     
-            {{-- <div class="col-lg-4">
+            <div class="col-lg-4">
                 <div class="border p-md-4 cart-totals ml-3">
                     <div class="table-responsive">
+                        <p style="font-size: 20px"><strong>Thông tin đơn hàng</strong></p>
                         <table class="table no-border">
                             <tbody>
                                 <tr>
-                                    <td class="cart_total_label">
-                                        <h6 class="text-muted">Subtotal</h6>
+                                    <td class="cart_total_label" style="width: 120px">
+                                        <h6 class="text-muted">Giá tạm tính</h6>
                                     </td>
                                     <td class="cart_total_amount">
-                                        <h4 class="text-primary text-end">$12.31</h4>
+                                        <h4 class="text-primary text-end">{{ number_format($total)}}đ</h4>
                                     </td>
                                 </tr>
                                 <tr>
@@ -135,40 +135,35 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="cart_total_label">
-                                        <h6 class="text-muted">Shipping</h6>
+                                    <td class="cart_total_label" style="width: 100%">
+                                       {{-- <h6 class="text-muted">Coupons</h6> --}}
+                                        <div class="mb-3" >
+                                            <label for="exampleFormControlInput1" class="form-label">Voucher</label>
+                                            <input style="width: 100%" type="text" class="form-control" id="discount_code" placeholder="Nhập mã giảm giá">
+                                            <p style="opacity:0">Thành công</p>
+                                        </div>
+                                        <a href="{{route('home')}}" id="apply_discount_btn" class="translatex hover-top"  style="background-color:rgb(93,168,138,0.8);display:inline-block; padding:5px 10px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);border-top-left-radius: 12px;border-bottom-right-radius: 12px;color:black;font-weight:600;font-size:14px;position:relative">Áp dụng mã</a>
                                     </td>
-                                    <td class="cart_total_amount">
-                                        <h5 class="text-heading text-end">Free</h5>
-                                    </td>
+                                   
                                 </tr>
+                            
+                                
                                 <tr>
-                                    <td class="cart_total_label">
-                                        <h6 class="text-muted">Estimate for</h6>
+                                    <td class="cart_total_label" >
+                                        <h6 class="text-muted">Giá phải trả</h6>
                                     </td>
-                                    <td class="cart_total_amount">
-                                        <h5 class="text-heading text-end">United Kingdom</h5>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td scope="col" colspan="2">
-                                        <div class="divider-2 mt-3 mb-3"></div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="cart_total_label">
-                                        <h6 class="text-muted">Total</h6>
-                                    </td>
-                                    <td class="cart_total_amount">
-                                        <h4 class="text-primary text-end">$12.31</h4>
+                                    <td class="cart_total_amount" >
+                                        <h4 class="text-primary text-end">{{ number_format($total)}}đ</h4>
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
-                    <a href="#" class="btn mb-2 w-100">Proceed To CheckOut<i class="bi bi-box-arrow-right ms-2"></i></a>
+                    {{-- <a href="#" class="btn mb-2 w-100">Proceed To CheckOut<i class="bi bi-box-arrow-right ms-2"></i></a> --}}
+                    <a href="#" class="translatex"  style="background-color:rgba(221, 131, 229, 0.8);display:inline-block; padding:10px 15px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);border-top-left-radius: 12px;border-bottom-right-radius: 12px;color:black;font-weight:600;font-size:16px;position:relative"><i class="bi bi-arrow-left me-2"></i>Thanh Toán</a>
+
                 </div>
-            </div> --}}
+            </div>
         </div>
     </div>
 </div>

@@ -81,7 +81,7 @@
                                         alt="shopping-cart--v1"
                                     />
                                 </a>
-                                <span class="cart-count">2</span>
+                                <span class="cart-count">{{ count($carts) }}</span>
                             </div>
                             <div class="modal_container-view-cart_list" style="display: none"></div>
                         </div>

@@ -22,10 +22,15 @@ class ProductController extends Controller
     {
         $product = $this->productService->show($id);
         // dd($product);
+        $carts = session()->get('cart',[]);
+        if ($carts === null) {
+        // Xử lý khi không có giỏ hàng
+            $carts = [];
+        }
         $category = $this->categoryService->getByCategoryId($product->category_id);
         $categories = $category->products;
         // dd($categories);
-        return view('client.layouts.pages.view-product-detail',['product' => $product,'categories' => $categories]);
+        return view('client.layouts.pages.view-product-detail',['product' => $product,'categories' => $categories,'carts' => $carts]);
     }
 
   

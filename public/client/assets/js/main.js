@@ -1,4 +1,4 @@
-let app = {
+const app = {
     currentItemIndex: 0,
     //Typing Efect
     typingAnimation() {
@@ -196,34 +196,12 @@ let app = {
         });
     },
 
-    //save value input cart
-    saveInputValue: function (input) {
-        localStorage.setItem("inputValue", input.value);
-    },
-
-    loadInputValue: function () {
-        var input = document.querySelector(".cart-product-quantity-input");
-        var storedValue = localStorage.getItem("inputValue");
-
-        if (storedValue) {
-            input.value = storedValue;
-        }
-    },
-
     run: function () {
         // app.typingAnimation();
         this.headerScroll();
         this.titleScroll();
         this.hiddenText();
         this.sideCart();
-        this.loadInputValue();
-        //save value input cart khi f5 trang
-        window.addEventListener("DOMContentLoaded", function () {
-            var input = document.querySelector(".cart-product-quantity-input");
-            input.addEventListener("change", function () {
-                app.saveInputValue(this);
-            });
-        });
         // app.carouselFeatured();
         this.autoplay();
     },

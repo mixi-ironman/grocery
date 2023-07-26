@@ -911,7 +911,7 @@ chuyển dịch từ giữa ra 2 bên */
 .old-price {
     text-decoration: line-through;
     color: red;
-    font-size: 12px;
+    font-size: 12px !important;
     margin-left: 10px;
 }
 .add-cart {

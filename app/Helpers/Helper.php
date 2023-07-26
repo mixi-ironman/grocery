@@ -65,7 +65,7 @@ class Helper
                 // echo $category->parent_id .'và'. $parent_id .'<br>';
                 $html .= '
                     <tr>
-                        <td scope="row" style="text-align: justify; vertical-align: middle;">'. $key++ .'</td>
+                        <td scope="row" style="text-align: justify; vertical-align: middle;">'. $category->id .'</td>
                         <td style="text-align: justify; vertical-align: middle;">'.$char.$category->name .'</td>
                         <td style="text-align: justify; vertical-align: middle;">'. $category->slug .'</td>
                         <td style="text-align: justify; vertical-align: middle; max-width: 200px; white-space: normal; overflow: hidden;">'. $category->description .'</td>
@@ -83,7 +83,7 @@ class Helper
 
                 unset($categories[$key]);
                 // dd($categories);
-                $html .= self::category($categories, $category->id, $char.'>');
+                $html .= self::category($categories, $category->id, $char.'-- ');
                 // $html.=self::category($categories, $category->id,$char.$category->name.' - ');
             }
         }
@@ -91,13 +91,13 @@ class Helper
     }
 
     public static function price($price = 0)
-{
-    if ($price != 0) {
-        return '<p>' . number_format($price) . 'đ</p>';
-    } else {
-        return '<a href="/lien-he.html">Liên hệ</a>';
+    {
+        if ($price != 0) {
+            return '<p>' . number_format($price) . 'đ</p>';
+        } else {
+            return '<a href="/lien-he.html">Liên hệ</a>';
+        }
     }
-}
 
 
     public static function oldPrice( $priceSale = 0)

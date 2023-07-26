@@ -393,7 +393,7 @@
 
 @push('custom-script')
 <script>
-let app = {
+const app_ = {
      scrollHeader() {
                 window.addEventListener('scroll', function () {
                     var stickyElement = document.querySelector('.nav-container');
@@ -469,6 +469,6 @@ let app = {
             },
         };
 
-        app.run();
+        app_.run();
 </script>
 @endpush

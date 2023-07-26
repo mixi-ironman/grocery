@@ -17,9 +17,9 @@ class CategoryRepository extends BaseRepository
     public function getCategories()
     {
         // return $this->model->orderByDesc('created_at')->with('parentCategory')->paginate(5)->withQueryString();
-        return $this->model->orderByDesc('created_at')->paginate(5)->withQueryString();
+        // return $this->model->orderByDesc('created_at')->paginate(5)->withQueryString();
 
-        // return $this->model->paginate(5);
+        return $this->model->paginate(5);
         // return $this->model->all();
 
 

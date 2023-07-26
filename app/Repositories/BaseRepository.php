@@ -23,7 +23,7 @@ class BaseRepository
 
     public function create($attribute = [])
     {
-        dd($attribute);
+        // dd($attribute);
         return $this->model->create($attribute);
     }
 

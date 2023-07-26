@@ -1,7 +1,6 @@
-<!-- <div class="container-fluid"> -->
 
     <div class="slider-wraper row">
-        <!-- <div class="col-md-12" style="padding: 0"> -->
+        {{-- <!-- <div class="col-md-12" style="padding: 0"> --> --}}
         <div class="col-md-12">
             <div class="slider-wraper-list">
                 <div class="slider-wraper_item">

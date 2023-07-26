@@ -73,7 +73,7 @@ li {
     width: 30%;
     height: 3px;
     background: linear-gradient(to right, #090909, #ff6fe0);
-    right: 0;
+    left: 0;
     bottom: -8px;
     z-index: 3;
     transition: all 0.4s;
@@ -108,7 +108,6 @@ li {
     margin: 0 auto;
     float: left;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-    /* box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.05); */
     background: linear-gradient(to right, #8ce09d, #fff5c3) !important;
     z-index: 100;
     animation: slideIndown 1s linear;
