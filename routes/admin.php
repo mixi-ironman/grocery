@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SliderController;
+use App\Http\Controllers\ProductImageController;
 
 
 // Route::group(['prefix' => 'categories', 'as' => 'categories.'], function () {
@@ -42,3 +43,24 @@ Route::prefix('sliders')->name('sliders.')->group(function () {
     Route::put('/update/{id}', [SliderController::class, 'update'])->name('update');
     Route::delete('/destroy/{id}', [SliderController::class, 'destroy'])->name('destroy');
 });
+
+//Product
+
+Route::prefix('product')->name('product.')->group(function () {
+
+    Route::get('/', [ProductImageController::class, 'index'])->name('images.index');
+    Route::get('images/create', [ProductImageController::class, 'create'])->name('images.create');
+    Route::post('images/store', [ProductImageController::class, 'store'])->name('images.store');
+    Route::get('images/edit/{id}', [ProductImageController::class, 'edit'])->name('images.edit');
+    Route::put('images/update/{id}', [ProductImageController::class, 'update'])->name('images.update');
+    Route::delete('images/destroy/{id}', [ProductImageController::class, 'destroy'])->name('images.destroy');
+
+
+    // Route::get('images/{id}', [ProductImageController::class, 'show'])->name('product.image.show');
+    // Cập nhật hình ảnh sản phẩm
+    // Route::put('images/{id}', [ProductImageController::class, 'update'])->name('product.image.update');
+
+    // // Xóa hình ảnh sản phẩm
+    // Route::delete('images/{id}', [ProductImageController::class, 'destroy'])->name('product.image.destroy');
+});
+

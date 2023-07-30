@@ -115,7 +115,8 @@
                             <div class="slider-item-product">
                                 <div class="product-title popular-product-title">
                                     <h3 class="name-category-popular">Popular Products</h3>
-                                    <ul class="nav-tab">
+                                    {{-- <h3 class="name-category-popular">Sản phẩm phổ biến</h3> --}}
+                                    <ul class="nav-tab" style="opacity: 0">
                                         <li class="nav-item">
                                             <a href="#" class="nav-item-link">All </a>
                                         </li>

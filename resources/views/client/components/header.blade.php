@@ -1,3 +1,4 @@
+{{-- {{ dd($menu) }} --}}
 <div class="header">
     <!-- header-top -->
     <div class="container header-top">
@@ -18,7 +19,7 @@
                             type="text"
                             id="search"
                             name="search"
-                            placeholder="Search..."
+                            placeholder="Tìm kiếm sản phảm..."
                             class="search-box"
                             maxlength="128"
                             autocomplete="off"
@@ -49,6 +50,7 @@
                                 height="40"
                                 src="https://img.icons8.com/bubbles/50/likee-ap.png"
                                 alt="likee-ap"
+                                style="border-radius: 50%"
                             />
                             <span class="count">3</span>
                         </a>
@@ -62,6 +64,7 @@
                                 height="35"
                                 src="https://img.icons8.com/bubbles/50/user-female.png"
                                 alt="user-female"
+                                style="border-radius: 50%"
                             />
                         </a>
                         <div class="login-box" style="display: none">
@@ -79,6 +82,7 @@
                                         height="35"
                                         src="https://img.icons8.com/doodle/48/shopping-cart--v1.png"
                                         alt="shopping-cart--v1"
+                                        style="border-radius: 50%"
                                     />
                                 </a>
                                 <span class="cart-count">{{ count($carts) }}</span>
@@ -100,12 +104,14 @@
                         <!-- nav-left -->
                         <div class="header_mega-container">
                             <div class="navleft-container">
-                                <div class="mega-menu-title hover-top">
-                                    <!-- <i class="fa-solid fa-face-grin-tongue-wink menu-icon"></i> -->
-                                    <i class="fa-solid fa-chart-gantt menu-icon"></i>
-                                    {{-- <h3>All Categories</h3> --}}
-                                    <h3>Mixi Grocery</h3>
-                                </div>
+                                <a href="{{ route('viewCategory') }}">
+                                    <div class="mega-menu-title hover-top">
+                                        <!-- <i class="fa-solid fa-face-grin-tongue-wink menu-icon"></i> -->
+                                        <i class="fa-solid fa-chart-gantt menu-icon"></i>
+                                        {{-- <h3>All Categories</h3> --}}
+                                        <h3>Mixi Grocery</h3>
+                                    </div>
+                                </a>
                             </div>
                             <!-- mega-all-categories -->
                             <div class="mega-menu-category" style="display: none">
@@ -323,19 +329,19 @@
                         <div class="nav-features-box">
                             <ul class="features-box_list">
                                 <li class="features-box_item">
-                                    <a href="#">Home</a>
+                                    <a href="#">Trang chủ</a>
                                 </li>
                                 <li class="features-box_item">
-                                    <a href="#">About</a>
+                                    <a href="#">Sản phẩm</a>
                                 </li>
                                 <li class="features-box_item">
-                                    <a href="#">Shop</a>
+                                    <a href="#">Tin tức</a>
                                 </li>
                                 <li class="features-box_item">
-                                    <a href="#">Blog</a>
+                                    <a href="#">Giới thiệu</a>
                                 </li>
                                 <li class="features-box_item">
-                                    <a href="#">Contact</a>
+                                    <a href="#">Liên hệ</a>
                                 </li>
                             </ul>
                             <div class="contact">

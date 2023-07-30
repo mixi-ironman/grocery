@@ -5,15 +5,19 @@ namespace App\Http\Controllers\Home;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Services\Client\ProductService;
+use App\Services\OrderService;
+
 
 class CartController extends Controller
 {
     private $productService;
+    private $orderService;
 
-    public function __construct(ProductService $productService)
+
+    public function __construct(ProductService $productService,OrderService $orderService)
     {
         $this->productService = $productService;
-
+        $this->orderService = $orderService;
     }
     public function index()
     {
@@ -87,7 +91,7 @@ class CartController extends Controller
 
      public function deleteCart(Request $request)
      {
-       if($request->id )
+       if($request->id)
         {
             $carts = session()->get('cart',[]);
             unset($carts[$request->id]);
@@ -102,6 +106,27 @@ class CartController extends Controller
 
         }
      }
+
+      public function checkOut(Request $request)
+      {
+            $carts = session()->get('cart',[]);
+            return view('client.layouts.pages.checkout',['carts' => $carts]);
+            // $customer = Auth::guard('customer')->user();
+            // return view('home.pages.checkout',compact('carts','customer'));
+      }
+
+      public function addOrderCash(Request $request)
+      {
+        $carts = session()->get('cart',[]);
+        if (isset($carts))
+        {
+            //  $checkOut = $this->cartService->checkOut($carts);
+            //  $subTotal = $this->orderService->subTotal($carts);
+             $this->orderService->add($request,$carts);
+             session()->forget('cart');
+        }
+        //   return redirect()->route('home');
+      }
 
 
 }

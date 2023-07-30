@@ -8,12 +8,11 @@
                     <div class="slider-item_description">
                         <p>Organic</p>
                         <p>Farm Fresh Produce Right to Your Door</p>
-                        <a href="#"
-                            >Shop Now!
+                        <a href="#" style="opacity: 1;color:black;background-color:rgb(93,168,138)border-top-left-radius: 12px;border-bottom-right-radius: 12px;">Shop Now!
                             <span
                                 ><i
                                     class="fa-regular fa-face-grin-hearts"
-                                    style="font-size: 20px; color: rgb(93, 247, 111)"
+                                    style="font-size: 20px; color: rgb(245, 245, 245)"
                                 ></i></span
                         ></a>
                     </div>

@@ -17,6 +17,10 @@ class ProductService
     {
         $this->productRepository = $productRepository;
     }
+    public function getAll_()
+    {
+        return $this->productRepository->getAll();
+    }
 
     //get all category
     public function getAllProduct()

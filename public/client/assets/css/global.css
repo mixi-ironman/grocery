@@ -44,7 +44,7 @@ li {
 .translatey {
     transition: all 0.3s;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-    border-radius: 50% !important;
+    /* border-radius: 50% !important; */
     cursor: pointer;
 }
 
@@ -123,3 +123,9 @@ li {
         transform: translate3d(0, 0%, 0);
     }
 }
+
+/* <td>{{ $category->created_at->format('d/m/Y H:i:s') }}</td> */
+/* ko bắt dc sử kiện submit ở ajax.
+do cache view hoặc cache php Run:
+php artisan cache clear
+service php-fpm restart */

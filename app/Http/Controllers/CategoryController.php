@@ -39,8 +39,9 @@ class CategoryController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(CreateFormRequest $request)
     {
+     
        //dd($request->all());
        $this->categoryService->store($request);
 

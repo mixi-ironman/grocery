@@ -25,18 +25,39 @@ Route::get('/home', function () {
 //Home
 Route::get('/',[HomeController::class,'index'])->name('home');
 Route::get('/load-product',[HomeController::class,'loadProduct'])->name('loadproduct');
+// view product theo category
+Route::get('/category-product',[HomeController::class,'viewCategory'])->name('viewCategory');
+Route::get('/autocomplete-ajax',[HomeController::class,'autoCompleteAjax'])->name('autocomplete-ajax');
+// ---------------
 Route::post('danhmuc/{id}-{slug}.html',[MenuController::class,'index'])->name('index');
 //view product
 Route::get('/product/{id}-{slug}.html',[ProductController::class,'index'])->name('view-product');
-//add cart
-Route::get('products/add-to-cart/{id}',[CartController::class,'addToCart'])->name('add-to-cart');
-//show cart
-Route::get('products/show-cart',[CartController::class,'showCart'])->name('show-cart');
-//update cart
-Route::get('products/update-cart',[CartController::class,'updateCart'])->name('update-cart');
-//delete cart
-Route::get('products/delete-cart',[CartController::class,'deleteCart'])->name('delete-cart');
+// -----------------
 
+//cart
+Route::get('products/add-to-cart/{id}',[CartController::class,'addToCart'])->name('add-to-cart');
+Route::get('products/show-cart',[CartController::class,'showCart'])->name('show-cart');
+Route::get('products/update-cart',[CartController::class,'updateCart'])->name('update-cart');
+Route::get('products/delete-cart',[CartController::class,'deleteCart'])->name('delete-cart');
+//checkout 
+Route::get('/check-out',[CartController::class,'checkout'])->name('check-out');
+Route::post('/check-out-cash',[CartController::class,'addOrderCash'])->name('confirm-check-out');
+// --------------------
+
+//order xem danh sach đơn hàng
+
+
+
+
+
+
+
+
+// Route xử lý thanh toán bằng tiền mặt
+Route::post('/checkout-cash', 'PaymentController@checkoutCash');
+
+// Route xử lý thanh toán online
+Route::post('/checkout-online', 'PaymentController@checkoutOnline');
 
 
 

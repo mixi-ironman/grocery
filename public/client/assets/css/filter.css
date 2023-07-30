@@ -9,7 +9,7 @@
 }
 
 .bgr-banner-shop {
-    background-image: url('../img/bg-grocery-4.jpg');
+    background-image: url("../img/bg-grocery-4.jpg");
     padding-top: 210px;
     background-repeat: no-repeat;
     background-size: cover;
@@ -43,7 +43,7 @@
 
 .filter-category-name h4::after,
 .filter-brand-wrap h4::after {
-    content: '';
+    content: "";
     display: block;
     position: absolute;
     bottom: -5px;
@@ -54,7 +54,7 @@
 }
 
 .filter-category-name h4::before {
-    content: '';
+    content: "";
     display: block;
     position: absolute;
     bottom: -5px;
@@ -221,6 +221,20 @@
 }
 
 .sort-by {
+    position: relative;
+    padding: 1px;
+}
+
+.sort-by::after {
+    content: "";
+    position: absolute;
+    height: 10px;
+    bottom: -10px;
+    left: 0;
+    /* background-color: red; */
+    width: 100%;
+    display: block;
+    z-index: 100;
 }
 
 .sort-by-dropdown-quantity {
@@ -246,8 +260,9 @@
 .sort-by-product-atribute {
     padding-right: 45px;
 }
-.sort-by-dropdown-atribute {
-    /* display: none; */
+/* .sort-by-dropdown-atribute {
+    opacity: 0;
+    visibility: hidden;
     position: absolute;
     background-color: white;
     border-radius: 5px;
@@ -256,7 +271,30 @@
     min-width: 100%;
     z-index: 10;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    transition: opacity 0.3s ease;
 }
+
+.sort-by:hover .sort-by-dropdown-atribute {
+    opacity: 1;
+    visibility: visible;
+} */
+
+.sort-by-dropdown-atribute {
+    display: none;
+    position: absolute;
+    background-color: white;
+    border-radius: 5px;
+    top: 110%;
+    left: 0;
+    min-width: 100%;
+    z-index: 10;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.sort-by-cover_right:hover .sort-by-dropdown-atribute {
+    display: block;
+}
+
 .atribute-list {
     margin: 0;
     padding: 10px 10px;

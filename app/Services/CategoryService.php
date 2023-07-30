@@ -7,6 +7,7 @@ use Illuminate\Support\Str;
 use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
+use App\Exceptions\CommonException;
 class CategoryService
 {
     private $categoryRepository;
@@ -54,11 +55,11 @@ class CategoryService
           ]);
            DB::commit();
            
-        //    return Redirect::route('categories.index')->with('success', 'Created Category Successfully!');
         //    return redirect()->route('categories.index')->with('success', 'Created Category Successfully!'); 
         } catch (\Exception $e) {
-          DB::rollBack();
-          return Redirect::back()->withErrors(['create' => 'Something Wrong!'])->withInput();
+            DB::rollBack();
+            throw new CommonException('Something wrong');
+        //   return Redirect::back()->withErrors(['error' => 'Something Wrong!'])->withInput();
         }
     }
 

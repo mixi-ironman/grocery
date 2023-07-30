@@ -160,7 +160,7 @@
                         </table>
                     </div>
                     {{-- <a href="#" class="btn mb-2 w-100">Proceed To CheckOut<i class="bi bi-box-arrow-right ms-2"></i></a> --}}
-                    <a href="#" class="translatex"  style="background-color:rgba(221, 131, 229, 0.8);display:inline-block; padding:10px 15px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);border-top-left-radius: 12px;border-bottom-right-radius: 12px;color:black;font-weight:600;font-size:16px;position:relative"><i class="bi bi-arrow-left me-2"></i>Thanh Toán</a>
+                    <a href="{{ route('check-out') }}" class="translatex"  style="background-color:rgba(221, 131, 229, 0.8);display:inline-block; padding:10px 15px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);border-top-left-radius: 12px;border-bottom-right-radius: 12px;color:black;font-weight:600;font-size:16px;position:relative"><i class="bi bi-arrow-left me-2"></i>Thanh Toán</a>
 
                 </div>
             </div>
@@ -197,7 +197,7 @@ $(document).ready(function () {
 
             success: function(data) {
                 // Xử lý phản hồi từ server (nếu cần)
-                alert('Load product thành công');
+                alert('update product thành công');
 
                 if(data.code === 200){
                     $(".cart_wrapper").html(data.cart_component);

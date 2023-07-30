@@ -46,4 +46,10 @@ class HomeController extends Controller
                 'html' => ''
         ]);
     }
+
+    //view category-product
+    public function viewCategory(Request $request)
+    {
+      return view('client.layouts.pages.view-category-product');
+    }
 }

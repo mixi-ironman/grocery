@@ -82,7 +82,7 @@
 <div class="product-grid row g-3">
     <input type="hidden" value="1" id ="page" name = "page">
     <div class="col-md-12" >
-        <button type="button" data-url = {{ route('loadproduct') }} class="btn-load_product translate" style="display:block;padding: 10px 30px; outline:none;border:none;background-color:rgb(232, 131, 131);font-weight:bold;border-radius:5px;box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.05)" >Load more</button>
+        <button type="button" data-url = {{ route('loadproduct') }} class="btn-load_product translatex" style="opacity:0;display:block;padding: 10px 30px; outline:none;border:none;background-color:rgb(232, 131, 131);font-weight:bold;border-top-left-radius: 12px;border-bottom-right-radius: 12px;box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.05)" >Load more</button>
     </div>
 </div>
 @endif

@@ -4,7 +4,7 @@
                             <div class="product-title">
                                 <h3 class="hover_" style="position: relative">Featured Categories</h3>
                                 <div class="nav-wraper">
-                                    <ul class="nav-tab">
+                                    <ul class="nav-tab" style="opacity: 0">
                                         <li class="nav-item">
                                             <a href="#" class="nav-item-link">Cake - Milk</a>
                                         </li>

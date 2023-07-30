@@ -329,11 +329,11 @@
             <div class="col-md-12">
                 <div class="product-grid row g-3">
                     @foreach($categories as $index => $products)
-                    <div class="col-md-3">
+                    <div class="col-lg-1-5">
                         <div class="product-cart">
                             <div class="product-img-action">
                                 <div class="product-cart-img">
-                                    <a href="#">
+                                    <a href="{{ route('view-product',['id' => $product->id, 'slug' => Str::slug($product->name)]) }}">
                                         <img class="default-img" src="{{ asset('uploads/') }}/{{ $products->image }}" alt="">
                                         {{-- <img class="hover-img" src="{{ asset('uploads/') }}/{{ $products->image }}" alt=""> --}}
                                     </a>
@@ -344,7 +344,7 @@
                                         <button  class="product-action-icon" style="display:none">
                                             <img class="translatex" width="37" height="37" src="https://img.icons8.com/bubbles/50/half-heart.png" alt="half-heart">
                                         </button>
-                                        <button  class="product-action-icon btn_add_to_cart">
+                                        <button  class="product-action-icon btn_add_to_cart"  data-url="{{ route('add-to-cart',['id' => $products->id]) }}">
                                             <img class="translatex" width="35" height="35" src="https://img.icons8.com/doodle/48/shopping-cart--v1.png" alt="shopping-cart--v1">
                                         </button>
                                     </div>
@@ -355,7 +355,7 @@
                             <div class="product-content">
                                 <div class="product-category">{{ $products->category->name }}</div>
                                 <h2 class="product-name">
-                                    <a href="#">{{ $products->name }}</a>
+                                    <a href={{ route('view-product',['id' => $product->id, 'slug' => Str::slug($product->name)]) }}>{{ $products->name }}</a>
                                 </h2>
                                 <div class="product-rate-cover">
                                     <div class="product-rate">

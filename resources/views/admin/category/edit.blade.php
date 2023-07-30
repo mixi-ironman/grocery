@@ -6,8 +6,13 @@
             <div class="card-header">
                 <h4 class="card-title">Categories</h4>
             </div>
+            @if($errors->has('common'))
+                <div class="alert alert-danger">
+                    {{ $errors->first('error') }}
+                </div>
+            @endif
             <div class="card-body">
-                <form action="{{ route('categories.update',['id' => $categories->id]) }}" method="POST">
+                <form action="{{isset($categories) ? route('categories.update',['id' => $categories->id]) : '' }}" method="POST">
                     @csrf
                     @method('PUT')
                     <div class="mb-3">
