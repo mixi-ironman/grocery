@@ -10,7 +10,8 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-8">
+            @if(count($carts) > 0)
+                <div class="col-lg-8">
                 <div class="table-responsive shopping-summery delete_cart_url" data-url="{{ route('delete-cart') }}" style="height:633px;overflow: auto;scroll-behavior: smooth;">
                 <table class="table update_cart_url" data-url="{{ route('update-cart') }}">
                     <thead>
@@ -114,10 +115,16 @@
                         </table>
                     </div>
                     {{-- <a href="#" class="btn mb-2 w-100">Proceed To CheckOut<i class="bi bi-box-arrow-right ms-2"></i></a> --}}
-                    <a href="{{ route('check-out') }}" class="translatex"  style="background-color:rgba(221, 131, 229, 0.8);display:inline-block; padding:10px 15px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);border-top-left-radius: 12px;border-bottom-right-radius: 12px;color:black;font-weight:600;font-size:16px;position:relative"><i class="bi bi-arrow-left me-2"></i>Thanh Toán</a>
-
+                    <a href="{{ route('check-out') }}" class="translatex" id="checkout_button"  style="background-color:rgba(221, 131, 229, 0.8);display:inline-block; padding:10px 15px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);border-top-left-radius: 12px;border-bottom-right-radius: 12px;color:black;font-weight:600;font-size:16px;position:relative"><i class="bi bi-arrow-left me-2"></i>Thanh Toán</a>
                 </div>
             </div>
+            @else 
+                <div class="row" >
+                    <div class="col-md-12" style="height:500px;width:100%">
+                        <h3 style="height:100%;width:100% ;text-align:center;vertical-align:middle">Giỏ hàng của bạn đang trống</h3>
+                    </div>
+                </div>
+            @endif
         </div>
     </div>
 </div>
@@ -194,6 +201,17 @@ $(document).ready(function () {
             }
         });
     }
+
+    // $('#checkout_button').on('click', function() {
+    //     // Kiểm tra giỏ hàng có sản phẩm hay không
+    //     if ($('.cart-item').length === 0) {
+    //         alert('Giỏ hàng của bạn đang trống. Vui lòng thêm sản phẩm vào giỏ hàng trước khi thanh toán.');
+    //         return;
+    //     }
+
+    //     // Tiếp tục xử lý thanh toán
+    //     // ... (Thêm mã ajax xử lý thanh toán ở đây)
+    // });
 });
 
 </script>

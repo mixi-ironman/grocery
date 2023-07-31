@@ -75,7 +75,7 @@
                     </div>
                     <div class="product-availability">
                         <p class="availability-title">Availability :</p>
-                        <p class="in-stock">72 in stock</p>
+                        <p class="in-stock">{{ $product->stock }} in stock</p>
                     </div>
 
                     <div class="add-to-cart">

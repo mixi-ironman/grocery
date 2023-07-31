@@ -24,71 +24,7 @@ class OrderService
     {
     }
 
-    // public function add($request, $carts)
-    // {
-    //     // Bắt đầu giao dịch
-    //     DB::beginTransaction();
-
-    //     try {
-    //         $totalAmount = number_format($request->total_amount, 2, '.', '');
-    //         // Tạo mã đơn hàng ngẫu nhiên (UUID)
-    //         // $orderCode = (string) Str::uuid();
-    //         $orderCode = $this->generateOrderCode();
-    //         $msg = "";
-    //         $order = [
-    //             'name' => $request->name,
-    //             'email' => $request->email,
-    //             'phone' => $request->phone,
-    //             'shipping_address' => $request->shipping_address,
-    //             'payment_method' => $request->payment_method,
-    //             'order_note' => $request->order_note,
-    //             'order_code' => $orderCode,
-    //             'total_amount' => $totalAmount,
-    //         ];
-
-    //         // Lưu thông tin khách hàng vào bảng order
-    //         $addOrder = Order::create($order);
-
-    //         foreach ($carts as $id => $cart) {
-    //             $product = Product::find($id);
-    //             if($product->stock -= $cart['quantity'] > 0 )
-    //             {
-    //                 $msg = "Đặt hàng thành công";
-    //                 $orderDetail = [
-    //                     'order_id' => $addOrder->id,
-    //                     'product_id' => $id,
-    //                     'product_name' => $cart['name'],
-    //                     'price' => $cart['price'],
-    //                     'quantity' => $cart['quantity'],
-    //                     'total_price' => $cart['quantity'] * $cart['price'],
-    //                     'image' => $cart['image'],
-    //                 ];
-    //                 // Thêm thông tin sản phẩm vào bảng orderDetail
-    //                 OrderDetail::create($orderDetail);
-    //             }else{
-    //                 $msg = "Số lượng sản phẩm không đủ!";
-    //             }
-    //         }
-
-    //         // Nếu không có lỗi, lưu các thay đổi vào cơ sở dữ liệu
-    //         DB::commit();
-
-    //         return response()->json([
-    //             'status' => 'success',
-    //             'code' => 200,
-    //             'msg' => $msg,
-    //         ]);
-    //     } catch (\Exception $e) {
-    //         // Nếu có lỗi xảy ra, hủy bỏ các thay đổi và không lưu vào cơ sở dữ liệu
-    //         DB::rollback();
-
-    //         return response()->json([
-    //             'status' => 'error',
-    //             'code' => 500,
-    //             'msg' => 'Đã có lỗi xảy ra. Vui lòng thử lại sau.',
-    //         ]);
-    //     }
-    // }
+    //Đặt hàng
     public function add(Request $request, $carts)
     {
         // Bắt đầu giao dịch
@@ -111,14 +47,25 @@ class OrderService
                 'total_amount' => $totalAmount,
             ];
 
+            // Kiểm tra số lượng sản phẩm trong kho trước khi tạo đơn hàng
+            foreach ($carts as $id => $cart) {
+                $product = Product::find($id);
+                if ($product && $cart['quantity'] > $product->stock) {
+                    // Số lượng sản phẩm trong kho không đủ
+                    DB::rollback();
+                    return response()->json([
+                        'status' => 'error',
+                        'code' => 400,
+                        'msg' => 'Số lượng sản phẩm "' . $product->name . '" trong kho không đủ',
+                    ]);
+                }
+            }
+
             // Lưu thông tin khách hàng vào bảng order
             $addOrder = Order::create($order);
 
-            foreach ($carts as $id => $cart) {
-                $product = Product::find($id);
-
-                if ($product->stock >= $cart['quantity']) {
-                    $msg = "Đặt hàng thành công";
+            foreach ($carts as $id => $cart) {        
+                $product = Product::find($id);  
                     $orderDetail = [
                         'order_id' => $addOrder->id,
                         'product_id' => $id,
@@ -137,11 +84,7 @@ class OrderService
 
                     // Cập nhật tổng tiền đơn hàng
                     $totalAmount += $cart['quantity'] * $cart['price'];
-                } else {
-                    $msg = "Số lượng sản phẩm không đủ!";
-                }
-            }
-
+                }  
             // Cập nhật tổng tiền đơn hàng vào bảng order
             $addOrder->total_amount = $totalAmount;
             $addOrder->save();

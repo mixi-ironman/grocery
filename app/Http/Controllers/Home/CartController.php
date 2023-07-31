@@ -27,7 +27,7 @@ class CartController extends Controller
 
     public function addToCart(Request $request, $id)
     {
-         session()->forget('cart');
+        //  session()->forget('cart');
         //  Hoặc sử dụng session()->pull('cart') nếu bạn muốn lấy giỏ hàng và xóa nó khỏi session cùng lúc.
         // dd(session()->get('cart'));
 
