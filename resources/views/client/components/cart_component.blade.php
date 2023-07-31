@@ -23,11 +23,11 @@
                             <th style="text-align:center" scope="col">Giá</th>
                             <th style="text-align:center" scope="col">Thành Tiền</th>
                             <th style="text-align:center" scope="col">Action</th>
-        
                         </tr>
                     </thead>
                     <tbody>
                     @php
+                    // dd($carts);
                         $total = 0
                     @endphp
                     @foreach($carts as $id => $cart)
@@ -63,56 +63,10 @@
                 <div class="divider-2 mb-3"></div>
                 
                 <div class="cart-action d-flex justify-content-between">
-                    {{-- <a href={{route('home')}} class="btn"><i class="bi bi-arrow-left me-2" style="width:150px;height:50px;background-color:red;"></i>Continue Shopping</a>
-                    <a class="btn  me-2 mb-sm-2"><i class="bi bi-arrow-clockwise me-2"></i>Update Cart</a> --}}
                     <a href="{{route('home')}}" class="translatex hover-top"  style="background-color:rgb(93,168,138,0.8);display:inline-block; padding:10px 15px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);border-top-left-radius: 12px;border-bottom-right-radius: 12px;color:black;font-weight:600;font-size:16px;position:relative"><i class="bi bi-arrow-left me-2"></i>Continue Shopping</a>
                     <p style="text-align: right;font-size:20px;"><strong style="box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);border-top-left-radius: 12px;border-bottom-right-radius: 12px;padding:5px 20px;border:4px solid rgb(93,168,138);">Tổng: {{ number_format($total).' đ' }}</strong></p>
                 </div>
-                {{-- <div class="row mt-4">
-                    <div class="col-lg-7">
-                        <div class="calculate-shipping p-4 border border-radius-15">
-                            <h4 class="mb-3">Calculate Shipping</h4>
-                            <p class="mb-3"><span class="font-lg text-muted">Flat rate:</span><strong class="text-primary">5%</strong></p>
-                            <form class="field_form shipping_calculator">
-                                <div class="form-row">
-                                    <div class="form-group col-lg-12">
-                                        <div class="custom_select">
-                                            <select class="form-control select-active w-100">
-                                                <option value="VN">Vietnam</option>
-                                                <option value="WF">Wallis and Futuna</option>
-                                                <option value="EH">Western Sahara</option>
-                                                <option value="WS">Western Samoa</option>
-                                                <option value="YE">Yemen</option>
-                                                <option value="ZM">Zambia</option>
-                                                <option value="ZW">Zimbabwe</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-row row">
-                                    <div class="form-group col-lg-6">
-                                        <input required="required" placeholder="State / Country" name="name" type="text">
-                                    </div>
-                                    <div class="form-group col-lg-6">
-                                        <input required="required" placeholder="PostCode / ZIP" name="name" type="text">
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                    <div class="col-lg-5">
-                        <div class="p-4">
-                            <h4 class="mb-3">Apply Coupon</h4>
-                            <p class="mb-3"><span class="font-lg text-muted">Using A Promo Code?</span></p>
-                            <form action="#">
-                                <div class="d-flex justify-content-between">
-                                    <input class="font-medium me-2 coupon" name="Coupon" placeholder="Enter Your Coupon">
-                                    <button class="btn"><i class="bi bi-tag me-2"></i>Apply</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div> --}}
+           
             </div>
     
             <div class="col-lg-4">

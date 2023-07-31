@@ -149,23 +149,21 @@
                     shipping_address: shipping_address,
                     payment_method: payment_method,
                     order_note: order_note,
-                    total_amount:total_amount,
-
+                    total_amount: total_amount,
                     _token: $('meta[name="csrf-token"]').attr('content')
                 },
                 success: function(data) {
                     if (data.status === 'success') {
-                        alert('Đặt hàng thành công');
-                        // Sau khi đặt hàng thành công, bạn có thể xử lý các thao tác tiếp theo tại đây
+                        alert(data.msg); 
                     } else {
-                        alert('Đặt hàng thất bại. Vui lòng thử lại sau.');
+                        alert(data.msg); 
                     }
-                
                 },
-                // error: function(error) {
-                //     alert('Có lỗi xảy ra. Vui lòng thử lại sau.');
-                // }
+                error: function(error) {
+                    alert('Có lỗi xảy ra. Vui lòng thử lại sau.');
+                }
             });
+
         } else if (payment_method === 'online') {
                alert('Hiện chức năng thành toán đang phát triển')
         }

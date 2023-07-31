@@ -27,12 +27,12 @@ class CartController extends Controller
 
     public function addToCart(Request $request, $id)
     {
-        //  session()->forget('cart');
-         // Hoặc sử dụng session()->pull('cart') nếu bạn muốn lấy giỏ hàng và xóa nó khỏi session cùng lúc.
+         session()->forget('cart');
+        //  Hoặc sử dụng session()->pull('cart') nếu bạn muốn lấy giỏ hàng và xóa nó khỏi session cùng lúc.
         // dd(session()->get('cart'));
 
         $product = $this->productService->getProductById($id);
-
+       
         if (!$product) {
             return redirect()->back()->with('error', 'Sản phẩm không tồn tại.');
         }
@@ -111,8 +111,6 @@ class CartController extends Controller
       {
             $carts = session()->get('cart',[]);
             return view('client.layouts.pages.checkout',['carts' => $carts]);
-            // $customer = Auth::guard('customer')->user();
-            // return view('home.pages.checkout',compact('carts','customer'));
       }
 
       public function addOrderCash(Request $request)

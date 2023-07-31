@@ -20,10 +20,6 @@ class HomeController extends Controller
     {
         $products = $this->productService->getProducts();
         $carts = session()->get('cart',[]);
-        if ($carts === null) {
-        // Xử lý khi không có giỏ hàng
-            $carts = [];
-        }
         // dd($carts);
         return view('client.layouts.pages.home',['products' => $products, 'carts' => $carts]); 
     }

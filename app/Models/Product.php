@@ -18,6 +18,7 @@ class Product extends Model
         'old_price',
         'image',
         'is_active',
+        'stock',
     ];
 
     /*
@@ -29,6 +30,11 @@ class Product extends Model
     public function category()
     {
         return $this->belongsTo(Category::class, 'category_id', 'id');
+    }
+
+    public function media()
+    {
+        return $this->morphMany(Media::class, 'mediable');
     }
 
     

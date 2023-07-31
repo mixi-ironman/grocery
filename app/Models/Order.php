@@ -17,6 +17,12 @@ class Order extends Model
         'payment_method',
         'status',
         'order_note',
+        'order_code',
         // 'order_date',
     ];
+
+    public function orderDetail()
+    {
+        return $this->hasMany(OrderDetail::class,'order_id', 'id');
+    }
 }

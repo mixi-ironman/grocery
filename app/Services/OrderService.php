@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\Models\Order;
+use App\Models\Product;
+
 use App\Models\OrderDetail;
 use App\Services\ProductService;
 
@@ -16,54 +18,152 @@ use App\Repositories\OrderRepository;
 
 class OrderService
 {
-     private $orderRepository;
-     private $productService;
 
-    public function __construct(OrderRepository $orderRepository,ProductService $productService)
+
+    public function __construct(readonly OrderRepository $orderRepository,readonly ProductService $productService)
     {
-        $this->orderRepository = $orderRepository;
-        $this->productService = $productService;
-
     }
 
-    public function add($request, $carts)
+    // public function add($request, $carts)
+    // {
+    //     // Bắt đầu giao dịch
+    //     DB::beginTransaction();
+
+    //     try {
+    //         $totalAmount = number_format($request->total_amount, 2, '.', '');
+    //         // Tạo mã đơn hàng ngẫu nhiên (UUID)
+    //         // $orderCode = (string) Str::uuid();
+    //         $orderCode = $this->generateOrderCode();
+    //         $msg = "";
+    //         $order = [
+    //             'name' => $request->name,
+    //             'email' => $request->email,
+    //             'phone' => $request->phone,
+    //             'shipping_address' => $request->shipping_address,
+    //             'payment_method' => $request->payment_method,
+    //             'order_note' => $request->order_note,
+    //             'order_code' => $orderCode,
+    //             'total_amount' => $totalAmount,
+    //         ];
+
+    //         // Lưu thông tin khách hàng vào bảng order
+    //         $addOrder = Order::create($order);
+
+    //         foreach ($carts as $id => $cart) {
+    //             $product = Product::find($id);
+    //             if($product->stock -= $cart['quantity'] > 0 )
+    //             {
+    //                 $msg = "Đặt hàng thành công";
+    //                 $orderDetail = [
+    //                     'order_id' => $addOrder->id,
+    //                     'product_id' => $id,
+    //                     'product_name' => $cart['name'],
+    //                     'price' => $cart['price'],
+    //                     'quantity' => $cart['quantity'],
+    //                     'total_price' => $cart['quantity'] * $cart['price'],
+    //                     'image' => $cart['image'],
+    //                 ];
+    //                 // Thêm thông tin sản phẩm vào bảng orderDetail
+    //                 OrderDetail::create($orderDetail);
+    //             }else{
+    //                 $msg = "Số lượng sản phẩm không đủ!";
+    //             }
+    //         }
+
+    //         // Nếu không có lỗi, lưu các thay đổi vào cơ sở dữ liệu
+    //         DB::commit();
+
+    //         return response()->json([
+    //             'status' => 'success',
+    //             'code' => 200,
+    //             'msg' => $msg,
+    //         ]);
+    //     } catch (\Exception $e) {
+    //         // Nếu có lỗi xảy ra, hủy bỏ các thay đổi và không lưu vào cơ sở dữ liệu
+    //         DB::rollback();
+
+    //         return response()->json([
+    //             'status' => 'error',
+    //             'code' => 500,
+    //             'msg' => 'Đã có lỗi xảy ra. Vui lòng thử lại sau.',
+    //         ]);
+    //     }
+    // }
+    public function add(Request $request, $carts)
     {
-        $totalAmount = number_format($request->total_amount, 2, '.', '');
-        $order = [
-            'name' => $request->name,
-            'email'=>$request->email,
-            'phone'=>$request->phone,
-            'shipping_address'=>$request->shipping_address,
-            'payment_method'=>$request->payment_method,
-            'order_note'=>$request->order_note,
-            'total_amount' =>$totalAmount,
-        ];
+        // Bắt đầu giao dịch
+        DB::beginTransaction();
 
-        // Lưu thông tin khách hàng vào bảng order
-        $addOrder = Order::create($order);
-        foreach ($carts as $id => $cart){
-           $orderDetail = [
-               'order_id'=>$addOrder->id,
-               'product_id'=>$id,
-               'product_name'=>$cart['name'],
-               'price'=>$cart['price'],
-               'quantity'=>$cart['quantity'],
-               'total_price'=> $cart['quantity']*$cart['price'],
-               'image'=>$cart['image'],
-           ];
-            if($order!=false){
-                OrderDetail::create($orderDetail);
+        try {
+            // Tạo mã đơn hàng ngẫu nhiên (UUID)
+            $orderCode = $this->generateOrderCode();
+            $msg = "";
+            $totalAmount = 0;
+
+            $order = [
+                'name' => $request->name,
+                'email' => $request->email,
+                'phone' => $request->phone,
+                'shipping_address' => $request->shipping_address,
+                'payment_method' => $request->payment_method,
+                'order_note' => $request->order_note,
+                'order_code' => $orderCode,
+                'total_amount' => $totalAmount,
+            ];
+
+            // Lưu thông tin khách hàng vào bảng order
+            $addOrder = Order::create($order);
+
+            foreach ($carts as $id => $cart) {
+                $product = Product::find($id);
+
+                if ($product->stock >= $cart['quantity']) {
+                    $msg = "Đặt hàng thành công";
+                    $orderDetail = [
+                        'order_id' => $addOrder->id,
+                        'product_id' => $id,
+                        'product_name' => $cart['name'],
+                        'price' => $cart['price'],
+                        'quantity' => $cart['quantity'],
+                        'total_price' => $cart['quantity'] * $cart['price'],
+                        'image' => $cart['image'],
+                    ];
+
+                    // Thêm thông tin sản phẩm vào bảng orderDetail
+                    OrderDetail::create($orderDetail);
+
+                    // Cập nhật số lượng sản phẩm trong bảng products
+                    $product->decrement('stock', $cart['quantity']);
+
+                    // Cập nhật tổng tiền đơn hàng
+                    $totalAmount += $cart['quantity'] * $cart['price'];
+                } else {
+                    $msg = "Số lượng sản phẩm không đủ!";
+                }
             }
-          
-        }
 
-        return response()->json(
-            [
+            // Cập nhật tổng tiền đơn hàng vào bảng order
+            $addOrder->total_amount = $totalAmount;
+            $addOrder->save();
+
+            // Nếu không có lỗi, lưu các thay đổi vào cơ sở dữ liệu
+            DB::commit();
+
+            return response()->json([
                 'status' => 'success',
                 'code' => 200,
-                'cart' => $cart,
-            ]
-        ,200);
+                'msg' => $msg,
+            ]);
+        } catch (\Exception $e) {
+            // Nếu có lỗi xảy ra, hủy bỏ các thay đổi và không lưu vào cơ sở dữ liệu
+            DB::rollback();
+
+            return response()->json([
+                'status' => 'error',
+                'code' => 500,
+                'msg' => 'Đã có lỗi xảy ra. Vui lòng thử lại sau.',
+            ]);
+        }
     }
 
     public function subTotal($carts){
@@ -78,6 +178,19 @@ class OrderService
             $subTotal += $total;
         }
         return $subTotal;
+    }
+
+    // Tạo mã đơn hàng ngẫu nhiên với định dạng "#12ghjkju33"
+    function generateOrderCode()
+    {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $length = 10;
+        $randomString = '#';
+        for ($i = 0; $i < $length; $i++) {
+            $index = rand(0, strlen($characters) - 1);
+            $randomString .= $characters[$index];
+        }
+        return $randomString;
     }
 
 }

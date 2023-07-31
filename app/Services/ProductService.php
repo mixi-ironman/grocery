@@ -97,6 +97,7 @@ class ProductService
                 'description' => $request->input('description'),
                 'category_id' => $request->input('category_id'),
                 'price' => $request->input('price'),
+                'stock' => $request->input('stock'),
                 'image' => $imagePath,
                 'is_active' => $request->input('is_active'),
             ]);
@@ -147,6 +148,7 @@ class ProductService
                 'category_id' => $request->input('category_id'),
                 'price' => $request->input('price'),
                 'old_price' => $request->input('old_price'),
+                'stock' => $request->input('stock'),
 
                 'image' => $imagePath,
                 'is_active' => $request->input('is_active'),

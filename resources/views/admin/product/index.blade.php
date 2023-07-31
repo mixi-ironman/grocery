@@ -18,6 +18,7 @@
                         <th scope="col"style="text-align: center;vertical-align:middle;">Category</th>
                         <th scope="col"style="text-align: center;vertical-align:middle;">Price</th>
                         <th scope="col"style="text-align: center;vertical-align:middle;">Old Price</th>
+                        <th scope="col"style="text-align: center;vertical-align:middle;">Stock</th>
                         <th scope="col"style="text-align: center;vertical-align:middle;">IsActive</th>
                         <th scope="col"style="text-align: center;vertical-align:middle;">Is_onsale</th>
                         <th scope="col"style="text-align: center;vertical-align:middle;">Is_popular</th>
@@ -43,6 +44,7 @@
                             <td style="text-align: center;vertical-align:middle;max-width:100px;white-space: wrap;overflow: hidden; text-overflow: ellipsis;">{{ $product->category->name }}</td>
                             <td style="text-align: center;vertical-align:middle;max-width:200px;white-space: wrap;overflow: hidden; text-overflow: ellipsis;">{{ number_format($product->price) }}đ</td>
                             <td style="text-align: center;vertical-align:middle;max-width:200px;white-space: wrap;overflow: hidden; text-overflow: ellipsis;">{{ number_format($product->old_price) }}đ</td>
+                            <td style="text-align: center;vertical-align:middle;max-width:200px;white-space: wrap;overflow: hidden; text-overflow: ellipsis;">{{ $product->stock }}</td>
 
                             <td style="text-align: center;vertical-align:middle;max-width:200px;white-space: wrap;overflow: hidden; text-overflow: ellipsis;">
                                 {{ $product->is_active }}

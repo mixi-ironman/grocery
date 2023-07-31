@@ -5,6 +5,8 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SliderController;
 use App\Http\Controllers\ProductImageController;
+use App\Http\Controllers\OrderDetailController;
+
 
 
 // Route::group(['prefix' => 'categories', 'as' => 'categories.'], function () {
@@ -18,9 +20,7 @@ Route::prefix('categories')->name('categories.')->group(function () {
     Route::post('/store', [CategoryController::class, 'store'])->name('store');
     Route::get('/edit/{id}', [CategoryController::class, 'edit'])->name('edit');
     Route::put('/update/{id}', [CategoryController::class, 'update'])->name('update');
-
     Route::put('/{id}', [CategoryController::class, 'update'])->name('update');
-
     Route::delete('/destroy/{id}', [CategoryController::class, 'destroy'])->name('destroy');
 });
 
@@ -59,8 +59,15 @@ Route::prefix('product')->name('product.')->group(function () {
     // Route::get('images/{id}', [ProductImageController::class, 'show'])->name('product.image.show');
     // Cập nhật hình ảnh sản phẩm
     // Route::put('images/{id}', [ProductImageController::class, 'update'])->name('product.image.update');
-
     // // Xóa hình ảnh sản phẩm
     // Route::delete('images/{id}', [ProductImageController::class, 'destroy'])->name('product.image.destroy');
+});
+
+//Order
+Route::prefix('order')->name('order.')->group(function () {
+    Route::get('/', [OrderDetailController::class, 'index'])->name('index');
+    Route::get('view-order/{id}',[OrderDetailController::class,'show'])->name('view');
+    // Route::get('/list-order', [OrderDetailController::class, 'index'])->name('list-order');
+    Route::delete('/destroy/{id}', [OrderDetailController::class, 'destroy'])->name('destroy');
 });
 
