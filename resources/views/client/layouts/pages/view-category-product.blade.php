@@ -103,7 +103,7 @@
                                     </div>
                                 </div>
                                 <div class="mini-cart wishlist translate">
-                                    <div class="mini-cart">
+                                    {{-- <div class="mini-cart"> --}}
                                         <div class="basket">
                                             <a href="#">
                                                 <!-- <i class="fa-solid fa-cart-arrow-down icon-cart"></i> -->
@@ -118,7 +118,7 @@
                                             <span class="cart-count">2</span>
                                         </div>
                                         <div class="modal_container-view-cart_list" style="display: none"></div>
-                                    </div>
+                                    {{-- </div> --}}
                                 </div>
                             </div>
                         </div>

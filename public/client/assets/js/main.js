@@ -181,28 +181,38 @@ const app = {
         });
     },
 
-    //slide-cart ()khi click vào giỏ hàng sẽ hiện các item có trong giỏ hàng
-    sideCart() {
-        const cartIcon = document.querySelector(".mini-cart");
-        const cartSidebar = document.querySelector(".cart-sidebar");
-        const cartIconClose = document.querySelector(".icon-close-cart");
+    // slide-cart ()khi click vào giỏ hàng sẽ hiện các item có trong giỏ hàng
 
-        cartIcon.addEventListener("click", function () {
-            cartSidebar.classList.toggle("cart-sidebar-show");
+    // sideCart() {
+    //     const cartIcon = document.querySelector(".mini-cart");
+    //     const cartSidebar = document.querySelector(".cart-sidebar");
+    //     const cartIconClose = document.querySelector(".icon-close-cart");
+
+    //     cartIcon.addEventListener("click", function () {
+    //         cartSidebar.classList.toggle("cart-sidebar-show");
+    //     });
+
+    //     cartIconClose.addEventListener("click", function () {
+    //         cartSidebar.classList.remove("cart-sidebar-show");
+    //     });
+    // },
+    sideCart() {
+        // Sử dụng event delegation cho cartIcon
+        $(document).on("click", ".mini-cart", function () {
+            $(".cart-sidebar").toggleClass("cart-sidebar-show");
         });
 
-        cartIconClose.addEventListener("click", function () {
-            cartSidebar.classList.remove("cart-sidebar-show");
+        // Sử dụng event delegation cho cartIconClose
+        $(document).on("click", ".icon-close-cart", function () {
+            $(".cart-sidebar").removeClass("cart-sidebar-show");
         });
     },
-
     run: function () {
         // app.typingAnimation();
         this.headerScroll();
         this.titleScroll();
         this.hiddenText();
         this.sideCart();
-        // app.carouselFeatured();
         this.autoplay();
     },
 };
@@ -210,3 +220,12 @@ const app = {
 app.run();
 
 // console.log("Detail");
+
+document.addEventListener("click", function (event) {
+    if (event.target.classList.contains("mini-cart")) {
+        console.log("Đã click vào phần tử có class 'mini-cart'");
+    } else {
+        // console.log({ event } );
+        console.log("Không click vào phần tử có class 'mini-cart'");
+    }
+});
