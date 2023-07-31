@@ -24,7 +24,7 @@ Route::get('/home', function () {
 
 //Home
 Route::get('/',[HomeController::class,'index'])->name('home');
-Route::get('/load-product',[HomeController::class,'loadProduct'])->name('loadproduct');
+Route::get('/load-product',[HomeController::class,'loadProduct'])->name('load-product');
 // view product theo category
 Route::get('/category-product',[HomeController::class,'viewCategory'])->name('viewCategory');
 Route::get('/autocomplete-ajax',[HomeController::class,'autoCompleteAjax'])->name('autocomplete-ajax');

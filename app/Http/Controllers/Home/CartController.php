@@ -32,7 +32,7 @@ class CartController extends Controller
         // dd(session()->get('cart'));
 
         $product = $this->productService->getProductById($id);
-       
+        // dd($product);
         if (!$product) {
             return redirect()->back()->with('error', 'Sản phẩm không tồn tại.');
         }
@@ -50,11 +50,13 @@ class CartController extends Controller
         }
 
         session()->put('cart', $cart);
+        $cartList =  view('client.components.cart_list',['carts' => $cart])->render();
         return response()->json(
             [
                 'message' => 'succes',
                 'code' => 200,
                 'cart' => $cart,
+                'cartList'=>$cartList
             ]
         ,200);
         

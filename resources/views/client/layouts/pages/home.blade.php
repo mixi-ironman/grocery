@@ -182,7 +182,7 @@
                                 />
                             </div>
                             <div class="product-grid row product-featured">
-                               @include('client.components.product_cart_item', ['itemsPerRow' =>'3'])
+                                @include('client.components.product_cart_item', ['itemsPerRow' =>'3'])
                             </div>
                         </div>
                     </div>
@@ -306,9 +306,10 @@
             </div>
 
             <!-- Position -->
-            {{-- @include('client.components.cart_list',['carts' => $carts]) --}}
-            @include('client.components.cart_list')
-
+            <div id="cart_list_wrapper">
+                {{-- @include('client.components.cart_list',['carts' => $carts]) --}}
+                @include('client.components.cart_list')
+            </div>
             <!-- --Toast Messeage -->
             <div id="toast"></div>
         </div>

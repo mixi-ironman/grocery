@@ -9,11 +9,11 @@ use App\Services\Client\ProductService;
 
 class HomeController extends Controller
 {
-    private $productService;
+    // private $productService;
 
-    public function __construct(ProductService $productService)
+    public function __construct(readonly ProductService $productService)
     {
-        $this->productService = $productService;
+        // $this->productService = $productService;
     }
 
     public function index()
@@ -27,20 +27,20 @@ class HomeController extends Controller
     //load product
     public function loadProduct(Request $request)
     {
-        // dd('loadProduct');
         $page = $request->input('page');
-        $result = $this->productService->loadProduct($page);
-        if(count($result) != 0){
-            $html = view('client.components.product_cart_item',['products' => $result])->render();
+        $products = $this->productService->loadProduct($page);
+        // dd($products);
+        if(count($products) != 0){
+
+            $result = view('client.components.product_cart_item',['products' => $products,'itemsPerRow' =>'1-5'])->render();
+
             return response()->json([
-                'html' => $html,
-                'page' => $page
+                    'code'=>200,
+                    'msg'=>'Load số lượng sản phẩm thành công!',
+                    'product_cart_item' => $result,
+                    'page' => $page
             ]);
         }
-
-        return response()->json([
-                'html' => ''
-        ]);
     }
 
     //view category-product

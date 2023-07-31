@@ -25,11 +25,11 @@ class ProductRepository extends BaseRepository
     {
        return $this->model->orderByDesc('id')
                             ->when($page != null , function($query) use ($page){
-                            $offset =$page * 10;
-                            $query->offset($offset);
-                            })
-                            ->limit(10)
-                            ->get();
+                                $offset =$page * 10;
+                                $query->offset($offset);
+                                })
+                                ->limit(10)
+                                ->get();
     }
 
     public function getDetailProduct($id)

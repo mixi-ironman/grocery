@@ -1,4 +1,3 @@
-
 @foreach($products as $product)
 <div class="col-lg-{{ $itemsPerRow }}">
         <div class="product-cart">
@@ -80,14 +79,14 @@
 
 @if(count($products) >= 10 && $itemsPerRow == '1-5')
 <div class="product-grid row g-3">
-    <input type="hidden" value="1" id ="page" name = "page">
+    <input type="hidden" value="1 " id ="page" name = "page">
     <div class="col-md-12" >
-        <button type="button" data-url = {{ route('loadproduct') }} class="btn-load_product translatex" style="opacity:0;display:block;padding: 10px 30px; outline:none;border:none;background-color:rgb(232, 131, 131);font-weight:bold;border-top-left-radius: 12px;border-bottom-right-radius: 12px;box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.05)" >Load more</button>
+        <button type="button" data-url = {{ route('load-product') }} class="btn-load_product translatex" style="display:block;padding: 10px 30px; outline:none;border:none;background-color:rgb(232, 131, 131);font-weight:bold;border-top-left-radius: 12px;border-bottom-right-radius: 12px;box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.05)" >Load more</button>
     </div>
 </div>
 @endif
 
-{{-- @push('custom-script')
+@push('custom-script')
 <script>
 $.ajaxSetup({
 headers: {
@@ -104,30 +103,28 @@ $(document).ready(function () {
     });
 
     function loadMore(url) {
-        console.log(url);
+        // console.log(url);
         let page = $('#page').val();
-        console.log(page);
+        // console.log(page);
 
         $.ajax({
             method: 'GET',
             dataType: 'JSON',
-
             data: {
                 page: page,
                 // Gửi CSRF token kèm theo dữ liệu
                 _token: $('meta[name="csrf-token"]').attr('content')
             },
-            // url: "{{ route('loadproduct') }}",
             url: url,
 
 
-            success: function(response) {
+            success: function(data) {
                 // Xử lý phản hồi từ server (nếu cần)
-                alert('Load product thành công');
-                if(response.html){
-                    // console.log(response.html)
-                    $("#list-product").append(response.html);
-                    $('#page').val(response.page+1)
+                // alert('Load product thành công');      
+                if(data.code === 200 ){ 
+                    // console.log(data.product_cart_item);
+                    $("#list-product").append(data.product_cart_item);
+                    // $('#page').val(data.page + 1)
                 }
             },
             error: function(error) {
@@ -139,4 +136,4 @@ $(document).ready(function () {
 });
     </script>
 @endpush
- --}}
+

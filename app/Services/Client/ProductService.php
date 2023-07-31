@@ -40,6 +40,4 @@ class ProductService
     {
         return $this->productRepository->loadProducts($page);
     }
-
-  
 }

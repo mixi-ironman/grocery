@@ -35,6 +35,11 @@
                     </div>
 
                     <div class="mb-3">
+                        <label  class="form-label">Old Price</label>
+                        <input type="text" class="form-control"  name="old_price" aria-describedby="emailHelp">
+                    </div>
+
+                    <div class="mb-3">
                         <label  class="form-label">Stock</label>
                         <input type="number" class="form-control"  name="stock" aria-describedby="emailHelp">
                     </div>

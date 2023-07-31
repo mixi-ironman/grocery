@@ -9,8 +9,8 @@ function addToCart(event) {
         success: function (data) {
             // Xử lý phản hồi từ server (nếu cần)
             if (data.code === 200) {
-                // alert("Thêm sản phẩm thành công");
-                // console.log(data);
+                $("#cart_list_wrapper").html(data.cartList);
+                console.log(data.cartList);
             }
         },
         error: function () {
@@ -19,9 +19,10 @@ function addToCart(event) {
     });
 }
 $(document).ready(function () {
-    // $(".btn_add_to_cart").on("click", addToCart);
     $(document).on("click", ".btn_add_to_cart", addToCart);
 });
+
+// $(".btn_add_to_cart").on("click", addToCart);
 
 // $(".btn_add_to_cart").on("click", function (e) {
 // e.preventDefault();
