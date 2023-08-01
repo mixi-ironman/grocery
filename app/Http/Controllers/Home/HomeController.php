@@ -55,7 +55,7 @@ class HomeController extends Controller
         if($data['query'])
         {
             $products = Product::where('is_active',1)->where('name','LIKE','%'.$data['query'].'%')->get();
-            $product_component =  view('client.components.dropdown-input',['product_search'=>$products ])->render();
+            $product_component =  view('client.components.dropdown-input',['products'=>$products ])->render();
         }
         return response()->json([
             'msg'=>'Search success!',

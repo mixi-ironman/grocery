@@ -10,7 +10,7 @@ $("#keyword").keyup(function () {
     // alert(url);
     if (query != "") {
         $.ajax({
-            method: "get",
+            method: "POST",
             url: url,
             dataType: "json",
             data: {
