@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\Home;
 
 use App\Http\Controllers\Controller;
-
+use App\Http\View\Composers\MenuComposer;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Services\Client\ProductService;
 
@@ -31,13 +32,12 @@ class HomeController extends Controller
         $products = $this->productService->loadProduct($page);
         // dd($products);
         if(count($products) != 0){
-
             $result = view('client.components.product_cart_item',['products' => $products,'itemsPerRow' =>'1-5'])->render();
-
             return response()->json([
                     'code'=>200,
                     'msg'=>'Load số lượng sản phẩm thành công!',
                     'product_cart_item' => $result,
+                    '$products' => $products,
                     'page' => $page
             ]);
         }
@@ -47,5 +47,19 @@ class HomeController extends Controller
     public function viewCategory(Request $request)
     {
       return view('client.layouts.pages.view-category-product');
+    }
+
+    public function autocompleteAjax(Request $request)
+    {
+        $data= $request->all();
+        if($data['query'])
+        {
+            $products = Product::where('is_active',1)->where('name','LIKE','%'.$data['query'].'%')->get();
+            $product_component =  view('client.components.dropdown-input',['product_search'=>$products ])->render();
+        }
+        return response()->json([
+            'msg'=>'Search success!',
+            'product_component'=>$product_component
+        ]);
     }
 }

@@ -29,11 +29,12 @@
                     <tbody>
                     @php
                     // dd($carts);
-                        $total = 0
+                        $total = 0;
+                        $i = 1;
                     @endphp
                     @foreach($carts as $id => $cart)
                         <tr>
-                            <th style="text-align:center;vertical-align:middle" scope="row">{{ $id }}</th>
+                            <th style="text-align:center;vertical-align:middle" scope="row">{{ $i++ }}</th>
                             <td  style="text-align:center;vertical-align:middle">{{ $cart['name'] }}</td>
                             <td  style="text-align:center;vertical-align:middle"><img style="width:160px;height:100px;line-height:100px;object-fit: cover;border-radius:5px;border:1px solid rgb(247, 181, 181);box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);object-position: center;" src="{{ asset('uploads/') }}/{{ $cart['image'] }}" ></td>
                             <td style="text-align:center;vertical-align:middle;" ><input type = "number" class="quantity" value="{{ $cart['quantity'] }}" style="width:60px;border-top-left-radius: 12px;border-bottom-right-radius: 12px;border:2px solid green;text-align:center;outline:none" min="1" max="100"></td>

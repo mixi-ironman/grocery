@@ -24,25 +24,27 @@
 }
 
 /* --header-search */
+/* --header-search */
 .header-searh_box {
     display: flex;
     width: 100%;
     height: 100%;
     justify-content: center;
+    position: relative;
     align-items: center;
 }
 
-.header-searh_box form {
+.form-search {
     width: 100%;
     /* transform: translateY(49%); */
     display: flex;
     justify-content: end;
-    position: relative;
     z-index: 10;
 }
 
 .search-box {
     width: 7%;
+    /* width: 100%; */
     /* position: relative; */
     background: linear-gradient(to right, #e597ab, #ae9aea);
     outline: none;
@@ -53,10 +55,32 @@
     z-index: 1;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
     transition: all 1s;
+    cursor: pointer;
 }
-
 .search-box:focus {
     width: 95%;
+}
+
+/* Dropdown-search */
+.header-action_dropdown {
+    display: none;
+    padding: 15px 10px;
+    position: absolute;
+    z-index: 100;
+    top: 90%;
+    left: 6px;
+    max-height: 467px;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+    width: 562px;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    /* Thêm các thuộc tính style cần thiết */
+}
+
+.header-action_dropdown.show {
+    display: block;
 }
 
 .header-search-btn {
@@ -740,6 +764,7 @@ chuyển dịch từ giữa ra 2 bên */
 /* product cart */
 .product-grid {
     margin-top: 15px !important;
+    /* transition: all 0.3s; */
 }
 
 .product-featured .slick-list {
@@ -1337,15 +1362,11 @@ p {
     padding: 0;
     margin: 0;
 }
-/* .body-cart-main {
-   
-} */
 
-.body-cart-sidebar {
-}
 .cart-product-list {
     padding: 0;
-    margin: 0 0 30px 0;
+    /* margin: 0 0 30px 0; */
+    margin: 0 0 0px 0;
 }
 
 /* .cart-product-list::after {
@@ -1371,6 +1392,10 @@ p {
     /* border-top: 1px solid red; */
     border-right: 4px solid rgba(177, 156, 172, 0.957);
     border-left: 4px solid rgba(227, 180, 38, 0.957);
+}
+
+.cart-product-item:last-child {
+    margin-bottom: 0px;
 }
 .cart-product-image {
     height: 100%;
@@ -1413,7 +1438,7 @@ p {
 }
 
 .cart-product-des-link {
-    height: 37px;
+    height: 30px;
     overflow: hidden;
     text-overflow: ellipsis;
     /* white-space: nowrap; */
@@ -1464,6 +1489,7 @@ span {
     width: 330px;
     right: 20px;
     background-color: rgb(251, 241, 241); */
+    margin-top: 30px;
 }
 .cart-total {
     margin-bottom: 20px;

@@ -25,13 +25,14 @@ Route::get('/home', function () {
 //Home
 Route::get('/',[HomeController::class,'index'])->name('home');
 Route::get('/load-product',[HomeController::class,'loadProduct'])->name('load-product');
-// view product theo category
-Route::get('/category-product',[HomeController::class,'viewCategory'])->name('viewCategory');
-Route::get('/autocomplete-ajax',[HomeController::class,'autoCompleteAjax'])->name('autocomplete-ajax');
-// ---------------
-Route::post('danhmuc/{id}-{slug}.html',[MenuController::class,'index'])->name('index');
-//view product
+//search
+Route::get('/autocomplete-ajax',[HomeController::class,'autocompleteAjax'])->name('autocomplete-ajax');
 Route::get('/product/{id}-{slug}.html',[ProductController::class,'index'])->name('view-product');
+Route::get('/category-product',[HomeController::class,'viewCategory'])->name('viewCategory');
+// ---------------
+
+Route::post('danhmuc/{id}-{slug}.html',[MenuController::class,'index'])->name('index');
+
 // -----------------
 
 //cart
@@ -44,32 +45,15 @@ Route::get('/check-out',[CartController::class,'checkout'])->name('check-out');
 Route::post('/check-out-cash',[CartController::class,'addOrderCash'])->name('confirm-check-out');
 // --------------------
 
-//order xem danh sach đơn hàng
-
-
-
-
-
-
-
-
 // Route xử lý thanh toán bằng tiền mặt
 Route::post('/checkout-cash', 'PaymentController@checkoutCash');
 
 // Route xử lý thanh toán online
 Route::post('/checkout-online', 'PaymentController@checkoutOnline');
 
+// --------------------
 
 
 
-
-
-    // Route::get('/home',[HomeController::class,'index'])->name('home');
-    // Route::get('/logout',[HomeController::class,'logout'])->name('customer-logout');
-    // Route::get('/category/{id}',[HomeController::class,'showCategoryItems'])->name('category');
-    // Route::get('/product',[HomeController::class,'getAll'])->name('all-product');
-    // Route::get('/product/{id}',[HomeController::class,'productDetail'])->name('view-product');
-    // Route::post('/search',[HomeController::class,'search'])->name('search');
-    // Route::get('/add-to-cart',[CartController::class,'add'])->name('add-to-cart');
 
 

@@ -48,18 +48,29 @@ class OrderService
             ];
 
             // Kiểm tra số lượng sản phẩm trong kho trước khi tạo đơn hàng
-            foreach ($carts as $id => $cart) {
-                $product = Product::find($id);
-                if ($product && $cart['quantity'] > $product->stock) {
-                    // Số lượng sản phẩm trong kho không đủ
+            foreach ($carts as $id => $cart) {        
+                $product = Product::find($id);  
+                if (!$product || $cart['quantity'] > $product->stock) {
+                    // Số lượng sản phẩm trong kho không đủ hoặc sản phẩm không tồn tại
                     DB::rollback();
-                    return response()->json([
-                        'status' => 'error',
-                        'code' => 400,
-                        'msg' => 'Số lượng sản phẩm "' . $product->name . '" trong kho không đủ',
-                    ]);
+
+                    if (!$product) {
+                        return response()->json([
+                            'status' => 'error',
+                            'code' => 400,
+                            'msg' => 'Sản phẩm không tồn tại: ' . $cart['name'],
+                        ]);
+                    } else {
+                        $quantityShortage = $cart['quantity'] - $product->stock;
+                        return response()->json([
+                            'status' => 'error',
+                            'code' => 400,
+                            'msg' => 'Số lượng sản phẩm "' . $product->name . '" trong kho không đủ. Thiếu ' . $quantityShortage . ' sản phẩm.',
+                        ]);
+                    }
                 }
             }
+
 
             // Lưu thông tin khách hàng vào bảng order
             $addOrder = Order::create($order);

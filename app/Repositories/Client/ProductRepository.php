@@ -20,22 +20,32 @@ class ProductRepository extends BaseRepository
         // return $this->model->paginate(5);
         return $this->model->orderByDesc('id')->limit(10)->get();
     }
-
+    
+    // load thêm sản phẩm
+    // public function loadProducts($page = null)
+    // {
+    //     return $this->model->orderByDesc('id')
+    //                         ->when($page != null , function($query) use ($page){
+    //                             $query->offset($page * 10);
+    //                         })
+    //                         ->limit(10)
+    //                         ->get();
+    // }
     public function loadProducts($page = null)
     {
-       return $this->model->orderByDesc('id')
-                            ->when($page != null , function($query) use ($page){
-                                $offset =$page * 10;
-                                $query->offset($offset);
-                                })
-                                ->limit(10)
-                                ->get();
+        $query = $this->model->orderByDesc('id');
+
+        if ($page !== null) {
+            $query->skip($page * 10);
+        }
+
+        return $query->limit(10)->get();
     }
+
 
     public function getDetailProduct($id)
     {
        return $this->model->where('id', $id)->where('is_active', 1)->firstOrFail();
-
     }
 
     //lấy ra sản phẩm liên quan

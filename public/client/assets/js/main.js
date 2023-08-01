@@ -207,6 +207,21 @@ const app = {
             $(".cart-sidebar").removeClass("cart-sidebar-show");
         });
     },
+
+    dropdowInput() {
+        // const searchBox = document.querySelector(".search-box");
+        const headerDropdown = $(".header-action_dropdown");
+
+        // Lắng nghe sự kiện focus vào input
+        $(document).on("focus", ".search-box", function () {
+            headerDropdown.addClass("show");
+        });
+
+        $(document).on("blur", ".search-box", function () {
+            headerDropdown.removeClass("show");
+        });
+    },
+
     run: function () {
         // app.typingAnimation();
         this.headerScroll();
@@ -214,6 +229,7 @@ const app = {
         this.hiddenText();
         this.sideCart();
         this.autoplay();
+        // this.dropdowInput();
     },
 };
 
@@ -221,11 +237,11 @@ app.run();
 
 // console.log("Detail");
 
-document.addEventListener("click", function (event) {
-    if (event.target.classList.contains("mini-cart")) {
-        console.log("Đã click vào phần tử có class 'mini-cart'");
-    } else {
-        // console.log({ event } );
-        console.log("Không click vào phần tử có class 'mini-cart'");
-    }
-});
+// document.addEventListener("click", function (event) {
+//     if (event.target.classList.contains("mini-cart")) {
+//         console.log("Đã click vào phần tử có class 'mini-cart'");
+//     } else {
+//         // console.log({ event } );
+//         console.log("Không click vào phần tử có class 'mini-cart'");
+//     }
+// });

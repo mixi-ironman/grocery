@@ -17,11 +17,13 @@
                     <form action="#" method="get" class="form-search">
                         <input
                             type="text"
-                            id="search"
+                            id="keyword"
                             name="search"
                             placeholder="Tìm kiếm sản phảm..."
                             class="search-box"
                             maxlength="128"
+                            value=""
+                            data-url="{{ route('autocomplete-ajax') }}"
                             autocomplete="off"
                         />
                         <button type="submit" class="header-search-btn" id="submit-button">
@@ -36,7 +38,12 @@
                         </button>
                     </form>
                     <!-- <h3 class="mixi">From mixi with love</h3> -->
-                    <h3 class="mixi">Wellcome to Mixi-Chill</h3>
+                    {{-- <h3 class="mixi">Wellcome to Mixi-Chill</h3> --}}
+
+                   {{-- Dropdown Input search --}}
+                    <div class="wrapper_input-dropdown">
+                        @include('client.components.dropdown-input')
+                    </div>
                 </div>
             </div>
             <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
@@ -363,3 +370,20 @@
         </div>
     </div>
 </div>
+
+@push('custom-script')
+<script>
+     // const searchBox = document.querySelector(".search-box");
+        const headerDropdown = $(".header-action_dropdown");
+
+        // Lắng nghe sự kiện focus vào input
+        $(document).on("focus", ".search-box", function () {
+            headerDropdown.addClass("show");
+        });
+
+        $(document).on("blur", ".search-box", function () {
+            headerDropdown.removeClass("show");
+        });
+</script>
+
+@endpush
