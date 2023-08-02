@@ -345,7 +345,7 @@
         <script src="{{ url('client') }}/assets/js/main.js"></script>
         <script src="{{ url('client') }}/assets/js/toast_msg.js"></script>
         <script src="{{ url('client') }}/assets/js/loadmore.js"></script>
-        <script src="{{ url('client') }}/assets/js/search.js"></script>
+        {{-- <script src="{{ url('client') }}/assets/js/search.js"></script> --}}
 
 
         <script src="{{ url('client') }}/assets/js/add_cart.js"></script>

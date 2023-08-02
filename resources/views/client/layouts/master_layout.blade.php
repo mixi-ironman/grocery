@@ -82,8 +82,7 @@
         {{-- <script src="{{ url('client') }}/assets/js/jquery-3.7.0.min.js"></script> --}}
 
         <script src="{{ url('client') }}/assets/js/toast_msg.js"></script>
-        <script src="{{ url('client') }}/assets/js/search.js"></script>
-
+        {{-- <script src="{{ url('client') }}/assets/js/search.js"></script> --}}
         <script src="{{ url('client') }}/assets/js/add_cart.js"></script>
          @stack('custom-script')
 

@@ -26,7 +26,7 @@
                             data-url="{{ route('autocomplete-ajax') }}"
                             autocomplete="off"
                         />
-                        <button type="submit" class="header-search-btn" id="submit-button">
+                        <button type="button" class="header-search-btn" id="submit-button">
                             <!-- <i class="fa-solid fa-magnifying-glass"></i> -->
                             <img
                                 style="background-color: white; border-radius: 50%"
@@ -41,9 +41,9 @@
                     {{-- <h3 class="mixi">Wellcome to Mixi-Chill</h3> --}}
 
                    {{-- Dropdown Input search --}}
-                    <div class="wrapper_input-dropdown">
-                        @include('client.components.dropdown-input')
-                    </div>
+                        <div class="wrapper_input-dropdown">
+                            @include('client.components.dropdown-input')
+                        </div>
                 </div>
             </div>
             <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
@@ -371,7 +371,7 @@
     </div>
 </div>
 
-@push('custom-script')
+{{-- @push('custom-script')
 <script>
      // const searchBox = document.querySelector(".search-box");
         const headerDropdown = $(".header-action_dropdown");
@@ -379,11 +379,31 @@
         // Lắng nghe sự kiện focus vào input
         $(document).on("focus", ".search-box", function () {
             headerDropdown.addClass("show");
+            // headerDropdown.fadeIn();
+
         });
 
         $(document).on("blur", ".search-box", function () {
             headerDropdown.removeClass("show");
+            // headerDropdown.fadeOut();
         });
 </script>
+@endpush --}}
 
-@endpush
+{{-- Event delegation là một kỹ thuật trong lập trình web cho phép bạn gán sự 
+kiện cho các phần tử con của một phần tử cha, ngay cả khi các phần tử con
+ được tạo ra sau khi trang web đã được tải. Thông thường, khi bạn gán sự 
+ kiện trực tiếp cho một phần tử, sự kiện chỉ áp dụng cho các phần tử đã 
+ tồn tại khi trang web được tải, 
+và các phần tử mới được thêm vào sau đó sẽ không có sự kiện nào được gán. 
+
+ể đảm bảo các sự kiện không bị mất tác dụng sau khi có dữ liệu mới trả về từ 
+Ajax, bạn có thể sử dụng event delegation. Event delegation cho phép bạn gán
+ sự kiện cho các phần tử được tạo động trong tương lai,
+ bao gồm các phần tử được thêm vào sau khi Ajax trả về dữ liệu.
+
+ Ngăn chặn sự kiện "click" bị gọi nhiều lần: Nếu sự kiện "click" đang bị gọi nhiều
+  lần, bạn có thể ngăn chặn điều này bằng cách sử dụng debounce hoặc thêm một biến
+   cờ để xác định xem sự kiện đã được xử lý hay chưa trước khi tiếp tục thực hiện 
+   hành động tiếp theo.
+--}}

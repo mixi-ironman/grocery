@@ -26,7 +26,7 @@ Route::get('/home', function () {
 Route::get('/',[HomeController::class,'index'])->name('home');
 Route::get('/load-product',[HomeController::class,'loadProduct'])->name('load-product');
 //search
-Route::post('/autocomplete-ajax',[HomeController::class,'autocompleteAjax'])->name('autocomplete-ajax');
+Route::get('/autocomplete-ajax',[HomeController::class,'autocompleteAjax'])->name('autocomplete-ajax');
 Route::get('/product/{id}-{slug}.html',[ProductController::class,'index'])->name('view-product');
 Route::get('/category-product',[HomeController::class,'viewCategory'])->name('viewCategory');
 // ---------------

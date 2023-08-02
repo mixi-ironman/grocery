@@ -47,6 +47,7 @@
     /* width: 100%; */
     /* position: relative; */
     background: linear-gradient(to right, #e597ab, #ae9aea);
+
     outline: none;
     border: none;
     padding: 15px 65px 15px 15px;
@@ -63,8 +64,8 @@
 
 /* Dropdown-search */
 .header-action_dropdown {
-    display: none;
-    padding: 15px 10px;
+    /* display: none; */
+    /* padding: 15px 10px; */
     position: absolute;
     z-index: 100;
     top: 90%;
@@ -189,7 +190,12 @@
 } */
 
 .nav-container {
-    background: linear-gradient(to right, #ffd26f, #81ffef);
+    background: linear-gradient(to left, #ffd26f, #9ce9ad);
+    /* background: linear-gradient(
+        to right,
+        rgb(163, 222, 192),
+        rgb(214, 97, 112)
+    ); */
     /* background-color: rgb(93, 168, 138); */
     padding: 10px;
     transition: all 1s;
