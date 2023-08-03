@@ -182,29 +182,26 @@ const app = {
     },
 
     // slide-cart ()khi click vào giỏ hàng sẽ hiện các item có trong giỏ hàng
-
-    // sideCart() {
-    //     const cartIcon = document.querySelector(".mini-cart");
-    //     const cartSidebar = document.querySelector(".cart-sidebar");
-    //     const cartIconClose = document.querySelector(".icon-close-cart");
-
-    //     cartIcon.addEventListener("click", function () {
-    //         cartSidebar.classList.toggle("cart-sidebar-show");
-    //     });
-
-    //     cartIconClose.addEventListener("click", function () {
-    //         cartSidebar.classList.remove("cart-sidebar-show");
-    //     });
-    // },
     sideCart() {
         // Sử dụng event delegation cho cartIcon
         $(document).on("click", ".mini-cart", function () {
             $(".cart-sidebar").toggleClass("cart-sidebar-show");
+            $(".site-overlay").addClass("active");
         });
 
-        // Sử dụng event delegation cho cartIconClose
+        // Sự kiện click cho site-overlay
+        $(document).on("click", ".site-overlay", function (event) {
+            // Kiểm tra xem phần tử click có chứa cart-sidebar hay không
+            if (!$(event.target).closest(".cart-sidebar").length) {
+                // Nếu không chứa, ẩn cart-sidebar
+                $(".cart-sidebar").removeClass("cart-sidebar-show");
+                $(".site-overlay").removeClass("active");
+            }
+        });
+
         $(document).on("click", ".icon-close-cart", function () {
             $(".cart-sidebar").removeClass("cart-sidebar-show");
+            $(".site-overlay").removeClass("active");
         });
     },
 
@@ -228,54 +225,64 @@ const app = {
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
             },
         });
+        if (!$(document).data("registered")) {
+            $("#keyword_search").keyup(function (e) {
+                let query = $(this).val();
+                let url = $(this).data("url");
+                // alert(url);
+                if (query != "") {
+                    $.ajax({
+                        method: "GET",
+                        url: url,
+                        dataType: "json",
+                        data: {
+                            query: query,
+                            _token: $('meta[name="csrf-token"]').attr(
+                                "content"
+                            ),
+                        },
+                        success: function (data) {
+                            $(".header-action_dropdown").css(
+                                "padding",
+                                "15px 10px !important"
+                            );
+                            // $(".header-action_dropdown").show();
+                            $(".header-action_dropdown").fadeIn();
+                            // $(".header-action_dropdown").css("display", "block");
+                            console.log(data.product_component);
+                            $(".wrapper_input-dropdown").html(
+                                data.product_component
+                            );
+                        },
+                        error: function (error) {
+                            // alert("Có lỗi xảy ra. Vui lòng thử lại sau.");
+                        },
+                    });
+                    return false;
+                } else {
+                    // $(".header-action_dropdown").css("display", "none");
+                    $(".header-action_dropdown").fadeOut();
+                }
+                // Ngăn chặn sự kiện nổi bọt
+                // e.stopImmediatePropagation();
+            });
+            $(document).data("registered", true);
+        }
 
-        $("#keyword").keyup(function () {
-            let query = $(this).val();
-            let url = $(this).data("url");
-            // alert(url);
-            if (query != "") {
-                $.ajax({
-                    method: "GET",
-                    url: url,
-                    dataType: "json",
-                    data: {
-                        query: query,
-                        _token: $('meta[name="csrf-token"]').attr("content"),
-                    },
-                    success: function (data) {
-                        $(".header-action_dropdown").css(
-                            "padding",
-                            "15px 10px !important"
-                        );
-                        // $(".header-action_dropdown").show();
-                        $(".header-action_dropdown").fadeIn();
-                        // $(".header-action_dropdown").css("display", "block");
-                        console.log(data.product_component);
-                        $(".wrapper_input-dropdown").html(
-                            data.product_component
-                        );
-                    },
-                    error: function (error) {
-                        alert("Có lỗi xảy ra. Vui lòng thử lại sau.");
-                    },
-                });
-            } else {
-                // $(".header-action_dropdown").css("display", "none");
-                $(".header-action_dropdown").fadeOut();
-            }
-        });
-
-        $(document).on("click", ".cart-product-item_click", function () {
+        $(document).on("click", ".cart-product-item_click", function (e) {
             let name = $(this).data("name");
-            $("#keyword").val(name);
+            $("#keyword_search").val(name);
+            // Ngăn chặn sự kiện nổi bọt
+            // e.stopImmediatePropagation();
         });
 
-        $(document).on("blur", ".search-box", function () {
+        $(document).on("blur", ".search-box", function (e) {
             let query = $(this).val();
-
             // headerDropdown.removeClass("show");
             $(".search-box").val(query);
             $(".header-action_dropdown").fadeOut();
+            // Ngăn chặn sự kiện nổi bọt
+            // e.stopImmediatePropagation();
         });
     },
 

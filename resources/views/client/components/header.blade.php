@@ -17,7 +17,7 @@
                     <form action="#" method="get" class="form-search">
                         <input
                             type="text"
-                            id="keyword"
+                            id="keyword_search"
                             name="search"
                             placeholder="Tìm kiếm sản phảm..."
                             class="search-box"
@@ -336,7 +336,7 @@
                         <div class="nav-features-box">
                             <ul class="features-box_list">
                                 <li class="features-box_item">
-                                    <a href="#">Trang chủ</a>
+                                    <a href="{{ route('home') }}">Trang chủ</a>
                                 </li>
                                 <li class="features-box_item">
                                     <a href="#">Sản phẩm</a>

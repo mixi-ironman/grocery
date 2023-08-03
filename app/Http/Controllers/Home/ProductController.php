@@ -57,7 +57,7 @@ class ProductController extends Controller
             <div class="comment-text">
                 <ul class="list-line rating" title="Average Rating" style="display:flex;margin:0;padding:0">';
                 for ($count = 1; $count <= 5; $count++) {
-                    $color = ($count <= $comment->rating) ? 'color:#ffcc00;' : 'color:#ccc;';
+                    $color = ($count <= $comment?->rating) ? 'color:#ffcc00;' : 'color:#ccc;';
                     $html .= '
                         <li 
                             style="cursor:pointer;'. $color .' font-size:30px;"

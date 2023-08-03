@@ -316,6 +316,7 @@
                 {{-- @include('client.components.cart_list',['carts' => $carts]) --}}
                 @include('client.components.cart_list')
             </div>
+            <div id="site-overlay" class="site-overlay"></div>
             <!-- --Toast Messeage -->
             <div id="toast"></div>
         </div>

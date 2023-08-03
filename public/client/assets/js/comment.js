@@ -4,39 +4,32 @@ $(document).ready(function () {
             $("#" + product_id + "-" + count).css("color", "#ccc");
         }
     }
+
     let selectedIndex = 0;
-    // hover chuột đánh giá sao
-    $(document).on("mouseenter", ".rating", function () {
-        var $this = $(this);
-        var index = $this.data("index");
-        var product_id = $this.data("product_id");
-        console.log("--" + index);
-        // Gán giá trị index vào biến trung gian selectedIndex
-        selectedIndex = index;
-        // $("#submit-cmt").data("count", index);
+    // Kiểm tra xem sự kiện "mouseenter" đã được đăng ký cho phần tử ".rating" hay chưa
+    if (!$(document).data("hover_event_registered")) {
+        // Nếu chưa đăng ký, thực hiện đăng ký sự kiện "mouseenter"
+        $(document).on("click", ".rate", function () {
+            var $this = $(this);
+            var index = $this.data("index");
+            var product_id = $this.data("product_id");
+            console.log("---" + index);
+            // console.log("hover");
 
-        remove_background(product_id);
+            selectedIndex = index;
+            // $("#submit-cmt").data("count", index);
 
-        for (var count = 1; count <= index; count++) {
-            $("#" + product_id + "-" + count).css("color", "#ffcc00");
-        }
-    });
+            remove_background(product_id);
 
-    //nhả chuột không đánh giá sao
-    // $(document).on('mouseleave', '.rating', function(){
-    //     var index = $(this).data('index');
-    //     var product_id = $(this).data("product_id");
-    //     var rating = $(this).data("rating");
+            for (var count = 1; count <= index; count++) {
+                $("#" + product_id + "-" + count).css("color", "#ffcc00");
+            }
+        });
+        // Đánh dấu đã đăng ký sự kiện "mouseenter" để tránh lặp lại đăng ký
+        $(document).data("hover_event_registered", true);
+    }
 
-    //     remove_background(product_id);
-
-    //     for(var count = 1; count <= rating; count++)
-    //     {
-    //         $('#'+product_id+'-'+count).css('color','#ffcc00');
-    //     }
-    // });
     // Khai báo headers cho AJAX request
-
     $.ajaxSetup({
         headers: {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
@@ -77,45 +70,56 @@ $(document).ready(function () {
     }
 
     //send-comment
-    $(document).on("click", ".button-contactForm", function () {
-        let product_id = $(".review-comment").data("id");
-        let url_cmt = $("#send-comment").data("url");
-        let name = $("#cmt-name").val();
-        let content = $("#cmt-content").val();
+    if (!$(document).data("sub_cmt")) {
+        $(document).on("click", ".button-contactForm", function () {
+            let product_id = $(".review-comment").data("id");
+            let url_cmt = $("#send-comment").data("url");
+            let name = $("#cmt-name").val();
+            let content = $("#cmt-content").val();
 
-        $.ajax({
-            method: "POST",
-            url: url_cmt,
-            data: {
-                product_id: product_id,
-                name: name,
-                content: content,
-                selectedIndex: selectedIndex,
-                // Gửi CSRF token kèm theo dữ liệu
-                _token: $('meta[name="csrf-token"]').attr("content"),
-            },
+            $.ajax({
+                method: "POST",
+                url: url_cmt,
+                data: {
+                    product_id: product_id,
+                    name: name,
+                    content: content,
+                    selectedIndex: selectedIndex,
+                    // Gửi CSRF token kèm theo dữ liệu
+                    _token: $('meta[name="csrf-token"]').attr("content"),
+                },
 
-            success: function (data) {
-                $(".cmt-notification").html(
-                    '<p style="color:green;font-size:15px;font-weight:600">Thêm bình luận thành công</p>'
-                );
-                $(".cmt-notification").fadeOut(1500);
-                $("#cmt-name").val("");
-                $("#cmt-content").val("");
+                success: function (data) {
+                    $(".cmt-notification").html(
+                        '<p style="color:green;font-size:15px;font-weight:600">Thêm bình luận thành công</p>'
+                    );
+                    $(".cmt-notification").fadeOut(1500);
+                    $("#cmt-name").val("");
+                    $("#cmt-content").val("");
 
-                loadloadComment();
-            },
+                    loadloadComment();
+                },
 
-            error: function (error) {
-                alert("Có lỗi xảy ra. Vui lòng thử lại sau");
-            },
+                error: function (error) {
+                    alert("Có lỗi xảy ra. Vui lòng thử lại sau");
+                },
+            });
         });
-    });
+
+        $(document).data("sub_cmt", true);
+    }
 });
 
-// // Sử dụng event delegation để xử lý sự kiện click cho nút "btn-load_product"
-// $(document).on("click", "#btn-load_product", function () {
-//     const url = $(this).data("url");
-//     // console.log("load");
-//     loadMore(url);
+//nhả chuột không đánh giá sao
+// $(document).on('mouseleave', '.rating', function(){
+//     var index = $(this).data('index');
+//     var product_id = $(this).data("product_id");
+//     var rating = $(this).data("rating");
+
+//     remove_background(product_id);
+
+//     for(var count = 1; count <= rating; count++)
+//     {
+//         $('#'+product_id+'-'+count).css('color','#ffcc00');
+//     }
 // });

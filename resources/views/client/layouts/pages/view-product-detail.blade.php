@@ -52,7 +52,7 @@
                                         }
                                     @endphp
                                <li 
-                                    class="rating" 
+                                    class="rating_" 
                                     style="cursor:pointer;{{ $color }}; font-size:30px;"
                                 >
                                     &#9733
@@ -196,7 +196,7 @@
                                     data-index="{{ $count }}"   
                                     data-product_id ="{{ $product?->id }}"
                                     data-rating="{{ $rating }}" 
-                                    class="rating" 
+                                    class="rate" 
                                     style="cursor:pointer;{{ $color }}; font-size:30px;"
                                 >
                                     &#9733

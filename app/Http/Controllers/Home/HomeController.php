@@ -5,8 +5,6 @@ namespace App\Http\Controllers\Home;
 use App\Http\Controllers\Controller;
 use App\Http\View\Composers\MenuComposer;
 use App\Models\Product;
-use App\Models\Comment;
-
 use Illuminate\Http\Request;
 use App\Services\Client\ProductService;
 
