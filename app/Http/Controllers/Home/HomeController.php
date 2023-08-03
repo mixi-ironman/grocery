@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Home;
 use App\Http\Controllers\Controller;
 use App\Http\View\Composers\MenuComposer;
 use App\Models\Product;
+use App\Models\Comment;
+
 use Illuminate\Http\Request;
 use App\Services\Client\ProductService;
 
@@ -56,6 +58,7 @@ class HomeController extends Controller
         {
             $products = Product::where('is_active',1)->where('name','LIKE','%'.$data['query'].'%')->get();
             $product_component =  view('client.components.dropdown-input',['products_search'=>$products ])->render();
+           
         }
         return response()->json([
             'msg'=>'Search success!',

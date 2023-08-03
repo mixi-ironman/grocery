@@ -8,7 +8,7 @@
 //     let query = $(this).val();
 //     let url = $(this).data("url");
 //     // alert(url);
-//     if (query != "") {
+//     if (query && query != "") {
 //         $.ajax({
 //             method: "GET",
 //             url: url,

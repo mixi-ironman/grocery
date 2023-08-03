@@ -30,7 +30,7 @@ Route::get('/category-product',[HomeController::class,'viewCategory'])->name('vi
 
 //Product
 Route::get('/product/{id}-{slug}.html',[ProductController::class,'index'])->name('view-product');
-Route::post('/load-comment',[ProductController::class,'loadComment'])->name('load-comment');
+Route::get('/load-comment',[ProductController::class,'loadComment'])->name('load-comment');
 Route::post('/send-comment',[ProductController::class,'sentComment'])->name('send-comment');
 // ---------------
 

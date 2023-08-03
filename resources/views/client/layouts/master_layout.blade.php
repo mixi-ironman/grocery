@@ -44,9 +44,11 @@
             @include('client.components.footer')
             </div>
 
-             <!-- Position -->
-            {{-- @include('client.components.cart_list',['carts' => $carts]) --}}
-            @include('client.components.cart_list')
+           <!-- Position -->
+            <div id="cart_list_wrapper">
+                {{-- @include('client.components.cart_list',['carts' => $carts]) --}}
+                @include('client.components.cart_list')
+            </div>
 
             <!-- --Toast Messeage -->
             <div id="toast"></div>

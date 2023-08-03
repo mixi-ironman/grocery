@@ -40,12 +40,27 @@
                         <h1>{{ $product->name }}</h1>
                     </div>
                     <div class="product-rating">
-                        <div class="star-rating">
-                            <i class="fa-regular fa-star"></i>
-                            <i class="fa-regular fa-star"></i>
-                            <i class="fa-regular fa-star"></i>
-                            <i class="fa-regular fa-star"></i>
-                            <i class="fa-regular fa-star"></i>
+                        <div class="star-rating" style="display:flex">
+                            <ul style="display:flex;margin:0;padding:0">
+                            @for($count=1; $count<=5; $count++)
+                                    @php
+                                        if($count<=$rating)
+                                        {
+                                            $color = 'color:#ffcc00;';
+                                        }else{
+                                            $color ='color:#ccc;';
+                                        }
+                                    @endphp
+                               <li 
+                                    class="rating" 
+                                    style="cursor:pointer;{{ $color }}; font-size:30px;"
+                                >
+                                    &#9733
+                                </li>
+                                
+                                @endfor
+                            </ul> <span ><strong style="color:red;display:inline-block;margin:5px 0 0 10px">{{ $rating }}/5</strong></span> 
+                              
                         </div>
                         {{-- <span>32 reviews</span> --}}
                     </div>
@@ -129,11 +144,11 @@
     <div class="tabs">
         <div class="tab-item active">
             <img width="25" height="25" src="https://img.icons8.com/fluency/48/content.png" alt="content">
-            <span> Description</span>
+            <span> Mô tả chi tiết</span>
         </div>
         <div class="tab-item">
             <img width="25" height="25" src="https://img.icons8.com/fluency/48/feedback-hub.png" alt="feedback-hub">
-            <span> Reviews</span>
+            <span>Đánh giá sản phẩm</span>
         </div>
 
         <div class="line"></div>
@@ -158,32 +173,36 @@
             </div>
             <div class="col-md-6 review-form-wraper">
                 <div class="review-form-res">
-                    <h2>Add Review</h2>
+                    <h2>Viết đánh giá</h2>
                     <hr>
 
                     {{-- <form action="#" id="comment-form">
                         @csrf --}}
                         <div class="comment-form-rating">
                             <label for="rating">Your rating &nbsp;</label>
-                            <p class="stars">
-                                <span>
-                                    <a class="star-1" href="#">
-                                        <i class="fa-regular fa-star"></i>
-                                    </a>
-                                    <a class="star-2" href="#">
-                                        <i class="fa-regular fa-star"></i>
-                                    </a>
-                                    <a class="star-3" href="#">
-                                        <i class="fa-regular fa-star"></i>
-                                    </a>
-                                    <a class="star-4" href="#">
-                                        <i class="fa-regular fa-star"></i>
-                                    </a>
-                                    <a class="star-5" href="#">
-                                        <i class="fa-regular fa-star"></i>
-                                    </a>
-                                </span>
-                            </p>
+                            <ul class="list-line rating" title="Average Rating" style="display:flex;margin:0;padding:0">
+                                @for($count=1; $count<=5; $count++)
+                                    @php
+                                        if($count<=$rating)
+                                        {
+                                            $color = 'color:#ffcc00;';
+                                        }else{
+                                            $color ='color:#ccc;';
+                                        }
+                                    @endphp
+                               <li 
+                                    title="star_rating" 
+                                    id="{{ $product?->id }}-{{ $count }}"
+                                    data-index="{{ $count }}"   
+                                    data-product_id ="{{ $product?->id }}"
+                                    data-rating="{{ $rating }}" 
+                                    class="rating" 
+                                    style="cursor:pointer;{{ $color }}; font-size:30px;"
+                                >
+                                    &#9733
+                                </li>
+                                @endfor
+                            </ul>
                         </div>
                         <div class="row">
                             <div class="col-md-6" style="margin:20px 0;">
@@ -204,7 +223,7 @@
                             <div class="cmt-notification" ></div>
 
                             <div class="form-group btn-form-submit" id="send-comment" data-url="{{ route('send-comment') }}">
-                                <button class="button-contactForm" id="submit-cmt">Submit Review</button>
+                                <button class="button-contactForm" data-count="0" id="submit-cmt">Submit Review</button>
                             </div>
                         </div>
                     {{-- </form> --}}
@@ -237,23 +256,37 @@
                                         <img class="default-img" src="{{ asset('uploads/') }}/{{ $products->image }}" alt="">
                                         {{-- <img class="hover-img" src="{{ asset('uploads/') }}/{{ $products->image }}" alt=""> --}}
                                     </a>
-                                    <div class="product-action">
+                                   <div class="product-action">
                                         <a href={{ route('view-product',['id' => $products->id, 'slug' => Str::slug($products->name)]) }} class="product-action-icon">
-                                            <img width="35" height="35" class="translatex" src="https://img.icons8.com/external-ddara-fill-ddara/64/external-eye-eye-ddara-fill-ddara.png" alt="external-eye-eye-ddara-fill-ddara">
+                                            <img
+                                                width="35"
+                                                height="35"
+                                                class="translatex"
+                                                src="https://img.icons8.com/external-ddara-fill-ddara/64/external-eye-eye-ddara-fill-ddara.png"
+                                                alt="external-eye-eye-ddara-fill-ddara"
+                                            />
                                         </a>
-                                        <button  class="product-action-icon" style="display:none">
-                                            <img class="translatex" width="37" height="37" src="https://img.icons8.com/bubbles/50/half-heart.png" alt="half-heart">
+                                        <button style="display:none" class="product-action-icon">
+                                            <img  class="translatex"
+                                                width="37"
+                                                height="37" src="https://img.icons8.com/external-creatype-glyph-colourcreatype/64/external-eye-essential-ui-v2-creatype-glyph-colourcreatype-2.png" alt="external-eye-essential-ui-v2-creatype-glyph-colourcreatype-2"/>
                                         </button>
-                                        <button  class="product-action-icon btn_add_to_cart"  data-url="{{ route('add-to-cart',['id' => $products->id]) }}">
-                                            <img class="translatex" width="35" height="35" src="https://img.icons8.com/doodle/48/shopping-cart--v1.png" alt="shopping-cart--v1">
-                                        </button>
+                                        <a href="#" class="product-action-icon btn_add_to_cart" data-url="{{ route('add-to-cart',['id' => $products->id]) }}">
+                                            <img
+                                                class="translatex"
+                                                width="35"
+                                                height="35"
+                                                src="https://img.icons8.com/doodle/48/shopping-cart--v1.png"
+                                                alt="shopping-cart--v1"
+                                            />
+                                        </a>
                                     </div>
                                 </div>
                                 <!-- button hiển thị giá trị giảm  giá của 1 cart là bao nhiêu -->
                                 <div class="product-badges"></div>
                             </div>
                             <div class="product-content">
-                                <div class="product-category">{{ $products->category->name }}</div>
+                                <div class="product-category">{{ $products?->category->name }}</div>
                                 <h2 class="product-name">
                                     <a href={{ route('view-product',['id' => $products->id, 'slug' => Str::slug($product->name)]) }}>{{ $products->name }}</a>
                                 </h2>
@@ -292,6 +325,7 @@
 @endsection
 
 @push('custom-script')
+
 <script>
 const app_ = {
      scrollHeader() {
@@ -367,8 +401,9 @@ const app_ = {
                 this.quantityInput();
                 this.toggleTabUi();
             },
-        };
+};
+    app_.run();
 
-        app_.run();
+    
 </script>
 @endpush

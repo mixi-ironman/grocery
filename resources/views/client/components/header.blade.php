@@ -361,7 +361,7 @@
                                     src="https://img.icons8.com/bubbles/50/phone-not-being-used.png"
                                     alt="phone-not-being-used"
                                 />
-                                <span>0123.456.789</span>
+                                <span>0777.888.999</span>
                             </div>
                         </div>
                     </div>

@@ -1,5 +1,42 @@
 $(document).ready(function () {
+    function remove_background(product_id) {
+        for (var count = 1; count <= 5; count++) {
+            $("#" + product_id + "-" + count).css("color", "#ccc");
+        }
+    }
+    let selectedIndex = 0;
+    // hover chuột đánh giá sao
+    $(document).on("mouseenter", ".rating", function () {
+        var $this = $(this);
+        var index = $this.data("index");
+        var product_id = $this.data("product_id");
+        console.log("--" + index);
+        // Gán giá trị index vào biến trung gian selectedIndex
+        selectedIndex = index;
+        // $("#submit-cmt").data("count", index);
+
+        remove_background(product_id);
+
+        for (var count = 1; count <= index; count++) {
+            $("#" + product_id + "-" + count).css("color", "#ffcc00");
+        }
+    });
+
+    //nhả chuột không đánh giá sao
+    // $(document).on('mouseleave', '.rating', function(){
+    //     var index = $(this).data('index');
+    //     var product_id = $(this).data("product_id");
+    //     var rating = $(this).data("rating");
+
+    //     remove_background(product_id);
+
+    //     for(var count = 1; count <= rating; count++)
+    //     {
+    //         $('#'+product_id+'-'+count).css('color','#ffcc00');
+    //     }
+    // });
     // Khai báo headers cho AJAX request
+
     $.ajaxSetup({
         headers: {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
@@ -12,7 +49,7 @@ $(document).ready(function () {
         let product_id = $(".review-comment").data("id");
         let url = $("#view-comment").data("url");
         $.ajax({
-            method: "POST",
+            method: "GET",
             url: url,
             data: {
                 product_id: product_id,
@@ -53,6 +90,7 @@ $(document).ready(function () {
                 product_id: product_id,
                 name: name,
                 content: content,
+                selectedIndex: selectedIndex,
                 // Gửi CSRF token kèm theo dữ liệu
                 _token: $('meta[name="csrf-token"]').attr("content"),
             },

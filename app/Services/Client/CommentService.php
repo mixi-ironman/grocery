@@ -21,12 +21,11 @@ class CommentService
          try {
             DB::beginTransaction();
             $product_id = $request->product_id;
-            $name = $request->name;
-            $content = $request->content;
-
+           
             $comment = $this->commentRepository->create([
                 'name' => $request->name,
                 'content' => $request->content,
+                'rating' => $request->selectedIndex,
                 'commentable_type' => 'product',
                 'commentable_id' => $request->product_id,
             ]);

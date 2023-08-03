@@ -389,9 +389,9 @@ chuyển dịch từ giữa ra 2 bên */
     /* position: relative; */
 }
 .slider-item_img {
-    /* background-image: url('https://w.wallhaven.cc/full/9m/wallhaven-9mjoy1.png'); */
-
-    background-image: url(../img/slider_4.jpg);
+    /* background-image: url("https://w.wallhaven.cc/full/9m/wallhaven-9mjoy1.png"); */
+    /* background-image: url(../img/slider_4.jpg); */
+    background-image: url("https://pendecor.vn/uploads/files/2022/04/18/thiet-ke-cua-hang-tien-loi-9.jpg");
     /* filter: blur(0px); */
     padding-top: 45%;
     background-repeat: no-repeat;
@@ -408,8 +408,7 @@ chuyển dịch từ giữa ra 2 bên */
     left: 12px;
     right: 12px;
     bottom: 0;
-    background-color: rgba(26, 26, 26);
-    opacity: 0.4;
+    background-color: rgba(26, 26, 26, 0.4);
 }
 .slider-item_description {
     /* display: none; */

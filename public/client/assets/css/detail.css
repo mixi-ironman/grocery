@@ -22,6 +22,10 @@
     border-radius: 10px;
     border: 2px solid rgb(213, 237, 171);
 }
+
+/* .product-img:hover {
+    transform: scale(1.2);
+} */
 .more-view-list {
     display: flex;
 }
@@ -261,8 +265,8 @@
 .review-comment {
     padding: 10px;
     /* border: 1px solid green; */
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-    border-radius: 10px;
+    box-shadow: 2px 2px 5px #deb8e6;
+    border-radius: 5px;
 }
 .comment-list {
     list-style: none;
@@ -331,8 +335,11 @@
 /* Form-comment */
 
 .review-form-res {
+    border-radius: 5px;
     padding: 15px 15px;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    box-shadow: 2px 2px 5px #deb8e6;
+
+    /* border: 1px solid green; */
 }
 
 .stars {
