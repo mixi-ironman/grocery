@@ -25,10 +25,13 @@ Route::get('/home', function () {
 //Home
 Route::get('/',[HomeController::class,'index'])->name('home');
 Route::get('/load-product',[HomeController::class,'loadProduct'])->name('load-product');
-//search
 Route::get('/autocomplete-ajax',[HomeController::class,'autocompleteAjax'])->name('autocomplete-ajax');
-Route::get('/product/{id}-{slug}.html',[ProductController::class,'index'])->name('view-product');
 Route::get('/category-product',[HomeController::class,'viewCategory'])->name('viewCategory');
+
+//Product
+Route::get('/product/{id}-{slug}.html',[ProductController::class,'index'])->name('view-product');
+Route::post('/load-comment',[ProductController::class,'loadComment'])->name('load-comment');
+Route::post('/send-comment',[ProductController::class,'sentComment'])->name('send-comment');
 // ---------------
 
 Route::post('danhmuc/{id}-{slug}.html',[MenuController::class,'index'])->name('index');

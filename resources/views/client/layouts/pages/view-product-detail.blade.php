@@ -79,7 +79,7 @@
                     </div>
 
                     <div class="add-to-cart">
-                        <form action="">
+                        <form>
                             <div class="full-left">
                                 <div class="quantity">
                                     <button type="button">
@@ -151,111 +151,9 @@
 
     <div class="tab-pane tab-review">
         <div class="row">
-            <div class="col-md-6 review-comment">
-                <ol class="comment-list">
-                    <li class="comment-item">
-                        <img class="comment-user-img" src="#" alt="">
-                        <div class="comment-text">
-                            <div class="star-cmt">
-                                <i class="fa-regular fa-star"></i>
-                                <i class="fa-regular fa-star"></i>
-                                <i class="fa-regular fa-star"></i>
-                                <i class="fa-regular fa-star"></i>
-                                <i class="fa-regular fa-star"></i>
-                            </div>
-                            <div class="comment-meta">
-                                <span>Nam LS</span>
-                                -
-                                <span>30/04/2023</span>
-                            </div>
-                            <div class="comment-description">
-                                <p>
-                                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Facere quae
-                                    doloribus modi praesentium saepe amet, nesciunt accusantium beatae,
-                                    dicta sed ipsum rem at natus adipisci. Voluptate repellat vero tenetur
-                                    quae.
-                                </p>
-                            </div>
-                        </div>
-                    </li>
-
-                    <li class="comment-item">
-                        <img class="comment-user-img" src="#" alt="">
-                        <div class="comment-text">
-                            <div class="star-cmt">
-                                <i class="fa-regular fa-star"></i>
-                                <i class="fa-regular fa-star"></i>
-                                <i class="fa-regular fa-star"></i>
-                                <i class="fa-regular fa-star"></i>
-                                <i class="fa-regular fa-star"></i>
-                            </div>
-                            <div class="comment-meta">
-                                <span>Nam LS</span>
-                                -
-                                <span>30/04/2023</span>
-                            </div>
-                            <div class="comment-description">
-                                <p>
-                                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Facere quae
-                                    doloribus modi praesentium saepe amet, nesciunt accusantium beatae,
-                                    dicta sed ipsum rem at natus adipisci. Voluptate repellat vero tenetur
-                                    quae.
-                                </p>
-                            </div>
-                        </div>
-                    </li>
-
-                    <li class="comment-item">
-                        <img class="comment-user-img" src="#" alt="">
-                        <div class="comment-text">
-                            <div class="star-cmt">
-                                <i class="fa-regular fa-star"></i>
-                                <i class="fa-regular fa-star"></i>
-                                <i class="fa-regular fa-star"></i>
-                                <i class="fa-regular fa-star"></i>
-                                <i class="fa-regular fa-star"></i>
-                            </div>
-                            <div class="comment-meta">
-                                <span>Nam LS</span>
-                                -
-                                <span>30/04/2023</span>
-                            </div>
-                            <div class="comment-description">
-                                <p>
-                                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Facere quae
-                                    doloribus modi praesentium saepe amet, nesciunt accusantium beatae,
-                                    dicta sed ipsum rem at natus adipisci. Voluptate repellat vero tenetur
-                                    quae.
-                                </p>
-                            </div>
-                        </div>
-                    </li>
-
-                    <li class="comment-item">
-                        <img class="comment-user-img" src="#" alt="">
-                        <div class="comment-text">
-                            <div class="star-cmt">
-                                <i class="fa-regular fa-star"></i>
-                                <i class="fa-regular fa-star"></i>
-                                <i class="fa-regular fa-star"></i>
-                                <i class="fa-regular fa-star"></i>
-                                <i class="fa-regular fa-star"></i>
-                            </div>
-                            <div class="comment-meta">
-                                <span>Nam LS</span>
-                                -
-                                <span>30/04/2023</span>
-                            </div>
-                            <div class="comment-description">
-                                <p>
-                                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Facere quae
-                                    doloribus modi praesentium saepe amet, nesciunt accusantium beatae,
-                                    dicta sed ipsum rem at natus adipisci. Voluptate repellat vero tenetur
-                                    quae.
-                                </p>
-                            </div>
-                        </div>
-                    </li>
+            <div class="col-md-6 review-comment" data-id="{{$product->id}}">
+                <ol class="comment-list" id="view-comment" data-url="{{ route('load-comment') }}">
+                    
                 </ol>
             </div>
             <div class="col-md-6 review-form-wraper">
@@ -263,7 +161,8 @@
                     <h2>Add Review</h2>
                     <hr>
 
-                    <form class="comment-form" action="" method="post">
+                    {{-- <form action="#" id="comment-form">
+                        @csrf --}}
                         <div class="comment-form-rating">
                             <label for="rating">Your rating &nbsp;</label>
                             <p class="stars">
@@ -287,28 +186,29 @@
                             </p>
                         </div>
                         <div class="row">
+                            <div class="col-md-6" style="margin:20px 0;">
+                                <div class="form-group comment-form-author">
+                                    <input class="form-control" type="text" name="cmt-name" id="cmt-name" value="" placeholder="Name...">
+                                </div>
+                            </div>
+                            <div class="col-md-6" style="opacity:0">
+                                <div class="form-group comment-form-email">
+                                    <input class="form-control" type="text" name="email" id="email" value="" placeholder="Email...">
+                                </div>
+                            </div>
                             <div class="col-md-12">
                                 <div class="form-group comment-form-comment">
-                                    <textarea class="form-control" name="comment" id="comment" cols="30" rows="6" placeholder="Write comment"></textarea>
+                                    <textarea class="form-control" name="cmt-content" id="cmt-content" cols="30" rows="6" placeholder="Write comment..."></textarea>
                                 </div>
                             </div>
+                            <div class="cmt-notification" ></div>
 
-                            <div class="col-md-6">
-                                <div class="form-group comment-form-author">
-                                    <input class="form-control" type="text" name="name" id="name " placeholder="Name...">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group comment-form-email">
-                                    <input class="form-control" type="text" name="email" id="email " placeholder="Email...">
-                                </div>
-                            </div>
-
-                            <div class="form-group btn-form-submit">
-                                <button type="submit" class="button-contactForm">Submit Review</button>
+                            <div class="form-group btn-form-submit" id="send-comment" data-url="{{ route('send-comment') }}">
+                                <button class="button-contactForm" id="submit-cmt">Submit Review</button>
                             </div>
                         </div>
-                    </form>
+                    {{-- </form> --}}
+
                 </div>
             </div>
         </div>
@@ -333,12 +233,12 @@
                         <div class="product-cart">
                             <div class="product-img-action">
                                 <div class="product-cart-img">
-                                    <a href="{{ route('view-product',['id' => $product->id, 'slug' => Str::slug($product->name)]) }}">
+                                    <a href="{{ route('view-product',['id' => $products->id, 'slug' => Str::slug($products->name)]) }}">
                                         <img class="default-img" src="{{ asset('uploads/') }}/{{ $products->image }}" alt="">
                                         {{-- <img class="hover-img" src="{{ asset('uploads/') }}/{{ $products->image }}" alt=""> --}}
                                     </a>
                                     <div class="product-action">
-                                        <a href={{ route('view-product',['id' => $products->id, 'slug' => Str::slug($product->name)]) }} class="product-action-icon">
+                                        <a href={{ route('view-product',['id' => $products->id, 'slug' => Str::slug($products->name)]) }} class="product-action-icon">
                                             <img width="35" height="35" class="translatex" src="https://img.icons8.com/external-ddara-fill-ddara/64/external-eye-eye-ddara-fill-ddara.png" alt="external-eye-eye-ddara-fill-ddara">
                                         </a>
                                         <button  class="product-action-icon" style="display:none">
@@ -355,7 +255,7 @@
                             <div class="product-content">
                                 <div class="product-category">{{ $products->category->name }}</div>
                                 <h2 class="product-name">
-                                    <a href={{ route('view-product',['id' => $product->id, 'slug' => Str::slug($product->name)]) }}>{{ $products->name }}</a>
+                                    <a href={{ route('view-product',['id' => $products->id, 'slug' => Str::slug($product->name)]) }}>{{ $products->name }}</a>
                                 </h2>
                                 <div class="product-rate-cover">
                                     <div class="product-rate">

@@ -84,7 +84,6 @@ class ProductService
                 // Cách 2: Sử dụng store() để lưu hình ảnh vào thư mục 'uploads' trong ổ đĩa 'public'
                 // $imagePath = $request->file('image')->store('uploads', 'public');
             } else {
-
                 $imagePath = null; 
             }
             // cách khác

@@ -1,8 +1,8 @@
 
     <div class="slider-wraper row">
         {{-- <!-- <div class="col-md-12" style="padding: 0"> --> --}}
-        <div class="col-md-12">
-            <div class="slider-wraper-list">
+        <div class="col-md-12 slider-wraper-list">
+            {{-- <div class="slider-wraper-list"> --}}
                 <div class="slider-wraper_item">
                     <div class="slider-item_img"></div>
                     <div class="slider-item_description">
@@ -39,6 +39,6 @@
                         />
                     </div>
                 </div>
-            </div>
+            {{-- </div> --}}
         </div>
     </div>

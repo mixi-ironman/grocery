@@ -108,7 +108,9 @@ li {
     margin: 0 auto;
     float: left;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-    background: linear-gradient(to right, #8ce09d, #fff5c3) !important;
+    /* background: linear-gradient(to right, #8ce09d, #fff5c3) !important; */
+    background: linear-gradient(to right, #deb8e6, #9ce9ad) !important;
+
     z-index: 100;
     animation: slideIndown 1s linear;
     /* transition: opacity .25s ease,transform .25s ease; */

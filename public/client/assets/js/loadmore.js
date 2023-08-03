@@ -1,11 +1,10 @@
-// Khai báo headers cho AJAX request
-$.ajaxSetup({
-    headers: {
-        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-    },
-});
-
 $(document).ready(function () {
+    // Khai báo headers cho AJAX request
+    $.ajaxSetup({
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+    });
     // Sử dụng event delegation để xử lý sự kiện click cho nút "btn-load_product"
     $(document).on("click", "#btn-load_product", function () {
         const url = $(this).data("url");

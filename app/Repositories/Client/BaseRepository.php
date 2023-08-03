@@ -12,6 +12,7 @@ class BaseRepository
 
     public function getById($id)
     {
+        // dd($id);
         return $this->model->find($id);
     }
 

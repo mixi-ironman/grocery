@@ -35,6 +35,11 @@ class ProductService
         return $this->productRepository->getById($id);
     }
 
+    public function getAllProducts()
+    {
+        return $this->productRepository->getAll();
+    }
+
     //load product
     public function loadProduct($page = null)
     {

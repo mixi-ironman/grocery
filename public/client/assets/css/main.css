@@ -59,7 +59,7 @@
     cursor: pointer;
 }
 .search-box:focus {
-    width: 95%;
+    width: 70%;
 }
 
 /* Dropdown-search */
@@ -69,11 +69,11 @@
     position: absolute;
     z-index: 100;
     top: 90%;
-    left: 6px;
-    max-height: 467px;
+    right: 80px;
+    max-height: 530px;
     overflow-y: auto;
     scroll-behavior: smooth;
-    width: 562px;
+    width: 400px;
     background-color: white;
     border-radius: 5px;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
@@ -190,7 +190,7 @@
 } */
 
 .nav-container {
-    background: linear-gradient(to left, #ffd26f, #9ce9ad);
+    background: linear-gradient(to left, #deb8e6, #9ce9ad);
     /* background: linear-gradient(
         to right,
         rgb(163, 222, 192),
@@ -379,7 +379,7 @@ chuyển dịch từ giữa ra 2 bên */
 
 .slider-wraper-list {
     list-style: none;
-    padding: 0;
+    /* padding: 0;   */
     overflow: hidden;
     margin: 0;
     position: relative;
@@ -405,8 +405,8 @@ chuyển dịch từ giữa ra 2 bên */
     content: "";
     position: absolute;
     top: 0;
-    left: 0;
-    right: 0;
+    left: 12px;
+    right: 12px;
     bottom: 0;
     background-color: rgba(26, 26, 26);
     opacity: 0.4;
