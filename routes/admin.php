@@ -34,7 +34,7 @@ Route::prefix('products')->name('products.')->group(function () {
     Route::delete('/destroy/{id}', [ProductController::class, 'destroy'])->name('destroy');
 });
 
-//Product
+//sliders
 Route::prefix('sliders')->name('sliders.')->group(function () {
     Route::get('/', [SliderController::class, 'index'])->name('index');
     Route::get('/create', [SliderController::class, 'create'])->name('create');

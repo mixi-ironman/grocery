@@ -71,8 +71,9 @@ class ProductController extends Controller
         return redirect()->route('products.index')->with('success', 'Update Product Successfully!');
     }
 
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
+         $this->productService->destroy($id);
+        return redirect()->route('products.index')->with('success', 'Delete Product Successfully!');
     }
 }

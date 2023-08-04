@@ -25,12 +25,17 @@
                     </div>
 
                     <div class="mb-3">
-                        <label  class="form-label">Description</label>
+                        <label  class="form-label">Mô tả</label>
                         <textarea class="form-control" name="description" rows="3"></textarea>
                     </div>
 
                     <div class="mb-3">
-                        <label  class="form-label">Price</label>
+                        <label  class="form-label">Mô tả chi tiết</label>
+                        <textarea name="content" id="content" rows="10" cols="80"></textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label  class="form-label">Giá</label>
                         <input type="text" class="form-control"  name="price" aria-describedby="emailHelp">
                     </div>
 
@@ -40,12 +45,12 @@
                     </div>
 
                     <div class="mb-3">
-                        <label  class="form-label">Stock</label>
+                        <label  class="form-label">Số lượng</label>
                         <input type="number" class="form-control"  name="stock" aria-describedby="emailHelp">
                     </div>
 
                     <div class="mb-3">
-                        <label for="image"  class="form-label">Image</label>
+                        <label for="image"  class="form-label">Ảnh</label>
                         <input type="file" class="form-control" id="image" name="image" aria-describedby="emailHelp">
                     </div>
 
@@ -63,15 +68,6 @@
                         </label>
                     </div>
 
-                        {{-- <textarea name="content" id="content" rows="10" cols="80">
-                        
-                    </textarea>
-                    <script>
-                        // Replace the <textarea id="editor1"> with a CKEditor 4
-                        // instance, using default configuration.
-                        CKEDITOR.replace( 'content' );
-                    </script> --}}
-
                     <button type="submit" class="btn btn-primary">Save</button>
                 </form>
             </div>
@@ -81,6 +77,11 @@
 @endsection
 
 @push('custom-script')
+    <script>
+        // Replace the <textarea id="editor1"> with a CKEditor 4
+        // instance, using default configuration.
+        CKEDITOR.replace( 'content' );
+    </script>
     <script>
         $(document).ready(function () {
             $('#category_id').select2({

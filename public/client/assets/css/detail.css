@@ -258,10 +258,16 @@
 }
 .tab-pane.active {
     display: block;
-}
-.tab-pane p {
     text-align: justify;
 }
+.tab-pane.active p img {
+    display: block;
+    margin: 0 auto;
+    /* max-width: 100%; */
+    height: 500px;
+    object-fit: cover;
+}
+
 .review-comment {
     padding: 10px;
     /* border: 1px solid green; */

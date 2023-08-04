@@ -886,6 +886,9 @@ chuyển dịch từ giữa ra 2 bên */
     display: flex;
     flex-direction: column;
     margin-top: 5px;
+    /* min-height: 160px; */
+    /* flex: 1; */
+    justify-content: end;
 }
 
 .product-category {
@@ -1339,7 +1342,9 @@ chuyển dịch từ giữa ra 2 bên */
     z-index: 10000;
     top: 0;
     right: 0;
-    width: 330px;
+    /* width: 330px; */
+    width: 380px;
+
     height: 100vh;
     background-color: white;
     padding: 20px 15px;
@@ -1461,7 +1466,7 @@ p {
 }
 
 .cart-product-des-link {
-    height: 30px;
+    /* height: 30px; */
     overflow: hidden;
     text-overflow: ellipsis;
     /* white-space: nowrap; */

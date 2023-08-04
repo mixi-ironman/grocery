@@ -25,12 +25,11 @@ class ProductController extends Controller
 
         $carts = session()->get('cart',[]);
         if ($carts === null) {
-        // Xử lý khi không có giỏ hàng
             $carts = [];
         }
         $category = $this->categoryService->getByCategoryId($product->category_id);
         $categories = $category->products;
-        $rating = Comment::where('commentable_id',$id)->where('commentable_type','product')->get();
+        // $rating = Comment::where('commentable_id',$id)->where('commentable_type','product')->get();
         $rating = Comment::where('commentable_id',$id)->where('commentable_type','product')->avg('rating');
         if($rating === null){
             $rating = 0;

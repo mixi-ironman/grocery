@@ -23,7 +23,7 @@
                             <th style="text-align:center" scope="col">Số lượng</th>
                             <th style="text-align:center" scope="col">Giá</th>
                             <th style="text-align:center" scope="col">Thành Tiền</th>
-                            <th style="text-align:center" scope="col">Action</th>
+                            <th style="opacity:0;text-align:center" scope="col">Action</th>
                         </tr>
                     </thead>
                     <tbody>

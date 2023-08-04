@@ -21,7 +21,7 @@
                         <th scope="col"style="text-align: center;vertical-align:middle;">Stock</th>
                         <th scope="col"style="text-align: center;vertical-align:middle;">IsActive</th>
                         <th scope="col"style="text-align: center;vertical-align:middle;">Is_onsale</th>
-                        <th scope="col"style="text-align: center;vertical-align:middle;">Is_popular</th>
+                        <th scope="col"style="display:none;text-align: center;vertical-align:middle;">Is_popular</th>
                         <th scope="col"style="text-align: center;vertical-align:middle;">Is_featured</th>
                         {{-- <th scope="col"style="text-align: center;vertical-align:middle;">description</th> --}}
                         <th scope="col"style="text-align: center;vertical-align:middle;">Created At</th>
@@ -47,16 +47,32 @@
                             <td style="text-align: center;vertical-align:middle;max-width:200px;white-space: wrap;overflow: hidden; text-overflow: ellipsis;">{{ $product->stock }}</td>
 
                             <td style="text-align: center;vertical-align:middle;max-width:200px;white-space: wrap;overflow: hidden; text-overflow: ellipsis;">
-                                {{ $product->is_active }}
+                                @if( $product->is_active === 1)
+                                    <span class="btn btn-primary btn-xs">Yes</span>
+                                @elseif($product->is_active === 0)
+                                    <span class="btn btn btn-danger btn-xs">No</span>
+                                @endif
                             </td>
                             <td style="text-align: center;vertical-align:middle;max-width:200px;white-space: wrap;overflow: hidden; text-overflow: ellipsis;">
-                                {{ $product->is_onsale }}
+                                @if( $product->is_onsale === 1)
+                                    <span class="btn btn-primary btn-xs">Yes</span>
+                                @elseif($product->is_onsale === 0)
+                                    <span class="btn btn btn-danger btn-xs">No</span>
+                                @endif
+                            </td>
+                            <td style="display:none;text-align: center;vertical-align:middle;max-width:200px;white-space: wrap;overflow: hidden; text-overflow: ellipsis;">
+                                @if( $product->is_popular === 1)
+                                    <span class="btn btn-primary btn-xs">Yes</span>
+                                @elseif($product->is_popular === 0)
+                                    <span class="btn btn btn-danger btn-xs">No</span>
+                                @endif
                             </td>
                             <td style="text-align: center;vertical-align:middle;max-width:200px;white-space: wrap;overflow: hidden; text-overflow: ellipsis;">
-                                {{ $product->is_popular }}
-                            </td>
-                            <td style="text-align: center;vertical-align:middle;max-width:200px;white-space: wrap;overflow: hidden; text-overflow: ellipsis;">
-                                {{ $product->is_featured }}
+                                @if( $product->is_featured === 1)
+                                    <span class="btn btn-primary btn-xs">Yes</span>
+                                @elseif($product->is_featured === 0)
+                                    <span class="btn btn btn-danger btn-xs">No</span>
+                                @endif
                             </td>
                             {{-- <td style="text-align: justify;vertical-align:middle;max-width:350;white-space: wrap;overflow: hidden; text-overflow: ellipsis;">{{ $product->description }}</td> --}}
                             <td style="text-align: center;vertical-align:middle;max-width:200px;white-space: wrap;overflow: hidden; text-overflow: ellipsis;">{{ $product->created_at->format('d/m/Y h:i:s') }}</td>
@@ -66,7 +82,6 @@
                                     @method('DELETE')
                                     <a class="btn btn-primary" href="{{ route('products.edit',['id'=>$product->id]) }}" style="margin:0 5px 0 0;"><i class="fa-solid fa-pen-to-square"></i></a>
                                     <button type="submit" class="btn btn-info" style="margin:0;"><i class="fa-solid fa-trash"></i></button>
-                                    
                                 </form>
                             </td>
                         </tr>

@@ -33,7 +33,7 @@
                             <td style="text-align: center;vertical-align:middle;">{{ $order?->phone }}</td>
                             <td style="text-align: center;vertical-align:middle;">{{ $order?->shipping_address }}</td>
                             <td style="text-align: center;vertical-align:middle;">{{ number_format($order?->total_amount) }}</td>
-                            <td style="text-align: center;vertical-align:middle;"><span class="btn btn-primary display:inline-block" style="margin:0">{{ $order?->status}}</span></td>
+                            <td style="text-align: center;vertical-align:middle;"><span class="btn btn-primary btn-xs display:inline-block" style="margin:0">{{ $order?->status}}</span></td>
                             <td style="text-align: center;vertical-align:middle;">{{ $order?->order_note }}</td>
                             <td style="text-align: center;vertical-align:middle;">{{ $order->created_at->format('d/m/Y h:i:s') }}</td>
                            

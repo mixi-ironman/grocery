@@ -32,6 +32,11 @@
                     </div>
 
                     <div class="mb-3">
+                        <label  class="form-label">Mô tả chi tiết</label>
+                        <textarea name="content" id="content" rows="10" cols="80">{!! $product->content !!}</textarea>
+                    </div>
+
+                    <div class="mb-3">
                         <label  class="form-label">Price</label>
                         <input type="text" class="form-control"  name="price" aria-describedby="emailHelp" value="{{ $product->price }}">
                     </div>
@@ -83,6 +88,11 @@
 @endsection
 
 @push('custom-script')
+    <script>    
+        // Replace the <textarea id="editor1"> with a CKEditor 4
+        // instance, using default configuration.
+        CKEDITOR.replace( 'content' );
+    </script>
     <script>
         $(document).ready(function () {
             $('#category_id').select2({

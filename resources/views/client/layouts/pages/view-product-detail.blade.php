@@ -159,7 +159,7 @@
     <div class="tab-pane active">
         <h2>{{ $product->name }}</h2>
         <p>
-           {{ $product->description }}
+           {!! $product->content !!}
         </p>
       
     </div>

@@ -94,6 +94,8 @@ class ProductService
                 'name' => $request->input('name_product'),
                 'slug' => Str::slug($request->input('name_product'), '-'),
                 'description' => $request->input('description'),
+                'content' => $request->input('content'),
+
                 'category_id' => $request->input('category_id'),
                 'price' => $request->input('price'),
                 'old_price' => $request->input('old_price'),
@@ -145,6 +147,7 @@ class ProductService
                 'name' => $request->input('name_product'),
                 'slug' => Str::slug($request->input('name_product'), '-'),
                 'description' => $request->input('description'),
+                'content' => $request->input('content'),
                 'category_id' => $request->input('category_id'),
                 'price' => $request->input('price'),
                 'old_price' => $request->input('old_price'),
@@ -166,6 +169,10 @@ class ProductService
 
     public function destroy($id)
     {
-        $category = $this->productRepository->delete($id);
+        // dd($id);
+        if($id != 0)
+        {
+            $category = $this->productRepository->delete($id);
+        }
     }
 }
