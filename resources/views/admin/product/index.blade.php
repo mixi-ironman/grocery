@@ -4,7 +4,7 @@
     <div class="col-md-12">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title">products</h4>
+                <h4 class="card-title">Products</h4>
             </div>
             <div class="card-body">
                 <a class="btn btn-outline-primary" href="{{ route('products.create') }}"><i class="fa-brands fa-openid"></i> Add product</a>

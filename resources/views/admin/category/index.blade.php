@@ -14,7 +14,7 @@
                         <th scope="col"style="text-align: center;vertical-align:middle;">#</th>
                         <th scope="col"style="text-align: center;vertical-align:middle;">Name</th>
                         <th scope="col"style="text-align: center;vertical-align:middle;">slug</th>
-                        <th scope="col">description</th>
+                        <th scope="col"style="text-align: center;vertical-align:middle;">description</th>
                         <th scope="col"style="text-align: center;vertical-align:middle;">Parent_category</th>
                         <th scope="col"style="text-align: center;vertical-align:middle;">is_active</th>
                         <th scope="col"style="text-align: center;vertical-align:middle;">Created At</th>
@@ -25,15 +25,19 @@
                     {{-- @php dd($categories)  @endphp --}}
                     @foreach($categories as $key => $category)
                         <tr>
-                            <td scope="row" style="text-align: justify;vertical-align:middle;">{{ $category->id }}</td>
-                            <td style="text-align: justify;vertical-align:middle;">{{ $category->name }}</td>
-                            <td style="text-align: justify;vertical-align:middle;">{{ $category->slug }}</td>
-                            <td style="text-align: justify;vertical-align:middle;max-width:350px;white-space: wrap;overflow: hidden; text-overflow: ellipsis;">{{ $category->description }}</td>
+                            <td scope="row" style="text-align: center;vertical-align:middle;">{{ $category->id }}</td>
+                            <td style="text-align: center;vertical-align:middle;">{{ $category->name }}</td>
+                            <td style="text-align: center;vertical-align:middle;">{{ $category->slug }}</td>
+                            <td style="text-align: center;vertical-align:middle;max-width:350px;white-space: wrap;overflow: hidden; text-overflow: ellipsis;">{{ $category->description }}</td>
                             {{-- <td style="text-align: center;vertical-align:middle;">{{ $category->parent_id }}</td> --}}
                             <td style="text-align: center;vertical-align:middle;">{{ $category?->parentCategory?->name }}</td>
 
                             <td style="text-align: center;vertical-align:middle;">
-                                   {{ $category->is_active }}
+                                    @if( $category->is_active === 1)
+                                    <span class="btn btn-primary btn-xs">Yes</span>
+                                    @elseif($category->is_active === 0)
+                                        <span class="btn btn btn-danger btn-xs">No</span>
+                                    @endif
                                 {{-- @if($category->is_active == 1)
                                 <a href="{{ route('categories.update'['id' => $category->id]) }}" class="change-status" data-status = "{{ $category->is_active }}"><i class="fa-solid fa-eye"></i></a>
                                 @elseif($category->is_active == 0)

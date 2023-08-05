@@ -67,7 +67,6 @@ Route::prefix('product')->name('product.')->group(function () {
 Route::prefix('order')->name('order.')->group(function () {
     Route::get('/', [OrderDetailController::class, 'index'])->name('index');
     Route::get('view-order/{id}',[OrderDetailController::class,'show'])->name('view');
-    // Route::get('/list-order', [OrderDetailController::class, 'index'])->name('list-order');
     Route::delete('/destroy/{id}', [OrderDetailController::class, 'destroy'])->name('destroy');
 });
 

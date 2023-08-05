@@ -21,9 +21,9 @@ class OrderDetailController extends Controller
     public function show($id)
     {
         // $orderDetail = $this->orderDetailService->getOrderDetail();
-        $orderDetail = $this->orderDetailService->getOrderDetailById($id);
+        $orderDetails = $this->orderDetailService->getOrderDetailById($id);
 
-        // dd($orderDetail);
-        return view('admin.order.list-order',[ 'orderDetail' => $orderDetail]);
+        // dd($orderDetails);
+        return view('admin.order.list-order',[ 'orderDetail' => $orderDetails]);
     }
 }
