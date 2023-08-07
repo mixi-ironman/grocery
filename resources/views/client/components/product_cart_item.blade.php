@@ -1,6 +1,6 @@
 @foreach($products as $product)
 <div class="col-lg-{{ $itemsPerRow }}">
-    <div class="product-cart">
+    <div class="product-cart scroll-animation">
         <div class="product-img-action">
             <div class="product-cart-img">
                 <a href="{{ route('view-product',['id' => $product->id, 'slug' => Str::slug($product->name)]) }}">
@@ -16,7 +16,7 @@
                         <img
                             width="35"
                             height="35"
-                            class="translatex"
+                            class="translatex" 
                             src="https://img.icons8.com/external-ddara-fill-ddara/64/external-eye-eye-ddara-fill-ddara.png"
                             alt="external-eye-eye-ddara-fill-ddara"
                         />
@@ -42,7 +42,7 @@
             <div class="product-badges"></div>
         </div>
         <div class="product-content">
-            <div class="product-category">{{ $product->category->name }}</div>
+            <div class="product-category" style="opacity:0.5">{{ $product->category->name }}</div>
             <h2 class="product-name">
                 {{-- <a href="/san-pham/{{ $product->id }}-{{ Str::slug($product->name) }}">{{ $product->name }}</a> --}}
                 <a href="{{ route('view-product',['id' => $product->id, 'slug' => Str::slug($product->name)]) }}">{{ $product->name }}</a>

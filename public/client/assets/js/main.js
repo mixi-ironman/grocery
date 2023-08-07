@@ -30,7 +30,7 @@ const app = {
         window.addEventListener("scroll", function () {
             var stickyElement = document.querySelector(".nav-container");
             var contentOffsetTop =
-                document.querySelector(".slider-wraper").offsetTop;
+                document.querySelector(".main-content").offsetTop;
 
             if (window.scrollY >= contentOffsetTop) {
                 stickyElement.classList.add("sticky");
@@ -43,26 +43,31 @@ const app = {
     //Title change khi when scroll
     titleScroll() {
         window.addEventListener("scroll", function () {
-            var scrollPosition_ = window.scrollY;
-            var translateY_ = scrollPosition_ - 2800; // Thay đổi tỷ lệ theo ý muốn
-            var scrollingText_ = document.querySelector(".scrolling-text_");
-            var pos_ = scrollingText_.getBoundingClientRect();
+            const scrollingText_ = document.querySelector(".scrolling-text_");
 
-            if (translateY_ > pos_.top) {
-                scrollingText_.style.transform = "translateX(0)";
-            } else {
-                scrollingText_.style.transform = "translateX(120px)";
+            if (scrollingText_) {
+                const scrollPosition_ = window.scrollY;
+                const translateY_ = scrollPosition_ - 2800; // Thay đổi tỷ lệ theo ý muốn
+                const pos_ = scrollingText_.getBoundingClientRect();
+
+                if (translateY_ > pos_.top) {
+                    scrollingText_.style.transform = "translateX(0)";
+                } else {
+                    scrollingText_.style.transform = "translateX(120px)";
+                }
             }
-            var scrollPosition = window.scrollY;
-            var translateY = scrollPosition - 1700; // Thay đổi tỷ lệ theo ý muốn
 
-            var scrollingText = document.querySelector(".scrolling-text");
-            var pos = scrollingText.getBoundingClientRect();
+            const scrollingText = document.querySelector(".scrolling-text");
+            if (scrollingText) {
+                const scrollPosition = window.scrollY;
+                const translateY = scrollPosition - 1700; // Thay đổi tỷ lệ theo ý muốn
+                const pos = scrollingText.getBoundingClientRect();
 
-            if (translateY > pos.top) {
-                scrollingText.style.transform = "translateX(0)";
-            } else {
-                scrollingText.style.transform = "translateX(-120px)";
+                if (translateY > pos.top) {
+                    scrollingText.style.transform = "translateX(0)";
+                } else {
+                    scrollingText.style.transform = "translateX(-120px)";
+                }
             }
         });
     },
@@ -91,6 +96,7 @@ const app = {
         wrapList.scrollLeft = this.currentItemIndex * widthItem;
         console.log(this.currentItemIndex * widthItem);
     },
+    //carousekl trên code thuần chưa xong
 
     //Carousel use slick
     autoplay() {
@@ -229,7 +235,7 @@ const app = {
         $("#keyword_search").keyup(function (e) {
             let query = $(this).val();
             let url = $(this).data("url");
-            // alert(url);
+            // console.log("click");
             if (query != "") {
                 $.ajax({
                     method: "GET",
@@ -251,6 +257,8 @@ const app = {
                         $(".wrapper_input-dropdown").html(
                             data.product_component
                         );
+                        // Ngăn chặn sự kiện nổi bọt
+                        // e.stopImmediatePropagation();
                     },
                     error: function (error) {
                         // alert("Có lỗi xảy ra. Vui lòng thử lại sau.");
@@ -261,8 +269,6 @@ const app = {
                 // $(".header-action_dropdown").css("display", "none");
                 $(".header-action_dropdown").fadeOut();
             }
-            // Ngăn chặn sự kiện nổi bọt
-            // e.stopImmediatePropagation();
         });
 
         $(document).on("click", ".cart-product-item_click", function (e) {
@@ -282,6 +288,25 @@ const app = {
         });
     },
 
+    scrollAnimation() {
+        // Xử lý sự kiện cuộn trang
+        window.addEventListener("scroll", () => {
+            const scrollAnimationElements =
+                document.querySelectorAll(".scroll-animation");
+            scrollAnimationElements.forEach((element) => {
+                const elementTop = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                console.log("win" + windowHeight * 0.75);
+                console.log("e" + elementTop);
+
+                // Kiểm tra khi nào phần tử nằm trong khung hiển thị
+                if (elementTop < windowHeight * 0.8) {
+                    element.classList.add("animate");
+                }
+            });
+        });
+    },
+
     run: function () {
         // app.typingAnimation();
         this.headerScroll();
@@ -289,8 +314,9 @@ const app = {
         this.hiddenText();
         this.sideCart();
         this.autoplay();
-        // this.dropdowInput();
+        this.dropdowInput();
         this.autocompleteAjax();
+        this.scrollAnimation();
     },
 };
 

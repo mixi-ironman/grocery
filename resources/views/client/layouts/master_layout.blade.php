@@ -35,7 +35,7 @@
             <!-- End slider --> --}}
 
             <!-- Main -->
-            <div class="container content">
+            <div class="container content main-content">
                 @yield('content')
             </div>
 

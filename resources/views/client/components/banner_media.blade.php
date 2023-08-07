@@ -1,5 +1,5 @@
 {{-- <div class="container-fluid" style="margin-top: 30px"> --}}
-    <div class="banner-media row">
+    <div class="banner-media row scroll-animation">
         <!-- <img src="{{ url('client') }}/assets/img/banner_.png" alt="" /> -->
         <div class="banner-media-des">
             <h5>ORGANIC FOODS</h5>

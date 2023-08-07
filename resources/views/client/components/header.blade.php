@@ -26,6 +26,10 @@
                             data-url="{{ route('autocomplete-ajax') }}"
                             autocomplete="off"
                         />
+                        {{-- Dropdown Input search --}}
+                        <div class="wrapper_input-dropdown">
+                            @include('client.components.dropdown-input')
+                        </div>
                         <button type="button" class="header-search-btn" id="submit-button">
                             <!-- <i class="fa-solid fa-magnifying-glass"></i> -->
                             <img
@@ -40,10 +44,7 @@
                     <!-- <h3 class="mixi">From mixi with love</h3> -->
                     {{-- <h3 class="mixi">Wellcome to Mixi-Chill</h3> --}}
 
-                   {{-- Dropdown Input search --}}
-                        <div class="wrapper_input-dropdown">
-                            @include('client.components.dropdown-input')
-                        </div>
+                        
                 </div>
             </div>
             <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">

@@ -2,7 +2,7 @@
                     <div class="row">
                         <div class="slider-item-product">
                             <div class="product-title">
-                                <h3 class="hover_" style="position: relative">Featured Categories</h3>
+                                <h3 class="hover_ " style="position: relative">Featured Categories</h3>
                                 <div class="nav-wraper">
                                     <ul class="nav-tab" style="opacity: 0">
                                         <li class="nav-item">
@@ -40,8 +40,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="slider-product-list">
-                                <div class="slider-product-item col-md-1 bg-1">
+                            <div class="slider-product-list ">
+                                <div class="slider-product-item scroll-animation col-md-1 bg-1">
                                     <figure>
                                         <a href="#">
                                             <img class="slider-item-img" src="{{ url('client') }}/assets/img/cake-milk.png" alt="" />
@@ -50,7 +50,7 @@
                                     <h6>Cake & Milk</h6>
                                     <p>26 items</p>
                                 </div>
-                                 <div class="slider-product-item col-md-1 bg-2">
+                                 <div class="slider-product-item scroll-animation col-md-1 bg-2">
                                     <figure>
                                         <a href="#">
                                             <img class="slider-item-img" src="{{ url('client') }}/assets/img/apple.png" alt="" />
@@ -59,7 +59,7 @@
                                     <h6>Apple</h6>
                                     <p>2 items</p>
                                 </div>
-                                <div class="slider-product-item col-md-1 bg-3">
+                                <div class="slider-product-item scroll-animation col-md-1 bg-3">
                                     <figure>
                                         <a href="#">
                                             <img class="slider-item-img" src="{{ url('client') }}/assets/img/dautay.png" alt="" />
@@ -68,7 +68,7 @@
                                     <h6>Strawberry</h6>
                                     <p>26 items</p>
                                 </div>
-                                <div class="slider-product-item col-md-1 bg-4">
+                                <div class="slider-product-item scroll-animation col-md-1 bg-4">
                                     <figure>
                                         <a href="#">
                                             <img class="slider-item-img" src="{{ url('client') }}/assets/img/kiwi.png" alt="" />
@@ -77,7 +77,7 @@
                                     <h6>Oganic Kiwi</h6>
                                     <p>16 items</p>
                                 </div>
-                                <div class="slider-product-item col-md-1 bg-5">
+                                <div class="slider-product-item scroll-animation col-md-1 bg-5">
                                     <figure>
                                         <a href="#">
                                             <img class="slider-item-img" src="{{ url('client') }}/assets/img/vegable.png" alt="" />
@@ -86,7 +86,7 @@
                                     <h6>Vegetables</h6>
                                     <p>21 items</p>
                                 </div>
-                                <div class="slider-product-item col-md-1 bg-6">
+                                <div class="slider-product-item scroll-animation col-md-1 bg-6">
                                     <figure>
                                         <a href="#">
                                             <img class="slider-item-img" src="{{ url('client') }}/assets/img/snack.png" alt="" />
@@ -95,7 +95,7 @@
                                     <h6>Snack</h6>
                                     <p>26 items</p>
                                 </div>
-                                <div class="slider-product-item col-md-1 bg-7">
+                                <div class="slider-product-item scroll-animation col-md-1 bg-7">
                                     <figure>
                                         <a href="#">
                                             <img class="slider-item-img" src="{{ url('client') }}/assets/img/peach.png" alt="" />
@@ -105,7 +105,7 @@
                                     <p>26 items</p>
                                 </div>
 
-                                <div class="slider-product-item col-md-1 bg-8">
+                                <div class="slider-product-item scroll-animation col-md-1 bg-8">
                                     <figure>
                                         <a href="#">
                                             <img class="slider-item-img" src="{{ url('client') }}/assets/img/cake-milk.png" alt="" />
@@ -115,7 +115,7 @@
                                     <p>26 items</p>
                                 </div>
 
-                                <div class="slider-product-item col-md-1 bg-9">
+                                <div class="slider-product-item scroll-animation col-md-1 bg-9">
                                     <figure>
                                         <a href="#">
                                             <img class="slider-item-img" src="{{ url('client') }}/assets/img/vegable.png" alt="" />
@@ -124,7 +124,7 @@
                                     <h6>Vegetables</h6>
                                     <p>21 items</p>
                                 </div>
-                                <div class="slider-product-item col-md-1 bg-10">
+                                <div class="slider-product-item scroll-animation col-md-1 bg-10">
                                     <figure>
                                         <a href="#">
                                             <img class="slider-item-img" src="{{ url('client') }}/assets/img/snack.png" alt="" />
@@ -133,7 +133,7 @@
                                     <h6>Snack</h6>
                                     <p>26 items</p>
                                 </div>
-                                <div class="slider-product-item col-md-1 bg-11">
+                                <div class="slider-product-item scroll-animation col-md-1 bg-11">
                                     <figure>
                                         <a href="#">
                                             <img class="slider-item-img" src="{{ url('client') }}/assets/img/peach.png" alt="" />

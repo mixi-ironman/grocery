@@ -18,7 +18,7 @@ class ProductRepository extends BaseRepository
     {
         // return $this->model->orderByDesc('created_at')->paginate(5);
         // return $this->model->paginate(5);
-        return $this->model->orderByDesc('id')->limit(10)->get();
+        return $this->model->orderByDesc('id')->limit(10)->with(['category'])->get();
     }
     
     // load thêm sản phẩm
@@ -31,6 +31,7 @@ class ProductRepository extends BaseRepository
     //                         ->limit(10)
     //                         ->get();
     // }
+
     public function loadProducts($page = null)
     {
         $query = $this->model->orderByDesc('id');

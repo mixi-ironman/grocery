@@ -210,7 +210,7 @@
                                     <input class="form-control" type="text" name="cmt-name" id="cmt-name" value="" placeholder="Name...">
                                 </div>
                             </div>
-                            <div class="col-md-6" style="opacity:0">
+                            <div class="col-md-6" style="display:none">
                                 <div class="form-group comment-form-email">
                                     <input class="form-control" type="text" name="email" id="email" value="" placeholder="Email...">
                                 </div>
@@ -223,7 +223,7 @@
                             <div class="cmt-notification" ></div>
 
                             <div class="form-group btn-form-submit" id="send-comment" data-url="{{ route('send-comment') }}">
-                                <button class="button-contactForm" data-count="0" id="submit-cmt">Submit Review</button>
+                                <button class="button-contactForm" data-count="0" id="submit-cmt" style="width:100px;font-size:18px;font-weight:500">Gửi</button>
                             </div>
                         </div>
                     {{-- </form> --}}
@@ -247,7 +247,8 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="product-grid row g-3">
-                    @foreach($categories as $index => $products)
+                    @foreach($categories as $products)
+              
                     <div class="col-lg-1-5">
                         <div class="product-cart">
                             <div class="product-img-action">
@@ -286,7 +287,7 @@
                                 <div class="product-badges"></div>
                             </div>
                             <div class="product-content">
-                                <div class="product-category">{{ $products?->category->name }}</div>
+                                <div class="product-category">{{ $product->category->name }}</div>
                                 <h2 class="product-name">
                                     <a href={{ route('view-product',['id' => $products->id, 'slug' => Str::slug($product->name)]) }}>{{ $products->name }}</a>
                                 </h2>
@@ -328,23 +329,7 @@
 
 <script>
 const app_ = {
-     scrollHeader() {
-                window.addEventListener('scroll', function () {
-                    var stickyElement = document.querySelector('.nav-container');
-                    var contentOffsetTop = document.querySelector('.product-view');
-
-                    if (contentOffsetTop) {
-                        // Kiểm tra xem phần tử có tồn tại hay không
-                        const topPosition = contentOffsetTop.offsetTop;
-                        if (window.scrollY >= topPosition) {
-                            stickyElement.classList.add('sticky');
-                        } else {
-                            stickyElement.classList.remove('sticky');
-                        }
-                    }
-                });
-            },
-
+  
     quantityInput() {
         const $ = document.querySelector.bind(document);
         const $$ = document.querySelectorAll.bind(document);
@@ -396,11 +381,11 @@ const app_ = {
         //     });
         // });
     },
-     run() {
-                this.scrollHeader();
-                this.quantityInput();
-                this.toggleTabUi();
-            },
+    run() 
+    {
+        this.quantityInput();
+        this.toggleTabUi();
+    },
 };
     app_.run();
 

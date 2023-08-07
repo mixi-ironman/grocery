@@ -43,15 +43,16 @@
             @include('client.components.header')
             <!-- End header -->
 
-            <!-- Slider -->
+            
+
+             <!-- Main -->
+            <div class="content main-content">
+                <!-- Slider -->
             {{-- <div class="container-fluid"> --}}
             <div class="container">
                 @include('client.components.slider')
             </div>
             <!-- End slider -->
-
-             <!-- Main -->
-            <div class="content">
                 <!-- Feature-Category -->
                 @include('client.components.featured_category')
                 <!--End Feature-Category -->
@@ -60,7 +61,7 @@
                 <div class="container banner-wrapper">
                     <div class="row banner-wrapper-list g-3">
                         <div class="col-lg-4 col-md-6">
-                            <div class="banner-item">
+                            <div class="banner-item scroll-animation">
                                 <img src="{{ url('client') }}/assets/img/banner-1.png" class="banner-item-img" alt="banner1" />
                                 <div class="banner-item-description">
                                     <h4>
@@ -75,7 +76,7 @@
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-6">
-                            <div class="banner-item">
+                            <div class="banner-item scroll-animation">
                                 <img src="{{ url('client') }}/assets/img/banner-2.png" class="banner-item-img" alt="banner2" />
                                 <div class="banner-item-description">
                                     <h4>
@@ -90,7 +91,7 @@
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-6">
-                            <div class="banner-item">
+                            <div class="banner-item scroll-animation">
                                 <img src="{{ url('client') }}/assets/img/banner-3.png" class="banner-item-img" alt="banner3" />
                                 <div class="banner-item-description">
                                     <h4>
@@ -114,7 +115,7 @@
                         <div class="col-md-12">
                             <div class="slider-item-product">
                                 <div class="product-title popular-product-title">
-                                    <h3 class="name-category-popular">Popular Products</h3>
+                                    <h3 class="name-category-popular scroll-animation">Popular Products</h3>
                                     {{-- <h3 class="name-category-popular">Sản phẩm phổ biến</h3> --}}
                                     <ul class="nav-tab" style="opacity: 0">
                                         <li class="nav-item">
@@ -138,10 +139,10 @@
                                 {{-- @include('client.components.product_cart_item',[@include('cart-products', ['cartProducts' => $cartProducts, 'itemsPerRow' => 3])]) --}}
                                 @include('client.components.product_cart_item', ['itemsPerRow' =>'1-5'])
                             </div>
-                            <div class="product-grid row g-3 btn_load-more" >
+                            <div class="product-grid row g-3 btn_load-more " >
                                 <input type="hidden" value="1" id ="page" name = "page">
                                 <div class="col-md-12" >
-                                    <button type="button" data-url = {{ route('load-product') }} id="btn-load_product" class=" translatex hover-top" style="background-color:rgb(93,168,138,0.8);display:inline-block; padding:10px 15px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);border-top-left-radius: 12px;border-bottom-right-radius: 12px;color:black;font-weight:600;font-size:16px;position:relative" >Load more</button>
+                                    <button type="button" data-url = {{ route('load-product') }} id="btn-load_product" class="scroll-animation translatex hover-top" style="background-color:rgb(93,168,138,0.8);display:inline-block; padding:10px 15px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);border-top-left-radius: 12px;border-bottom-right-radius: 12px;color:black;font-weight:600;font-size:16px;position:relative" >Load more</button>
                                 </div>
                             </div>
                         </div>
@@ -157,14 +158,14 @@
 
                 <!-- Featured Products -->
                 <div class="container featured-product">
-                    <div class="row">
+                    <div class="row ">
                         <div class="col-md-3">
                             <div class="banner-feature-left"></div>
                         </div>
-                        <div class="col-md-9">
-                            <div class="row g-3 product-featured-desciption">
+                        <div class="col-md-9 ">
+                            <div class="row g-3 product-featured-desciption ">
                                 <div class="des-top">
-                                    <p class="scrolling-text">Product</p>
+                                    <p class="scrolling-text scroll-animation">Product</p>
                                 </div>
                                 <div class="des-bottom">
                                     <span>Products</span>
@@ -196,11 +197,11 @@
 
                 <!-- Top Sale Products -->
                 <div class="container featured-product">
-                    <div class="row">
+                    <div class="row ">
                         <div class="col-md-9">
                             <div class="row g-3 product-featured-desciption">
                                 <div class="des-top">
-                                    <p class="scrolling-text_">Product</p>
+                                    <p class="scrolling-text_ scroll-animation">Product</p>
                                 </div>
                                 <div class="des-bottom">
                                     <span>Products</span>
@@ -235,28 +236,28 @@
                 </div>
 
                 <!-- List Brands -->
-                <div class="container list-brands">
-                    <div class="row">
+                <div class="container list-brands ">
+                    <div class="row ">
                         <!-- Brands Favorite -->
                         <h4 class="list-brand-title">Shop by brands</h4>
                     </div>
-                    <div class="row g-3 brand-list">
+                    <div class="row g-3 brand-list ">
                         <div class="col-md-2">
-                            <div class="brand-item">
+                            <div class="brand-item scroll-animation">
                                 <a href="#">
                                     <img src="{{ url('client') }}/assets/img/brand_3.png" alt="" />
                                 </a>
                             </div>
                         </div>
                         <div class="col-md-2">
-                            <div class="brand-item">
+                            <div class="brand-item scroll-animation">
                                 <a href="#">
                                     <img src="{{ url('client') }}/assets/img/brand4.png" alt="" />
                                 </a>
                             </div>
                         </div>
                         <div class="col-md-2">
-                            <div class="brand-item">
+                            <div class="brand-item scroll-animation">
                                 <a href="#">
                                     <img src="{{ url('client') }}/assets/img/brand_5.png" alt="" />
                                 </a>
@@ -264,21 +265,21 @@
                         </div>
 
                         <div class="col-md-2">
-                            <div class="brand-item">
+                            <div class="brand-item scroll-animation">
                                 <a href="#">
                                     <img src="{{ url('client') }}/assets/img/brand_3.png" alt="" />
                                 </a>
                             </div>
                         </div>
                         <div class="col-md-2">
-                            <div class="brand-item">
+                            <div class="brand-item scroll-animation">
                                 <a href="#">
                                     <img src="{{ url('client') }}/assets/img/brand4.png" alt="" />
                                 </a>
                             </div>
                         </div>
                         <div class="col-md-2">
-                            <div class="brand-item">
+                            <div class="brand-item scroll-animation">
                                 <a href="#">
                                     <img src="{{ url('client') }}/assets/img/brand_5.png" alt="" />
                                 </a>
