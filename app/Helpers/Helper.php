@@ -60,7 +60,7 @@ class Helper
     public static function oldPrice( $priceSale = 0)
     {
         if($priceSale != 0 ){
-            return '<p class="old-price">' . number_format($priceSale) . '</p>';
+            return '<p class="old-price">' . number_format($priceSale) . '₫</p>';
             //khoảng trắng &nbsp₫
             // return number_format($priceSale);
         }else{

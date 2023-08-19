@@ -37,8 +37,13 @@ return [
 
     'guards' => [
         'web' => [
-            'driver' => 'session',
+            'driver' => 'session', //driver quyết định cơ chế nào lưu session
             'provider' => 'users',
+        ],
+
+        'admin' => [
+            'driver' => 'session', //driver quyết định cơ chế nào lưu session
+            'provider' => 'admin',
         ],
     ],
 
@@ -63,6 +68,11 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
+        ],
+
+         'admin' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Admin::class,
         ],
 
         // 'users' => [

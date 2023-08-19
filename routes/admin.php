@@ -6,6 +6,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SliderController;
 use App\Http\Controllers\ProductImageController;
 use App\Http\Controllers\OrderDetailController;
+use App\Http\Controllers\TagController;
 
 
 
@@ -20,7 +21,6 @@ Route::prefix('categories')->name('categories.')->group(function () {
     Route::post('/store', [CategoryController::class, 'store'])->name('store');
     Route::get('/edit/{id}', [CategoryController::class, 'edit'])->name('edit');
     Route::put('/update/{id}', [CategoryController::class, 'update'])->name('update');
-    Route::put('/{id}', [CategoryController::class, 'update'])->name('update');
     Route::delete('/destroy/{id}', [CategoryController::class, 'destroy'])->name('destroy');
 });
 
@@ -32,6 +32,7 @@ Route::prefix('products')->name('products.')->group(function () {
     Route::get('/edit/{id}', [ProductController::class, 'edit'])->name('edit');
     Route::put('/update/{id}', [ProductController::class, 'update'])->name('update');
     Route::delete('/destroy/{id}', [ProductController::class, 'destroy'])->name('destroy');
+ 
 });
 
 //sliders
@@ -55,12 +56,22 @@ Route::prefix('product')->name('product.')->group(function () {
     Route::put('images/update/{id}', [ProductImageController::class, 'update'])->name('images.update');
     Route::delete('images/destroy/{id}', [ProductImageController::class, 'destroy'])->name('images.destroy');
 
-
     // Route::get('images/{id}', [ProductImageController::class, 'show'])->name('product.image.show');
     // Cập nhật hình ảnh sản phẩm
     // Route::put('images/{id}', [ProductImageController::class, 'update'])->name('product.image.update');
     // // Xóa hình ảnh sản phẩm
     // Route::delete('images/{id}', [ProductImageController::class, 'destroy'])->name('product.image.destroy');
+});
+
+Route::group(['prefix' => 'tags', 'as' => 'tags.'], function () {
+    Route::get('/', [TagController::class, 'index'])->name('index');
+    Route::get('/create', [TagController::class, 'create'])->name('create');
+    Route::get('/{id}', [TagController::class, 'show'])->name('show');
+    Route::get('/update/{id}', [TagController::class, 'edit'])->name('edit');
+    Route::post('/', [TagController::class, 'store'])->name('store');
+    Route::put('/{id}', [TagController::class, 'update'])->name('update');
+    // Route::post('/create-tag', [TagController::class, 'createTag'])->name('create-tag');
+
 });
 
 //Order

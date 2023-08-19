@@ -19,6 +19,8 @@ class Product extends Model
         'old_price',
         'image',
         'is_active',
+        'is_onsale',
+        'is_featured',
         'stock',
     ];
 
@@ -42,5 +44,16 @@ class Product extends Model
     {
         return $this->morphMany(Comment::class, 'commentable');
     }
+
+    public function productTags()
+    {
+        return $this->hasMany(ProductTag::class, 'product_id','id');
+    }
+    //dùng quan hệ  belongsToMany nhiều khi có bảng trung gian vd nàY là bảng product_tags thay vì dùng cách trên productTags()
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class, 'product_tags', 'product_id', 'tag_id');
+    }
+
 
 }

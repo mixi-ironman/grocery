@@ -134,9 +134,9 @@ const app = {
 
                 // dùng append-child thay vì dùng position
                 prevArrow:
-                    '<button type="button" class="slick-prev "><img class="translatey" width="30" height="30" src="https://img.icons8.com/bubbles/50/right.png" alt="right" /></button>',
+                    '<button type="button" class="slick-prev " style="margin-left:10px;"><img class="translatey rounded-circle" width="30" height="30" src="https://img.icons8.com/bubbles/50/right.png" alt="right" /></button>',
                 nextArrow:
-                    '<button type="button" class="slick-next "><img class="translatey" width="30" height="30" src="https://img.icons8.com/bubbles/50/000000/long-arrow-left.png" alt="long-arrow-left" /></button>',
+                    '<button type="button" class="slick-next "><img class="translatey rounded-circle" width="30" height="30" src="https://img.icons8.com/bubbles/50/000000/long-arrow-left.png" alt="long-arrow-left" /></button>',
                 autoplaySpeed: 1400,
             });
 
@@ -240,16 +240,15 @@ const app = {
                 $.ajax({
                     method: "GET",
                     url: url,
+                    // delay: 200,
                     dataType: "json",
                     data: {
                         query: query,
                         _token: $('meta[name="csrf-token"]').attr("content"),
                     },
                     success: function (data) {
-                        $(".header-action_dropdown").css(
-                            "padding",
-                            "15px 10px !important"
-                        );
+                        $(".header-action_dropdown").css("padding", "10px");
+
                         // $(".header-action_dropdown").show();
                         $(".header-action_dropdown").fadeIn();
                         // $(".header-action_dropdown").css("display", "block");
@@ -296,18 +295,27 @@ const app = {
             scrollAnimationElements.forEach((element) => {
                 const elementTop = element.getBoundingClientRect().top;
                 const windowHeight = window.innerHeight;
-                console.log("win" + windowHeight * 0.75);
-                console.log("e" + elementTop);
+                // console.log("win" + windowHeight * 0.75);
+                // console.log("e" + elementTop);
 
                 // Kiểm tra khi nào phần tử nằm trong khung hiển thị
-                if (elementTop < windowHeight * 0.8) {
+                if (elementTop < windowHeight * 0.85) {
                     element.classList.add("animate");
                 }
             });
         });
     },
 
+    beforeunload() {
+        window.addEventListener("unload", function (event) {
+            // Hiển thị modal banner ở đây
+            // console.log("Bạn có muốn rời khỏi trang");
+        });
+    },
+
     run: function () {
+        this.beforeunload();
+
         // app.typingAnimation();
         this.headerScroll();
         this.titleScroll();
@@ -330,5 +338,12 @@ app.run();
 //     } else {
 //         // console.log({ event } );
 //         console.log("Không click vào phần tử có class 'mini-cart'");
+//     }
+// });
+
+// document.addEventListener("keydown", function (event) {
+//     if (event.keyCode === 116) {
+//         // Thực hiện hành động khi F5 được nhấn
+//         console.log("Bạn đã nhấn phím F5");
 //     }
 // });

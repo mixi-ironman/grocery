@@ -12,7 +12,6 @@ class BaseRepository
 
     public function getById($id)
     {
-        // dd($id);
         return $this->model->find($id);
     }
 
@@ -22,8 +21,6 @@ class BaseRepository
         return $this->model->all();
     }
 
-    
-
     public function create($attribute = [])
     {
         // dd($attribute);
@@ -32,8 +29,9 @@ class BaseRepository
 
     public function update($id, $attribute = [])
     {
-        return $this->model->where('id',$id)
-                           ->update($attribute);
+        $model = $this->getById($id);
+        $model->update($attribute);
+        return $model;
     }
 
     public function delete($id)
@@ -42,3 +40,9 @@ class BaseRepository
                            ->delete();
     }
 }
+
+// Tóm lại, cách sử dụng Product:: thường dùng để thực 
+// hiện các truy vấn cơ sở dữ liệu hoặc tương tác với 
+// dữ liệu có sẵn. Còn cách tạo instance của model bằng
+//  new Product() thường được sử dụng để tạo mới bản ghi
+//   và thao tác với dữ liệu trước khi lưu vào cơ sở dữ liệu.

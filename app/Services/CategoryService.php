@@ -10,11 +10,10 @@ use Illuminate\Support\Facades\Redirect;
 use App\Exceptions\CommonException;
 class CategoryService
 {
-    private $categoryRepository;
 
-    public function __construct(CategoryRepository $categoryRepository)
+    public function __construct(readonly CategoryRepository $categoryRepository)
     {
-        $this->categoryRepository = $categoryRepository;
+
     }
 
     //get all category 
@@ -65,10 +64,22 @@ class CategoryService
 
     public function update($request, $id)
     {
-        // dd($request->input());
-            // $parent_id = ($request->input('parent_id') != $id) ? $request->input('parent_id') : null;
+       
         try {
             DB::beginTransaction();
+
+            //handle update is_active
+            if ($request->ajax()) {
+                $category = $this->categoryRepository->update($id, [
+                    'is_active' => $request->is_active,
+                ]);
+                DB::commit();
+                return response()->json([
+                    'title'=> 'Update Status',
+                    'message' => 'Update Status for ' . $category->name . ' successfully!',
+                    'is_active' => $category->is_active,
+                ]);
+            }
             //handle nếu không chọn category thì không update category
             if ($request->input('parent_id') != $id) {
                 $category = $this->categoryRepository->update($id, [
@@ -89,7 +100,7 @@ class CategoryService
 
             DB::commit();
 
-            // return Redirect::route('categories.index')->with('success', 'Update Category Successfully!');
+             return Redirect::route('categories.index')->with('success', 'Update Category Successfully!');
             //  return redirect()->route('categories.index')->with('success', 'Created Category Successfully!');
         } catch (\Exception $e) {
             DB::rollBack();

@@ -58,6 +58,7 @@ class HomeController extends Controller
             $product_component =  view('client.components.dropdown-input',['products_search'=>$products ])->render();
            
         }
+        
         return response()->json([
             'msg'=>'Search success!',
             'product_component'=>$product_component,

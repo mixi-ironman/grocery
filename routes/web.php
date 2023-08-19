@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Home\HomeController;
 use App\Http\Controllers\Home\ProductController;
 use App\Http\Controllers\Home\CartController;
+use App\Http\Controllers\AdminAuthController;
 
 
 /*
@@ -19,6 +20,15 @@ use App\Http\Controllers\Home\CartController;
 
 Route::get('/home', function () {
     return view('client.layouts.master_layout');
+    
+});
+
+Route::get('admin/login',[AdminAuthController::class,'viewLogin'])->name('admin-login');
+Route::post('admin/login',[AdminAuthController::class,'login'])->name('admin-auth');
+
+
+Route::get('admin/logout', function () {
+    return view('admin.auth.logout');
     
 });
 

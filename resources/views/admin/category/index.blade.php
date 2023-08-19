@@ -14,7 +14,7 @@
                         <th scope="col"style="text-align: center;vertical-align:middle;">#</th>
                         <th scope="col"style="text-align: center;vertical-align:middle;">Name</th>
                         <th scope="col"style="text-align: center;vertical-align:middle;">slug</th>
-                        <th scope="col"style="text-align: center;vertical-align:middle;">description</th>
+                        {{-- <th scope="col"style="text-align: center;vertical-align:middle;">description</th> --}}
                         <th scope="col"style="text-align: center;vertical-align:middle;">Parent_category</th>
                         <th scope="col"style="text-align: center;vertical-align:middle;">is_active</th>
                         <th scope="col"style="text-align: center;vertical-align:middle;">Created At</th>
@@ -28,21 +28,18 @@
                             <td scope="row" style="text-align: center;vertical-align:middle;">{{ $category->id }}</td>
                             <td style="text-align: center;vertical-align:middle;">{{ $category->name }}</td>
                             <td style="text-align: center;vertical-align:middle;">{{ $category->slug }}</td>
-                            <td style="text-align: center;vertical-align:middle;max-width:350px;white-space: wrap;overflow: hidden; text-overflow: ellipsis;">{{ $category->description }}</td>
+                            {{-- <td style="text-align: center;vertical-align:middle;max-width:350px;white-space: wrap;overflow: hidden; text-overflow: ellipsis;">{{ $category->description }}</td> --}}
                             {{-- <td style="text-align: center;vertical-align:middle;">{{ $category->parent_id }}</td> --}}
                             <td style="text-align: center;vertical-align:middle;">{{ $category?->parentCategory?->name }}</td>
 
                             <td style="text-align: center;vertical-align:middle;">
-                                    @if( $category->is_active === 1)
-                                    <span class="btn btn-primary btn-xs">Yes</span>
+                                <a href="{{ route('categories.update', ['id' => $category->id]) }}" class="change-status" data-status = "{{ $category->is_active }}">
+                                    @if( $category->is_active === 1) 
+                                        <span class="btn btn-primary btn-xs">Yes</span>
                                     @elseif($category->is_active === 0)
                                         <span class="btn btn btn-danger btn-xs">No</span>
                                     @endif
-                                {{-- @if($category->is_active == 1)
-                                <a href="{{ route('categories.update'['id' => $category->id]) }}" class="change-status" data-status = "{{ $category->is_active }}"><i class="fa-solid fa-eye"></i></a>
-                                @elseif($category->is_active == 0)
-                                <a href="{{ route('categories.update'['id' => $category->id]) }}" class="change-status" data-status = "{{ $category->is_active }}"><i class="fa-regular fa-eye-slash"></i></a>
-                                @endif --}}
+                                </a>
                             </td>
                             <td style="text-align: center;vertical-align:middle;">{{ $category->created_at->format('d/m/Y h:i:s') }}</td>
                             <td style="text-align:center;vertical-align:middle">
@@ -67,30 +64,41 @@
     </div>
 @endsection
 
-{{-- @push('custom-script')
+@push('custom-script')
     <script>
         $(document).ready(function () {
-            $('#change-status').on('click', function(e){
+            $(document).on("click", ".change-status", function (e) {
                 e.preventDefault();
-                let = url = $(this).attr('href');
-                let is_active = $(this).data('status');
-                console.log('is_active');
+                const statusIcon = [
+                    '<span class="btn btn btn-danger btn-xs">No</span>',
+                    '<span class="btn btn-primary btn-xs">Yes</span>'
+                ]
+                let url = $(this).attr('href');
+                let is_active = $(this).attr('data-status');
+
+                let _this = $(this)
                 $.ajax({
-                    method: 'PUT',
-                    url : url,
-                    data : {
-                        _tocken: '{{ csrf_tocken}}'
-                        is_active: is_active == 1 ? '0' : '1'
+                    type: 'PUT',
+                    url: url,
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                        is_active: is_active == 1 ? 0 : 1,
                     },
-                    dataType:'json',
-                    success: function(data) {
-                    // Xử lý phản hồi từ server (nếu cần)
-                    alert('Load product thành công');
-                    
+                    dataType: 'json',
+
+                    success: function (data) {
+                        console.log(data.is_active);
+                        _this.attr('data-status', data.is_active);
+                        _this.empty();
+                        _this.html(statusIcon[data.is_active]);
                     },
+                    error: function (data) {
+                        console.log(data, 1)
+                    }
                 })
             })
         })
     </script>
-@endpush --}}
+@endpush
+
 

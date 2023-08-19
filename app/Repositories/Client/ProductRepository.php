@@ -18,7 +18,8 @@ class ProductRepository extends BaseRepository
     {
         // return $this->model->orderByDesc('created_at')->paginate(5);
         // return $this->model->paginate(5);
-        return $this->model->orderByDesc('id')->limit(10)->with(['category'])->get();
+        // return $this->model->orderByDesc('id')->limit(10)->with(['category'])->get();
+        return $this->model->where('is_active' , 1)->orderByDesc('created_at')->limit(10)->with(['category'])->get();
     }
     
     // load thêm sản phẩm
@@ -37,10 +38,11 @@ class ProductRepository extends BaseRepository
         $query = $this->model->orderByDesc('id');
 
         if ($page !== null) {
-            $query->skip($page * 10);
+            $query->skip($page * 5);
         }
 
-        return $query->limit(10)->get();
+        return $query->limit(5)->get();
+
     }
 
 

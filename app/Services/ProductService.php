@@ -8,6 +8,8 @@ use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
+use App\Models\ProductTag;
+
 
 class ProductService
 {
@@ -34,47 +36,10 @@ class ProductService
         return $this->productRepository->getById($id);
     }
 
-    // public function store($request)
-    // {
-    //     // dd($request->all());
-    //     try {
-    //         DB::Begintransaction();
-    //         // Xử lý file hình ảnh
-    //         if ($request->hasFile('image') && $request->file('image')->isValid()) {
-    //             $imagePath = 'image'.time().'-'.uniqid().'.'.$request->file('image')->extension();
-    //             //cách 1 move file
-    //             $request->file('image')->move(public_path('uploads'), $imagePath);
-    //             $imagePath = $request->file('image')->store('products', 'public'); // Lưu hình ảnh vào thư mục 'products' trong ổ đĩa 'public'
-
-    //         } else {
-    //             $imagePath = null; // Hoặc bạn có thể gán một giá trị mặc định nếu không có hình ảnh được tải lên
-    //         }
-    //         $product = $this->productRepository->create([
-    //         'name' => $request->input('name_category'),
-    //         'slug' => Str::slug($request->input('name_category'), '-'),
-    //         'description' => $request->input('description'),
-    //         'category_id' => $request->input('category_id'),
-    //         'image' => $imagePath,
-    //         'is_active' => $request->input('is_active'),
-    //       ]);
-    //        DB::commit();
-           
-    //        return Redirect::route('products.index')->with('success', 'Created Product Successfully!');
-    //     } catch (\Exception $e) {
-    //       DB::rollBack();
-    //       return Redirect::back()->withErrors(['create' => 'Something Wrong!'])->withInput();
-    //     }
-    // }
-
     public function store($request)
     {
-        // dd($request);
-
         try {
             DB::beginTransaction();
-            // dd($request->hasFile('image'));
-            // dd($request->file('image')->isValid());
-
             // Xử lý file hình ảnh
             if ($request->hasFile('image') && $request->file('image')->isValid()) {
                 $imagePath = 'image'.time().'-'.uniqid().'.'.$request->file('image')->extension();
@@ -104,6 +69,18 @@ class ProductService
                 'is_active' => $request->input('is_active'),
             ]);
 
+                $productId = $product->id;
+                $selectedTags = $request->input('tags'); // Giá trị từ Ajax
+                // Loại bỏ giá trị trùng lặp và thêm vào bảng productTag
+                $uniqueTags = array_unique($selectedTags);
+                foreach ($uniqueTags as $tagId) {
+                    ProductTag::create([
+                        'product_id' => $productId,
+                        'tag_id' => $tagId
+                    ]);
+                }
+            
+
             DB::commit();
 
             // return Redirect::route('products.index')->with('success', 'Created Product Successfully!');
@@ -120,6 +97,47 @@ class ProductService
 
             // Lấy thông tin sản phẩm hiện tại từ cơ sở dữ liệu
             $product = $this->productRepository->getById($id);
+            if ($request->ajax()) {
+                $product = $this->productRepository->getById($id);
+                if ($product) {
+                    $changedAttributes = [];
+            
+                    if ($request->has('is_active') && $product->is_active != $request->is_active) {
+                        $changedAttributes['is_active'] = $request->is_active;
+                    }
+            
+                    if ($request->has('is_featured') && $product->is_featured != $request->is_featured) {
+                        $changedAttributes['is_featured'] = $request->is_featured;
+                    }
+            
+                    if ($request->has('is_onsale') && $product->is_onsale != $request->is_onsale) {
+                        $changedAttributes['is_onsale'] = $request->is_onsale;
+                    }
+            
+                    if (!empty($changedAttributes)) {
+                        // dd($changedAttributes);
+                        $this->productRepository->update($id, $changedAttributes);
+                        DB::commit();
+            
+                        return response()->json([
+                            'title' => 'Update Status',
+                            'message' => 'Update Status for ' . $product->name . ' successfully!',
+                            'changed_attributes' => $changedAttributes,
+                        ]);
+                    } else {
+                        return response()->json([
+                            'title' => 'No Update',
+                            'message' => 'No changes to update.',
+                        ]);
+                    }
+                } else {
+                    return response()->json([
+                        'title' => 'Product Not Found',
+                        'message' => 'Product with ID ' . $id . ' not found.',
+                    ], 404);
+                }
+            }
+            
 
             // Xử lý file hình ảnh nếu người dùng tải lên hình ảnh mới
             if ($request->hasFile('image') && $request->file('image')->isValid()) {
@@ -157,8 +175,6 @@ class ProductService
             ]);
 
             DB::commit();
-
-            // Redirect về trang danh sách sản phẩm sau khi cập nhật thành công
             return redirect()->route('products.index')->with('success', 'Updated Product Successfully!');
         } catch (\Exception $e) {
             DB::rollBack();

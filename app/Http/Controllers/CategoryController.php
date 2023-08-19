@@ -5,14 +5,18 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\Category\CreateFormRequest;
 use App\Services\CategoryService;
+use App\Models\Category;
+
 use Illuminate\Support\Facades\Session;
 class CategoryController extends Controller
 {
    private $categoryService;
+   private $htmlOption;
 
     public function __construct(CategoryService $categoryService)
     {
         $this->categoryService = $categoryService;
+        $this->htmlOption = '';
     }
 
     public function index(Request $request)
@@ -31,12 +35,28 @@ class CategoryController extends Controller
 
     public function create()
     {
+        $htmlMenu = $this->categoryrRecusive(0);
         //lấy ra danh mục cha
         $category_parent = $this->categoryService->getParentCategory();
         return view('admin.category.create',[
             'title'=>'Add Category',
             'category_parent' => $category_parent,
         ]);
+    }
+
+    //handle menu đa cấp
+    public function categoryrRecusive($id, $text = '')
+    {
+        $data = Category::all();
+        foreach ($data as $value){
+            if($value['parent_id'] == $id)
+            {
+               $this->htmlOption .= "<option>".$text. $value['name']."</option>";
+                self::categoryrRecusive($value['id'], $text.'-');
+            }
+        }
+
+        return $this->htmlOption;
     }
 
     public function store(CreateFormRequest $request)
@@ -72,7 +92,7 @@ class CategoryController extends Controller
     public function update(Request $request, string $id)
     {
         $this->categoryService->update($request,$id);
-        return redirect()->route('categories.index')->with('success', 'Created Category Successfully!');
+        // return redirect()->route('categories.index')->with('success', 'Update Category Successfully!');
     }
 
     public function destroy(string $id)

@@ -18,7 +18,7 @@
                     
                         <tr>
                             <th style="text-align:center" scope="col">#</th>
-                            <th style="text-align:center" scope="col">Tên SP</th>
+                            <th style="text-align:center;width:250px;" scope="col">Tên SP</th>
                             <th style="text-align:center" scope="col">Hình Ảnh</th>
                             <th style="text-align:center" scope="col">Số lượng</th>
                             <th style="text-align:center" scope="col">Giá</th>
@@ -36,7 +36,9 @@
                         <tr>
                             <th style="text-align:center;vertical-align:middle" scope="row">{{ $i++ }}</th>
                             <td  style="text-align:center;vertical-align:middle">{{ $cart['name'] }}</td>
-                            <td  style="text-align:center;vertical-align:middle"><img style="width:160px;height:100px;line-height:100px;object-fit: cover;border-radius:5px;border:1px solid rgb(247, 181, 181);box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);object-position: center;" src="{{ asset('uploads/') }}/{{ $cart['image'] }}" ></td>
+                            {{-- <td  style="text-align:center;vertical-align:middle"><img style="width:160px;height:100px;line-height:100px;object-fit: cover;border-radius:5px;border:1px solid rgb(247, 181, 181);box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);object-position: center;" src="{{ asset('uploads/') }}/{{ $cart['image'] }}" ></td> --}}
+                            <td  style="text-align:center;vertical-align:middle"><img style="height:130px !important;border-radius:5px;border:1px solid rgb(247, 181, 181);box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);" src="{{ asset('uploads/') }}/{{ $cart['image'] }}" ></td>
+
                             <td style="text-align:center;vertical-align:middle;" ><input type = "number" class="quantity" value="{{ $cart['quantity'] }}" style="width:60px;border-top-left-radius: 12px;border-bottom-right-radius: 12px;border:2px solid green;text-align:center;outline:none" min="1" max="100"></td>
                             {{-- <td>
                                 <div class="detail-extralink mr-15">
@@ -191,6 +193,7 @@ $(document).ready(function () {
                 // Xử lý phản hồi từ server (nếu cần)
 
                 if(data.code === 200){
+                    $("#count_number").text(data.count_number)
                     $(".cart_wrapper").html(data.cart_component);
                 }
                 alert('Xóa product thành công');

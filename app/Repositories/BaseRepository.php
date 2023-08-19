@@ -29,8 +29,10 @@ class BaseRepository
 
     public function update($id, $attribute = [])
     {
-        return $this->model->where('id',$id)
-                           ->update($attribute);
+        $model = $this->getById($id);
+        $model->update($attribute);
+        // dd($model);
+        return $model;
     }
 
     public function delete($id)

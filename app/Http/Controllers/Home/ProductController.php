@@ -9,6 +9,8 @@ use App\Services\Client\CommentService;
 use App\Models\Comment;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\Tag;
+
 
 
 use App\Services\CategoryService;
@@ -17,28 +19,26 @@ use App\Services\CategoryService;
 class ProductController extends Controller
 {
    
-    public function __construct(readonly ProductService $productService,readonly CategoryService $categoryService,readonly CommentService $commentService)
-    {
-    }
+    public function __construct(
+        readonly ProductService $productService,
+        readonly CategoryService $categoryService,
+        readonly CommentService $commentService,
+        readonly Tag $tag
+    ){}
     
     public function index($id, $slug)
     {
-        // $product = $this->productService->show($id);
         $product = Product::with(['category'])->find($id);
 
-        // $products = $this->productService->getProducts();
-
+        //lấy tag theo product
+        // foreach($product->tags as $productTag)
+        // {
+        //     dd($productTag->name);
+        // }
+        
         $carts = session()->get('cart',[]);
-        if ($carts === null) {
-            $carts = [];
-        }
-        $category = $this->categoryService->getByCategoryId($product->category_id);
         $categories = Category::with(['products'])->find($product->category_id); // Tải trước danh sách sản phẩm của tất cả các danh mục
-        // dd($categories);
 
-        //$categories = $category->products;
-        // Hoặc có thể tải trước danh sách sản phẩm của một danh mục cụ thể
-        // $categories = Category::with('products')->where('id', $categoryId)->get();
         // $rating = Comment::where('commentable_id',$id)->where('commentable_type','product')->get();
         $rating = Comment::where('commentable_id',$id)->where('commentable_type','product')->avg('rating');
         if($rating === null){
@@ -101,11 +101,3 @@ class ProductController extends Controller
 
   
 }
-
-// <div class="star-cmt">
-// <i class="fa-regular fa-star"></i>
-// <i class="fa-regular fa-star"></i>
-// <i class="fa-regular fa-star"></i>
-// <i class="fa-regular fa-star"></i>
-// <i class="fa-regular fa-star"></i>
-// </div>

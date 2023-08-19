@@ -60,7 +60,7 @@
                                 alt="likee-ap"
                                 style="border-radius: 50%"
                             />
-                            <span class="count">3</span>
+                            <span class="count" >3</span>
                         </a>
                     </div>
                     <div class="user-img_area wishlist translate">
@@ -93,7 +93,7 @@
                                         style="border-radius: 50%"
                                     />
                                 </a>
-                                <span class="cart-count">{{ count($carts) }}</span>
+                                <span class="cart-count" id="count_number">{{ count($carts) }}</span>
                             </div>
                             <div class="modal_container-view-cart_list" style="display: none"></div>
                         {{-- </div> --}}
@@ -362,7 +362,7 @@
                                     src="https://img.icons8.com/bubbles/50/phone-not-being-used.png"
                                     alt="phone-not-being-used"
                                 />
-                                <span>0777.888.999</span>
+                                <span>0123.456.789</span>
                             </div>
                         </div>
                     </div>

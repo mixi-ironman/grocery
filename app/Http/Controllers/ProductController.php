@@ -10,13 +10,12 @@ use Illuminate\Support\Facades\Session;
 class ProductController extends Controller
 {
     private $productService;
-       private $categoryService;
+    private $categoryService;
 
     public function __construct(ProductService $productService,CategoryService $categoryService)
     {
         $this->productService = $productService;
         $this->categoryService = $categoryService;
-
     }
 
     public function index()
@@ -68,7 +67,7 @@ class ProductController extends Controller
     public function update(Request $request, string $id)
     {
          $this->productService->update($request,$id);
-        return redirect()->route('products.index')->with('success', 'Update Product Successfully!');
+        // return redirect()->route('products.index')->with('success', 'Update Product Successfully!');
     }
 
     public function destroy($id)

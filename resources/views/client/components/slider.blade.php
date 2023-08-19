@@ -24,14 +24,14 @@
 
                     <div class="slider-wraper-direction">
                         <img
-                            class="translatey"
+                            class="translatey rounded-circle"
                             width="30"
                             height="30"
                             src="https://img.icons8.com/bubbles/50/000000/long-arrow-left.png"
                             alt="long-arrow-left"
                         />
                         <img
-                            class="translatey"
+                            class="translatey rounded-circle"
                             width="30"
                             height="30"
                             src="https://img.icons8.com/bubbles/50/right.png"

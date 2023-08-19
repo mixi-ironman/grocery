@@ -37,6 +37,7 @@ class CartController extends Controller
             return redirect()->back()->with('error', 'Sản phẩm không tồn tại.');
         }
         $cart = session()->get('cart', []);
+       
         if (isset($cart[$id])) {
             $cart[$id]['quantity'] += 1; // Tăng số lượng sản phẩm trong giỏ hàng
             // $cart[$id]['quantity'] = $cart[$id]['quantity'] + 1;
@@ -50,13 +51,15 @@ class CartController extends Controller
         }
 
         session()->put('cart', $cart);
+        $count_number = count($cart);
         $cartList =  view('client.components.cart_list',['carts' => $cart])->render();
         return response()->json(
             [
                 'message' => 'succes',
                 'code' => 200,
                 'cart' => $cart,
-                'cartList'=>$cartList
+                'cartList'=>$cartList,
+                'count_number'=>$count_number
             ]
         ,200);
         
@@ -98,12 +101,15 @@ class CartController extends Controller
             $carts = session()->get('cart',[]);
             unset($carts[$request->id]);
             session()->put('cart', $carts);
+            $count_number = count($carts);
             
             $cartComponent = view('client.components.cart_component',['carts' => $carts])->render();
             return response()->json([
                 'code'=>200,
                 'msg'=>'Xóa sản phẩm thành công!',
                 'cart_component' => $cartComponent,
+                'count_number'=>$count_number
+
             ]);
 
         }
@@ -115,12 +121,12 @@ class CartController extends Controller
             return view('client.layouts.pages.checkout',['carts' => $carts]);
       }
 
+      //thanh toán khi nhận hàng
       public function addOrderCash(Request $request)
       {
         $carts = session()->get('cart',[]);
         if (isset($carts))
         {
-            //  $checkOut = $this->cartService->checkOut($carts);
             //  $subTotal = $this->orderService->subTotal($carts);
              $this->orderService->add($request,$carts);
              session()->forget('cart');
