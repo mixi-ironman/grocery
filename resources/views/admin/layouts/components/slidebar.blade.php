@@ -94,7 +94,7 @@
               </div>
               <span class="nav-link-text ms-1">Khuyến mãi</span>
             </a>
-          </li>
+          </li> 
           <li class="nav-item">
             <a class="nav-link" href="{{ route('order.index') }}">
               <div

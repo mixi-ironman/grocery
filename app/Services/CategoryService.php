@@ -54,7 +54,7 @@ class CategoryService
           ]);
            DB::commit();
            
-        //    return redirect()->route('categories.index')->with('success', 'Created Category Successfully!'); 
+           return redirect()->route('categories.index')->with('success', 'Created Category Successfully!'); 
         } catch (\Exception $e) {
             DB::rollBack();
             throw new CommonException('Something wrong');

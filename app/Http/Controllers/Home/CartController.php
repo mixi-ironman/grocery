@@ -10,14 +10,12 @@ use App\Services\OrderService;
 
 class CartController extends Controller
 {
-    private $productService;
-    private $orderService;
 
 
-    public function __construct(ProductService $productService,OrderService $orderService)
+
+    public function __construct(readonly private ProductService $productService,readonly private OrderService $orderService)
     {
-        $this->productService = $productService;
-        $this->orderService = $orderService;
+
     }
     public function index()
     {

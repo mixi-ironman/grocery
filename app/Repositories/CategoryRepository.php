@@ -27,7 +27,6 @@ class CategoryRepository extends BaseRepository
 
     public function getParent()
     {
-        // dd($data);
         return $this->model->where('parent_id',0)->get();
     }
 

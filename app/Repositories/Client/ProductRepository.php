@@ -38,10 +38,10 @@ class ProductRepository extends BaseRepository
         $query = $this->model->orderByDesc('id');
 
         if ($page !== null) {
-            $query->skip($page * 5);
+            $query->skip($page * 10);
         }
 
-        return $query->limit(5)->get();
+        return $query->limit(10)->get();
 
     }
 

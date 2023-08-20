@@ -37,7 +37,7 @@ $(document).ready(function () {
     // Sử dụng event delegation để xử lý sự kiện click cho nút "btn-load_product"
     $(document).on("click", "#btn-load_product", function () {
         const url = $(this).data("url");
-        // console.log("load");
+        console.log(url);
         loadMore(url);
     });
 });

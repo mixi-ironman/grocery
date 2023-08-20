@@ -53,6 +53,7 @@ Route::get('products/add-to-cart/{id}',[CartController::class,'addToCart'])->nam
 Route::get('products/show-cart',[CartController::class,'showCart'])->name('show-cart');
 Route::get('products/update-cart',[CartController::class,'updateCart'])->name('update-cart');
 Route::get('products/delete-cart',[CartController::class,'deleteCart'])->name('delete-cart');
+
 //checkout 
 Route::get('/check-out',[CartController::class,'checkout'])->name('check-out');
 Route::post('/check-out-cash',[CartController::class,'addOrderCash'])->name('confirm-check-out');

@@ -14,14 +14,30 @@
                         <input type="text" class="form-control"  name="name_product" aria-describedby="emailHelp">
                     </div>
 
+                    {{-- parent category --}}
                      <div class="mb-3">
-                        <label for="category_id" class="form-label">Category</label>
-                        <select class="form-select" id="category_id" name="category_id" aria-label="Default select example">
+                        <label for="parent_category_id" class="form-label">Parent Category</label>
+                        <select class="form-select select2" id="parent_id" name="parent_id" aria-label="Default select example">
                             <option value="0">---Chọn---</option>
-                        @foreach($categories as $category)
+                        @foreach($parentCategories as $category)
                             <option value="{{ $category->id }}">{{ $category->name }}</option>
                         @endforeach
                         </select>
+
+                        @if($errors->has('parent_id'))
+                            {{ $errors->first('parent_id') }}
+                        @endif
+                    </div>
+
+                    {{-- category --}}
+                    <div class="mb-3">
+                        <label for="category" class="form-label">Category</label>
+                        <select class="form-select select2" id="category" name="category_id" aria-label="Default select example">
+                            <option value="0">----------</option>
+                        </select>
+                        @if($errors->has('parent_id'))
+                            {{ $errors->first('parent_id') }}
+                        @endif
                     </div>
 
                     <div class="mb-3">
@@ -99,10 +115,6 @@
                 theme: 'bootstrap-5'
             });
 
-            $('#category_id').select2({
-                theme: 'bootstrap-5'
-            });
-
             $('#tags').select2({
                 theme: 'bootstrap-5',
                 tags: true,
@@ -135,11 +147,12 @@
                     }
                 },
             })
+
             var existingTags = [];
             $('.select2').on('select2:selecting', function (e) {
                 let tagName = e.params.args.data.text;
-                let tagId = e.params.args.data.id;
-                console.log(tagId);
+                // let tagId = e.params.args.data.id;
+                // console.log(tagId);
                 if (tagName) {
 
                     // Gửi dữ liệu thẻ mới lên server (nếu cần)
@@ -166,6 +179,29 @@
                 }
 
             });
+
+            //get category theo parentCategory
+            $('#category').select2({
+                theme: 'bootstrap-5',
+                ajax: {
+                    url: '{{ route('categories.get-children') }}',
+                    data: function (params) {
+                        var query = {
+                            parent_id: $('#parent_id').val(),
+                            _token: '{{ csrf_token() }}'
+                        }
+
+                        // Query parameters will be ?search=[term]&type=public
+                        return query;
+                    },
+                    dataType: 'json',
+                    processResults: function (data, params) {
+                        return {
+                            results: data,
+                        }
+                    }
+                },
+            })
 
         })
             

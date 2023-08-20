@@ -125,6 +125,7 @@
     function addOrder(event) {
         event.preventDefault();
         let urlCash = $('.cash').data('url');
+        // alert(urlCash);
         let fullname = $('#name').val();
         let email = $('#email').val();
         let phone = $('#phone').val();
@@ -154,12 +155,11 @@
                     total_amount: total_amount,
                     _token: $('meta[name="csrf-token"]').attr('content')
                 },
-                success: function(data) {
-                    if (data.status === 'success') {
-                        alert(data.msg); 
-                    } else {
-                        alert(data.msg); 
-                    }
+                success: function(res) {
+                    alert(res)
+                // Xử lý phản hồi từ server (nếu cần)
+                alert('đặt hàng thành công');
+
                 },
                 error: function(error) {
                     alert('Có lỗi xảy ra. Vui lòng thử lại sau.');
@@ -167,7 +167,7 @@
             });
 
         } else if (payment_method === 'online') {
-               alert('Hiện chức năng thành toán đang phát triển')
+               alert('Đang phát triển ^.^ ' )
         }
     }
 

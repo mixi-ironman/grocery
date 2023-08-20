@@ -44,31 +44,15 @@ class CategoryController extends Controller
         ]);
     }
 
-    //handle menu đa cấp
-    public function categoryrRecusive($id, $text = '')
-    {
-        $data = Category::all();
-        foreach ($data as $value){
-            if($value['parent_id'] == $id)
-            {
-               $this->htmlOption .= "<option>".$text. $value['name']."</option>";
-                self::categoryrRecusive($value['id'], $text.'-');
-            }
-        }
-
-        return $this->htmlOption;
-    }
-
     public function store(CreateFormRequest $request)
     {
      
-       //dd($request->all());
-       $this->categoryService->store($request);
+        return $this->categoryService->store($request);
 
     //    Session::flash('success','Thêm danh mục thành công');
     //    return redirect()->back();
     //    return redirect()->route('categories.index');
-          return redirect()->route('categories.index')->with('success', 'Created Category Successfully!');
+        //   return redirect()->route('categories.index')->with('success', 'Created Category Successfully!');
 
     }
 
@@ -91,7 +75,7 @@ class CategoryController extends Controller
 
     public function update(Request $request, string $id)
     {
-        $this->categoryService->update($request,$id);
+        return $this->categoryService->update($request,$id);
         // return redirect()->route('categories.index')->with('success', 'Update Category Successfully!');
     }
 
@@ -100,5 +84,37 @@ class CategoryController extends Controller
         $this->categoryService->destroy($id);
         return redirect()->route('categories.index')->with('success', 'Delete Category Successfully!');
 
+    }
+
+    //handle menu đa cấp
+    public function categoryrRecusive($id, $text = '')
+    {
+        $data = Category::all();
+        foreach ($data as $value){
+            if($value['parent_id'] == $id)
+            {
+            $this->htmlOption .= "<option>".$text. $value['name']."</option>";
+                self::categoryrRecusive($value['id'], $text.'-');
+            }
+        }
+
+        return $this->htmlOption;
+    }
+
+    public function getChildrenByParent_id(Request $request)
+    {
+        if ($request->parent_id == 0) {
+            return response()->json([]);
+        }
+
+        $categories = Category::where('parent_id', $request->parent_id)->get();
+        $childCategory =  $categories->map(function ($category) {
+            return [
+                'id' => $category->id,
+                'text' => $category->name,
+            ];
+        });
+
+        return response()->json($childCategory);
     }
 }

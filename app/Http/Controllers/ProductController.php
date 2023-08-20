@@ -30,17 +30,19 @@ class ProductController extends Controller
     public function create()
     {
         //lấy ra danh sách category
+        $parentCategories = $this->categoryService->getParentCategory();
         $categories = $this->categoryService->getAll();
         return view('admin.product.create',[
             'title'=>'Add Product',
             'categories' => $categories,
+            'parentCategories' => $parentCategories
         ]);
     }
 
     public function store(Request $request)
     {
-        $this->productService->store($request);
-        return redirect()->route('products.create')->with('success', 'Created Products Successfully!');
+        return $this->productService->store($request);
+        // return redirect()->route('products.create')->with('success', 'Created Products Successfully!');
             // return Redirect::route('products.index')->with('success', 'Created Product Successfully!');
     }
 
@@ -66,13 +68,13 @@ class ProductController extends Controller
 
     public function update(Request $request, string $id)
     {
-         $this->productService->update($request,$id);
+        return $this->productService->update($request,$id);
         // return redirect()->route('products.index')->with('success', 'Update Product Successfully!');
     }
 
     public function destroy($id)
     {
-         $this->productService->destroy($id);
-        return redirect()->route('products.index')->with('success', 'Delete Product Successfully!');
+        return $this->productService->destroy($id);
+        // return redirect()->route('products.index')->with('success', 'Delete Product Successfully!');
     }
 }

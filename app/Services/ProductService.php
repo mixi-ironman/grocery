@@ -60,7 +60,6 @@ class ProductService
                 'slug' => Str::slug($request->input('name_product'), '-'),
                 'description' => $request->input('description'),
                 'content' => $request->input('content'),
-
                 'category_id' => $request->input('category_id'),
                 'price' => $request->input('price'),
                 'old_price' => $request->input('old_price'),
@@ -69,8 +68,10 @@ class ProductService
                 'is_active' => $request->input('is_active'),
             ]);
 
-                $productId = $product->id;
-                $selectedTags = $request->input('tags'); // Giá trị từ Ajax
+            $productId = $product->id;
+            $selectedTags = $request->input('tags'); 
+            if( $selectedTags)
+            {
                 // Loại bỏ giá trị trùng lặp và thêm vào bảng productTag
                 $uniqueTags = array_unique($selectedTags);
                 foreach ($uniqueTags as $tagId) {
@@ -79,11 +80,11 @@ class ProductService
                         'tag_id' => $tagId
                     ]);
                 }
-            
+            }
 
             DB::commit();
 
-            // return Redirect::route('products.index')->with('success', 'Created Product Successfully!');
+            return Redirect::route('products.index')->with('success', 'Created Product Successfully!');
         } catch (\Exception $e) {
             DB::rollBack();
             return Redirect::back()->withErrors(['create' => 'Something Wrong!'])->withInput();

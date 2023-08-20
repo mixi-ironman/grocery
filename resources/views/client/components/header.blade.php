@@ -19,7 +19,7 @@
                             type="text"
                             id="keyword_search"
                             name="search"
-                            placeholder="Tìm kiếm sản phảm..."
+                            placeholder="Tìm kiếm sản phẩm..."
                             class="search-box"
                             maxlength="128"
                             value=""
