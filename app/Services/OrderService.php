@@ -55,12 +55,11 @@ class OrderService
                     DB::rollback();
 
                     if (!$product) {
-                        return response()->json([]);
-                        // return response()->json([
-                        //     'status' => 'error',
-                        //     'code' => 400,
-                        //     'msg' => 'Sản phẩm không tồn tại: ' . $cart['name'],
-                        // ]);
+                        return response()->json([
+                            'status' => 'error',
+                            'code' => 400,
+                            'msg' => 'Sản phẩm không tồn tại: ' . $cart['name'],
+                        ]);
                     } else {
                         $quantityShortage = $cart['quantity'] - $product->stock;
                         return response()->json([

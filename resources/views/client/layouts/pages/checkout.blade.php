@@ -144,7 +144,6 @@
             $.ajax({
                 method: 'POST',
                 url: urlCash,
-                dataType: 'json',
                 data: {
                     name: fullname,
                     email: email,
@@ -155,14 +154,14 @@
                     total_amount: total_amount,
                     _token: $('meta[name="csrf-token"]').attr('content')
                 },
-                success: function(res) {
-                    alert(res)
-                // Xử lý phản hồi từ server (nếu cần)
-                alert('đặt hàng thành công');
-
+                dataType: 'json',
+                success: function (data) {
+                   
+                    console.log(data); 
+                   
                 },
-                error: function(error) {
-                    alert('Có lỗi xảy ra. Vui lòng thử lại sau.');
+                error: function (error) {
+                    console.error('Đã có lỗi xảy ra', error);
                 }
             });
 

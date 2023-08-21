@@ -313,6 +313,37 @@ const app = {
         });
     },
 
+    subMenuCategory: function () {
+        let items = document.querySelectorAll('.menu-item');
+        let subs = document.querySelectorAll('.sub-menu-item');
+        let menuContainer = document.querySelector('.sub-menu-category');
+        items.forEach(function (item) {
+            item.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                let sub = this.querySelector('.sub-menu-item'); // Lấy sub của item được click
+
+                items.forEach(function (otherItem) {
+                    otherItem.classList.remove('active');
+                });
+
+                subs.forEach(function (subItem) {
+                    subItem.classList.remove('active');
+                });
+
+                this.classList.add('active');
+                sub.classList.add('active');
+            });
+        });
+
+        menuContainer.addEventListener('mouseleave', function () {
+            items.forEach(function (item) {
+                item.classList.remove('active');
+            });
+            // menuContainer.style.display = 'none';
+        });
+    },
+
     run: function () {
         this.beforeunload();
 
@@ -325,6 +356,7 @@ const app = {
         this.dropdowInput();
         this.autocompleteAjax();
         this.scrollAnimation();
+        this.subMenuCategory();
     },
 };
 

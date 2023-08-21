@@ -32,12 +32,7 @@
         <title>Mixi-Market</title>
     </head>
     <body>
-        {{-- @php
-        dd($carts);
-        // echo"<pre>";
-        // print_r($carts);
-        // echo"</pre>";
-        @endphp --}}
+
         <div class="app">
             <!-- Header -->
             @include('client.components.header')

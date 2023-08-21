@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Home;
 use App\Http\Controllers\Controller;
 use App\Http\View\Composers\MenuComposer;
 use App\Models\Product;
+use App\Models\Category;
+
 use Illuminate\Http\Request;
 use App\Services\Client\ProductService;
 
@@ -21,8 +23,8 @@ class HomeController extends Controller
     {
         $products = $this->productService->getProducts();
         $carts = session()->get('cart',[]);
-        // dd($carts);
-        return view('client.layouts.pages.home',['products' => $products, 'carts' => $carts]); 
+        $categoryList = Category::where('parent_id', 0)->get();
+        return view('client.layouts.pages.home',['products' => $products, 'carts' => $carts,'categoryList'=>$categoryList]); 
     }
 
     //load product
