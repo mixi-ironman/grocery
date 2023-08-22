@@ -42,7 +42,7 @@
 
                     <div class="mb-3">
                         <label for="parent_id" class="form-label">Tag</label>
-                        <select class="select2 form-select" id="tags" name="tags[]" multiple>
+                        <select class="select2 form-select tag-select" id="tags" name="tags[]" multiple>
                             <option value="0">---Chọn---</option>
                         </select>
                     </div>
@@ -114,7 +114,7 @@
             $('.select2').select2({
                 theme: 'bootstrap-5'
             });
-
+            //add tag
             $('#tags').select2({
                 theme: 'bootstrap-5',
                 tags: true,
@@ -149,7 +149,7 @@
             })
 
             var existingTags = [];
-            $('.select2').on('select2:selecting', function (e) {
+            $('.tag-select').on('select2:selecting', function (e) {
                 let tagName = e.params.args.data.text;
                 // let tagId = e.params.args.data.id;
                 // console.log(tagId);

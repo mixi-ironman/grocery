@@ -29,7 +29,7 @@ class ProductController extends Controller
     public function index($id, $slug)
     {
         $product = Product::with(['category'])->find($id);
-
+        $categoryList = Category::where('parent_id', 0)->get();
         //lấy tag theo product
         // foreach($product->tags as $productTag)
         // {
@@ -47,7 +47,7 @@ class ProductController extends Controller
 
         $rating = round($rating);
       
-        return view('client.layouts.pages.view-product-detail',['product' => $product, 'categories' => $categories->products, 'carts' => $carts, 'rating' => $rating]);
+        return view('client.layouts.pages.view-product-detail',['product' => $product, 'categories' => $categories->products, 'carts' => $carts, 'rating' => $rating,'categoryList'=>$categoryList]);
     }
   
     public function loadComment(Request $request)

@@ -18,10 +18,12 @@
             type="text/css"
             href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"
         />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.6.3/nouislider.min.css" />
+
         <link rel="stylesheet" href="{{ url('client') }}/assets/css/global.css" />
         <link rel="stylesheet" href="{{ asset('client/assets/css/main.css') }}" />
         <link rel="stylesheet" href="{{ asset('client/assets/css/detail.css') }}" />
-
+        <link rel="stylesheet" href="{{ url('client') }}/assets/css/filter.css" />
         <title>Mixi-Market</title>
     </head>
     <body>
@@ -58,11 +60,11 @@
         </div>
         
 
-        {{-- thêm jquery --}}
+        {{-- add jquery --}}
         <script src="{{ asset('js/jquery-3.7.0.min.js') }}"></script>
         {{-- <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script> --}}
 
-        {{-- thêm slick --}}
+        {{-- add slick --}}
         <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
         <script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
         <script
@@ -88,7 +90,7 @@
         {{-- <script src="{{ url('client') }}/assets/js/search.js"></script> --}}
         <script src="{{ url('client') }}/assets/js/add_cart.js"></script>
         <script src="{{ url('client') }}/assets/js/comment.js"></script>
-
+        
          @stack('custom-script')
 
     </body>

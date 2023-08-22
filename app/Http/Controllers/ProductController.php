@@ -42,8 +42,8 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         return $this->productService->store($request);
-        // return redirect()->route('products.create')->with('success', 'Created Products Successfully!');
-            // return Redirect::route('products.index')->with('success', 'Created Product Successfully!');
+        return redirect()->route('products.create')->with('success', 'Created Products Successfully!');
+        // return Redirect::route('products.index')->with('success', 'Created Product Successfully!');
     }
 
 
@@ -69,12 +69,12 @@ class ProductController extends Controller
     public function update(Request $request, string $id)
     {
         return $this->productService->update($request,$id);
-        // return redirect()->route('products.index')->with('success', 'Update Product Successfully!');
+        return redirect()->route('products.index')->with('success', 'Update Product Successfully!');
     }
 
     public function destroy($id)
     {
         return $this->productService->destroy($id);
-        // return redirect()->route('products.index')->with('success', 'Delete Product Successfully!');
+        return redirect()->route('products.index')->with('success', 'Delete Product Successfully!');
     }
 }

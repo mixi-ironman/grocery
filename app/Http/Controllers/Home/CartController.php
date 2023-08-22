@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Services\Client\ProductService;
 use App\Services\OrderService;
+use App\Models\Category;
 
 
 class CartController extends Controller
@@ -69,9 +70,10 @@ class CartController extends Controller
         // echo"<pre>";
         // print_r(session()->get('cart'));
         // echo"</pre>";
+        $categoryList = Category::where('parent_id', 0)->get();
 
         $carts = session()->get('cart',[]);
-        return view('client.layouts.pages.view-cart-detail',['carts' => $carts]);
+        return view('client.layouts.pages.view-cart-detail',['carts' => $carts,'categoryList'=>$categoryList]);
      }
 
      public function updateCart(Request $request)
@@ -116,7 +118,8 @@ class CartController extends Controller
       public function checkOut(Request $request)
       {
             $carts = session()->get('cart',[]);
-            return view('client.layouts.pages.checkout',['carts' => $carts]);
+            $categoryList = Category::where('parent_id', 0)->get();
+            return view('client.layouts.pages.checkout',['carts' => $carts,'categoryList'=>$categoryList]);
       }
 
       //thanh toán khi nhận hàng
@@ -126,10 +129,10 @@ class CartController extends Controller
         if (isset($carts))
         {
             //  $subTotal = $this->orderService->subTotal($carts);
-             $this->orderService->add($request,$carts);
-             session()->forget('cart');
+            session()->forget('cart');
+            return $this->orderService->add($request,$carts);
         }
-        //   return redirect()->route('home');
+          return redirect()->route('home');
       }
 
 

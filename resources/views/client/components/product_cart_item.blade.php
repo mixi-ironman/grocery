@@ -1,6 +1,6 @@
 @foreach($products as $product)
-<div class="col-lg-{{ $itemsPerRow }}">
-    <div class="product-cart scroll-animation">
+<div class="col-lg-{{ $itemsPerRow }} col-md-{{ $itemsPerRow }} scroll-animation">
+    <div class="product-cart ">
         <div class="product-img-action">
             <div class="product-cart-img">
                 <a href="{{ route('view-product',['id' => $product->id, 'slug' => Str::slug($product->name)]) }}">

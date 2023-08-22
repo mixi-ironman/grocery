@@ -4,7 +4,6 @@
 {{-- @php 
     dd($products);
 @endphp --}}
-
 <div class="product-view">
     <div class="product-essential">
         <div class="row">
@@ -248,7 +247,6 @@
             <div class="col-md-12">
                 <div class="product-grid row g-3">
                     @foreach($categories as $products)
-              
                     <div class="col-lg-1-5">
                         <div class="product-cart">
                             <div class="product-img-action">

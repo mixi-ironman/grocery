@@ -23,6 +23,7 @@ class HomeController extends Controller
     {
         $products = $this->productService->getProducts();
         $carts = session()->get('cart',[]);
+        // dd($carts);
         $categoryList = Category::where('parent_id', 0)->get();
         return view('client.layouts.pages.home',['products' => $products, 'carts' => $carts,'categoryList'=>$categoryList]); 
     }
@@ -48,7 +49,9 @@ class HomeController extends Controller
     //view category-product
     public function viewCategory(Request $request)
     {
-      return view('client.layouts.pages.view-category-product');
+        $carts = session()->get('cart',[]);
+        $categoryList = Category::where('parent_id', 0)->get();
+      return view('client.layouts.pages.view-category-product',['carts' => $carts,'categoryList'=>$categoryList]);
     }
 
     public function autocompleteAjax(Request $request)

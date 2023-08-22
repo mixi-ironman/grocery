@@ -263,7 +263,6 @@
 /* sub-menu-category */
 .sub-menu-category {
     display: none;
-
     position: absolute;
     top: calc(100% + 2px);
     z-index: 999;
@@ -281,36 +280,76 @@
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
 }
 .menu-item {
-    margin-bottom: 10px;
+    width: 100%;
+    margin-bottom: 6px;
     border-radius: 4px;
+    position: relative;
+    border: 1px solid #f2f3f4;
+    /* overflow: hidden;
+    white-space: nowrap;
+    display: inline-block;  Đảm bảo mỗi item là một block nhỏ 
+    max-width: 100%; Giới hạn chiều rộng của item 
+    text-overflow: ellipsis; */
 
+    /* display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    -webkit-line-clamp: 2;Số hàng muốn hiển thị
+    line-clamp: 2; Số hàng muốn hiển thị, sử dụng cho Firefox và trình duyệt hỗ trợ 
+    text-overflow: ellipsis; Hiển thị dấu "..." khi văn bản bị tràn */
 }
+
+
 
 /* .menu-item:nth-child(2n){
     background-color:rgba(231, 208, 208, 0.7);
 } */
 .menu-item.active .menu-item-link {
+
+    background-color: rgb(152, 199, 152, 0.3);
+}
+
+.menu-item.menu-item-link:hover {
     background-color: rgb(152, 199, 152, 0.3);
 }
 .menu-item-link {
-    position: relative;
     z-index: 12;
-    display: block;
-    
+    width:100%;
+    cursor: pointer;
     border-radius: 4px;
     color: black;
-    /* box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); */
+    overflow: hidden;
+    white-space: nowrap;
+    display: inline-block; 
+    max-width: 100%;
+    text-overflow: ellipsis;
+
+ /* overflow: hidden;
+    white-space: nowrap;
+    display: inline-block;  Đảm bảo mỗi item là một block nhỏ 
+    max-width: 100%; Giới hạn chiều rộng của item 
+    text-overflow: ellipsis; */
+
+    /* display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    -webkit-line-clamp: 2;Số hàng muốn hiển thị
+    line-clamp: 2; Số hàng muốn hiển thị, sử dụng cho Firefox và trình duyệt hỗ trợ 
+    text-overflow: ellipsis; Hiển thị dấu "..." khi văn bản bị tràn */
+/* box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); */
 }
 
 /* sub-item */
 .sub-menu-item {
     position: absolute;
     /* display: none; */
+    background-color: white;
+    height: 100%;
     visibility: hidden;
     border-radius:4px;
     z-index: 10;
     top: 0;
-    right: -101%;
+    right: -116%;
     transform: translateY(70%);
     transition: transform 0.3s ease-out;
 }
@@ -320,13 +359,10 @@
     transform: translateY(0%);
 }
 
-.sub-menu-item .active {
-    visibility: visible;
-    transform: translateY(0%);
-}
-
 .menu-sub-item {
     margin-bottom: 5px;
+    cursor: pointer;
+    cursor: pointer;
 }
 
 .menu-sub-item:last-child
@@ -337,10 +373,8 @@
 .menu-sub-item_link {
     display: block;
     padding: 5px 10px;
-
     /* box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); */
     text-align: left;
-
     border-radius: 4px;
     color: black;
 }
@@ -1823,7 +1857,7 @@ span {
 
 .scroll-animation {
     opacity: 0;
-    transition: opacity 1.3s ease-out;
+    transition: opacity 0.5s ease-out;
     animation: slideInFromLeft 0.9s ease;
 }
 

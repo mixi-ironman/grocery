@@ -104,6 +104,7 @@ class CategoryController extends Controller
     public function getChildrenByParent_id(Request $request)
     {
         if ($request->parent_id == 0) {
+           
             return response()->json([]);
         }
 

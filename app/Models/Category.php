@@ -16,7 +16,10 @@ class Category extends Model
         'parent_id',
         'is_active',
     ];
-
+    public function products()
+    {
+        return $this->hasMany(Product::class, 'category_id', 'id');
+    }
     //phương thức products() sẽ trả về một bộ sưu tập (collection) của các bản ghi Product liên quan đến bản ghi Category hiện tại.
     /*
     Lấy danh sách sản phẩm thuộc về một danh mục cụ thể (ví dụ: danh mục có id là 1):
@@ -24,10 +27,7 @@ class Category extends Model
     $products = $category->products; // Lấy danh sách các sản phẩm thuộc danh mục này
 
     */
-    public function products()
-    {
-        return $this->hasMany(Product::class, 'category_id', 'id');
-    }
+    
 
     //lấy ra category cha khi mà trả ra 1 object rồi 1 object khác trỏ đến attribute sẽ bị lỗi nên dùng ?->  model ?-> atribute
     public function parentCategory()

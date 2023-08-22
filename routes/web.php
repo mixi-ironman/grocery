@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Home\HomeController;
 use App\Http\Controllers\Home\ProductController;
 use App\Http\Controllers\Home\CartController;
+use App\Http\Controllers\Home\CategoryController;
+
 use App\Http\Controllers\AdminAuthController;
 
 
@@ -44,8 +46,8 @@ Route::get('/load-comment',[ProductController::class,'loadComment'])->name('load
 Route::post('/send-comment',[ProductController::class,'sentComment'])->name('send-comment');
 // ---------------
 
-Route::post('danhmuc/{id}-{slug}.html',[MenuController::class,'index'])->name('index');
-
+//Category
+Route::get('category/{id}-{slug}.html',[CategoryController::class,'index'])->name('category-product');
 // -----------------
 
 //cart
@@ -53,6 +55,7 @@ Route::get('products/add-to-cart/{id}',[CartController::class,'addToCart'])->nam
 Route::get('products/show-cart',[CartController::class,'showCart'])->name('show-cart');
 Route::get('products/update-cart',[CartController::class,'updateCart'])->name('update-cart');
 Route::get('products/delete-cart',[CartController::class,'deleteCart'])->name('delete-cart');
+// --------------------
 
 //checkout 
 Route::get('/check-out',[CartController::class,'checkout'])->name('check-out');
@@ -64,7 +67,6 @@ Route::post('/checkout-cash', 'PaymentController@checkoutCash');
 
 // Route xử lý thanh toán online
 Route::post('/checkout-online', 'PaymentController@checkoutOnline');
-
 // --------------------
 
 
