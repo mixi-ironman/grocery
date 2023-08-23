@@ -116,9 +116,9 @@
                                     <div class="mega-menu-title hover-top">
                                         <!-- <i class="fa-solid fa-face-grin-tongue-wink menu-icon"></i> -->
                                         <i class="fa-solid fa-chart-gantt menu-icon"></i>
-                                        {{-- <a href="{{ route('viewCategory') }}"> --}}
+                                        <a href="{{ route('viewCategory') }}">
                                             <h3 class="categories-button-active">Mixi Grocery</h3>
-                                        {{-- </a> --}}
+                                        </a>
                                         
                                         <!-- sub-category -->
                                         @include('client.components.main_menu',['categoryList'=>$categoryList])

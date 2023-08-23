@@ -87,7 +87,6 @@
                     dataType: 'json',
 
                     success: function (data) {
-                        console.log(data.is_active);
                         _this.attr('data-status', data.is_active);
                         _this.empty();
                         _this.html(statusIcon[data.is_active]);

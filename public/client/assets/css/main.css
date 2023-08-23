@@ -299,7 +299,9 @@
     text-overflow: ellipsis; Hiển thị dấu "..." khi văn bản bị tràn */
 }
 
-
+.menu-item:last-child{
+    margin-bottom: 0px;
+}
 
 /* .menu-item:nth-child(2n){
     background-color:rgba(231, 208, 208, 0.7);
@@ -836,11 +838,11 @@ chuyển dịch từ giữa ra 2 bên */
 
 .banner-wrapper-list {
     /* overflow: hidden; */
-
     display: flex;
     flex-wrap: nowrap;
     white-space: nowrap;
     overflow-x: auto;
+    padding:12px;
 }
 .banner-item {
     position: relative;

@@ -84,7 +84,7 @@
                                     @elseif($product->is_featured === 0)
                                         <span class="btn btn btn-danger btn-xs">No</span>
                                     @endif
-                            </a>
+                                </a>
                             </td>
                             {{-- <td style="text-align: justify;vertical-align:middle;max-width:350;white-space: wrap;overflow: hidden; text-overflow: ellipsis;">{{ $product->description }}</td> --}}
                             <td style="text-align: center;vertical-align:middle;max-width:200px;white-space: wrap;overflow: hidden; text-overflow: ellipsis;">{{ $product->created_at->format('d/m/Y h:i:s') }}</td>
@@ -116,10 +116,10 @@
             $(document).on("click", ".change-status", function (e) {
                 e.preventDefault();
     
-                const statusMap = {
-                    0: '<span class="btn btn btn-danger btn-xs">No</span>',
-                    1: '<span class="btn btn-primary btn-xs">Yes</span>'
-                };
+                let statusIcon = [
+                    '<span class="btn btn btn-danger btn-xs">No</span>',
+                    '<span class="btn btn-primary btn-xs">Yes</span>'
+                ]
     
                 let url = $(this).attr('href');
                 let is_active = $(this).attr('data-status');
@@ -144,7 +144,7 @@
                     updateData.is_onsale = is_onsale == 1 ? 0 : 1;
                 }
 
-                console.log(updateData)
+                // console.log(updateData)
     
                 $.ajax({
                     type: 'PUT',
@@ -152,19 +152,24 @@
                     data: updateData,
                     dataType: 'json',
                     success: function (data) {
+                        // console.log(data)
                         if (is_active != undefined) {
-                            _this.attr('data-status', data.is_active);
+                            _this.attr('data-status', data.changed_attributes.is_active);
                             _this.empty();
-                            _this.html(statusMap[data.is_active]);
+                            _this.html(statusIcon[data.changed_attributes.is_active]);
                         }
     
                         if (is_featured != undefined) {
-                            _this.attr('data-featured', data.is_featured);
-                            // Update featured UI if needed
+                            // console.log(data.changed_attributes.is_featured);
+                            _this.attr('data-featured', data.changed_attributes.is_featured);
+                            _this.empty();
+                            _this.html(statusIcon[data.changed_attributes.is_featured]);
                         }
+                        
                         if (is_onsale != undefined) {
-                            _this.attr('data-onsale', data.is_onsale);
-                            // Update onsale UI if needed
+                            _this.attr('data-onsale', data.changed_attributes.is_onsale);
+                            _this.empty();
+                            _this.html(statusIcon[data.changed_attributes.is_onsale]);
                         }
                     },
                     error: function (error) {

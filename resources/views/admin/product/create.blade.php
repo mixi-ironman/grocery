@@ -114,7 +114,7 @@
             $('.select2').select2({
                 theme: 'bootstrap-5'
             });
-            //add tag
+            //load tag
             $('#tags').select2({
                 theme: 'bootstrap-5',
                 tags: true,
@@ -147,7 +147,8 @@
                     }
                 },
             })
-
+            
+            //add tag
             var existingTags = [];
             $('.tag-select').on('select2:selecting', function (e) {
                 let tagName = e.params.args.data.text;
@@ -155,7 +156,6 @@
                 // console.log(tagId);
                 if (tagName) {
 
-                    // Gửi dữ liệu thẻ mới lên server (nếu cần)
                     $.ajax({
                         url: '{{ route('tags.store') }}',
                         type: 'POST',

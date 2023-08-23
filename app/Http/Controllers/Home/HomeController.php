@@ -50,8 +50,9 @@ class HomeController extends Controller
     public function viewCategory(Request $request)
     {
         $carts = session()->get('cart',[]);
+        $products = Product::where('is_active',1)->orderByDesc('created_at')->get();
         $categoryList = Category::where('parent_id', 0)->get();
-      return view('client.layouts.pages.view-category-product',['carts' => $carts,'categoryList'=>$categoryList]);
+      return view('client.layouts.pages.view-category-product',['carts' => $carts,'categoryList'=>$categoryList,'products'=>$products]);
     }
 
     public function autocompleteAjax(Request $request)

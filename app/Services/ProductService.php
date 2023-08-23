@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
 use App\Models\ProductTag;
+use App\Models\Category;
+
 
 
 class ProductService
@@ -55,39 +57,77 @@ class ProductService
             // $product = $this->getById($id);
             // $product->create([]);
 
-            $product = $this->productRepository->create([
-                'name' => $request->input('name_product'),
-                'slug' => Str::slug($request->input('name_product'), '-'),
-                'description' => $request->input('description'),
-                'content' => $request->input('content'),
-                'category_id' => $request->input('category_id'),
-                'price' => $request->input('price'),
-                'old_price' => $request->input('old_price'),
-                'stock' => $request->input('stock'),
-                'image' => $imagePath,
-                'is_active' => $request->input('is_active'),
-            ]);
+            // Kiểm tra xem danh mục cha có danh mục con hay không
+            $category = Category::find($request->input('parent_id'));
+            if (!$category) {
+                return back()->with('error', 'Không tìm thấy danh mục.');
+            }
+            // dd($category->childrentCategory->isEmpty());
+            if ($category->childrentCategory->isEmpty()) {
+                $category_id = $category->id;
 
-            $productId = $product->id;
-            $selectedTags = $request->input('tags'); 
-            if( $selectedTags)
-            {
-                // Loại bỏ giá trị trùng lặp và thêm vào bảng productTag
-                $uniqueTags = array_unique($selectedTags);
-                foreach ($uniqueTags as $tagId) {
-                    ProductTag::create([
-                        'product_id' => $productId,
-                        'tag_id' => $tagId
-                    ]);
+                $product = $this->productRepository->create([
+                    'name' => $request->input('name_product'),
+                    'slug' => Str::slug($request->input('name_product'), '-'),
+                    'description' => $request->input('description'),
+                    'content' => $request->input('content'),
+                    'category_id' => $category_id,
+                    'price' => $request->input('price'),
+                    'old_price' => $request->input('old_price'),
+                    'stock' => $request->input('stock'),
+                    'image' => $imagePath,
+                    'is_active' => $request->input('is_active'),
+                ]);
+    
+                $productId = $product->id;
+                $selectedTags = $request->input('tags'); 
+                if( $selectedTags)
+                {
+                    // Loại bỏ giá trị trùng lặp và thêm vào bảng productTag
+                    $uniqueTags = array_unique($selectedTags);
+                    foreach ($uniqueTags as $tagId) {
+                        ProductTag::create([
+                            'product_id' => $productId,
+                            'tag_id' => $tagId
+                        ]);
+                    }
                 }
+                DB::commit();
+
+            }else{
+                $product = $this->productRepository->create([
+                    'name' => $request->input('name_product'),
+                    'slug' => Str::slug($request->input('name_product'), '-'),
+                    'description' => $request->input('description'),
+                    'content' => $request->input('content'),
+                    'category_id' => $request->input('category_id'),
+                    'price' => $request->input('price'),
+                    'old_price' => $request->input('old_price'),
+                    'stock' => $request->input('stock'),
+                    'image' => $imagePath,
+                    'is_active' => $request->input('is_active'),
+                ]);
+    
+                $productId = $product->id;
+                $selectedTags = $request->input('tags'); 
+                if( $selectedTags)
+                {
+                    // Loại bỏ giá trị trùng lặp và thêm vào bảng productTag
+                    $uniqueTags = array_unique($selectedTags);
+                    foreach ($uniqueTags as $tagId) {
+                        ProductTag::create([
+                            'product_id' => $productId,
+                            'tag_id' => $tagId
+                        ]);
+                    }
+                }
+                DB::commit();
             }
 
-            DB::commit();
-
-            return Redirect::route('products.index')->with('success', 'Created Product Successfully!');
+            return Redirect::route('products.index')->with('success', 'Thêm sản phẩm thành công!');
         } catch (\Exception $e) {
             DB::rollBack();
-            return Redirect::back()->withErrors(['create' => 'Something Wrong!'])->withInput();
+            return Redirect::back()->withErrors(['create' => 'Thêm sản phẩm thất bại ^.^'])->withInput();
         }
     }
 
@@ -176,10 +216,10 @@ class ProductService
             ]);
 
             DB::commit();
-            return redirect()->route('products.index')->with('success', 'Updated Product Successfully!');
+            return redirect()->route('products.index')->with('success', 'Cập nhật sản phẩm thành công!');
         } catch (\Exception $e) {
             DB::rollBack();
-            return Redirect::back()->withErrors(['update' => 'Something Wrong!'])->withInput();
+            return Redirect::back()->withErrors(['update' => 'Cập nhật sản phẩm thất bại ^.^!'])->withInput();
         }
     }
 
