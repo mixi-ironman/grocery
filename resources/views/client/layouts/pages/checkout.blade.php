@@ -156,10 +156,33 @@
                 },
                 dataType: 'json',
                 success: function (data) {
-                   
                     console.log(data); 
-                   
+                    if (data.status == 'success') {
+                        alert('Tạo đơn hàng thành công');
+                        $.ajax({
+                        method: 'POST',
+                        url: '{{ route('clear-cart') }}',
+                        data: {
+                            _token: $('meta[name="csrf-token"]').attr('content')
+                        },
+                        dataType: 'json',
+                        success: function (response) {
+                            if (response.code == 200) {
+                                window.location.replace('{{ route('home') }}');
+                            }
+                        },
+                        error: function (error) {
+                            console.error('Đã có lỗi xảy ra khi xóa giỏ hàng', error);
+                            window.location.replace('{{ route('home') }}');
+                        }
+                    });
+                       
+                    } else if (data.status == 'error') {
+                        alert(data.msg);
+                        window.location.replace('{{ route('show-cart') }}');
+                    }   
                 },
+
                 error: function (error) {
                     console.error('Đã có lỗi xảy ra', error);
                 }

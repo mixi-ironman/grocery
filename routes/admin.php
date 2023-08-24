@@ -55,6 +55,7 @@ Route::prefix('product')->name('product.')->group(function () {
     Route::post('images/store', [ProductImageController::class, 'store'])->name('images.store');
     Route::get('images/edit/{id}', [ProductImageController::class, 'edit'])->name('images.edit');
     Route::put('images/update/{id}', [ProductImageController::class, 'update'])->name('images.update');
+    Route::post('upload-image', [ProductImageController::class, 'uploadImage'])->name('upload-image');
     Route::delete('images/destroy/{id}', [ProductImageController::class, 'destroy'])->name('images.destroy');
 
     // Route::get('images/{id}', [ProductImageController::class, 'show'])->name('product.image.show');

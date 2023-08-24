@@ -53,6 +53,8 @@ Route::get('category/{id}-{slug}.html',[CategoryController::class,'index'])->nam
 //cart
 Route::get('products/add-to-cart/{id}',[CartController::class,'addToCart'])->name('add-to-cart');
 Route::get('products/show-cart',[CartController::class,'showCart'])->name('show-cart');
+Route::post('products/clear-cart',[CartController::class,'clearCart'])->name('clear-cart');
+
 Route::get('products/update-cart',[CartController::class,'updateCart'])->name('update-cart');
 Route::get('products/delete-cart',[CartController::class,'deleteCart'])->name('delete-cart');
 // --------------------

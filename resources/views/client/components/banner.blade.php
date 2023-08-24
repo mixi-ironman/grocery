@@ -1,5 +1,4 @@
-<div class="container banner-wrapper">
-    <div class="row banner-wrapper-list g-3">
+<div class="row banner-wrapper-list  g-3">
         <div class="col-lg-4 col-md-6">
             <div class="banner-item">
                 <img src="{{ url('client') }}/assets/img/banner-1.png" class="banner-item-img" alt="banner1" />
@@ -11,7 +10,7 @@
                         <br />
                         Products
                     </h4>
-                    <a class="translatey" href="#">Shop now!</a>
+                    <a class="translatey" href="{{ route('viewCategory') }}">Shop now!</a>
                 </div>
             </div>
         </div>
@@ -26,7 +25,7 @@
                         <br />
                         Products
                     </h4>
-                    <a class="translatey" href="#">Shop now!</a>
+                    <a class="translatey" href="{{ route('viewCategory') }}">Shop now!</a>
                 </div>
             </div>
         </div>
@@ -41,9 +40,8 @@
                         <br />
                         Products
                     </h4>
-                    <a class="translatey" href="#">Shop now!</a>
+                    <a class="translatey" href="{{ route('viewCategory') }}">Shop now!</a>
                 </div>
             </div>
         </div>
-    </div>
 </div>

@@ -43,66 +43,21 @@
              <!-- Main -->
             <div class="content main-content">
                 <!-- Slider -->
-            {{-- <div class="container-fluid"> --}}
-            <div class="container">
-                @include('client.components.slider')
-            </div>
-            <!-- End slider -->
+                {{-- <div class="container-fluid"> --}}
+                <div class="container">
+                    @include('client.components.slider')
+                </div>
+                <!-- End slider -->
+
                 <!-- Feature-Category -->
                 @include('client.components.featured_category')
                 <!--End Feature-Category -->
 
                 <!-- banner Category -->
-                <div class="container banner-wrapper">
-                    <div class="row banner-wrapper-list g-3">
-                        <div class="col-lg-4 col-md-6">
-                            <div class="banner-item scroll-animation">
-                                <img src="{{ url('client') }}/assets/img/banner-1.png" class="banner-item-img" alt="banner1" />
-                                <div class="banner-item-description">
-                                    <h4>
-                                        Everyday Fresh &
-                                        <br />
-                                        Clear Width Our
-                                        <br />
-                                        Products
-                                    </h4>
-                                    <a class="translatey" href="#">Shop now!</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6">
-                            <div class="banner-item scroll-animation">
-                                <img src="{{ url('client') }}/assets/img/banner-2.png" class="banner-item-img" alt="banner2" />
-                                <div class="banner-item-description">
-                                    <h4>
-                                        Everyday Fresh &
-                                        <br />
-                                        Clear Width Our
-                                        <br />
-                                        Products
-                                    </h4>
-                                    <a class="translatey" href="#">Shop now!</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6">
-                            <div class="banner-item scroll-animation">
-                                <img src="{{ url('client') }}/assets/img/banner-3.png" class="banner-item-img" alt="banner3" />
-                                <div class="banner-item-description">
-                                    <h4>
-                                        Everyday Fresh &
-                                        <br />
-                                        Clear Width Our
-                                        <br />
-                                        Products
-                                    </h4>
-                                    <a class="translatey" href="#">Shop now!</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="container">
+                @include('client.components.banner')
                 </div>
-                <!-- end banner -->
+                <!--End banner Category -->
 
                 <!-- Popular Products -->
                 <div class="container popular-product category">
@@ -110,7 +65,7 @@
                         <div class="col-md-12">
                             <div class="slider-item-product">
                                 <div class="product-title popular-product-title">
-                                    <h3 class="name-category-popular scroll-animation">Popular Products</h3>
+                                    <h3 class="hover_  name-category-popular scroll-animation" style="position: relative">Popular Products</h3>
                                     {{-- <h3 class="name-category-popular">Sản phẩm phổ biến</h3> --}}
                                     <ul class="nav-tab" style="opacity: 0">
                                         <li class="nav-item">

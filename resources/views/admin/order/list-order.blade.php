@@ -12,7 +12,7 @@
                 <table class="table">
                     <thead>
                     <tr>
-                        <th scope="col"style="text-align: center;vertical-align:middle;">Mã Đơn</th>
+                        {{-- <th scope="col"style="text-align: center;vertical-align:middle;">Mã Đơn</th> --}}
                         {{-- <th scope="col"style="text-align: center;vertical-align:middle;">Tên KH</th>
                         <th scope="col"style="text-align: center;vertical-align:middle;">Sdt</th>
                         <th scope="col"style="text-align: center;vertical-align:middle;">Địa chỉ</th> --}}
@@ -22,14 +22,14 @@
                         <th scope="col"style="text-align: center;vertical-align:middle;">Giá</th>
                         <th scope="col"style="text-align: center;vertical-align:middle;">Số lượng</th>
                         <th scope="col"style="text-align: center;vertical-align:middle;">Tổng tiền</th></th>
-                        <th scope="col"style="text-align: center;vertical-align:middle;">Ghi chú</th>
+                        <th scope="col"style="width:250px;text-align: center;vertical-align:middle;">Ghi chú</th>
                         <th scope="col"style="text-align: center;vertical-align:middle;">Ngày đặt</th>
                     </tr>
                     </thead>
                     <tbody>
                     @foreach($orderDetail as $key => $orderDetail)
                         <tr>
-                            <td scope="row" style="text-align: center;vertical-align:middle;">{{ $orderDetail?->order?->order_code }}</td>
+                            {{-- <td scope="row" style="text-align: center;vertical-align:middle;">{{ $orderDetail?->order?->order_code }}</td> --}}
                             {{-- <td style="text-align: center;vertical-align:middle;">{{ $orderDetail?->order?->name }}</td>
                             <td style="text-align: center;vertical-align:middle;">{{ $orderDetail?->order?->phone }}</td>
                             <td style="text-align: center;vertical-align:middle;">{{ $orderDetail?->order?->shipping_address }}</td> --}}
@@ -50,6 +50,8 @@
                     @endforeach
                     </tbody>
                 </table>
+                <div>
+                </div>
             </div>
            
         </div>
@@ -57,6 +59,10 @@
         <div class="col-md-3">
         <table class="table" style="background-color:white; border-radius:5px;">
             <thead>
+                <tr >
+                    <th scope="col">Mã đơn hàng</th>
+                    <td style="text-align: left;vertical-align:middle;">{{ $orderDetail?->order?->order_code }}</td>
+                </tr>
                 <tr >
                     <th scope="col">Tên</th>
                     <td style="text-align: left;vertical-align:middle;">{{ $orderDetail?->order?->name }}</td>
@@ -69,6 +75,10 @@
                     <th scope="col">Địa chỉ</th>
                     <td style="text-align: left;vertical-align:middle;">{{ $orderDetail?->order?->shipping_address }}</td>
                 </tr>
+                {{-- <tr >
+                    <th scope="col">Ghi chú</th>
+                    <td style="text-align: left;vertical-align:middle;">{{ $orderDetail?->order?->order_note }}</td>
+                </tr> --}}
             </thead>
             {{-- <tbody>
                 <tr>

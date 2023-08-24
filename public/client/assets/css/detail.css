@@ -164,6 +164,14 @@
     outline: none;
     padding: 5px 10px;
     border-radius: 5px;
+    color: #000000;
+    background-color: #e183ca;
+}
+
+.btn-add-cart:disabled {
+    opacity:0.6;
+    background-color: #ccc; 
+    cursor: not-allowed; 
 }
 
 .btn-add {

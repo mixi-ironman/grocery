@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 class Product extends Model
 {
     use HasFactory;
@@ -35,14 +35,14 @@ class Product extends Model
         return $this->belongsTo(Category::class, 'category_id', 'id');
     }
 
-    public function media()
+    public function media(): MorphMany
     {
         return $this->morphMany(Media::class, 'mediable');
     }
 
-    public function comments()
+    public function listComment(): MorphMany
     {
-        return $this->morphMany(Comment::class, 'commentable');
+        return $this->morphMany(Comment::class, 'commentable_type','commentable_id');
     }
 
     public function productTags()
@@ -54,6 +54,5 @@ class Product extends Model
     {
         return $this->belongsToMany(Tag::class, 'product_tags', 'product_id', 'tag_id');
     }
-
 
 }

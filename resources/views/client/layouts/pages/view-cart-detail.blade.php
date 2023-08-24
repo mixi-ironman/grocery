@@ -40,4 +40,6 @@ const app_ = {
 
         app_.run();
 </script>
+
+
 @endpush

@@ -12,7 +12,6 @@ use App\Models\Product;
 use App\Models\Tag;
 
 
-
 use App\Services\CategoryService;
 
 
@@ -30,6 +29,8 @@ class ProductController extends Controller
     {
         $product = Product::with(['category'])->find($id);
         $categoryList = Category::where('parent_id', 0)->get();
+
+        
         //lấy tag theo product
         // foreach($product->tags as $productTag)
         // {
@@ -54,10 +55,7 @@ class ProductController extends Controller
     {
         $product_id = $request->product_id;
         $comments = $this->commentService->show($product_id);
-
-        // dd($comments);
         $html = '';
-
         foreach($comments as $id => $comment){
         $html .= '
         <li class="comment-item">

@@ -25,30 +25,42 @@ class CategoryController extends Controller
         $categoryList = Category::where('parent_id', 0)->get();
 
         $categoryType = request()->query('category_type');
-        if ($categoryType === 'parent') {
-            //cách 1
-            // $products = Product::whereIn('category_id', function ($query) use ($id) {
-            //     $query->select('id')
-            //         ->from('categories')
-            //         ->where('parent_id', $id);
-            // })->get();
+        // if ($categoryType === 'parent') {
+        //     //cách 1
+        //     // $products = Product::whereIn('category_id', function ($query) use ($id) {
+        //     //     $query->select('id')
+        //     //         ->from('categories')
+        //     //         ->where('parent_id', $id);
+        //     // })->get();
 
-            //cách 2
-            $categoryCollection = Category::where('parent_id', $id)->get();//
-            $categoryIds = $categoryCollection->pluck('id');
-            if(count($categoryIds))
-            {
-                $products = Product::whereIn('category_id', $categoryIds)->get();
-            }else{
-                $products = Product::where('category_id',$id)->get();
-            }
+        //     //cách 2
+        //     $categoryCollection = Category::where('parent_id', $id)->get();//
+        //     $categoryIds = $categoryCollection->pluck('id');
+        //     if(count($categoryIds))
+        //     {
+        //         $products = Product::whereIn('category_id', $categoryIds)->get();
+        //     }else{
+        //         $products = Product::where('category_id',$id)->get();
+        //     }
            
             
-        } elseif ($categoryType === 'child') {
-            $products = Product::where('category_id',$id)->get();
-        } 
+        // } elseif ($categoryType === 'child') {
+        //     $products = Product::where('category_id',$id)->get();
+        // } 
 
-        // dd($products);
+        if ($categoryType === 'parent') {
+            $categoryIds = Category::where('parent_id', $id)->pluck('id');
+    
+            if ($categoryIds->isEmpty()) {
+                $categoryIds = [$id];
+            }
+    
+            $products = Product::whereIn('category_id', $categoryIds)->get();
+        } elseif ($categoryType === 'child') {
+            $products = Product::where('category_id', $id)->get();
+        } else {
+            $products = collect(); 
+        }
         return view('client.layouts.pages.view-category-product',['carts' => $carts,'categoryList'=>$categoryList,'products'=>$products,'categoryList'=>$categoryList]); 
     }
 }

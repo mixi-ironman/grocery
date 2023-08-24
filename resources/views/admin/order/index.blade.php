@@ -10,7 +10,7 @@
                 <table class="table">
                     <thead>
                     <tr>
-                        <th scope="col"style="text-align: center;vertical-align:middle;">Mã Đơn</th>
+                        <th scope="col"style="text-align: center;vertical-align:middle;">Stt</th>
                         <th scope="col"style="text-align: center;vertical-align:middle;">Tên KH</th>
                         <th scope="col"style="text-align: center;vertical-align:middle;">Sdt</th>
                         <th scope="col"style="text-align: center;vertical-align:middle;">Địa chỉ</th>
@@ -22,9 +22,12 @@
                     </tr>
                     </thead>
                     <tbody>
+                    @php
+                        $index = 1;
+                    @endphp
                     @foreach($orders as $key => $order)
                         <tr>
-                            <td scope="row" style="text-align: center;vertical-align:middle;">{{ $order?->order_code }}</td>
+                            <td scope="row" style="text-align: center;vertical-align:middle;">{{ $index++ }}</td>
                             <td style="text-align: center; vertical-align: middle;">
                                 <a href="{{ route('order.view', ['id' => $order->id]) }}">
                                     {{ $order->name }}

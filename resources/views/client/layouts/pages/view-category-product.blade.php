@@ -20,7 +20,7 @@
                 <form name="product-filter" class="product-filter" method="POST">
                     <!-- filer product category -->
                     <div class="filter-category-name">
-                        <h4>Category</h4>
+                        <h4>Danh mục</h4>
                         <div class="product-category">
                             <ul class="product-category-list" data-name="category" data-columns="2">
                                 @foreach($categoryList as $index => $categoryParent)
@@ -59,7 +59,7 @@
                         </div>
                     </div>
                     <!-- filter product frice -->
-                    <div class="price-slider sidebar-widget">
+                    <div class="price-slider sidebar-widget" style="opacity:0;">
                         <div class="price-ranger">
                             <h4>Filter By Price</h4>
                             <div
@@ -112,7 +112,7 @@
 
         <div class="col-md-9">
             <div class="product-content-area">
-                <div class="row">
+                <div class="row" style="opacity:0;">
                     <div class="shop-product-filter">
                         <div class="total-product">
                             <p style="opacity: 0">We found <strong>29</strong> items</p>

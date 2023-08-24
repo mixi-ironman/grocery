@@ -7,13 +7,13 @@ use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
+use Illuminate\Mail\OrderSuccessMail;
 use App\Models\Order;
 use App\Models\Product;
-
 use App\Models\OrderDetail;
 use App\Services\ProductService;
-
 use App\Repositories\OrderRepository;
 
 class OrderService
@@ -33,7 +33,6 @@ class OrderService
         try {
             // Tạo mã đơn hàng ngẫu nhiên (UUID)
             $orderCode = $this->generateOrderCode();
-            $msg = "";
             $totalAmount = 0;
 
             $order = [
@@ -52,6 +51,10 @@ class OrderService
                 $product = Product::find($id);  
                 if (!$product || $cart['quantity'] > $product->stock) {
                     // Số lượng sản phẩm trong kho không đủ hoặc sản phẩm không tồn tại
+
+                    // //khi sản phẩm ko đủ số lượng có thể xóa sản phẩm đó trong giỏ hàng hoặc quay về trang show cart
+                    // unset($carts[$id]);
+                    // session()->put('cart', $carts);
                     DB::rollback();
 
                     if (!$product) {
@@ -62,10 +65,13 @@ class OrderService
                         ]);
                     } else {
                         $quantityShortage = $cart['quantity'] - $product->stock;
+                        
                         return response()->json([
                             'status' => 'error',
                             'code' => 400,
-                            'msg' => 'Số lượng sản phẩm "' . $product->name . '" trong kho không đủ. Thiếu ' . $quantityShortage . ' sản phẩm.',
+                            'product_id'=>$id,
+                            // 'msg' => 'Số lượng sản phẩm "' . $product->name . '" trong kho không đủ. Thiếu ' . $quantityShortage . ' sản phẩm.',
+                            'msg' => 'Số lượng sản phẩm "' . $product->name . '" trong kho không đủ ^.^',
                         ]);
                     }
                 }
@@ -103,11 +109,15 @@ class OrderService
             // Nếu không có lỗi, lưu các thay đổi vào cơ sở dữ liệu
             DB::commit();
 
+            // Mail::to($addOrder->email)
+            //     ->send(new OrderSuccessMail());
+
             return response()->json([
                 'status' => 'success',
                 'code' => 200,
-                'msg' => $msg,
+                'msg' => 'Tạo đơn hàng thành công',
             ]);
+            
         } catch (\Exception $e) {
             // Nếu có lỗi xảy ra, hủy bỏ các thay đổi và không lưu vào cơ sở dữ liệu
             DB::rollback();

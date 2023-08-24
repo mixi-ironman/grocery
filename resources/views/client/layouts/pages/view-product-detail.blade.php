@@ -58,7 +58,8 @@
                                 </li>
                                 
                                 @endfor
-                            </ul> <span ><strong style="color:red;display:inline-block;margin:5px 0 0 10px">{{ $rating }}/5</strong></span> 
+                            </ul> 
+                            <span ><strong style="color:red;display:inline-block;margin:5px 0 0 10px">{{ $rating }}/5</strong></span> 
                               
                         </div>
                         {{-- <span>32 reviews</span> --}}
@@ -84,12 +85,12 @@
                         <p class="vendor-name">Suite</p>
                     </div>
                     <div class="product-category">
-                        <p class="category-title">Type :</p>
+                        <p class="category-title">Loại :</p>
                         <p class="category-name">{{ $product->category->name }}</p>
                     </div>
                     <div class="product-availability">
-                        <p class="availability-title">Availability :</p>
-                        <p class="in-stock">{{ $product->stock }} in stock</p>
+                        <p class="availability-title">Tình trạng :</p>
+                        <p class="in-stock" id="product-stock" data-quantity="{{ $product->stock }}">{{ $product->stock }} in stock</p>
                     </div>
 
                     <div class="add-to-cart">
@@ -100,13 +101,13 @@
                                         <i class="fa-solid fa-minus icon-minus"></i>
                                     </button>
                                     <!-- <input type="number" name="quatity" id="" value="1" max-length="12" /> -->
-                                    <input type="text" inputmode="numeric" name="quatity" id="" value="1" max-length="12" class="input-quantity">
+                                    <input type="text" inputmode="numeric" name="quatity" id="input-quantity" value="1" max-length="12" class="input-quantity">
                                     <button type="button">
                                         <i class="fa-solid fa-plus icon-flus"></i>
                                     </button>
                                 </div>
-                                <button type="button" name="add-to-cart" class="btn-add-cart btn_add_to_cart">
-                                    <i class="fa-solid fa-cart-shopping"></i><span class="btn-add">ADD TO CART</span>
+                                <button type="button" name="add-to-cart" class="btn-add-cart btn_add_to_cart btn_add_to_cart-detail" data-url="{{ route('add-to-cart',['id' => $product->id]) }}" data-product_id = "{{ $product->id }}">
+                                    <i class="fa-solid fa-cart-shopping"></i><span class="btn-add">Thêm vào giỏ hàng</span>
                                 </button>
                             </div>
                         </form>
@@ -328,28 +329,69 @@
 <script>
 const app_ = {
   
-    quantityInput() {
-        const $ = document.querySelector.bind(document);
-        const $$ = document.querySelectorAll.bind(document);
+    // quantityInput() {
+    //     const $ = document.querySelector.bind(document);
+    //     const $$ = document.querySelectorAll.bind(document);
 
+    //     const minusBtn = $('.icon-minus');
+    //     const plusBtn = $('.icon-flus');
+    //     const quantityInput_ = $('.input-quantity');
+
+    //     minusBtn.addEventListener('click', function () {
+    //         let quantity = parseInt(quantityInput_.value);
+    //         if (quantity > 1) {
+    //             quantity -= 1;
+    //             quantityInput_.value = quantity;
+    //         }
+    //     });
+
+    //     plusBtn.addEventListener('click', function () {
+            
+
+    //         let quantity = parseInt(quantityInput_.value);
+    //         if (quantity < 10 || quantity < 0) {
+    //             quantity += 1;
+    //             quantityInput_.value = quantity;
+    //         }
+            
+    //     });
+    // },
+    quantityInput() {
         const minusBtn = $('.icon-minus');
         const plusBtn = $('.icon-flus');
         const quantityInput_ = $('.input-quantity');
+        const addCartBtn = $('.btn-add-cart');
+        let stock = $('#product-stock').data('quantity');
 
-        minusBtn.addEventListener('click', function () {
-            let quantity = parseInt(quantityInput_.value);
+        minusBtn.on('click', function () {
+            let quantity = parseInt(quantityInput_.val());
+            // console.log(quantity)
+
             if (quantity > 1) {
                 quantity -= 1;
-                quantityInput_.value = quantity;
+                quantityInput_.val(quantity);
+
+                if (quantity > stock) {
+                    addCartBtn.prop('disabled', true);
+                } else {
+                    addCartBtn.prop('disabled', false);
+                }
             }
         });
 
-        plusBtn.addEventListener('click', function () {
-            let quantity = parseInt(quantityInput_.value);
+        plusBtn.on('click', function () {
+            let quantity = parseInt(quantityInput_.val());
+            // console.log(quantity)
             if (quantity < 10 || quantity < 0) {
                 quantity += 1;
-                quantityInput_.value = quantity;
+                quantityInput_.val(quantity);
+                if (quantity > stock) {
+                    addCartBtn.prop('disabled', true);
+                } else {
+                    addCartBtn.prop('disabled', false);
+                }
             }
+
         });
     },
 
@@ -386,7 +428,43 @@ const app_ = {
     },
 };
     app_.run();
+ 
+</script>
 
-    
+<script>
+    function addToCart(event) {
+    event.preventDefault();
+    let urlCart = $(this).data("url");
+    let inputValue = $('#input-quantity').val();
+    console.log('input'+inputValue)
+    // $('#product-stock').data('quantity', stock); //cách này lấy value thay đổi route
+
+    // alert(urlCart);
+    $.ajax({
+        method: "GET",
+        url: urlCart,
+        dataType: "json",
+        data: {
+                quantity: inputValue,  
+                _token: $('meta[name="csrf-token"]').attr("content"),
+        },
+        success: function (data) {
+            let count = 0;
+ 
+            if (data.code === 200) {
+                $("#count_number").text(data.count_number)
+                $("#cart_list_wrapper").html(data.cartList);
+                // console.log(data.cartList);
+            }
+        },
+        error: function () {
+            alert("Lỗi ở ajax");
+        },
+    });
+}
+
+$(document).ready(function () {
+    $(document).on("click", ".btn_add_to_cart-detail", addToCart);
+});
 </script>
 @endpush

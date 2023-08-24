@@ -26,44 +26,43 @@ class CartController extends Controller
 
     public function addToCart(Request $request, $id)
     {
-        //  session()->forget('cart');
-        //  Hoặc sử dụng session()->pull('cart') nếu bạn muốn lấy giỏ hàng và xóa nó khỏi session cùng lúc.
-        // dd(session()->get('cart'));
-
+        $quantity_input = $request->quantity ? $request->quantity : 1;
+    
         $product = $this->productService->getProductById($id);
-        // dd($product);
+    
         if (!$product) {
             return redirect()->back()->with('error', 'Sản phẩm không tồn tại.');
         }
+    
         $cart = session()->get('cart', []);
-       
+    
         if (isset($cart[$id])) {
-            $cart[$id]['quantity'] += 1; // Tăng số lượng sản phẩm trong giỏ hàng
-            // $cart[$id]['quantity'] = $cart[$id]['quantity'] + 1;
+            $cart[$id]['quantity'] += $quantity_input; // Tăng số lượng sản phẩm trong giỏ hàng
         } else {
             $cart[$id] = [
                 'name' => $product->name,
                 'image' => $product->image,
                 'price' => $product->price,
-                'quantity' => 1,
+                'quantity' => $quantity_input,
             ];
         }
-
+    
         session()->put('cart', $cart);
         $count_number = count($cart);
-        $cartList =  view('client.components.cart_list',['carts' => $cart])->render();
+        $cartList = view('client.components.cart_list', ['carts' => $cart])->render();
+    
         return response()->json(
             [
-                'message' => 'succes',
+                'message' => 'success',
                 'code' => 200,
                 'cart' => $cart,
-                'cartList'=>$cartList,
-                'count_number'=>$count_number
-            ]
-        ,200);
-        
-        // return redirect()->back()->with('success', 'Sản phẩm đã được thêm vào giỏ hàng.');
+                'cartList' => $cartList,
+                'count_number' => $count_number
+            ],
+            200
+        );
     }
+    
 
      public function showCart(Request $request)
      {
@@ -128,11 +127,19 @@ class CartController extends Controller
         $carts = session()->get('cart',[]);
         if (isset($carts))
         {
-            //  $subTotal = $this->orderService->subTotal($carts);
-            session()->forget('cart');
+            // session()->forget('cart');
             return $this->orderService->add($request,$carts);
         }
-          return redirect()->route('home');
+      }
+
+      public function clearCart(Request $request)
+      {
+            session()->forget('cart');
+            
+            return response()->json([
+                'status' => 'success_',
+                'code' => 200,
+            ]);
       }
 
 

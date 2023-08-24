@@ -105,9 +105,23 @@
         // instance, using default configuration.
         CKEDITOR.replace( 'content' );
     </script> --}}
+
+    <script> 
+        tinymce.init({
+            selector: '#content',  // change this value according to your HTML
+            plugins: 'image wordcount',
+            toolbar: 'undo redo | blocks | bold italic | alignleft aligncentre alignright alignjustify | indent outdent | bullist numlist | image | wordcount',
+            image_list: [
+            { title: 'My image 1', value: 'https://www.example.com/my1.gif' },
+            { title: 'My image 2', value: 'http://www.moxiecode.com/my2.gif' }
+            ],
+            images_upload_url: '{{ asset('upload/image') }}',
+        });
+    </script>
+
     <script>
        
-       CKEDITOR.replace( 'content' );
+        // CKEDITOR.replace( 'content' );
 
         $(document).ready(function () {
 

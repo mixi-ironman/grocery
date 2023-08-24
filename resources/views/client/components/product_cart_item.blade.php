@@ -26,7 +26,7 @@
                             width="37"
                             height="37" src="https://img.icons8.com/external-creatype-glyph-colourcreatype/64/external-eye-essential-ui-v2-creatype-glyph-colourcreatype-2.png" alt="external-eye-essential-ui-v2-creatype-glyph-colourcreatype-2"/>
                     </button>
-                    <a href="#" class="product-action-icon btn_add_to_cart" data-url="{{ route('add-to-cart',['id' => $product->id]) }}">
+                    <a href="#" class="product-action-icon btn_add_to_cart btn_add_to_cart-quick" data-url="{{ route('add-to-cart',['id' => $product->id]) }}">
                         <img
                             class="translatex"
                             width="35"
@@ -50,11 +50,27 @@
             </h2>
             <div class="product-rate-cover">
                 <div class="product-rate">
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
+                    {{-- <ul style="display:flex;margin:0;padding:0">
+                        @foreach($rating as $rate)
+                            @php
+                                $averageRating = round($rate->average_rating);
+                            @endphp
+                            @for($count = 1; $count <= 5; $count++)
+                                @php
+                                    if ($count <= $averageRating) {
+                                        $color = 'color:#ffcc00;';
+                                    } else {
+                                        $color = 'color:#ccc;';
+                                    }
+                                @endphp
+                                <li class="rating_" style="cursor:pointer;{{ $color }}; font-size:30px;">&#9733</li>
+                            @endfor
+                        @endforeach
+                    </ul> --}}
+                    
+                        {{-- @php
+                            echo round((int)$rate->average_rating);
+                        @endphp --}}
                 </div>
                 <div class="product-jubge" style="display: none"></div>
             </div>
@@ -122,6 +138,5 @@
         }
     });
 </script>
-
 @endpush --}}
 

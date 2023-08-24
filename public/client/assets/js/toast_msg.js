@@ -1,18 +1,46 @@
 // Toast function
-let btn_toast = document.querySelectorAll(".btn_add_to_cart");
-// console.log(btn_toast);
-btn_toast.forEach((element, index) => {
-    element.addEventListener("click", function (e) {
-        //  $(this).
-        toast({
-            title: "Thành công!",
-            message: "Bạn đã thêm sản phẩm vào giỏ hàng.",
-            type: "success",
-            duration: 2000,
-        });
-        console.log("click");
+//cách 1
+// let btn_toast = document.querySelectorAll(".btn_add_to_cart");
+// btn_toast.forEach((element, index) => {
+//     element.addEventListener("click", function (e) {
+//         toast({
+//             title: "Thành công!",
+//             message: "Bạn đã thêm sản phẩm vào giỏ hàng.",
+//             type: "success",
+//             duration: 2000,
+//         });
+//         console.log("click");
+//     });
+// });
+
+// cách 2
+// Lắng nghe sự kiện click trên container chung
+// document.getElementById('container').addEventListener('click', function(event) {
+//     // Kiểm tra xem phần tử được nhấp có class .btn_add_to_cart hay không
+//     if (event.target.classList.contains('btn_add_to_cart')) {
+//         // Thêm sản phẩm vào giỏ hàng
+//         toast({
+//             title: "Thành công!",
+//             message: "Bạn đã thêm sản phẩm vào giỏ hàng.",
+//             type: "success",
+//             duration: 2000,
+//         });
+//     }
+// });
+
+//cách 3
+$(document).on('click', '.btn_add_to_cart', function(event) {
+    // Thêm sản phẩm vào giỏ hàng
+    // event.preventdefault()
+
+    toast({
+        title: "Thành công!",
+        message: "Bạn đã thêm sản phẩm vào giỏ hàng.",
+        type: "success",
+        duration: 2000,
     });
 });
+
 
 function toast({ title = "", message = "", type = "info", duration = 3000 }) {
     const main = document.getElementById("toast");

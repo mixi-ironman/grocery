@@ -135,7 +135,7 @@
                                     <a href="{{ route('home') }}">Trang chủ</a>
                                 </li>
                                 <li class="features-box_item">
-                                    <a href="#">Sản phẩm</a>
+                                    <a href="{{ route('viewCategory') }}">Sản phẩm</a>
                                 </li>
                                 <li class="features-box_item">
                                     <a href="#">Tin tức</a>

@@ -303,9 +303,9 @@
     margin-bottom: 0px;
 }
 
-/* .menu-item:nth-child(2n){
-    background-color:rgba(231, 208, 208, 0.7);
-} */
+.menu-item:nth-child(2n){
+    background-color:rgba(233, 224, 224, 0.5);
+}
 .menu-item.active .menu-item-link {
 
     background-color: rgb(152, 199, 152, 0.3);
@@ -833,7 +833,6 @@ chuyển dịch từ giữa ra 2 bên */
 /* Banner */
 
 .banner-wrapper {
-    margin-top: 30px;
 }
 
 .banner-wrapper-list {
@@ -842,7 +841,7 @@ chuyển dịch từ giữa ra 2 bên */
     flex-wrap: nowrap;
     white-space: nowrap;
     overflow-x: auto;
-    padding:12px;
+    padding: 12px 0px;
 }
 .banner-item {
     position: relative;
@@ -1077,10 +1076,17 @@ chuyển dịch từ giữa ra 2 bên */
     justify-content: space-between;
     align-items: center;
 }
+
+.product-price p strong{
+    color: rgb(235, 49, 49);
+    font-size: 18px !important;
+
+  
+}
 .old-price {
     text-decoration: line-through;
-    color: red;
-    font-size: 12px !important;
+    color: #82869e!important;
+    font-size: 13px !important;
     margin-left: 10px;
 }
 .add-cart {
@@ -1859,12 +1865,14 @@ span {
 
 .scroll-animation {
     opacity: 0;
+    /* visibility: hidden; */
     transition: opacity 0.5s ease-out;
     animation: slideInFromLeft 0.9s ease;
 }
 
 .scroll-animation.animate {
     opacity: 1;
+        /* visibility: visible; */
 }
 
 #list-product {

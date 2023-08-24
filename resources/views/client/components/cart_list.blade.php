@@ -65,8 +65,8 @@
             <div class="footer-cart-sidebar">
                 <p class="cart-total">Tổng: <span class="cart-product-price-total">{{ number_format($total) }}đ</span></p>
                 <p class="btn-cart">
-                    <a href="{{ route('show-cart') }}" class="btn-view-cart">View Cart</a>
-                    <a href="{{  route('check-out') }}" class="btn-check-out translate">Check out</a>
+                    <a href="{{ route('show-cart') }}" class="btn-view-cart">Xem chi tiết</a>
+                    <a href="{{  route('check-out') }}" class="btn-check-out translate">Thanh Toán</a>
                 </p>
             </div>
         </div>

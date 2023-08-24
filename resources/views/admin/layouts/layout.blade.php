@@ -259,6 +259,10 @@
         {{-- thêm jquery --}}
         <script src="{{ asset('js/jquery-3.7.0.min.js') }}"></script>
         <script src="{{ asset('libs/select2/js/select2.min.js') }}"></script>
+        
+        {{-- add tinymce như ckeditor --}}
+        <script src="{{ asset('tinymce/tinymce.min.js') }}"></script>
+
         <script>
             var ctx1 = document.getElementById("chart-line").getContext("2d");
 

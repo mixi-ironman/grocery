@@ -90,6 +90,7 @@
         {{-- <script src="{{ url('client') }}/assets/js/search.js"></script> --}}
         <script src="{{ url('client') }}/assets/js/add_cart.js"></script>
         <script src="{{ url('client') }}/assets/js/comment.js"></script>
+        <script src="{{ asset('tinymce/tinymce.min.js') }}"></script>
         
          @stack('custom-script')
 

@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\View\Composers\MenuComposer;
 use App\Models\Product;
 use App\Models\Category;
-
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Services\Client\ProductService;
 
@@ -25,7 +25,19 @@ class HomeController extends Controller
         $carts = session()->get('cart',[]);
         // dd($carts);
         $categoryList = Category::where('parent_id', 0)->get();
-        return view('client.layouts.pages.home',['products' => $products, 'carts' => $carts,'categoryList'=>$categoryList]); 
+
+        //get rating product
+        $productsWithRating = DB::table('products')
+        ->select('products.id', 'products.name', DB::raw('AVG(comments.rating) as average_rating'))
+        ->leftJoin('comments', function ($join) {
+            $join->on('products.id', '=', 'comments.commentable_id')
+                ->where('comments.commentable_type', '=', 'product');
+        })
+        ->groupBy('products.id', 'products.name', /* Thêm các cột khác mà bạn đã chọn */)
+        ->get();
+
+        // dd($productsWithRating);
+        return view('client.layouts.pages.home',['products' => $products, 'carts' => $carts,'categoryList'=>$categoryList,'rating' => $productsWithRating]); 
     }
 
     //load product
@@ -70,5 +82,19 @@ class HomeController extends Controller
             'product_component'=>$product_component,
             'products_search'=>$products
         ]);
+    }
+
+    public function getRating(Request $request)
+    {
+        $productsWithRating = DB::table('products')
+        ->select('products.id', 'products.name', DB::raw('AVG(comments.rating) as average_rating'))
+        ->leftJoin('comments', function ($join) {
+            $join->on('products.id', '=', 'comments.commentable_id')
+                ->where('comments.commentable_type', '=', 'product');
+        })
+        ->groupBy('products.id', 'products.name', /* Thêm các cột khác mà bạn đã chọn */)
+        ->get();
+
+        // dd($productsWithRating);
     }
 }

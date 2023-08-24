@@ -77,4 +77,18 @@ class ProductController extends Controller
         return $this->productService->destroy($id);
         return redirect()->route('products.index')->with('success', 'Delete Product Successfully!');
     }
+
+    public function uploadImage(Request $request)
+    {
+        if ($request->hasFile('file')) {
+            $imagePath = $request->file('file')->store('images', 'public');
+            // return response()->json(['location' => asset('storage/' . $imagePath)]);
+            $imagePath = 'image'.time().'-'.uniqid().'.'.$request->file('image')->extension();
+                // Cách 1: Sử dụng move() để lưu hình ảnh vào thư mục public/uploads
+                // $request->file('image')->move(public_path('uploads'), $imagePath);
+            return response()->json(['location' => asset('upload/'.$imagePath)]);
+
+        }
+        return response()->json(['error' => 'Image upload failed'], 400);
+    }
 }

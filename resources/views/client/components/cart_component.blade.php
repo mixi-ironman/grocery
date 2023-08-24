@@ -184,16 +184,13 @@ $(document).ready(function () {
         $.ajax({
             method: 'GET',
             dataType: 'JSON',
-
             data: {
                 'id': id
             },
             url: urlDeleteCart,
 
-
             success: function(data) {
                 // Xử lý phản hồi từ server (nếu cần)
-
                 if(data.code === 200){
                     $("#count_number").text(data.count_number)
                     $(".cart_wrapper").html(data.cart_component);
