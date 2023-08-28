@@ -55,4 +55,14 @@ class Product extends Model
         return $this->belongsToMany(Tag::class, 'product_tags', 'product_id', 'tag_id');
     }
 
+    //lấy giá ưu dãi nếu có
+    public function getCartPriceAttribute()
+    {
+        if ($this->sale_price) {
+            return $this->sale_price;
+        }
+
+        return $this->price;
+    }
+
 }

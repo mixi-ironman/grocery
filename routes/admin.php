@@ -7,6 +7,8 @@ use App\Http\Controllers\SliderController;
 use App\Http\Controllers\ProductImageController;
 use App\Http\Controllers\OrderDetailController;
 use App\Http\Controllers\TagController;
+use App\Http\Controllers\DashboardController;
+
 
 
 
@@ -14,6 +16,10 @@ use App\Http\Controllers\TagController;
 //     Route::get('/', [CategoryController::class, 'index'])->name('index');
 // });
 
+// Route::middleware('auth:admin')->group(function (){
+Route::prefix('dashboard')->name('dashboard.')->group(function () {
+Route::get('/', [DashboardController::class, 'index'])->name('index');
+});
 //Categories
 Route::prefix('categories')->name('categories.')->group(function () {
     Route::get('/', [CategoryController::class, 'index'])->name('index');

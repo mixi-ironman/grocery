@@ -7,9 +7,9 @@ use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
-use Illuminate\Mail\OrderSuccessMail;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\OrderSuccessMail;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\OrderDetail;
@@ -24,10 +24,9 @@ class OrderService
     {
     }
 
-    //Đặt hàng
+    // //Đặt hàng
     public function add(Request $request, $carts)
     {
-       
         DB::beginTransaction();
 
         try {
@@ -46,9 +45,17 @@ class OrderService
                 'total_amount' => $totalAmount,
             ];
 
-            // Kiểm tra số lượng sản phẩm trong kho trước khi tạo đơn hàng
             foreach ($carts as $id => $cart) {        
                 $product = Product::find($id);  
+                if ($cart['quantity'] > 10) {
+                    return response()->json([
+                        'status' => 'error',
+                        'code' => 400,
+                        'product_id' => $id,
+                        'msg' => 'Một sản phẩm bạn chỉ mua tối đa 10 sản phẩm ^.^',
+                    ]);
+                }
+
                 if (!$product || $cart['quantity'] > $product->stock) {
                     // Số lượng sản phẩm trong kho không đủ hoặc sản phẩm không tồn tại
 
@@ -76,32 +83,34 @@ class OrderService
                     }
                 }
             }
-
-
             // Lưu thông tin khách hàng vào bảng order
             $addOrder = Order::create($order);
 
-            foreach ($carts as $id => $cart) {        
+            $orderId = $addOrder->id;
+
+            foreach ($carts as $id => $cart) {
                 $product = Product::find($id);  
-                    $orderDetail = [
-                        'order_id' => $addOrder->id,
-                        'product_id' => $id,
-                        'product_name' => $cart['name'],
-                        'price' => $cart['price'],
-                        'quantity' => $cart['quantity'],
-                        'total_price' => $cart['quantity'] * $cart['price'],
-                        'image' => $cart['image'],
-                    ];
+                
+                $orderDetail = [
+                    'order_id' => $orderId,
+                    'product_id' => $id,
+                    'product_name' => $cart['name'],
+                    'price' => $cart['price'],
+                    'quantity' => $cart['quantity'],
+                    'total_price' => $cart['quantity'] * $cart['price'],
+                    'image' => $cart['image'],
+                ];
 
-                    // Thêm thông tin sản phẩm vào bảng orderDetail
-                    OrderDetail::create($orderDetail);
+                // Thêm thông tin sản phẩm vào bảng orderDetail
+                OrderDetail::create($orderDetail);
 
-                    // Cập nhật số lượng sản phẩm trong bảng products
-                    $product->decrement('stock', $cart['quantity']);
+                // Cập nhật số lượng sản phẩm trong bảng products
+                $product->decrement('stock', $cart['quantity']);
 
-                    // Cập nhật tổng tiền đơn hàng
-                    $totalAmount += $cart['quantity'] * $cart['price'];
-                }  
+                // Cập nhật tổng tiền đơn hàng
+                $totalAmount += $cart['quantity'] * $cart['price'];
+            }  
+
             // Cập nhật tổng tiền đơn hàng vào bảng order
             $addOrder->total_amount = $totalAmount;
             $addOrder->save();
@@ -109,24 +118,25 @@ class OrderService
             // Nếu không có lỗi, lưu các thay đổi vào cơ sở dữ liệu
             DB::commit();
 
-            // Mail::to($addOrder->email)
-            //     ->send(new OrderSuccessMail());
+            if($request->payment_method == 'online')
+            {
+                return redirect()->route('vnpay', ['order_id' => $orderId, 'amount' => $totalAmount]);
+            }
 
-            return response()->json([
-                'status' => 'success',
-                'code' => 200,
-                'msg' => 'Tạo đơn hàng thành công',
-            ]);
+            return redirect()->route('home');
+
+            // return response()->json([
+            //     'status' => 'success',
+            //     'msg' => 'Tạo đơn hàng thành công',
+            // ], 200);
             
         } catch (\Exception $e) {
             // Nếu có lỗi xảy ra, hủy bỏ các thay đổi và không lưu vào cơ sở dữ liệu
             DB::rollback();
-
             return response()->json([
                 'status' => 'error',
-                'code' => 500,
-                'msg' => 'Đã có lỗi xảy ra. Vui lòng thử lại sau.',
-            ]);
+                'msg' => 'Có lỗi xảy ra. Vui lòng thử lại sau',
+            ], 500);
         }
     }
 

@@ -27,7 +27,7 @@ class OrderSuccessMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Order Success Mail',
+            subject: 'Nam gửi emali nè',
         );
     }
 
@@ -37,7 +37,7 @@ class OrderSuccessMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'client.mail.order_success',
+            view: 'client.layouts.mail.order-success',
         );
     }
 

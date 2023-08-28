@@ -14,6 +14,7 @@ class Authenticate extends Middleware
 
     ];
 
+    //override lại method 
     public function handle($request, Closure $next, ...$guards)
     {
         // dd(...$guards);
@@ -27,6 +28,7 @@ class Authenticate extends Middleware
                 return redirect()->route($this->redirectRoute[$guard]);
             }
         }
+        
         $this->authenticate($request, $guards);
 
         return $next($request);

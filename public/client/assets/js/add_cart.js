@@ -8,19 +8,11 @@ function addToCart(event) {
         dataType: "json",
         success: function (data) {
             let count = 0;
-            // Xử lý phản hồi từ server (nếu cần)
             if (data.code === 200) {
-                // if(parseInt(data.count_number) == 0)
-                // {
-                //     data.count_number = 1;
-                // }
-
+                //update lại sỗ lượng icon header
                 $("#count_number").text(data.count_number)
+                //updale lại slide list cart detail trên header
                 $("#cart_list_wrapper").html(data.cartList);
-
-                // console.log(data.cartList);
-                console.log(data.count_number);
-
             }
         },
         error: function () {

@@ -46,7 +46,8 @@
               <input class="form-check-input" type="checkbox" value="" id="form1Example3" checked />
               <label class="form-check-label" for="form1Example3"> Remember me </label>
             </div>
-            <a href="#!">Forgot password?</a>
+            <a href="#!">Quên mật khẩu?</a>
+            <a href="{{ route("customer.register-page") }}">Đăng ký!</a>
           </div>
 
           <!-- Submit button -->

@@ -67,10 +67,6 @@
                             @endfor
                         @endforeach
                     </ul> --}}
-                    
-                        {{-- @php
-                            echo round((int)$rate->average_rating);
-                        @endphp --}}
                 </div>
                 <div class="product-jubge" style="display: none"></div>
             </div>
@@ -110,33 +106,5 @@
             console.log('load')
             // loadMore(url);
         });
-
-        function loadMore(url) {
-            let page = $('#page').val();
-            $.ajax({
-                method: 'GET',
-                dataType: 'JSON',
-                data: {
-                    page: page,
-                    // Gửi CSRF token kèm theo dữ liệu
-                    _token: $('meta[name="csrf-token"]').attr('content')
-                },
-                url: url,
-
-                success: function(data) {
-                    if (data.product_cart_item != '') {
-                        $("#list-product").append(data.product_cart_item);
-                         $('#page').val(data.page + 1);
-                    } else {
-                        $('.btn_load-more').hide();
-                    }
-                },
-                error: function(error) {
-                    alert('Có lỗi xảy ra. Vui lòng thử lại sau');
-                }
-            });
-        }
-    });
-</script>
 @endpush --}}
 

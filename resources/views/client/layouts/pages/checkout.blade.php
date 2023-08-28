@@ -9,7 +9,8 @@
                         <h4 class="text-center">Checkout</h4>
                     </div>
                     <div class="card-body">
-                        <form>
+                        <form action="{{ route('confirm-check-out') }}" method="POST">
+                            @csrf
                             <div class="mb-3">
                                 <label for="name" class="form-label">Họ và tên</label>
                                 <input type="text" class="form-control fullname" id="name" name="name" placeholder="full name..." value="">
@@ -53,7 +54,8 @@
                             <div class="d-grid gap-2" style="display:flex !important;justify-content:space-between">
                                 {{-- <button type="submit" class="btn btn-primary">Place Order</button> --}}
                                 <a href="{{ route('show-cart') }}" class="translatex"  style="width:200px;background-color:rgba(221, 131, 229, 0.8);display:block; padding:10px 15px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);border-top-left-radius: 12px;border-bottom-right-radius: 12px;color:black;font-weight:600;font-size:16px;position:relative"><i class="bi bi-arrow-left me-2"></i>Giỏ hàng</a>
-                                <a href="#" class="translatex btn-checkout"  style="width:200px;background-color:rgba(221, 131, 229, 0.8);display:block; padding:10px 15px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);border-top-left-radius: 12px;border-bottom-right-radius: 12px;color:black;font-weight:600;font-size:16px;position:relative"><i class="bi bi-arrow-left me-2"></i>Thanh Toán</a>
+                                {{-- <a href="#" class="translatex btn-checkout"  style="width:200px;background-color:rgba(221, 131, 229, 0.8);display:block; padding:10px 15px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);border-top-left-radius: 12px;border-bottom-right-radius: 12px;color:black;font-weight:600;font-size:16px;position:relative"><i class="bi bi-arrow-left me-2"></i>Thanh Toán</a> --}}
+                                <button type="submit" class="translatex btn-checkout" style="width:200px;background-color:rgba(221, 131, 229, 0.8);display:block; padding:10px 15px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);border-top-left-radius: 12px;border-bottom-right-radius: 12px;color:black;font-weight:600;font-size:16px;position:relative">Thanh Toán</button>
                             </div>
                         </form>
                     </div>
@@ -114,7 +116,7 @@
     </div>
 @endsection
 
-@push('custom-script')
+{{-- @push('custom-script')
 <script>
     $.ajaxSetup({
         headers: {
@@ -125,8 +127,8 @@
     function addOrder(event) {
         event.preventDefault();
         let urlCash = $('.cash').data('url');
-        // alert(urlCash);
-        let fullname = $('#name').val();
+        alert(urlCash);
+        let name = $('#name').val();
         let email = $('#email').val();
         let phone = $('#phone').val();
         let shipping_address = $('#shipping_address').val();
@@ -145,42 +147,46 @@
                 method: 'POST',
                 url: urlCash,
                 data: {
-                    name: fullname,
-                    email: email,
-                    phone: phone,
-                    shipping_address: shipping_address,
-                    payment_method: payment_method,
-                    order_note: order_note,
-                    total_amount: total_amount,
+                    name,
+                    email,
+                    phone,
+                    shipping_address,
+                    payment_method,
+                    order_note,
+                    total_amount,
                     _token: $('meta[name="csrf-token"]').attr('content')
-                },
+                },xhrFields: { withCredentials: true },
                 dataType: 'json',
                 success: function (data) {
                     console.log(data); 
-                    if (data.status == 'success') {
+                    if(data.status)  
+                    {
+                        if (data.status == 'success') {
                         alert('Tạo đơn hàng thành công');
                         $.ajax({
-                        method: 'POST',
-                        url: '{{ route('clear-cart') }}',
-                        data: {
-                            _token: $('meta[name="csrf-token"]').attr('content')
-                        },
-                        dataType: 'json',
-                        success: function (response) {
-                            if (response.code == 200) {
-                                window.location.replace('{{ route('home') }}');
+                            method: 'POST',
+                            url: '{{ route('clear-cart') }}',
+                            data: {
+                                _token: $('meta[name="csrf-token"]').attr('content')
+                            },
+                            
+                            dataType: 'json',
+                            success: function (response) {
+                                if (response.code == 200) {
+                                    // window.location.replace('{{ route('home') }}');
+                                }
+                            },
+                            error: function (error) {
+                                console.error('Đã có lỗi xảy ra khi xóa giỏ hàng', error);
+                                // window.location.replace('{{ route('home') }}');
                             }
-                        },
-                        error: function (error) {
-                            console.error('Đã có lỗi xảy ra khi xóa giỏ hàng', error);
-                            window.location.replace('{{ route('home') }}');
-                        }
-                    });
+                        });
                        
                     } else if (data.status == 'error') {
                         alert(data.msg);
-                        window.location.replace('{{ route('show-cart') }}');
-                    }   
+                        // window.location.replace('{{ route('show-cart') }}');
+                    } 
+                    }
                 },
 
                 error: function (error) {
@@ -198,4 +204,4 @@
     });
 </script>
 
-@endpush
+@endpush --}}

@@ -4,11 +4,11 @@
                 <img src="{{ url('client') }}/assets/img/banner-1.png" class="banner-item-img" alt="banner1" />
                 <div class="banner-item-description">
                     <h4>
-                        Everyday Fresh &
+                        Uy tín &
                         <br />
-                        Clear Width Our
+                        Chất lượng
                         <br />
-                        Products
+                        ^.^
                     </h4>
                     <a class="translatey" href="{{ route('viewCategory') }}">Shop now!</a>
                 </div>
@@ -19,11 +19,11 @@
                 <img src="{{ url('client') }}/assets/img/banner-2.png" class="banner-item-img" alt="banner2" />
                 <div class="banner-item-description">
                     <h4>
-                        Everyday Fresh &
+                        Uy tín &
                         <br />
-                        Clear Width Our
+                        Chất lượng
                         <br />
-                        Products
+                        ^.^
                     </h4>
                     <a class="translatey" href="{{ route('viewCategory') }}">Shop now!</a>
                 </div>
@@ -34,11 +34,11 @@
                 <img src="{{ url('client') }}/assets/img/banner-3.png" class="banner-item-img" alt="banner3" />
                 <div class="banner-item-description">
                     <h4>
-                        Everyday Fresh &
+                        Uy tín &
                         <br />
-                        Clear Width Our
+                        Chất lượng
                         <br />
-                        Products
+                        ^.^
                     </h4>
                     <a class="translatey" href="{{ route('viewCategory') }}">Shop now!</a>
                 </div>

@@ -64,7 +64,7 @@
                         </a>
                     </div>
                     <div class="user-img_area wishlist translate">
-                        <a href="#">
+                        <a href="{{ route("customer.login-page") }}">
                             <!-- <i class="fa-solid fa-user-tie"></i> -->
                             <img
                                 class="translatey"

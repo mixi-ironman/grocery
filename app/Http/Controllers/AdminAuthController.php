@@ -25,5 +25,12 @@ class AdminAuthController extends Controller
             return redirect()->back()->withErrors(['login' => 'Sai tài khoản hoặc mật khẩu'])->withInput();
         }
     }
+
+    public function logout()
+    {
+        Auth::guard('admin')->logout();
+
+        return redirect()->route('categories.index'); 
+    }
 }
 

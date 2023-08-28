@@ -1,8 +1,8 @@
 <div class="cart">
-    <div class="container mb-5 mt-3">
+    <div class="container mb-5 mt-3" >
         <div class="row">
-            <div class="col-lg-8 mb-4">
-                <h1 class="mb-3">Your Cart</h1>
+            <div class="col-lg-8 mb-2">
+                <h1 class="mb-3">Giỏ hàng</h1>
                 {{-- <div class="d-flex justify-content-between" style="display:none">
                     <h6 class="text-muted">There are <span class="text-primary">3</span> products in your cart</h6>
                     <h6 class="text-muted"><a href="#" class="text-muted"><i class="bi bi-trash me-2"></i>Clear Cart</a></h6>
@@ -11,7 +11,7 @@
         </div>
         <div class="row">
             @if(count($carts) > 0)
-                <div class="col-lg-8">
+            <div class="col-lg-8" style="box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); padding:15px 2px 15px 15px;border-radius:4px">
                 <div class="table-responsive shopping-summery delete_cart_url" data-url="{{ route('delete-cart') }}" style="height:633px;overflow: auto;scroll-behavior: smooth;">
                 <table class="table update_cart_url" data-url="{{ route('update-cart') }}">
                     <thead>
@@ -40,7 +40,7 @@
                             <td  style="text-align:center;vertical-align:middle"><img style="height:130px !important;border-radius:5px;border:1px solid rgb(247, 181, 181);box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);" src="{{ asset('uploads/') }}/{{ $cart['image'] }}" ></td>
 
                             {{-- <td style="text-align:center;vertical-align:middle;" ><input type = "number" class="quantity" value="{{ $cart['quantity'] }}" style="width:60px;border-top-left-radius: 12px;border-bottom-right-radius: 12px;border:2px solid green;text-align:center;outline:none" min="1" max="100"></td> --}}
-                            <td style="text-align:center;vertical-align:middle;" ><input type = "number" class="quantity" value="{{ $cart['quantity'] }}" style="width:60px;border-top-left-radius: 12px;border-bottom-right-radius: 12px;border:2px solid green;text-align:center;outline:none"></td>
+                            <td style="text-align:center;vertical-align:middle;" ><input type = "number" class="quantity" value="{{ $cart['quantity'] }}" min = "1" max = "10" style="width:60px;border-top-left-radius: 12px;border-bottom-right-radius: 12px;border:2px solid green;text-align:center;outline:none"></td>
 
                             {{-- <td>
                                 <div class="detail-extralink mr-15">
@@ -68,16 +68,19 @@
                 </div>
                 <div class="divider-2 mb-3"></div>
                 
-                <div class="cart-action d-flex justify-content-between">
-                    <a href="{{route('home')}}" class="translatex hover-top"  style="background-color:rgb(93,168,138,0.8);display:inline-block; padding:10px 15px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);border-top-left-radius: 12px;border-bottom-right-radius: 12px;color:black;font-weight:600;font-size:16px;position:relative"><i class="bi bi-arrow-left me-2"></i>Continue Shopping</a>
-                    <p style="text-align: right;font-size:20px;"><strong style="box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);border-top-left-radius: 12px;border-bottom-right-radius: 12px;padding:5px 20px;border:4px solid rgb(93,168,138);">Tổng: {{ number_format($total).' đ' }}</strong></p>
+                <div class="cart-action d-flex justify-content-between align-items-center mt-4">
+                    <a href="{{route('home')}}" class="translatex hover-top"  style="background-color:rgb(93,168,138,0.8);display:inline-block; padding:10px 15px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);border-top-left-radius: 12px;border-bottom-right-radius: 12px;color:black;font-weight:600;font-size:16px;position:relative"><i class="bi bi-arrow-left me-2"></i>Quay lại trang chủ</a>
+                    <div class="wraper-btn-cart  d-flex justify-content-between align-items-center" style="padding: 0 15px">
+                        <a href="{{route('home')}}" class="translatex hover-top " id = "btn-destroy-cart"  style="background-color:rgb(93,168,138,0.8);display:inline-block; padding:7px 15px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);border-top-right-radius: 12px;border-bottom-left-radius: 12px;color:black;font-weight:600;font-size:16px;position:relative"><i class="bi bi-arrow-left me-2"></i>Xóa giỏ hàng</a>
+                        <p style="margin-left:20px;text-align: right;font-size:20px;"><strong style="box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);border-top-left-radius: 12px;border-bottom-right-radius: 12px;padding:5px 20px;border:4px solid rgb(93,168,138);">Tổng: {{ number_format($total).' đ' }}</strong></p>
+                    </div>
                 </div>
            
             </div>
     
-            <div class="col-lg-4">
-                <div class="border p-md-4 cart-totals ml-3">
-                    <div class="table-responsive">
+            <div class="col-lg-4" >
+                <div class="border p-md-4 cart-totals ml-3" >
+                    <div class="table-responsive" >
                         <p style="font-size: 20px"><strong>Thông tin đơn hàng</strong></p>
                         <table class="table no-border">
                             <tbody>
@@ -125,8 +128,9 @@
             </div>
             @else 
                 <div class="row" >
-                    <div class="col-md-12" style="height:500px;width:100%">
+                    <div class="col-md-12" style="height:200px;width:100%; d-flex justify-content-between align-items-center">
                         <h3 style="height:100%;width:100% ;text-align:center;vertical-align:middle">Giỏ hàng của bạn đang trống</h3>
+                        <a href="{{route('home')}}" class="translatex hover-top "  style="background-color:rgb(93,168,138,0.8);display:inline-block; padding:10px 15px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);border-top-right-radius: 12px;border-bottom-left-radius: 12px;color:black;font-weight:600;font-size:16px;position:relative"><i class="bi bi-arrow-left me-2"></i>Quay lại trang chủ</a>
                     </div>
                 </div>
             @endif
@@ -143,9 +147,12 @@ $(document).ready(function () {
     // $('.cart_update').on('click',updateCart);
     $(document).on('click', '.cart_update', updateCart);
     $(document).on('click', '.cart_delete', deleteCart);
+    $(document).on('click', '#btn-destroy-cart', destroyCart);
 
 
-    function updateCart(even) {
+
+    function updateCart(even) 
+    {
         even.preventDefault();
         let id = $(this).data('id');
         let urlUpdateCart = $('.update_cart_url').data('url');
@@ -167,6 +174,7 @@ $(document).ready(function () {
 
                 if(data.code === 200){
                     $(".cart_wrapper").html(data.cart_component);
+                    $("#cart_list_wrapper").html(data.cartList);
                 }
             },
             error: function(error) {
@@ -194,6 +202,7 @@ $(document).ready(function () {
                 if(data.code === 200){
                     $("#count_number").text(data.count_number)
                     $(".cart_wrapper").html(data.cart_component);
+                    $("#cart_list_wrapper").html(data.cartList);
                 }
                 alert('Xóa product thành công');
 
@@ -201,6 +210,28 @@ $(document).ready(function () {
             error: function(error) {
                 // Xử lý lỗi (nếu có)
                 alert('Có lỗi xảy ra. Vui lòng thử lại sau');
+            }
+        });
+    }
+
+    function destroyCart(even) 
+    {
+        $.ajax({
+            method: 'POST',
+            url: '{{ route('clear-cart') }}',
+            data: {
+                _token: $('meta[name="csrf-token"]').attr('content')
+            },
+            dataType: 'json',
+            success: function (response) {
+                if (response.code == 200) {
+                    window.location.replace('{{ route('home') }}');
+                    // location.reload();
+                }
+            },
+            error: function (error) {
+                console.error('Đã có lỗi xảy ra khi xóa giỏ hàng', error);
+                window.location.replace('{{ route('home') }}');
             }
         });
     }

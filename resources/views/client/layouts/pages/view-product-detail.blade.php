@@ -92,7 +92,7 @@
                         <p class="availability-title">Tình trạng :</p>
                         <p class="in-stock" id="product-stock" data-quantity="{{ $product->stock }}">{{ $product->stock }} in stock</p>
                     </div>
-
+                    @if($product->price != 0)
                     <div class="add-to-cart">
                         <form>
                             <div class="full-left">
@@ -112,6 +112,7 @@
                             </div>
                         </form>
                     </div>
+                    @endif
                     <hr>
                     <!-- <hr
                         style="
@@ -271,7 +272,7 @@
                                                 width="37"
                                                 height="37" src="https://img.icons8.com/external-creatype-glyph-colourcreatype/64/external-eye-essential-ui-v2-creatype-glyph-colourcreatype-2.png" alt="external-eye-essential-ui-v2-creatype-glyph-colourcreatype-2"/>
                                         </button>
-                                        <a href="#" class="product-action-icon btn_add_to_cart" data-url="{{ route('add-to-cart',['id' => $products->id]) }}">
+                                        <a href="#" class="product-action-icon btn_add_to_cart btn_add_to_cart-quick " data-url="{{ route('add-to-cart',['id' => $products->id]) }}">
                                             <img
                                                 class="translatex"
                                                 width="35"
@@ -432,6 +433,11 @@ const app_ = {
 </script>
 
 <script>
+     $.ajaxSetup({
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+    });
     function addToCart(event) {
     event.preventDefault();
     let urlCart = $(this).data("url");

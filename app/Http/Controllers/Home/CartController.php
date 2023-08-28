@@ -70,7 +70,6 @@ class CartController extends Controller
         // print_r(session()->get('cart'));
         // echo"</pre>";
         $categoryList = Category::where('parent_id', 0)->get();
-
         $carts = session()->get('cart',[]);
         return view('client.layouts.pages.view-cart-detail',['carts' => $carts,'categoryList'=>$categoryList]);
      }
@@ -83,10 +82,12 @@ class CartController extends Controller
             $carts[$request->id]['quantity'] = $request->quantity;
             session()->put('cart', $carts);
             $cartComponent = view('client.components.cart_component',['carts' => $carts])->render();
+            $cartList = view('client.components.cart_list', ['carts' => $carts])->render();
             return response()->json([
                 'code'=>200,
                 'msg'=>'Cập nhật số lượng thành công!',
                 'cart_component' => $cartComponent,
+                'cartList' => $cartList
             ]);
 
         }
@@ -103,12 +104,14 @@ class CartController extends Controller
             $count_number = count($carts);
             
             $cartComponent = view('client.components.cart_component',['carts' => $carts])->render();
+            $cartList = view('client.components.cart_list', ['carts' => $carts])->render();
+
             return response()->json([
                 'code'=>200,
                 'msg'=>'Xóa sản phẩm thành công!',
                 'cart_component' => $cartComponent,
-                'count_number'=>$count_number
-
+                'count_number'=>$count_number,
+                'cartList' => $cartList
             ]);
 
         }
@@ -127,7 +130,7 @@ class CartController extends Controller
         $carts = session()->get('cart',[]);
         if (isset($carts))
         {
-            // session()->forget('cart');
+            session()->forget('cart');
             return $this->orderService->add($request,$carts);
         }
       }
@@ -135,12 +138,22 @@ class CartController extends Controller
       public function clearCart(Request $request)
       {
             session()->forget('cart');
-            
             return response()->json([
-                'status' => 'success_',
+                'status' => 'success',
                 'code' => 200,
             ]);
       }
+
+    //   public function proxyRequest()
+    //   {
+    //     $response = Http::get('https://sandbox.vnpayment.vn/paymentv2/vpcpay.html' . $request->getRequestUri());
+
+    //     // Chuyển hướng đến route của VNPAY với dữ liệu tương ứng
+    //     return redirect()->route('vnpay', [
+    //         'order_id' => $response['order_id'],
+    //         'amount' => $response['amount']
+    //     ]);
+    //   }
 
 
 }
