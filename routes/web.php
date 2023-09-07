@@ -25,10 +25,11 @@ use App\Http\Controllers\Home\PaymentController;
 
     //client auth
     Route::prefix('customer')->name('customer.')->group(function () {
-        Route::get('/login',[AuthController::class,'loginForm'])->name('login-page');
+        Route::get('/login-page',[AuthController::class,'loginForm'])->name('login-page');
         Route::post('/login', [AuthController::class, 'login'])->name('login');
-        Route::get('/register',[AuthController::class,'registerForm'])->name('register-page');
+        Route::get('/register-page',[AuthController::class,'registerForm'])->name('register-page');
         Route::post('/register',[AuthController::class,'register'])->name('register');
+        Route::get('/logout',[AuthController::class,'logout'])->name('logout');
         Route::get('/verify/{customer}/{token}',[AuthController::class,'verify'])->name('verify-account');
     });
     // --------------------
@@ -62,8 +63,6 @@ use App\Http\Controllers\Home\PaymentController;
 
     Route::get('products/update-cart',[CartController::class,'updateCart'])->name('update-cart');
     Route::get('products/delete-cart',[CartController::class,'deleteCart'])->name('delete-cart');
-
-
     // --------------------
 
     //checkout 

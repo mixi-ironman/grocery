@@ -20,6 +20,7 @@ class Order extends Model
         'order_note',
         'order_code',
         // 'order_date',
+        'user_id',
     ];
 
     public function orderDetail()

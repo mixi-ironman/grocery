@@ -51,7 +51,7 @@
                             </a>
                         </figure>
                         <h6>Cake & Milk</h6>
-                        <p>26 items</p>
+                        {{-- <p>26 items</p> --}}
                     </div>
                      <div class="slider-product-item scroll-animation col-md-1 bg-2">
                         <figure>
@@ -60,7 +60,7 @@
                             </a>
                         </figure>
                         <h6>Apple</h6>
-                        <p>2 items</p>
+                        {{-- <p>2 items</p> --}}
                     </div>
                     <div class="slider-product-item scroll-animation col-md-1 bg-3">
                         <figure>
@@ -69,7 +69,7 @@
                             </a>
                         </figure>
                         <h6>Strawberry</h6>
-                        <p>26 items</p>
+                        {{-- <p>26 items</p> --}}
                     </div>
                     <div class="slider-product-item scroll-animation col-md-1 bg-4">
                         <figure>
@@ -78,7 +78,7 @@
                             </a>
                         </figure>
                         <h6>Oganic Kiwi</h6>
-                        <p>16 items</p>
+                        {{-- <p>16 items</p> --}}
                     </div>
                     <div class="slider-product-item scroll-animation col-md-1 bg-5">
                         <figure>
@@ -87,7 +87,7 @@
                             </a>
                         </figure>
                         <h6>Vegetables</h6>
-                        <p>21 items</p>
+                        {{-- <p>21 items</p> --}}
                     </div>
                     <div class="slider-product-item scroll-animation col-md-1 bg-6">
                         <figure>
@@ -96,7 +96,7 @@
                             </a>
                         </figure>
                         <h6>Snack</h6>
-                        <p>26 items</p>
+                        {{-- <p>26 items</p> --}}
                     </div>
                     <div class="slider-product-item scroll-animation col-md-1 bg-7">
                         <figure>
@@ -105,7 +105,7 @@
                             </a>
                         </figure>
                         <h6>Peach</h6>
-                        <p>26 items</p>
+                        {{-- <p>26 items</p> --}}
                     </div>
         
                     <div class="slider-product-item scroll-animation col-md-1 bg-8">
@@ -115,7 +115,7 @@
                             </a>
                         </figure>
                         <h6>Cake & Milk</h6>
-                        <p>26 items</p>
+                        {{-- <p>26 items</p> --}}
                     </div>
         
                     <div class="slider-product-item scroll-animation col-md-1 bg-9">
@@ -125,7 +125,7 @@
                             </a>
                         </figure>
                         <h6>Vegetables</h6>
-                        <p>21 items</p>
+                        {{-- <p>21 items</p> --}}
                     </div>
                     <div class="slider-product-item scroll-animation col-md-1 bg-10">
                         <figure>
@@ -134,7 +134,7 @@
                             </a>
                         </figure>
                         <h6>Snack</h6>
-                        <p>26 items</p>
+                        {{-- <p>26 items</p> --}}
                     </div>
                     <div class="slider-product-item scroll-animation col-md-1 bg-11">
                         <figure>
@@ -143,7 +143,7 @@
                             </a>
                         </figure>
                         <h6>Peach</h6>
-                        <p>26 items</p>
+                        {{-- <p>26 items</p> --}}
                     </div>
                 </div>
             </div>

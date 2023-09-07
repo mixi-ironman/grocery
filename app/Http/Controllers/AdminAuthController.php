@@ -12,6 +12,7 @@ class AdminAuthController extends Controller
 
     public function login(Request $request)
     {
+        // dd($request->all());
         $credential = [
             'username' => $request->username,
             'password' => $request->password,

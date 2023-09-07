@@ -47,7 +47,7 @@
                             </div>
 
                             <div class="mb-3">
-                                <label for="order_note" class="form-label">Note</label>
+                                <label for="order_note" class="form-label">Ghi chú(nếu có)</label>
                                 <textarea class="form-control" id="order_note"  name="order_note" rows="3"></textarea>
                             </div>
 
@@ -85,7 +85,7 @@
                                 {{-- <td  style="text-align:center;vertical-align:middle"><img style="width:160px;height:100px;line-height:100px;object-fit: cover;border-radius:5px;border:1px solid rgb(247, 181, 181);box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);object-position: center;" src="{{ asset('uploads/') }}/{{ $cart['image'] }}" ></td> --}}
                                 <td  style="text-align:center;vertical-align:middle"><img style="height:130px;border-radius:5px;border:1px solid rgb(247, 181, 181);box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);" src="{{ asset('uploads/') }}/{{ $cart['image'] }}" ></td>
 
-                                <td style="text-align:center;vertical-align:middle;" ><input readonly type = "number" class="quantity" value="{{ $cart['quantity'] }}" style="width:60px;border-top-left-radius: 12px;border-bottom-right-radius: 12px;border:2px solid green;text-align:center;outline:none" min="1" max="100"></td>
+                                <td style="text-align:center;vertical-align:middle;width:110px" ><input readonly type = "number" class="quantity" value="{{ $cart['quantity'] }}" style="display: inline-block;width:60px;border-top-left-radius: 12px;border-bottom-right-radius: 12px;border:2px solid green;text-align:center;outline:none" min="1" max="100"></td>
                                 {{-- <td style="text-align:center;vertical-align:middle">{{ number_format($cart['price']) }}đ</td> --}}
                                 <td style="text-align:center;vertical-align:middle">{{ number_format($cart['price'] * $cart['quantity']) }}đ</td>
                                

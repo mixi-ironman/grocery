@@ -21,7 +21,6 @@ class ProductController extends Controller
     public function index()
     {
         $products = $this->productService->getAllProduct();
-
         // dd($products);
         return view('admin.product.index', ['products' => $products]);
     }

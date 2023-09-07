@@ -15,6 +15,7 @@ use App\Models\Product;
 use App\Models\OrderDetail;
 use App\Services\ProductService;
 use App\Repositories\OrderRepository;
+use Illuminate\Support\Facades\Auth;
 
 class OrderService
 {
@@ -33,6 +34,13 @@ class OrderService
             // Tạo mã đơn hàng ngẫu nhiên (UUID)
             $orderCode = $this->generateOrderCode();
             $totalAmount = 0;
+            $user = Auth::user();
+
+            if (Auth::check()) {
+                $user_id = $user->id;
+            }else{
+                $user_id = null;
+            }
 
             $order = [
                 'name' => $request->name,
@@ -43,8 +51,10 @@ class OrderService
                 'order_note' => $request->order_note,
                 'order_code' => $orderCode,
                 'total_amount' => $totalAmount,
+                'user_id' => $user_id,
             ];
 
+            // dd($order);
             foreach ($carts as $id => $cart) {        
                 $product = Product::find($id);  
                 if ($cart['quantity'] > 10) {
@@ -85,6 +95,7 @@ class OrderService
             }
             // Lưu thông tin khách hàng vào bảng order
             $addOrder = Order::create($order);
+            // dd($addOrder);
 
             $orderId = $addOrder->id;
 

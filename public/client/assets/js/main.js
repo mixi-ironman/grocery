@@ -211,6 +211,7 @@ const app = {
         });
     },
 
+    //dropdown input search
     dropdowInput() {
         // const searchBox = document.querySelector(".search-box");
         const headerDropdown = $(".header-action_dropdown");
@@ -222,6 +223,21 @@ const app = {
 
         $(document).on("blur", ".search-box", function () {
             headerDropdown.removeClass("show");
+        });
+    },
+
+     //dropdown icon user => wishlist
+     dropdowIconUser() {
+        // const searchBox = document.querySelector(".search-box");
+        const userDropdown = $('.user-dropdown');
+
+        // Lắng nghe sự kiện focus vào input
+        $(document).on('mouseenter', '.user-img_area-link', function () {
+            userDropdown.addClass('show');
+        });
+
+        $(document).on('mouseleave', '.user-dropdown', function () {
+            userDropdown.removeClass('show');
         });
     },
 
@@ -346,6 +362,7 @@ const app = {
                 subItem.classList.remove('active');
             });
         });
+        
     },
     
 
@@ -362,6 +379,7 @@ const app = {
         this.autocompleteAjax();
         this.scrollAnimation();
         this.subMenuCategory();
+        this.dropdowIconUser();
     },
 };
 

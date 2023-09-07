@@ -41,6 +41,16 @@ li {
     color: black !important;
 }
 
+.translatex_ {
+    transition: all 0.3s;
+}
+
+.translatex_:hover {
+    /* background-color: rgb(226, 203, 166); */
+    transform: translateX(5px);
+    color: black !important;
+}
+
 .translatey {
     transition: all 0.3s;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);

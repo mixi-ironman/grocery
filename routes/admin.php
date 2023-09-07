@@ -8,8 +8,7 @@ use App\Http\Controllers\ProductImageController;
 use App\Http\Controllers\OrderDetailController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\DashboardController;
-
-
+use App\Http\Controllers\UserController;
 
 
 // Route::group(['prefix' => 'categories', 'as' => 'categories.'], function () {
@@ -87,5 +86,15 @@ Route::prefix('order')->name('order.')->group(function () {
     Route::get('/', [OrderDetailController::class, 'index'])->name('index');
     Route::get('view-order/{id}',[OrderDetailController::class,'show'])->name('view');
     Route::delete('/destroy/{id}', [OrderDetailController::class, 'destroy'])->name('destroy');
+});
+
+//locations
+Route::prefix('user')->name('user.')->group(function () {
+    Route::get('/', [UserController::class, 'index'])->name('index');
+    Route::get('/create', [UserController::class, 'create'])->name('create');
+    Route::post('/store', [UserController::class, 'store'])->name('store');
+    Route::get('/edit/{id}', [UserController::class, 'edit'])->name('edit');
+    Route::put('/update/{id}', [UserController::class, 'update'])->name('update');
+    Route::delete('/destroy/{id}', [UserController::class, 'destroy'])->name('destroy');
 });
 

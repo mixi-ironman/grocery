@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        if (!Schema::hasTable('categories')) {
+        // if (!Schema::hasTable('categories')) {
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
             $table->string('name');
@@ -21,7 +21,7 @@ return new class extends Migration
             $table->integer('is_active')->default(1);
             $table->timestamps();
         });
-    }
+    // }
     }
 
     /**

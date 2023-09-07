@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class AuthController extends Controller
 {
@@ -20,77 +21,74 @@ class AuthController extends Controller
         return view('client.layouts.auth.register'); 
     }
 
-    public function login(Request $request) 
-    { 
-        $validator = Validator::make($request->all(),[
-            'name' => 'require',
-            'password' => 'required',
-        ]);
-
-        if($validator->fails())
-        {
-            return redirect()->back()
-                             ->withErrors($validator)
-                             ->withInput();
+    //Login
+    public function login(Request $request)
+    {
+        // Kiểm tra dữ liệu đầu vào
+        $credentials = $request->only('email', 'password');
+        // Thử đăng nhập
+        if (Auth::attempt($credentials, $request->remember)) {
+            $user = Auth::user();
+            return redirect()->route('home');
+            // if ($user->status != 1) {
+            //     // Trường hợp tài khoản đã bị khóa
+            //     Auth::logout(); // Đăng xuất người dùng
+            //     return redirect()->route('customer.login-page')->with('msg', 'Tài khoản của bạn đã bị khóa.');
+            // }
+    
+            // if ($user->role == 1) {
+            //     // Trường hợp là người dùng bình thường
+            //     return redirect()->route('home');
+            // } else {
+            //     // Trường hợp là admin
+            // }
+        } else {
+            // Đăng nhập thất bại
+            return redirect()->route('customer.login-page')->with('msg', 'Đăng nhập thất bại. Vui lòng kiểm tra lại thông tin đăng nhập.');
         }
-
-        $remember = $request->remember;
-        if (Auth::attempt(['email'=>$request['name'], 'password'=>$request['password'] ],$remember))
-        {
-            if(Auth::user()->status != 1)
-            {
-                return redirect()->route('customer.login-page')->with('msg','Bạn đã đã bị khóa');
-            }
-
-            if(Auth::user()->role == 1)
-            {
-                return redirect()->route('home');
-            }else{
-                return view('admin');
-            }
-
-        }
-
     }
 
-    // public function register(Request $request) 
-    // { 
-    //     if($request->isMethod('post'))
-    //     {
-    //         $validator = Validator::make($request->all(),[
-    //             'name' => 'require| min:6 | max:30 |alpha',
-    //             'email' => 'required | email ',
-    //             'phone' => 'required | size:10 | numberic',
-    //             'password' => ' required | confirmed | min : 8 | max:20 ',
-    //         ]);
-    //     }
+    //Register
+    public function register(Request $request)
+    {
+        // $request->validate([
+        //     'username' => 'required|min:6|max:30|alpha',
+        //     'email' => 'required|email',
+        //     'password' => 'required|min:6|max:20',
+        // ]);
 
-    //     if($validator->fails())
-    //     {
-    //         return redirect()->back()
-    //                          ->withErrors($validator)
-    //                          ->withInput();
-    //     }
+        // if($request->hasFile('avatar'))
+        // {
+        //     $file = $request->file('avatar');
+        //     $destination_Path = public_path('image/avatar');
+        //     $file_Name = time().'_'.$file->getClientOriginalName();
+        //     $file->move($destination_Path, $file_Name);
+        // }else{
+        //     $file_Name = "default-user.png";
+        // }
 
-    //     if($request->hasFile('avatar'))
-    //     {
-    //         $file = $request->file('avatar');
-    //         $destination_Path = public_path('image/avatar');
-    //         $file_Name = time().'_'.$file->getClientOriginalName();
-    //         $file->move($destination_Path, $file_Name);
-    //     }else{
-    //         $file_Name = "default-user.png";
-    //     }
+        // Kiểm tra xem email đã tồn tại chưa
+        $user = User::where('email', $request->email)->first();
+        if (!$user) {
+            // Tạo tài khoản người dùng mới
+            $customer = User::create([
+                'name' => $request->username,
+                'email' => $request->email,
+                'password' => bcrypt($request->password),
+            ]);
+            return redirect()->route('customer.login-page')->with('msg', 'Bạn đã tạo tài khoản thành công');
+        } else {
+            // Email đã tồn tại
+            return redirect()->back()->withErrors(['email' => 'Email đã tồn tại'])->withInput();
+        }
+    }
 
-    //     $customer = Customer::where('email', $request_email)->first();
-    //     if(!$customer)
-    //     {
-    //         Customer::create([
-    //             'name' => $request_name,
-    //             'password' => bcrypt($request->password),
-    //         ]);
+    public function logout()
+    {
+        Auth::logout();
 
-    //         return redirect()->route('customer.login-page')->with('msg','Bạn đã tạo tài khoản thành công');
-    //     }
-    // }
+        return redirect()->route('home'); 
+        // tbl_province(province_id,province_name),tbl_district(dist_id,province_id,dist_name),tbl_ward(ward_id,dist_id,ward_name) đây nhé
+    }
+
 }

@@ -26,24 +26,28 @@
           class="img-fluid" alt="Phone image">
       </div>
       <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
-        <form action="{{ route('admin-auth') }}" method="POST">
+        <form action="{{ route('customer.login') }}" method="POST">
           @csrf
           <!-- Email input -->
           <div class="form-outline mb-4">
-            <input type="text" name="username" id="username" value="{{ old('username') }}" class="form-control form-control-lg" />
-            <label class="form-label" for="username">Username</label>
+            <label class="form-label" for="email">Email</label>
+            <input type="text" name="email" id="email" value="{{ old('email') }}" class="form-control form-control-lg" />
+          
           </div>
 
           <!-- Password input -->
           <div class="form-outline mb-4">
-            <input type="password" name="password" id="password" class="form-control form-control-lg" />
             <label class="form-label" for="password">Password</label>
+            <input type="password" name="password" id="password" class="form-control form-control-lg" />
+            {{-- @if($error->has('msg'))
+                {{ $errors->first('msg') }}
+            @endif --}}
           </div>
 
           <div class="d-flex justify-content-around align-items-center mb-4">
             <!-- Checkbox -->
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="form1Example3" checked />
+              <input class="form-check-input" type="checkbox" name="remember" id="form1Example3"  />
               <label class="form-check-label" for="form1Example3"> Remember me </label>
             </div>
             <a href="#!">Quên mật khẩu?</a>

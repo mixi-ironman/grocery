@@ -49,7 +49,7 @@
             </div>
             <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
                 <div class="header-cart_wishlist">
-                    <div class="wishlist-img_area wishlist translate">
+                    <div class="wishlist-img_area wishlist ">
                         <a href="#">
                             <!-- <i class="fa-regular fa-heart icon-heart"></i> -->
                             <img
@@ -63,8 +63,9 @@
                             <span class="count" >3</span>
                         </a>
                     </div>
-                    <div class="user-img_area wishlist translate">
-                        <a href="{{ route("customer.login-page") }}">
+                    <div class="user-img_area wishlist ">
+                        @if(Auth::check())
+                        <a class="user-img_area-link user-img_area-link_" href="">
                             <!-- <i class="fa-solid fa-user-tie"></i> -->
                             <img
                                 class="translatey"
@@ -75,11 +76,102 @@
                                 style="border-radius: 50%"
                             />
                         </a>
-                        <div class="login-box" style="display: none">
-                            <h3>Sign in</h3>
+                        <!-- dropdown-user -->
+                        <div class="user-dropdown">
+                            <ul class="user-dropdown-menu">
+                                <li class="user-dropdown-menu-item">
+                                    <a class="user-dropdown-menu-link translatex_" href="#">
+                                        <span
+                                            ><svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                viewBox="0 0 16 16"
+                                                width="1em"
+                                                height="1em"
+                                                fill="currentColor"
+                                                style="font-size: 20px"
+                                            >
+                                                <path
+                                                    d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4Zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10Z"
+                                                ></path></svg></span
+                                        >Quản lý tài khoản
+                                    </a>
+                                </li>
+                                <li class="user-dropdown-menu-item">
+                                    <a class="user-dropdown-menu-link translatex_" href="#">
+                                        <span
+                                            ><svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                viewBox="0 0 16 16"
+                                                width="1em"
+                                                height="1em"
+                                                fill="currentColor"
+                                                style="font-size: 20px"
+                                            >
+                                                <path
+                                                    d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z"
+                                                ></path>
+                                                <path
+                                                    d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"
+                                                ></path></svg></span
+                                        >Địa chỉ</a
+                                    >
+                                </li>
+                                <li class="user-dropdown-menu-item">
+                                    <a class="user-dropdown-menu-link translatex_" href="#">
+                                        <span
+                                            ><svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                viewBox="0 0 16 16"
+                                                width="1em"
+                                                height="1em"
+                                                fill="currentColor"
+                                                style="font-size: 20px"
+                                            >
+                                                <path
+                                                    d="M12.136.326A1.5 1.5 0 0 1 14 1.78V3h.5A1.5 1.5 0 0 1 16 4.5v9a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 13.5v-9a1.5 1.5 0 0 1 1.432-1.499L12.136.326zM5.562 3H13V1.78a.5.5 0 0 0-.621-.484L5.562 3zM1.5 4a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-13z"
+                                                ></path></svg></span
+                                        >Lịch sử giao dịch</a
+                                    >
+                                </li>
+                                <li class="user-dropdown-menu-item">
+                                    <a class="user-dropdown-menu-link translatex_" href="{{ route('customer.logout') }}">
+                                        <span
+                                            ><svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                viewBox="0 0 16 16"
+                                                width="1em"
+                                                height="1em"
+                                                fill="currentColor"
+                                                style="font-size: 20px"
+                                            >
+                                                <path
+                                                    fill-rule="evenodd"
+                                                    d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"
+                                                ></path>
+                                                <path
+                                                    fill-rule="evenodd"
+                                                    d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"
+                                                ></path></svg></span
+                                        >Đăng xuất</a
+                                    >
+                                </li>
+                            </ul>
                         </div>
+                        @else
+                        <a class="user-img_area-link " href="{{ route("customer.login-page") }}">
+                            <!-- <i class="fa-solid fa-user-tie"></i> -->
+                            <img
+                                class="translatey"
+                                width="35"
+                                height="35"
+                                src="https://img.icons8.com/bubbles/50/user-female.png"
+                                alt="user-female"
+                                style="border-radius: 50%"
+                            />
+                        </a>
+                        @endif
                     </div>
-                    <div class="mini-cart wishlist translate">
+                    <div class="mini-cart wishlist ">
                         {{-- <div class="mini-cart"> --}}
                             <div class="basket">
                                 <a href="#">
@@ -167,6 +259,14 @@
     </div>
 </div>
 
+@push('custom-script')
+    <script>
+       $('.user-img_area-link_').on('click', function(e) {
+            e.preventDefault(); 
+        });
+
+    </script>
+@endpush
 {{-- @push('custom-script')
 <script>
      // const searchBox = document.querySelector(".search-box");

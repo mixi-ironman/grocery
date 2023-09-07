@@ -42,8 +42,8 @@
 
           <div class="d-flex justify-content-around align-items-center mb-4">
             <!-- Checkbox -->
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="form1Example3" checked />
+            <div class="form-check" style="opacity:0">
+              <input class="form-check-input" type="checkbox"  name="remember" id="form1Example3"  />
               <label class="form-check-label" for="form1Example3"> Remember me </label>
             </div>
             <a href="#!">Forgot password?</a>

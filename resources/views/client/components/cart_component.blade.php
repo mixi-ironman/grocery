@@ -35,7 +35,7 @@
                     @foreach($carts as $id => $cart)
                         <tr>
                             <th style="text-align:center;vertical-align:middle" scope="row">{{ $i++ }}</th>
-                            <td  style="text-align:center;vertical-align:middle">{{ $cart['name'] }}</td>
+                            <td  style="text-align:center;vertical-align:middle"><a href="{{ route('view-product',['id'=>$id,'slug' => Str::slug($cart['name'])]) }}" style="color:rgb(179, 126, 210)">{{ $cart['name'] }}</a></td>
                             {{-- <td  style="text-align:center;vertical-align:middle"><img style="width:160px;height:100px;line-height:100px;object-fit: cover;border-radius:5px;border:1px solid rgb(247, 181, 181);box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);object-position: center;" src="{{ asset('uploads/') }}/{{ $cart['image'] }}" ></td> --}}
                             <td  style="text-align:center;vertical-align:middle"><img style="height:130px !important;border-radius:5px;border:1px solid rgb(247, 181, 181);box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);" src="{{ asset('uploads/') }}/{{ $cart['image'] }}" ></td>
 
@@ -100,9 +100,9 @@
                                 <tr>
                                     <td class="cart_total_label" style="width: 100%">
                                        {{-- <h6 class="text-muted">Coupons</h6> --}}
-                                        <div class="mb-3" >
+                                        <div class="mb-3" style="width:150px;">
                                             <label for="exampleFormControlInput1" class="form-label">Voucher</label>
-                                            <input style="width: 100%" type="text" class="form-control" id="discount_code" placeholder="Nhập mã giảm giá">
+                                            <input style="width: 200px;" type="text" class="form-control" id="discount_code" placeholder="Nhập mã giảm giá">
                                             <p style="opacity:0">Thành công</p>
                                         </div>
                                         <a href="{{route('home')}}" id="apply_discount_btn" class="translatex hover-top"  style="background-color:rgb(93,168,138,0.8);display:inline-block; padding:5px 10px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);border-top-left-radius: 12px;border-bottom-right-radius: 12px;color:black;font-weight:600;font-size:14px;position:relative">Áp dụng mã</a>

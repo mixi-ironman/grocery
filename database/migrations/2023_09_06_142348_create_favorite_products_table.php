@@ -11,15 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('promotions', function (Blueprint $table) {
+        Schema::create('favorite_products', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->text('description')->nullable();
-            $table->date('start_date');
-            $table->date('end_date');
-            $table->decimal('discount_amount', 10, 2);
-            $table->integer('is_active')->default(1);
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('product_id');
             $table->timestamps();
+
+            // Thiết lập khóa ngoại
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('product_id')->references('id')->on('products');
         });
     }
 
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('promotions');
+        Schema::dropIfExists('favorite_products');
     }
 };
