@@ -90,6 +90,8 @@
                         _this.attr('data-status', data.is_active);
                         _this.empty();
                         _this.html(statusIcon[data.is_active]);
+
+                        alert('Cập nhật trạng thái thành công!')
                     },
                     error: function (data) {
                         console.log(data, 1)

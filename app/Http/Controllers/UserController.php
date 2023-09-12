@@ -3,62 +3,78 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Services\UserService;
+use App\Repositories\UserRepository;
+use App\Models\Location;
 
 class UserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    public function __construct(
+        readonly UserService $userService,
+        readonly UserRepository $userRepository
+        ) {}
+
     public function index()
     {
-        return view('admin.user.index');
+        $users = $this->userRepository->getPaginate();
+        return view('admin.user.index',['users' => $users]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        return view('admin.user.create');
+        $provinces = Location::where('parent_id',0)->get();
+        $districts = Location::where('parent_id',1)->get();
+        return view('admin.user.create',['provinces' => $provinces, 'districts' => $districts]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $this->userService->store($request);
+        return redirect()->route('user.index')->with('success', 'Create User Successfully!');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
-        //
+        $user = $this->userRepository->getById($id);
+        $provinces = Location::where('parent_id',0)->get();
+        $districts = Location::where('parent_id',1)->get();
+        return view('admin.user.edit',[
+            'user' => $user,
+            'provinces' => $provinces,
+            'districts' => $districts,
+        ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
-        //
+        return $this->userService->update($request,$id);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
         //
+    }
+
+    public function getWard(Request $request)
+    {
+        // if ($request->parent_id == 0) {
+        //     // return response()->json([]);
+        //     return "sai rồi";
+        // }
+        $wards = Location::where('parent_id', $request->parent_id)->get();
+        
+        $childWard =  $wards->map(function ($ward) {
+            return [
+                'id' => $ward->id,
+                'text' => $ward->name,
+            ];
+        });
+
+        return response()->json($childWard);
     }
 }

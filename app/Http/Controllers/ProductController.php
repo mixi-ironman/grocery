@@ -56,7 +56,7 @@ class ProductController extends Controller
     {
         $product = $this->productService->getByProductId($id);
         $categories = $this->categoryService->getAll();
-        // dd($product);
+        // dd($categories);
         return view('admin.product.edit',[
             'title'=>'Edit Product',
             // 'category_parent' => $category_parent,

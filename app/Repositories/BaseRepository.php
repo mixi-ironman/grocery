@@ -21,6 +21,11 @@ class BaseRepository
         return $this->model->all();
     }
 
+    public function getPaginate()
+    {
+        return $this->model->orderByDesc('created_at')->paginate(5)->withQueryString();
+    }
+
     public function create($attribute = [])
     {
         // dd($attribute);

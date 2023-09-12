@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Services\OrderDetailService;
+use App\Models\Order;
+
 
 class OrderDetailController extends Controller
 {
@@ -22,8 +24,9 @@ class OrderDetailController extends Controller
     {
         // $orderDetail = $this->orderDetailService->getOrderDetail();
         $orderDetails = $this->orderDetailService->getOrderDetailById($id);
-
-        // dd($orderDetails);
+        // $order = Order::find($id);
+        // dd($order->orderDetails);
+        // $orderDetails->detach(8);
         return view('admin.order.list-order',[ 'orderDetail' => $orderDetails]);
     }
 }

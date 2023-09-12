@@ -167,7 +167,7 @@
     background-color: rgb(255, 255, 255);
     width: 220px;
     z-index: 9999;
-    border-radius: 8px;
+    border-radius: 10px;
     border: 1px solid rgb(175, 139, 139);
 }
 .user-dropdown::after{
@@ -188,7 +188,7 @@
 }
 .user-dropdown-menu {
     width: 100%;
-    padding: 10px;
+    padding: 10px 15px 10px;
     margin: 0;
 
     /* box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); */
@@ -921,7 +921,7 @@ chuyển dịch từ giữa ra 2 bên */
     background-color: rgb(108, 176, 149);
     display: block;
     padding: 5px 5px;
-    width: 100px;
+    width: 123px;
     text-align: center;
     color: black;
     letter-spacing: 1px;
@@ -1938,3 +1938,184 @@ span {
     overflow: hidden;
     padding: 10px 0;
 }
+
+/* Profile detail--------------------------------- */
+
+.menu-account-wraper {
+    padding-top: 30px;
+}
+
+.account-sidebar {
+    padding: 3px;
+}
+.account-sidebar__title {
+    font-size: 32px;
+    font-weight: 600;
+}
+.account-sidebar__menu {
+    padding: 5px 10px;
+    margin: 0;
+}
+.sidebar-menu__item {
+    margin-bottom: 12px;
+}
+.sidebar-menu__link {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    /* box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); */
+    border: 1px solid rgb(228, 226, 226);
+    /* width: 230px; */
+    padding: 7px 1px 7px 15px;
+    border-radius: 5px;
+}
+
+.sidebar-menu__link.active {
+    background-color: rgba(78, 194, 123, 0.5);
+}
+
+.sidebar-menu__link span {
+    display: inline-block;
+    color: #000000;
+    font-size: 17px;
+    font-weight: 600;
+    margin-left: 7px;
+    letter-spacing: 1px;
+}
+
+/* tab-pane-aaddress=------ */
+.address-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.address-create_content {
+    width: 100%;
+    height: 100%;
+}
+
+.address-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: rgba(180, 203, 174, 0.119);
+    margin-bottom: 15px;
+    padding: 15px 20px;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px rgba(187, 84, 84, 0.3);
+}
+.address-user_name,
+.address-user {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.title_ {
+    font-size: 18px;
+    font-weight: 600;
+    display: inline-block;
+    min-width: 80px;
+}
+.address-user_phone,
+.address-user_email,
+.address-user_detail {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.address-item_action {
+}
+
+/* tab-pane-history------------ */
+
+.tab-title-list {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin: 0 0 20px;
+    padding: 10px 0;
+}
+
+.tab-title-item {
+    margin-right: 10px;
+    border-radius: 5px;
+}
+
+.tab-title-link {
+    background-color: rgba(174, 128, 176, 0.1);
+    display: block;
+    width: 150px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 5px;
+    color: #000000;
+    padding: 7px 10px;
+    border-radius: 5px;
+}
+
+.tab-title-item.active {
+    background-color: #a0ddb8;
+    color: white;
+}
+
+.tab-title-link:hover {
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+/* address-overlay */
+.overlay-common {
+    background: rgba(0, 0, 0, 0.6);
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 7000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 200ms linear;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.content-wraper-common {
+    background-color: #fcfffc;
+    border-radius: 5px;
+    padding: 20px;
+    overflow: scroll;
+    z-index: 7100;
+}
+
+.overlay-common.active{
+    opacity: 1;
+    visibility:visible
+}
+
+/* -----------history(address)-overlay----------- */
+.address-content-wraper {
+    height: 700px ;
+    width: 70vw ;
+}
+.history-content-wraper {
+    height: 700px ;
+    width: 90vw ;
+}
+
+.address-wraper{
+    /* opacity: 0;
+    visibility: hidden; */
+    display: none;
+}
+
+.address-wraper.active{
+    /* opacity: 1;
+    visibility:visible */
+    display:block                       
+}
+

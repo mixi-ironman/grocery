@@ -215,6 +215,19 @@ class ProductService
                 'is_active' => $request->input('is_active'),
             ]);
 
+            $selectedTags = $request->input('tags'); 
+                if( $selectedTags)
+                {
+                    // Loại bỏ giá trị trùng lặp và thêm vào bảng productTag
+                    $uniqueTags = array_unique($selectedTags);
+                    foreach ($uniqueTags as $tagId) {
+                        ProductTag::create([
+                            'product_id' => $id,
+                            'tag_id' => $tagId
+                        ]);
+                    }
+            }
+
             DB::commit();
             return redirect()->route('products.index')->with('success', 'Cập nhật sản phẩm thành công!');
         } catch (\Exception $e) {

@@ -32,7 +32,6 @@ class SliderService
     
     public function store($request)
     {
-    // dd('store service');
         try {
             DB::beginTransaction();
 

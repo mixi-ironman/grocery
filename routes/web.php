@@ -8,6 +8,8 @@ use App\Http\Controllers\Home\CategoryController;
 use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\Home\AuthController;
 use App\Http\Controllers\Home\PaymentController;
+use App\Http\Controllers\Home\UserController;
+
 
 
 
@@ -79,5 +81,9 @@ use App\Http\Controllers\Home\PaymentController;
     Route::get('vnpay',[PaymentController::class,'vnpay'])->name('vnpay');
     Route::get('vnpay-return',[PaymentController::class,'vnpayReturn'])->name('vnpay-return');
 
-
-
+//User
+Route::prefix('customer')->name('customer.')->group(function () {
+    Route::get('/profile',[UserController::class,'index'])->name('profile');
+    Route::post('/profile',[UserController::class,'store'])->name('store');
+   
+});

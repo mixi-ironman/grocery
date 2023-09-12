@@ -52,7 +52,6 @@ Route::prefix('sliders')->name('sliders.')->group(function () {
 });
 
 //Product
-
 Route::prefix('product')->name('product.')->group(function () {
 
     Route::get('/', [ProductImageController::class, 'index'])->name('images.index');
@@ -70,6 +69,7 @@ Route::prefix('product')->name('product.')->group(function () {
     // Route::delete('images/{id}', [ProductImageController::class, 'destroy'])->name('product.image.destroy');
 });
 
+//Tag
 Route::group(['prefix' => 'tags', 'as' => 'tags.'], function () {
     Route::get('/', [TagController::class, 'index'])->name('index');
     Route::get('/create', [TagController::class, 'create'])->name('create');
@@ -88,7 +88,7 @@ Route::prefix('order')->name('order.')->group(function () {
     Route::delete('/destroy/{id}', [OrderDetailController::class, 'destroy'])->name('destroy');
 });
 
-//locations
+//User
 Route::prefix('user')->name('user.')->group(function () {
     Route::get('/', [UserController::class, 'index'])->name('index');
     Route::get('/create', [UserController::class, 'create'])->name('create');
@@ -96,5 +96,6 @@ Route::prefix('user')->name('user.')->group(function () {
     Route::get('/edit/{id}', [UserController::class, 'edit'])->name('edit');
     Route::put('/update/{id}', [UserController::class, 'update'])->name('update');
     Route::delete('/destroy/{id}', [UserController::class, 'destroy'])->name('destroy');
+    Route::get('/get-ward', [UserController::class, 'getWard'])->name('get-ward');
 });
 

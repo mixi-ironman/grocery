@@ -56,7 +56,6 @@
                                         <span class="btn btn btn-danger btn-xs">No</span>
                                     @endif
                                 </a>
-
                             </td>
                             <td style="text-align: center;vertical-align:middle;max-width:200px;white-space: wrap;overflow: hidden; text-overflow: ellipsis;">
                                 <a href="{{ route('products.update', ['id' => $product->id]) }}" class="change-status change-onsale" data-onsale = "{{ $product->is_onsale }}">
@@ -110,7 +109,6 @@
 @endsection
 
 @push('custom-script')
-
     <script>
         $(document).ready(function () {
             $(document).on("click", ".change-status", function (e) {
@@ -171,6 +169,8 @@
                             _this.empty();
                             _this.html(statusIcon[data.changed_attributes.is_onsale]);
                         }
+
+                        alert('Cập nhật trạng thái thành công!')
                     },
                     error: function (error) {
                         console.log(error);
@@ -179,7 +179,5 @@
             });
         });
     </script>
-    
-
 @endpush
 

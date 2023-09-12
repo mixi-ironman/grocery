@@ -19,6 +19,9 @@
             href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"
         />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.6.3/nouislider.min.css" />
+         {{-- Add Select2 --}}
+         <link rel="stylesheet" href="{{ asset('libs/select2/css/select2.min.css') }}">
+         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
 
         <link rel="stylesheet" href="{{ url('client') }}/assets/css/global.css" />
         <link rel="stylesheet" href="{{ asset('client/assets/css/main.css') }}" />
@@ -85,7 +88,9 @@
 
         <script src="{{ url('client') }}/assets/js/main.js"></script>
         {{-- <script src="{{ url('client') }}/assets/js/jquery-3.7.0.min.js"></script> --}}
-
+        {{-- thêm select2 --}}
+        <script src="{{ asset('libs/select2/js/select2.min.js') }}"></script>
+        
         <script src="{{ url('client') }}/assets/js/toast_msg.js"></script>
         {{-- <script src="{{ url('client') }}/assets/js/search.js"></script> --}}
         <script src="{{ url('client') }}/assets/js/add_cart.js"></script>

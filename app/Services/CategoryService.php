@@ -46,12 +46,12 @@ class CategoryService
         try {
             DB::Begintransaction();
             $category = $this->categoryRepository->create([
-            'name' => $request->input('name_category'),
-            'slug' => Str::slug($request->input('name_category'), '-'),
-            'description' => $request->input('description'),
-            'parent_id' => $request->input('parent_id'),
-            'is_active' => $request->input('is_active'),
-          ]);
+                'name' => $request->input('name_category'),
+                'slug' => Str::slug($request->input('name_category'), '-'),
+                'description' => $request->input('description'),
+                'parent_id' => $request->input('parent_id'),
+                'is_active' => $request->input('is_active'),
+            ]);
            DB::commit();
            
            return redirect()->route('categories.index')->with('success', 'Created Category Successfully!'); 

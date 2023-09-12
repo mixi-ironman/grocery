@@ -40,6 +40,15 @@ li {
     transform: translateX(-5px);
     color: black !important;
 }
+.translatey_ {
+    transition: all 0.3s;
+}
+
+.translatey_:hover {
+    /* background-color: rgb(226, 203, 166); */
+    transform: translateY(-3px);
+    color: black !important;
+}
 
 .translatex_ {
     transition: all 0.3s;
@@ -141,3 +150,27 @@ li {
 do cache view hoặc cache php Run:
 php artisan cache clear
 service php-fpm restart */
+
+::-webkit-scrollbar {
+    width: 8px; /* Chiều rộng của thanh cuộn ngang */
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #acecb6; /* Màu của nút kéo */
+    border-radius: 5px; 
+}
+
+::-webkit-scrollbar-track {
+    background-color: #f2f2f2; /* Màu nền của thanh cuộn */
+}
+
+/* Tùy chỉnh thanh cuộn dọc */
+::-webkit-scrollbar {
+    height: 10px; /* Chiều cao của thanh cuộn dọc */
+}
+
+/* Nút kéo của thanh cuộn dọc */
+::-webkit-scrollbar-thumb {
+    background-color: #acecb6; /* Màu của nút kéo */
+    border-radius: 5px; 
+}

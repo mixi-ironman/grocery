@@ -23,10 +23,11 @@ class Order extends Model
         'user_id',
     ];
 
-    public function orderDetail()
+    public function orderDetails()
     {
-        return $this->hasMany(OrderDetail::class,'order_id', 'id');
+        return $this->hasMany(OrderDetail::class);
     }
+
     //Mutator
     // Accessor có tên dạng get[TenThuocTinh]Attribute, còn Mutator có tên dạng set[TenThuocTinh]Attribute.
     public function setEmailAttribute($value)

@@ -62,6 +62,7 @@
 
                 </ul>
             </div>
+            @if(count($carts) > 0)
             <div class="footer-cart-sidebar">
                 <p class="cart-total">Tổng: <span class="cart-product-price-total">{{ number_format($total) }}đ</span></p>
                 <p class="btn-cart">
@@ -69,5 +70,8 @@
                     <a href="{{  route('check-out') }}" class="btn-check-out translate">Thanh Toán</a>
                 </p>
             </div>
+            @else
+                <p style="font-size:25px;"><i style="margin-right:10px;color:red;" class="fa-solid fa-ghost"></i>Giỏ hàng đang trống...</p>
+            @endif
         </div>
     </div>

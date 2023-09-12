@@ -37,7 +37,7 @@ class SliderController extends Controller
      */
     public function store(Request $request)
     {
-         $this->sliderService->store($request);
+        $this->sliderService->store($request);
         return redirect()->route('products.create')->with('success', 'Created Slider Successfully!');
         
     }

@@ -28,7 +28,9 @@
         <link rel="stylesheet" href="{{ url('client') }}/assets/css/global.css" />
         <link rel="stylesheet" href="{{ asset('client/assets/css/main.css') }}" />
         <link rel="stylesheet" href="{{ asset('client/assets/css/detail.css') }}" />
-
+         {{-- Add Select2 --}}
+         <link rel="stylesheet" href="{{ asset('libs/select2/css/select2.min.css') }}">
+         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
         <title>Mixi-Market</title>
     </head>
     <body>
@@ -298,7 +300,9 @@
         <script src="{{ url('client') }}/assets/js/toast_msg.js"></script>
         <script src="{{ url('client') }}/assets/js/loadmore.js"></script>
         {{-- <script src="{{ url('client') }}/assets/js/search.js"></script> --}}
-
+        
+        {{-- thêm select2 --}}
+        <script src="{{ asset('libs/select2/js/select2.min.js') }}"></script>
 
         <script src="{{ url('client') }}/assets/js/add_cart.js"></script>
         @stack('custom-script')

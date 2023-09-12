@@ -13,7 +13,7 @@
                     <span style="display:block;flex:1;height:100%;width:100%;font-size:18px;padding: 8px 10px;">{{ $categoryParent->name }}</span>
                     {{-- có cate con mới hiện icon --}}
                 @if($categoryParent->childrentCategory->count())
-                    <span style="font-size:16px;font-weight:bold;color:black;margin-left:10px"><i class="fa-solid fa-water"></i></span>
+                    <span style="font-size:16px;font-weight:bold;color:black;margin-left:10px"><i class="fa-solid fa-grip-lines"></i></span>
                 @endif
                 </a>
             <!--hiện nếu có sub-item -->

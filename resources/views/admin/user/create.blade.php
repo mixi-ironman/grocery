@@ -34,45 +34,33 @@
                         <textarea class="form-control" name="address" rows="3"></textarea>
                     </div>
 
-                    {{-- <div class="mb-3">
-                    <label  class="form-label" id="parent_id">Tên danh mục</label>
-                        <select class="form-select" aria-label="Default select example" id="parent_id" name="parent_id">
-                            <option selected value="0">---Chọn---</option>
-                            @foreach($category_parent as $category)
-                                <option  value="{{ $category->id }}">{{ $category->name }}</option>
-                            @endforeach
-                        </select>
-                    </div> --}}
-
                     <div class="mb-3">
                         <label for="parent_id" class="form-label">Tỉnh/Thành phố</label>
-                        <select class="form-select" id="parent_id" name="parent_id" aria-label="Default select example">
+                        <select class="form-select select_" id="parent_id" name="parent_id" aria-label="Default select example">
                             <option value="0">---Chọn---</option>
-                            {{-- @foreach($category_parent as $category)
-                                <option value="{{ $category->id }}">{{ $category->name }}</option>
-                            @endforeach --}}
+                            @foreach($provinces as $province)
+                                <option value="{{ $province->parent_id }}">{{ $province->name }}</option>
+                            @endforeach
+                            </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="district" class="form-label">Quận/Huyện</label>
+                        <select class="form-select select_" id="district" name="district" aria-label="Default select example">
+                            <option value="0">---Chọn---</option>
+                            @foreach($districts as $district)
+                            <option value="{{ $district->id }}">{{ $district->name }}</option>
+                            @endforeach
                         </select>
                     </div>
 
                     <div class="mb-3">
-                        <label for="parent_id" class="form-label">Quận/Huyện</label>
-                        <select class="form-select" id="parent_id" name="parent_id" aria-label="Default select example">
-                            <option value="0">---Chọn---</option>
-                            {{-- @foreach($category_parent as $category)
-                                <option value="{{ $category->id }}">{{ $category->name }}</option>
-                            @endforeach --}}
+                        <label for="ward" class="form-label">Phường Xã</label>
+                        <select class="form-select select_" id="ward" name="ward" aria-label="Default select example">
+                            <option value="0">----------</option>
                         </select>
                     </div>
-
-                    <div class="mb-3">
-                        <label for="parent_id" class="form-label">Phường Xã</label>
-                        <select class="form-select" id="parent_id" name="parent_id" aria-label="Default select example">
-                            <option value="0">---Chọn---</option>
-                            {{-- @foreach($category_parent as $category)
-                                <option value="{{ $category->id }}">{{ $category->name }}</option>
-                            @endforeach --}}
-                        </select>
-                    </div>
+                    
                     <p>Active</p>
                     <div class="form-check">
                         <input class="form-check-input" type="radio" name="status" checked value="1">
@@ -98,9 +86,35 @@
 @push('custom-script')
     <script>
         $(document).ready(function () {
-            $('#parent_id').select2({
+            $('.select_').select2({
                 theme: 'bootstrap-5'
             });
         })
+    </script>
+    <script>
+        $(document).ready(function () {
+           //get category theo parentCategory
+           $('#ward').select2({
+                theme: 'bootstrap-5',
+                ajax: {
+                    url: '{{ route('user.get-ward') }}',
+                    data: function (params) {
+                        var query = {
+                            parent_id: $('#district').val(),
+                            _token: '{{ csrf_token() }}'
+                        }
+
+                        // Query parameters will be ?search=[term]&type=public
+                        return query;
+                    },
+                    dataType: 'json',
+                    processResults: function (data, params) {
+                        return {
+                            results: data,
+                        }
+                    }
+                },
+            })
+        });
     </script>
 @endpush

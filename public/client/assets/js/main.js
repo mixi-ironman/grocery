@@ -86,7 +86,7 @@ const app = {
             this.autoSwitchItem(listCategorys);
         }, 1400);
     },
-
+    //Carousel for Feature code thuần
     autoSwitchItem(listCategorys) {
         const wrapList = document.querySelector(".slider-product-list");
         const widthItem = listCategorys[0].offsetWidth;
@@ -364,6 +364,30 @@ const app = {
         });
         
     },
+
+    //tab-menu-common
+    tabMenu(){
+        var tabItem = document.querySelectorAll(".tab-item-common");
+        var panes = document.querySelectorAll('.tab-pane-common');
+        var line = document.querySelectorAll('.line');
+
+
+        tabItem.forEach((item, index) => {
+            item.addEventListener('click', function (e) {
+                var tabItemActive = document.querySelector(".tab-item-common.active");
+                var panesActive = document.querySelector('.tab-pane-common.active');
+                tabItemActive.classList.remove('active');
+                panesActive.classList.remove('active');
+
+               // Di chuyển dấu gạch dưới tab đang được chọn
+                // line.style.left = this.offsetLeft + 'px';
+                // line.style.width = this.offsetWidth + 'px';
+                // Hiển thị tab và nội dung mới
+                this.classList.add('active');
+                panes[index].classList.add('active');
+            });
+        });
+    },
     
 
     run: function () {
@@ -380,6 +404,8 @@ const app = {
         this.scrollAnimation();
         this.subMenuCategory();
         this.dropdowIconUser();
+        this.tabMenu();
+
     },
 };
 

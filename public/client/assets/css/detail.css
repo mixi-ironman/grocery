@@ -233,7 +233,7 @@
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
     border-bottom: 5px solid transparent;
-    opacity: 0.6;
+    /* opacity: 0.6; */
     cursor: pointer;
     transition: all 0.5s ease;
 }
@@ -252,6 +252,16 @@
     opacity: 1;
 }
 
+/* tab-item-common ------------*/
+.tab-item-common{
+    opacity: 0.6;
+}
+
+.tab-item.active {
+    opacity: 1;
+}
+
+/* --------------------------------- */
 .tab-icon {
     font-size: 24px;
     width: 32px;
@@ -269,6 +279,17 @@
     display: block;
     text-align: justify;
 }
+
+/* tab-item-common ------------*/
+.tab-pane-common {
+    color: #333;
+    display: none;
+}
+.tab-pane-common.active {
+    display: block;
+    text-align: justify;
+}
+/* -------------------------------- */
 .tab-pane.active p img {
     display: block;
     margin: 0 auto;
