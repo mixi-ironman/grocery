@@ -97,5 +97,6 @@ Route::prefix('user')->name('user.')->group(function () {
     Route::put('/update/{id}', [UserController::class, 'update'])->name('update');
     Route::delete('/destroy/{id}', [UserController::class, 'destroy'])->name('destroy');
     Route::get('/get-ward', [UserController::class, 'getWard'])->name('get-ward');
+
 });
 

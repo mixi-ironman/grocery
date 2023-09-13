@@ -242,7 +242,7 @@ class ProductService
         // dd($id);
         if($id != 0)
         {
-            $category = $this->productRepository->delete($id);
+            $product = $this->productRepository->delete($id);
         }
     }
 }

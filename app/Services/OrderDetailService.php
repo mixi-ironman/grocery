@@ -38,6 +38,11 @@ class OrderDetailService
         return $this->orderRepository->getById($id);
     }
 
+    public function getOrderByUserId($id)
+    {
+        return $this->orderRepository->orderById($id);
+    }
+
     public function getOrderDetailById($id)
     {
         return $this->orderDetailRepository->getOrderDetail($id);

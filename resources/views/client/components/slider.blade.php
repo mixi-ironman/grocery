@@ -6,8 +6,8 @@
                 <div class="slider-wraper_item">
                     <div class="slider-item_img"></div>
                     <div class="slider-item_description">
-                        <p>Organic</p>
-                        <p>Farm Fresh Produce Right to Your Door</p>
+                        <p>Tiện hơn tiền mặt</p>
+                        <p>Lợi hơn tiền mặt</p>
                         <a href="#" style="opacity: 1;color:black;background-color:rgb(93,168,138)border-top-left-radius: 12px;border-bottom-right-radius: 12px;">Shop Now!
                             <span
                                 ><i

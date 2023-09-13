@@ -49,7 +49,7 @@
             </div>
             <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
                 <div class="header-cart_wishlist">
-                    <div class="wishlist-img_area wishlist ">
+                    <div class="wishlist-img_area wishlist " style="opacity:0">
                         <a href="#">
                             <!-- <i class="fa-regular fa-heart icon-heart"></i> -->
                             <img

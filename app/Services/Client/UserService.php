@@ -47,15 +47,31 @@ class UserService
                 // Người dùng chưa đăng nhập.
             }
             
-            return Redirect::route('customer.profile')->with('success', 'Tạo địa chỉ thành công!');
+            return redirect()->route('customer.profile')->with('success', 'Tạo địa chỉ thành công!');
         } catch (\Exception $e) {
             DB::rollBack();
-            return Redirect::back()->withErrors(['create' => 'Something Wrong!'])->withInput();
+            return redirect()->back()->withErrors(['create' => 'Something Wrong!'])->withInput();
         }
     }
 
-    public function show($id)
+    public function update($request, $id)
     {
-        
+        try {
+            DB::beginTransaction();
+
+            $user = $this->userRepository->update($id, [
+                'name' => $request->input('user_name'),
+                'email' => $request->input('email'),
+                'phone' => $request->input('phone'),
+                'address' => $request->input('address'),
+            ]);
+
+            DB::commit();
+
+            return redirect()->route('customer.profile')->with('success', 'Update User Successfully!');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->withErrors(['update' => 'Something Wrong!'])->withInput();
+        }
     }
 }

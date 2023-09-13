@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Services\Client\ProductService;
 use App\Services\OrderService;
 use App\Models\Category;
-
+use App\Models\Address;
 
 class CartController extends Controller
 {
@@ -120,8 +120,10 @@ class CartController extends Controller
       public function checkOut(Request $request)
       {
             $carts = session()->get('cart',[]);
+            $address = Address::where('is_default', 1)->first();
+
             $categoryList = Category::where('parent_id', 0)->get();
-            return view('client.layouts.pages.checkout',['carts' => $carts,'categoryList'=>$categoryList]);
+            return view('client.layouts.pages.checkout',['address' => $address,'carts' => $carts,'categoryList'=>$categoryList]);
       }
 
       //thanh toán khi nhận hàng

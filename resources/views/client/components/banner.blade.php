@@ -8,7 +8,7 @@
                         <br />
                         Chất lượng
                         <br />
-                        ..........
+                        ...
                     </h4>
                     <a class="translatey" href="{{ route('viewCategory') }}">Shop now!</a>
                 </div>
@@ -23,7 +23,7 @@
                         <br />
                         Chất lượng
                         <br />
-                        ..........
+                        ...
                     </h4>
                     <a class="translatey" href="{{ route('viewCategory') }}">Shop now!</a>
                 </div>
@@ -38,7 +38,7 @@
                         <br />
                         Chất lượng
                         <br />
-                        ..........
+                        ...
                     </h4>
                     <a class="translatey" href="{{ route('viewCategory') }}">Shop now!</a>
                 </div>

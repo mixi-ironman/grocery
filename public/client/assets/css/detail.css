@@ -284,10 +284,12 @@
 .tab-pane-common {
     color: #333;
     display: none;
+    font-style: normal;
 }
 .tab-pane-common.active {
     display: block;
     text-align: justify;
+    font-style: normal;
 }
 /* -------------------------------- */
 .tab-pane.active p img {

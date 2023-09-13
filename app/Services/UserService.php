@@ -65,9 +65,10 @@ class UserService
             }
 
             DB::commit();
+            return redirect()->route('user.index')->with('success', 'Create User Successfully!');
         } catch (\Exception $e) {
             DB::rollBack();
-            return Redirect::back()->withErrors(['create' => 'Something Wrong!'])->withInput();
+            return  redirect()->back()->withErrors(['create' => 'Something Wrong!'])->withInput();
         }
     }
 
@@ -105,7 +106,7 @@ class UserService
             return redirect()->route('user.index')->with('success', 'Update User Successfully!');
         } catch (\Exception $e) {
             DB::rollBack();
-            return Redirect::back()->withErrors(['update' => 'Something Wrong!'])->withInput();
+            return  redirect()->back()->withErrors(['update' => 'Something Wrong!'])->withInput();
         }
     }
 

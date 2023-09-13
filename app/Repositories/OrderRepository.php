@@ -18,4 +18,9 @@ class OrderRepository extends BaseRepository
         // return $this->model->paginate(5);
         // return $this->model->getAll();
     }
+
+    public function orderById($id)
+    {
+        return $this->model->where('user_id', $id)->get();
+    }
 }

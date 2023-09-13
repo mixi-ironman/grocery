@@ -29,8 +29,8 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
-        $this->userService->store($request);
-        return redirect()->route('user.index')->with('success', 'Create User Successfully!');
+        return $this->userService->store($request);
+        // return redirect()->route('user.index')->with('success', 'Create User Successfully!');
     }
 
     public function show(string $id)
@@ -62,13 +62,12 @@ class UserController extends Controller
 
     public function getWard(Request $request)
     {
-        // if ($request->parent_id == 0) {
-        //     // return response()->json([]);
-        //     return "sai rồi";
-        // }
-        $wards = Location::where('parent_id', $request->parent_id)->get();
-        
-        $childWard =  $wards->map(function ($ward) {
+        if ($request->parent_id == 0) {
+            return response()->json([]); // Trả về JSON trống nếu parent_id = 0
+        }
+
+        $wards = Location::where('parent_id', $request['parent_id'])->get();
+        $childWard = $wards->map(function ($ward) {
             return [
                 'id' => $ward->id,
                 'text' => $ward->name,
@@ -77,4 +76,5 @@ class UserController extends Controller
 
         return response()->json($childWard);
     }
+
 }

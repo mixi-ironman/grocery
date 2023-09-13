@@ -2,6 +2,7 @@
 
 @section('content')
 <!-- Detail-Profile -->
+@if(Auth::check())
 <div class="container">
     <div class="row menu-account-wraper">
         <div class="col-md-3">
@@ -67,7 +68,7 @@
                     </li>
 
                     <li class="sidebar-menu__item">
-                        <a href="#" class="sidebar-menu__link translatex_ tab-item-common">
+                        <a href="{{ route('customer.logout') }}" class="sidebar-menu__link translatex_ tab-item-common">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 viewBox="0 0 16 16"
@@ -100,7 +101,9 @@
                         <h4 class="card-title">Thông tin cá nhân</h4>
                     </div>
                     <div class="card-body">
-                        <form method="POST">
+                        <form action="{{ route('customer.update',['id' => $user->id]) }}" method="POST">
+                            @csrf
+                            @method('PUT')
                             <div class="mb-3">
                                 <label class="form-label">Họ tên<span style="color: red">*</span></label>
                                 <input
@@ -108,6 +111,7 @@
                                     class="form-control"
                                     name="user_name"
                                     aria-describedby="emailHelp"
+                                    value="{{ $user->name }}"
                                 />
                             </div>
 
@@ -116,8 +120,11 @@
                                 <input
                                     type="email"
                                     class="form-control"
+                                    readonly
                                     name="email"
+                                    style="color: rgb(164, 160, 160)"
                                     aria-describedby="emailHelp"
+                                    value="{{ $user->email }}"
                                 />
                             </div>
 
@@ -128,7 +135,7 @@
                                     class="form-control"
                                     name="phone"
                                     readonly
-                                    value="0931012321"
+                                    value="{{ $user->phone }}"
                                     style="color: rgb(164, 160, 160)"
                                 />
                             </div>
@@ -137,26 +144,11 @@
 
                             <div class="mb-3">
                                 <label class="form-label">Địa chỉ chi tiết</label>
-                                <textarea class="form-control" name="description" rows="3"></textarea>
+                                <textarea class="form-control" name="address" rows="3">{{ $user->address }}</textarea>
                             </div>
 
-                            <p>Đặt địa chỉ mặc định</p>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="is_active" value="1" />
-                                <label class="form-check-label"> Có </label>
-                            </div>
-                            <div class="form-check">
-                                <input
-                                    class="form-check-input"
-                                    type="radio"
-                                    name="is_active"
-                                    checked
-                                    value="0"
-                                />
-                                <label class="form-check-label"> Không </label>
-                            </div>
-                            <a href="#" class="translatex " id="btn-destroy-cart" style="background-color:rgb(93,168,138,0.8);display:inline-block; padding:7px 20px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);border-top-right-radius: 12px;border-bottom-left-radius: 12px;color:black;font-weight:600;font-size:16px;position:relative; margin-top:10px"><i class="bi bi-arrow-left me-2"></i>Cập nhật</a>
-                            {{-- <button type="submit" class="translatex" style="background-color:rgb(93,168,138,0.8);display:inline-block; padding:7px 20px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);border-top-right-radius: 12px;border-bottom-left-radius: 12px;color:black;font-weight:600;font-size:16px;position:relative; margin-top:10px"><i class="bi bi-arrow-left me-2">Cập nhật</button> --}}
+                            {{-- <a href="#" class="translatex " id="btn-destroy-cart" style="background-color:rgb(93,168,138,0.8);display:inline-block; padding:7px 20px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);border-top-right-radius: 12px;border-bottom-left-radius: 12px;color:black;font-weight:600;font-size:16px;position:relative; margin-top:10px"><i class="bi bi-arrow-left me-2"></i>Cập nhật</a> --}}
+                            <button type="submit" class="translatex" style="background-color:rgb(93,168,138,0.8);display:inline-block; padding:7px 20px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);border-top-right-radius: 12px;border-bottom-left-radius: 12px;color:black;font-weight:600;font-size:16px;position:relative; margin-top:10px"><i class="bi bi-arrow-left me-2">Cập nhật</button>
                         </form>
                     </div>
                 </div>
@@ -170,33 +162,17 @@
                     <a href="#" class="add-address icon-overlay add-address" >
                         <i
                             class="fa-solid fa-map-location"
-                            style="font-size: 29px; font-weight: 800; color: green"
-                        >
-                    </i>
+                            style="font-size: 29px; font-weight: 800; color: rgb(207, 90, 231)"
+                        ></i>
+                        {{-- <i class="fa-solid fa-circle-plus" style="font-size: 29px; font-weight: 800; color: rgb(160, 7, 81)"></i> --}}
                     </a>
                 </div>
                 <div class="address-create_content address-list">
-                    <div class="address-item translatey_">
-                        <div class="address-item_content-left">
-                            <div class="address-user_name">
-                                <p class="user_name">Phạm Văn Nam</p>
-                                <span class="title_" style="margin-left: 4px"> (Mặc định)</span>
-                            </div>
-                            <div class="address-user">
-                                <span class="title_">Địa chỉ: </span>
-                                <p class="address-user_detail">19 lô 2 ngõ 67 phùng khoang</p>
-                            </div>
-                            <p class="address-user_phone"><span class="title_">Sdt: </span>0931012321</p>
-                            <p class="address-user_email">
-                                <span class="title_">Email: </span>phamvannam.mixi@gmail.com
-                            </p>
-                        </div>
-                        <div class="address-item_action">
-                            <a><i class="fa-solid fa-pen"></i></a>
-                            <a style="margin-left: 10px"><i class="fa-solid fa-trash"></i></a>
-                        </div>
+                    {{-- address-item --}}
+                    <div id="wraper_address-item"> 
+                        @include('client.components.address_item_component',['addresses' => $addresses])
                     </div>
-               
+
                     {{-- Modal --}}
                     {{-- <div class="address-overlay overlay-common">
                         <div class="content-wraper-common address-content-wraper">
@@ -301,7 +277,7 @@
                         <div class="card">
                             <div class="card-header" style="display:flex;justify-content:space-between;align-items: center;">
                                 <h4 class="card-title">Tạo địa chỉ</h4>
-                                <p style="font-size:20px;"><i class="fa-solid fa-circle-xmark icon-close-overlay"></i></p>
+                                <p style="font-size:20px; "><i style="color:red;cursor: pointer;" class="fa-solid fa-circle-xmark icon-close-overlay"></i></p>
                             </div>
                             <div class="card-body">
                                 <form action="{{ route('customer.store') }}" method="POST">
@@ -359,7 +335,7 @@
                                     <div class="mb-3">
                                         <label for="ward" class="form-label">Phường Xã</label>
                                         <select style="width:100%" class="form-select select2" id="ward" name="ward" aria-label="Default select example">
-                                            <option value="0">---Chọn---</option>
+                                            {{-- <option value="0">---Chọn---</option> --}}
                                         </select>
                                     </div>
     
@@ -424,122 +400,59 @@
                             <div class="card-body">
                                 <table class="table">
                                     <thead>
-                                        <tr>
-                                            <th scope="col" style="text-align: center; vertical-align: middle">
-                                                Stt
-                                            </th>
-                                            <th scope="col" style="text-align: center; vertical-align: middle">
-                                                Tên KH
-                                            </th>
-                                            <th scope="col" style="text-align: center; vertical-align: middle">
-                                                Tổng tiền
-                                            </th>
-                                            <th scope="col" style="text-align: center; vertical-align: middle">
-                                                Trạng thái
-                                            </th>
-                                            <th scope="col" style="text-align: center; vertical-align: middle">
-                                                Ngày đặt
-                                            </th>
-                                            <th scope="col" style="text-align: center; vertical-align: middle">
-                                                Action
-                                            </th>
-                                        </tr>
+                                    <tr>
+                                        <th scope="col"style="text-align: center;vertical-align:middle;">Stt</th>
+                                        <th scope="col"style="text-align: center;vertical-align:middle;">Tên người nhận</th>
+                                        <th scope="col"style="text-align: center;vertical-align:middle;">Trạng thái</th></th>
+                                        <th scope="col"style="text-align: center;vertical-align:middle;">Địa chỉ</th>
+                                        <th scope="col"style="text-align: center;vertical-align:middle;">Tổng tiền</th></th>
+                                        <th scope="col"style="text-align: center;vertical-align:middle;">Ngày đặt</th>
+                                    </tr>
                                     </thead>
                                     <tbody>
+                                    @php
+                                        $index = 1;
+                                    @endphp
+                                    @foreach($orders as $key => $order)
                                         <tr>
-                                            <td scope="row" style="text-align: center; vertical-align: middle">
-                                                1
-                                            </td>
-                                            <td style="text-align: center; vertical-align: middle">
+                                            <td scope="row" style="text-align: center;vertical-align:middle;">{{ $index++ }}</td>
+                                            <td style="text-align: center; vertical-align: middle;">
                                                 {{-- {{ route('order.view', ['id' => $order->id]) }} --}}
-                                                <a href="#" class="icon-overlay">
-                                                    Phạm Văn Nam
+                                                <a class="icon-overlay" id="view-order" href="{{ route('customer.view-order',['id' => $order->id]) }}">
+                                                    {{ $order->name }}
                                                 </a>
                                             </td>
-                                            <td style="text-align: center; vertical-align: middle">125.000đ</td>
-                                            <td style="text-align: center; vertical-align: middle">
-                                                <span class="display:inline-block" style="margin: 0"
-                                                    >Đang xử lý</span
-                                                >
-                                            </td>
-                                            <td style="text-align: center; vertical-align: middle">
-                                                09/08/2023
-                                            </td>
-
-                                            <td style="text-align: center; vertical-align: middle">
-                                                <form
-                                                {{-- {{ route('order.destroy',['id'=>$order->id]) }} --}}
-                                                    action=""
-                                                    method="post"
-                                                    style="display: block; padding: 10px"
-                                                >
-                                                    <a
-                                                        class="btn btn-primary"
-                                                        href="#"
-                                                        style="margin: 0 5px 0 0"
-                                                        ><i class="fa-solid fa-pen-to-square"></i
-                                                    ></a>
+                                            <td style="text-align: center;vertical-align:middle;"><span class=" display:inline-block" style="margin:0">{{ $order?->status}}</span></td>
+                                            <td style="text-align: center;vertical-align:middle;">{{ $order?->shipping_address }}</td>
+                                            <td style="text-align: center;vertical-align:middle;">{{ number_format($order?->total_amount) }}</td>
+                                            <td style="text-align: center;vertical-align:middle;">{{ $order->created_at->format('d/m/Y h:i:s') }}</td>
+                                           
+                                            {{-- <td style="text-align:center;vertical-align:middle;">
+                                                <form action="{{ route('order.destroy',['id'=>$order->id]) }}" method="post" style="display:block;padding:10px">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <a class="btn btn-primary" href="#" style="margin:0 5px 0 0;"><i class="fa-solid fa-pen-to-square"></i></a>
                                                 </form>
-                                            </td>
+                                            </td> --}}
                                         </tr>
+                                    @endforeach
                                     </tbody>
                                 </table>
                             </div>
+                            
                         </div>
                     </div>
                 </div>
 
                 {{-- Modal --}}
-                <div class="history-overlay overlay-common">
-                    <div class="content-wraper-common history-content-wraper">
-                        <div class="card">
-                            <div class="card-header" style="display:flex;justify-content:space-between;align-items: center;">
-                                <h4 class="card-title">Danh sách đơn hàng</h4>
-                                <p style="font-size:20px;"><i class="fa-solid fa-circle-xmark icon-close-overlay"></i></p>
-                            </div>
-
-                            <div class="card-body">
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col" style="text-align: center; vertical-align: middle">
-                                                Product name
-                                            </th>
-                                            <th scope="col" style="text-align: center; vertical-align: middle">
-                                                Ảnh
-                                            </th>
-
-                                            <th scope="col" style="text-align: center; vertical-align: middle">
-                                                Giá
-                                            </th>
-                                            <th scope="col" style="text-align: center; vertical-align: middle">
-                                                Số lượng
-                                            </th>
-                                            <th scope="col" style="text-align: center; vertical-align: middle">
-                                                Tổng tiền
-                                            </th>
-                                            <th
-                                                scope="col"
-                                                style="width: 250px; text-align: center; vertical-align: middle"
-                                            >
-                                                Ghi chú
-                                            </th>
-                                            <th scope="col" style="text-align: center; vertical-align: middle">
-                                                Ngày đặt
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody></tbody>
-                                </table>
-                                <div></div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="modal-wrapper-history">
+                    @include('client.components.modal_history_order',['orderDetails' => $orderDetails])
                 </div>
             </div>
         </div>
     </div>
 </div>
+@endif
 @endsection
 
 @push('custom-script')
@@ -549,71 +462,161 @@
         $('.select2').select2({
             theme: 'bootstrap-5'
         });
-    })
-</script>
 
-<script>
-    $(document).ready(function () {
-       //get category theo parentCategory
-       $('#ward').select2({
+        $('#ward').select2({
             theme: 'bootstrap-5',
             ajax: {
-                url: '{{ route('user.get-ward') }}',
+                type: 'GET',
+                url: 'http://mixi.com:8000/admin/user/get-ward',
                 data: function (params) {
                     var query = {
                         parent_id: $('#district').val(),
                         _token: '{{ csrf_token() }}'
                     }
-
-                    // Query parameters will be ?search=[term]&type=public
                     return query;
                 },
                 dataType: 'json',
-                processResults: function (data, params) {
+                processResults: function (res, params) {
                     return {
-                        results: data,
+                        results: res,
                     }
-                }
+                },
+                // cache: true,
+                // placeholder: 'Chọn quận/huyện',
             },
         })
-    });
-</script>
-<script>
-    function overlayActive(event) {
-        var addOverlay = $('.overlay-common');
-        console.log(addOverlay);
 
-        // Kiểm tra xem phần tử overlay đang có class "active" hay không
-        if (addOverlay.hasClass('active')) {
-            addOverlay.removeClass('active');
-        } else {
-            addOverlay.addClass('active');
+        function overlayActive(event) {
+            var addOverlay = $('.overlay-common');
+
+            // Kiểm tra xem phần tử overlay đang có class "active" hay không
+            if (addOverlay.hasClass('active')) {
+                addOverlay.removeClass('active');
+            } else {
+                addOverlay.addClass('active');
+            }
+
+            $(document).on("click", ".icon-close-overlay", function () {
+                $(".overlay-common").removeClass("active");
+            });
+        }
+         $(document).on("click", ".icon-overlay", overlayActive);
+
+        //function thay cho function do select2 trong modal lỗi ko hiển thị
+        function iconActive(event) {
+            var addAdderss = $('.address-wraper');
+
+            // Kiểm tra xem phần tử overlay đang có class "active" hay không
+            if (addAdderss.hasClass('active')) {
+                // Nếu có, thì loại bỏ class "active"
+                addAdderss.removeClass('active');
+            } else {
+                // Nếu không, thêm class "active"
+                addAdderss.addClass('active');
+            }
+
+            $(document).on("click", ".icon-close-overlay", function () {
+                $(".address-wraper").removeClass("active");
+            });
         }
 
-        $(document).on("click", ".icon-close-overlay", function () {
-            $(".overlay-common").removeClass("active");
-        });
-    }
-    $(document).on("click", ".icon-overlay", overlayActive);
+        $(document).on("click", ".add-address", iconActive);
 
-    //function thay cho function do select2 trong modal lỗi ko hiển thị
-    function iconActive(event) {
-        var addAdderss = $('.address-wraper');
-
-        // Kiểm tra xem phần tử overlay đang có class "active" hay không
-        if (addAdderss.hasClass('active')) {
-            // Nếu có, thì loại bỏ class "active"
-            addAdderss.removeClass('active');
-        } else {
-            // Nếu không, thêm class "active"
-            addAdderss.addClass('active');
+        //set địa chỉ mặc định
+        function setDefaultAddress(e) {
+            e.preventDefault();
+            let addressId = $(this).attr('data-id');
+            let is_default = $('.user_name').attr('data-default');
+            // Gửi yêu cầu AJAX để đặt địa chỉ mặc định.
+            $.ajax({
+                type: 'PUT',
+                url: '{{ route('customer.address-default') }}',
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    addressId : addressId,
+                    is_default: is_default == 1 ? 0 : 1,
+                },
+                dataType: 'json',
+                success: function (response) {
+                    if(response['code'] == 200){
+                        alert(response['msg']);
+                        // window.location.replace('{{ route('customer.profile') }}');
+                        console.log(response['address_item']);
+                        
+                        // Xóa dữ liệu cũ trong #wraper_address-item
+                        // $("#wraper_address-item").empty();
+                        // Thêm dữ liệu mới vào #wraper_address-item
+                        // $("#wraper_address-item").append(response['address_item']);
+                        $("#wraper_address-item").html(response['address_item']);
+                    }
+                }
+            });
         }
 
-        $(document).on("click", ".icon-close-overlay", function () {
-            $(".address-wraper").removeClass("active");
-        });
-    }
+        $(document).on("click", ".change-address-default",setDefaultAddress)
 
-    $(document).on("click", ".add-address", iconActive);
+        //Xóa địa chỉ
+        function deleteAddress(e) {
+            e.preventDefault();
+            let addressId = $(this).attr('data-id');
+            let url = $(this).attr('href');
+            $.ajax({
+                type: 'Delete',
+                url: url,
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    addressId : addressId,
+                },
+                dataType: 'json',
+                success: function (response) {
+                    if(response['code'] == 200){
+                        alert(response['msg']);
+                        // window.location.replace('{{ route('customer.profile') }}');
+                        $("#wraper_address-item").html(response['address_item']);
+                    }
+                }
+            });
+        }
+
+        $(document).on("click", ".delete-address",deleteAddress)
+
+        //Xem chi tiết đơn hàng
+        function viewOrder(even) {
+            even.preventDefault();
+            let url = $(this).attr('href');
+            $.ajax({
+                type: 'GET',
+                url: url,
+                data: {
+                    _token: '{{ csrf_token() }}',
+                },
+                dataType: 'json',
+                success: function (response) {
+                    if(response['code'] == 200){
+                        $(".modal-wrapper-history").html(response['order_item']);
+                        var addOverlay = $('.overlay-common_');
+
+                        // Kiểm tra xem phần tử overlay đang có class "active" hay không
+                        if (addOverlay.hasClass('active')) {
+                            addOverlay.removeClass('active');
+                        } else {
+                            addOverlay.addClass('active');
+                        }
+
+                        $(document).on("click", ".icon-close-overlay", function () {
+                            $(".overlay-common_").removeClass("active");
+                        });
+                        // $('#view-order')addClass('icon-overlay');
+                        // alert(response['msg']);
+                        // window.location.replace('{{ route('customer.profile') }}');
+                    }
+                }
+            });
+        }
+
+        $(document).on("click", "#view-order",viewOrder)
+    })
+    
 </script>
+
 @endpush

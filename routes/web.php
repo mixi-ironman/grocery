@@ -84,6 +84,9 @@ use App\Http\Controllers\Home\UserController;
 //User
 Route::prefix('customer')->name('customer.')->group(function () {
     Route::get('/profile',[UserController::class,'index'])->name('profile');
+    Route::get('/view-order/{id}',[UserController::class,'viewOrder'])->name('view-order');
     Route::post('/profile',[UserController::class,'store'])->name('store');
-   
+    Route::put('/update/{id}',[UserController::class,'update'])->name('update');
+    Route::delete('/destroy/{id}', [UserController::class, 'destroy'])->name('destroy');
+    Route::put('/address-default', [UserController::class, 'setDefaultAddress'])->name('address-default');
 });

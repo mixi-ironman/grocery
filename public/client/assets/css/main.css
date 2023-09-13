@@ -590,8 +590,8 @@ chuyển dịch từ giữa ra 2 bên */
 .slider-item_description {
     /* display: none; */
     position: absolute;
-    top: 50%;
-    /* left: 70%; */
+    top: 70%;
+    left: 30%;
     transform: translateY(-50%);
     width: 100%;
     padding: 15px 10px;
@@ -605,7 +605,7 @@ chuyển dịch từ giữa ra 2 bên */
 
 @keyframes animateUser {
     20% {
-        top: 55%;
+        top: 75%;
         /* transform: rotate(180deg); */
         /* left: 54%; */
     }
@@ -626,15 +626,15 @@ chuyển dịch từ giữa ra 2 bên */
     color: red;
     font-family: "Shadows Into Light", cursive;
     font-weight: 900;
-    font-size: 70px;
+    font-size: 30px;
     word-spacing: 5px;
     letter-spacing: 0.5px;
-    transform: rotate(8deg);
+    transform: rotate(6deg);
     /* opacity: 0.8; */
 }
 
 .slider-item_description > *:nth-child(2) {
-    color: rgb(245, 238, 245);
+    color: rgb(245, 238, 242);
     font-family: "Rubik", sans-serif;
     font-weight: 400;
     font-size: 18px;
@@ -1988,6 +1988,7 @@ span {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    margin-bottom: 15px;
 }
 .address-create_content {
     width: 100%;
@@ -2097,14 +2098,44 @@ span {
     visibility:visible
 }
 
+.overlay-common_ {
+    background: rgba(0, 0, 0, 0.6);
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 7000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 200ms linear;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.content-wraper-common {
+    background-color: #fcfffc;
+    border-radius: 5px;
+    padding: 20px;
+    overflow: scroll;
+    z-index: 7100;
+}
+
+.overlay-common_.active{
+    opacity: 1;
+    visibility:visible
+}
+
 /* -----------history(address)-overlay----------- */
 .address-content-wraper {
     height: 700px ;
     width: 70vw ;
 }
 .history-content-wraper {
-    height: 700px ;
-    width: 90vw ;
+    max-height: 700px ;
+    width: 60vw ;
 }
 
 .address-wraper{

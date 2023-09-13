@@ -11,19 +11,33 @@
                     <div class="card-body">
                         <form action="{{ route('confirm-check-out') }}" method="POST">
                             @csrf
+                            @php
+                                if(Auth::check())
+                                {
+                                    $name = $address->name;
+                                    $email = $address->email;
+                                    $phone = $address->phone;
+                                    $address = $address->address_details;
+                                }else{
+                                    $name = '';
+                                    $email = '';
+                                    $phone = '';
+                                    $address = '';
+                                }
+                            @endphp
                             <div class="mb-3">
                                 <label for="name" class="form-label">Họ và tên</label>
-                                <input type="text" class="form-control fullname" id="name" name="name" placeholder="full name..." value="">
+                                <input type="text" class="form-control fullname" id="name" name="name" placeholder="full name..." value="{{ $name }}">
                             </div>
 
                             <div class="mb-3">
                                 <label for="email" class="form-label">Email </label>
-                                <input type="email" class="form-control email" id="email" name="email" placeholder="email..." value="">
+                                <input type="email" class="form-control email" id="email" name="email" placeholder="email..." value="{{ $email }}">
                             </div>
 
                             <div class="mb-3">
                                 <label for="phone" class="form-label">Điện thoại</label>
-                                <input type="text" class="form-control phone" id="phone" name="phone" placeholder="phone..." value="">
+                                <input type="text" class="form-control phone" id="phone" name="phone" placeholder="phone..." value="{{ $phone }}">
                             </div>
 
                             {{-- <div class="mb-3">
@@ -33,7 +47,7 @@
 
                             <div class="mb-3">
                                 <label for="shipping_address" class="form-label">Địa chỉ</label>
-                                <input type="text" class="form-control shipping_address" id="shipping_address" name="shipping_address" placeholder="address..." value="">
+                                <input type="text" class="form-control shipping_address" id="shipping_address" name="shipping_address" placeholder="address..." value="{{ $address }}">
                             </div>
 
                             <div class="mb-3">
