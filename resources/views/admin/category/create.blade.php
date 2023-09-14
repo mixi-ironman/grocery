@@ -14,11 +14,6 @@
                         <input type="text" class="form-control"  name="name_category" aria-describedby="emailHelp">
                     </div>
 
-                    {{-- <div class="mb-3">
-                        <label  class="form-label">Slug</label>
-                        <input type="text" class="form-control" name="slug" aria-describedby="emailHelp">
-                    </div> --}}
-
                     <div class="mb-3">
                         <label  class="form-label">Description</label>
                         <textarea class="form-control" name="description" rows="3"></textarea>

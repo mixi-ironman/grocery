@@ -9,6 +9,7 @@ use App\Http\Controllers\OrderDetailController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\CouponController;
 
 
 // Route::group(['prefix' => 'categories', 'as' => 'categories.'], function () {
@@ -78,7 +79,6 @@ Route::group(['prefix' => 'tags', 'as' => 'tags.'], function () {
     Route::post('/', [TagController::class, 'store'])->name('store');
     Route::put('/{id}', [TagController::class, 'update'])->name('update');
     // Route::post('/create-tag', [TagController::class, 'createTag'])->name('create-tag');
-
 });
 
 //Order
@@ -86,6 +86,16 @@ Route::prefix('order')->name('order.')->group(function () {
     Route::get('/', [OrderDetailController::class, 'index'])->name('index');
     Route::get('view-order/{id}',[OrderDetailController::class,'show'])->name('view');
     Route::delete('/destroy/{id}', [OrderDetailController::class, 'destroy'])->name('destroy');
+});
+
+//Coupon
+Route::prefix('coupons')->name('coupons.')->group(function () {
+    Route::get('/', [CouponController::class, 'index'])->name('index');
+    Route::get('/create', [CouponController::class, 'create'])->name('create');
+    Route::post('/store', [CouponController::class, 'store'])->name('store');
+    Route::get('/edit/{id}', [CouponController::class, 'edit'])->name('edit');
+    Route::put('/update/{id}', [CouponController::class, 'update'])->name('update');
+    Route::delete('/destroy/{id}', [CouponController::class, 'destroy'])->name('destroy');
 });
 
 //User
@@ -97,6 +107,5 @@ Route::prefix('user')->name('user.')->group(function () {
     Route::put('/update/{id}', [UserController::class, 'update'])->name('update');
     Route::delete('/destroy/{id}', [UserController::class, 'destroy'])->name('destroy');
     Route::get('/get-ward', [UserController::class, 'getWard'])->name('get-ward');
-
 });
 

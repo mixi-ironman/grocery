@@ -38,8 +38,8 @@ class UserController extends Controller
             // foreach ($orders as $key => $order) {
             //     $orderDetails = $order->with(['orderDetails'])->get();
             // }
-            $orderDetails = $this->orderDetailService->getOrderDetailById(5);
         }
+        $orderDetails = $this->orderDetailService->getOrderDetailById(5);
         $user = $user ?? (object)['id' => 7];
         return view('client.layouts.pages.account-detail',
                 [

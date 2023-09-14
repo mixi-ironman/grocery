@@ -102,10 +102,10 @@
                                        {{-- <h6 class="text-muted">Coupons</h6> --}}
                                         <div class="mb-3" style="width:150px;">
                                             <label for="exampleFormControlInput1" class="form-label">Voucher</label>
-                                            <input style="width: 200px;" type="text" class="form-control" id="discount_code" placeholder="Nhập mã giảm giá">
-                                            <p style="opacity:0">Thành công</p>
+                                            <input style="width: 200px;" type="text" name="coupon_code" class="form-control" id="discount_code" placeholder="Nhập mã giảm giá">
+                                            <p style="width:300px" id="notification_coupon"></p>
                                         </div>
-                                        <a href="{{route('home')}}" id="apply_discount_btn" class="translatex hover-top"  style="background-color:rgb(93,168,138,0.8);display:inline-block; padding:5px 10px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);border-top-left-radius: 12px;border-bottom-right-radius: 12px;color:black;font-weight:600;font-size:14px;position:relative">Áp dụng mã</a>
+                                        <a href="{{route('apply-coupon')}}" id="apply_discount_btn" class="translatex hover-top"  style="background-color:rgb(93,168,138,0.8);display:inline-block; padding:5px 10px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);border-top-left-radius: 12px;border-bottom-right-radius: 12px;color:black;font-weight:600;font-size:14px;position:relative">Áp dụng mã</a>
                                     </td>
                                    
                                 </tr>
@@ -113,10 +113,28 @@
                                 
                                 <tr>
                                     <td class="cart_total_label" >
+                                        <h6 class="text-muted">Giá tạm tính</h6>
+                                    </td>
+                                    <td class="cart_total_amount" >
+                                        <h4 style="width:165px" class="text-primary text-end" id="temporary-price">{{ number_format($total)}} đ</h4>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="cart_total_label" >
+                                        <h6 class="text-muted">Khuyến mãi</h6>
+                                    </td>
+                                    <td class="cart_total_amount">
+                                        <h4 style="width:165px" class="text-primary text-end" id="discount_cart">0 đ</h4>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="cart_total_label" >
                                         <h6 class="text-muted">Giá phải trả</h6>
                                     </td>
                                     <td class="cart_total_amount" >
-                                        <h4 class="text-primary text-end">{{ number_format($total)}}đ</h4>
+                                        <h4 style="width:165px" class="text-primary text-end" id="price-to-pay">{{ number_format($total)}} đ</h4>
                                     </td>
                                 </tr>
                             </tbody>
@@ -141,15 +159,6 @@
 @push('custom-script')
 <script>
 $(document).ready(function () {
-// Sự kiện click đã bị xóa đi: Trong quá trình thực hiện Ajax và cập nhật lại nội dung, có thể có mã JavaScript hoặc thư viện khác đã xóa đi hoặc gắn lại các sự kiện cho các phần tử. Điều này dẫn đến việc sự kiện click trước đó không còn tồn tại nữa.
-// Thay đổi cấu trúc DOM: Khi thực hiện Ajax và cập nhật lại nội dung, có thể cấu trúc DOM đã thay đổi, làm cho các phần tử chứa nút update không còn tồn tại trong DOM nữa.
-// Để giải quyết vấn đề này, bạn nên sử dụng sự kiện delegate hoặc on cho các phần tử có sẵn trong DOM và không thay đổi trong quá trình Ajax.
-    // $('.cart_update').on('click',updateCart);
-    $(document).on('click', '.cart_update', updateCart);
-    $(document).on('click', '.cart_delete', deleteCart);
-    $(document).on('click', '#btn-destroy-cart', destroyCart);
-
-
 
     function updateCart(even) 
     {
@@ -183,6 +192,7 @@ $(document).ready(function () {
             }
         });
     }
+    $(document).on('click', '.cart_update', updateCart);
 
     function deleteCart(even) 
     {
@@ -213,6 +223,8 @@ $(document).ready(function () {
             }
         });
     }
+    $(document).on('click', '.cart_delete', deleteCart);
+
 
     function destroyCart(even) 
     {
@@ -235,6 +247,8 @@ $(document).ready(function () {
             }
         });
     }
+    $(document).on('click', '#btn-destroy-cart', destroyCart);
+
 
     // $('#checkout_button').on('click', function() {
     //     // Kiểm tra giỏ hàng có sản phẩm hay không
@@ -246,8 +260,52 @@ $(document).ready(function () {
     //     // Tiếp tục xử lý thanh toán
     //     // ... (Thêm mã ajax xử lý thanh toán ở đây)
     // });
+
+    function number_format(number) {
+        return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(number);
+    }
+
+    //apply coupon
+    function applyCoupon(even) 
+    {
+        even.preventDefault();
+        let coupon_code = $('#discount_code').val();
+        let url = $('#apply_discount_btn').attr('href');
+        $.ajax({
+            method: 'POST',
+            url: url,
+            data: {
+                _token: $('meta[name="csrf-token"]').attr('content'),
+                'coupon_code' : coupon_code
+            },
+            dataType: 'json',
+            success: function (response) {
+            if (response['code'] === 200) {
+                $('#checkout_button').attr("href", "{{ route('check-out') }}?total=" + response['discount']);
+
+                $('#notification_coupon').html('<p style="color: green;">' + response['msg'] + '</p>');
+                $('#discount_cart').html('<p style="color: rgb(13,110,253);">-' + number_format(response['percentAmount']) + '</p>');
+                $('#price-to-pay').html('<p style="color: rgb(13,110,253);">' + number_format(response['discount']) + '</p>');
+            } else if (response['code'] === 500) {
+                $('#notification_coupon').html('<p style="color: red;">' + response['msg'] + '</p>');
+            }
+            },
+            error: function (error) {
+                console.error('Đã có lỗi xảy ra ', error);
+                // window.location.replace('{{ route('home') }}');
+            }
+        });
+    }
+
+    $(document).on('click', '#apply_discount_btn', applyCoupon);
+
 });
 
 </script>
 @endpush
+
+{{-- // Sự kiện click đã bị xóa đi: Trong quá trình thực hiện Ajax và cập nhật lại nội dung, có thể có mã JavaScript hoặc thư viện khác đã xóa đi hoặc gắn lại các sự kiện cho các phần tử. Điều này dẫn đến việc sự kiện click trước đó không còn tồn tại nữa.
+// Thay đổi cấu trúc DOM: Khi thực hiện Ajax và cập nhật lại nội dung, có thể cấu trúc DOM đã thay đổi, làm cho các phần tử chứa nút update không còn tồn tại trong DOM nữa.
+// Để giải quyết vấn đề này, bạn nên sử dụng sự kiện delegate hoặc on cho các phần tử có sẵn trong DOM và không thay đổi trong quá trình Ajax.
+    // $('.cart_update').on('click',updateCart); --}}
 

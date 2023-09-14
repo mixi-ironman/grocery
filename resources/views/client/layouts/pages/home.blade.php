@@ -4,6 +4,8 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="csrf-token" content="{{ csrf_token() }}">
+        <link rel="icon" href="https://i.pinimg.com/originals/b2/57/81/b2578191becd55a7ebbc3aa9cfda9a7a.jpg" type = "image/x-icon">
+        <title>Mixi...</title>
         {{-- add font-awesome --}}
         <link
             rel="stylesheet"
@@ -31,7 +33,6 @@
          {{-- Add Select2 --}}
          <link rel="stylesheet" href="{{ asset('libs/select2/css/select2.min.css') }}">
          <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
-        <title>Mixi-Market</title>
     </head>
     <body>
 
@@ -67,11 +68,11 @@
                         <div class="col-md-12">
                             <div class="slider-item-product">
                                 <div class="product-title popular-product-title">
-                                    <h3 class="hover_  name-category-popular scroll-animation" style="position: relative">Popular Products</h3>
+                                    <h3 class="hover_  name-category-popular scroll-animation" style="position: relative">Sản phẩm nổi bật</h3>
                                     {{-- <h3 class="name-category-popular">Sản phẩm phổ biến</h3> --}}
                                     <ul class="nav-tab" style="opacity: 0">
                                         <li class="nav-item">
-                                            <a href="#" class="nav-item-link">All </a>
+                                            <a href="#" class="nav-item-link">All</a>
                                         </li>
                                         <li class="nav-item">
                                             <a href="#" class="nav-item-link">Featured</a>
@@ -120,8 +121,8 @@
                                     <p class="scrolling-text scroll-animation">Product</p>
                                 </div>
                                 <div class="des-bottom">
-                                    <span>Products</span>
-                                    <h2>Featured</h2>
+                                    <span>Sản phẩm</span>
+                                    <h2>Nổi bật</h2>
                                 </div>
                             </div>
                             <div class="nav-tab-icon" style="text-align: end;display:none">

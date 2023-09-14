@@ -28,12 +28,14 @@ class OrderService
     // //Đặt hàng
     public function add(Request $request, $carts)
     {
+        
         DB::beginTransaction();
 
         try {
             // Tạo mã đơn hàng ngẫu nhiên (UUID)
             $orderCode = $this->generateOrderCode();
             $totalAmount = 0;
+            
             $user = Auth::user();
 
             if (Auth::check()) {
@@ -54,7 +56,6 @@ class OrderService
                 'user_id' => $user_id,
             ];
 
-            // dd($order);
             foreach ($carts as $id => $cart) {        
                 $product = Product::find($id);  
                 if ($cart['quantity'] > 10) {
@@ -117,9 +118,14 @@ class OrderService
 
                 // Cập nhật số lượng sản phẩm trong bảng products
                 $product->decrement('stock', $cart['quantity']);
-
-                // Cập nhật tổng tiền đơn hàng
-                $totalAmount += $cart['quantity'] * $cart['price'];
+                
+                if($request->total_amount)
+                {
+                    $totalAmount = $request->total_amount;
+                }else{
+                    // Cập nhật tổng tiền đơn hàng
+                    $totalAmount += $cart['quantity'] * $cart['price'];
+                }
             }  
 
             // Cập nhật tổng tiền đơn hàng vào bảng order

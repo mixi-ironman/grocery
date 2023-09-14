@@ -51,26 +51,24 @@ use App\Http\Controllers\Home\UserController;
     Route::get('/load-comment',[ProductController::class,'loadComment'])->name('load-comment');
     Route::post('/send-comment',[ProductController::class,'sentComment'])->name('send-comment');
     });
-    // ---------------
 
     //Category
     Route::get('category/{id}-{slug}.html',[CategoryController::class,'index'])->name('category-product');
     // -----------------
 
     //cart
-    Route::get('products/add-to-cart/{id}',[CartController::class,'addToCart'])->name('add-to-cart');
-    Route::get('products/show-cart',[CartController::class,'showCart'])->name('show-cart');
-    Route::post('products/clear-cart',[CartController::class,'clearCart'])->name('clear-cart');
-    Route::get('products/proxy',[CartController::class,'proxyRequest'])->name('proxy');
+    Route::prefix('cart')->group(function () {
+        Route::get('/add-to-cart/{id}',[CartController::class,'addToCart'])->name('add-to-cart');
+        Route::get('/show-cart',[CartController::class,'showCart'])->name('show-cart');
+        Route::post('/clear-cart',[CartController::class,'clearCart'])->name('clear-cart');
+        Route::get('/update-cart',[CartController::class,'updateCart'])->name('update-cart');
+        Route::get('/delete-cart',[CartController::class,'deleteCart'])->name('delete-cart');
+        Route::post('/apply-coupon',[CartController::class,'applyCoupon'])->name('apply-coupon');
 
-    Route::get('products/update-cart',[CartController::class,'updateCart'])->name('update-cart');
-    Route::get('products/delete-cart',[CartController::class,'deleteCart'])->name('delete-cart');
-    // --------------------
-
-    //checkout 
-    Route::get('/check-out',[CartController::class,'checkout'])->name('check-out');
-    Route::post('/check-out-cash',[CartController::class,'addOrderCash'])->name('confirm-check-out');
-    // --------------------
+        //checkout 
+        Route::get('/check-out',[CartController::class,'checkout'])->name('check-out');
+        Route::post('/check-out-cash',[CartController::class,'addOrderCash'])->name('confirm-check-out');
+    });
 
     // Route xử lý thanh toán bằng tiền mặt
     Route::post('/checkout-cash', 'PaymentController@checkoutCash');
@@ -81,7 +79,7 @@ use App\Http\Controllers\Home\UserController;
     Route::get('vnpay',[PaymentController::class,'vnpay'])->name('vnpay');
     Route::get('vnpay-return',[PaymentController::class,'vnpayReturn'])->name('vnpay-return');
 
-//User
+//customer
 Route::prefix('customer')->name('customer.')->group(function () {
     Route::get('/profile',[UserController::class,'index'])->name('profile');
     Route::get('/view-order/{id}',[UserController::class,'viewOrder'])->name('view-order');

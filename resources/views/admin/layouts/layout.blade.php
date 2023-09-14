@@ -7,15 +7,12 @@
             content="width=device-width, initial-scale=1, shrink-to-fit=no"
         />
         <meta name="csrf-token" content="{{ csrf_token() }}">
+        <link rel="icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTViWlGcje-ztwX382Ru2SOcJ6Vgp4eN7r_nw&usqp=CAU" type = "image/x-icon">
+
         <link
             rel="apple-touch-icon"
             sizes="76x76"
             href="{{ url('./mixi') }}/assets/img/apple-icon.png"
-        />
-        <link
-            rel="icon"
-            type="image/png"
-            href="{{ url('./mixi') }}/assets/img/favicon.png"
         />
         <title>Mixi</title>
         <!--     Fonts and icons     -->

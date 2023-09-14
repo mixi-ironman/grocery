@@ -3,7 +3,7 @@
             {{-- <div class="slider-item-product"> --}}
             <div class="col-md-12">
                 <div class="product-title">
-                    <h3 class="hover_ " style="position: relative">Featured Categories</h3>
+                    <h3 class="hover_ " style="position: relative">Danh mục nổi bật</h3>
                     <div class="nav-wraper">
                         <ul class="nav-tab" style="opacity: 0">
                             <li class="nav-item">

@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Location;
+use App\Models\Address;
 use App\Repositories\Client\UserRepository;
 use App\Repositories\Client\AddressRepository;
 
@@ -29,6 +30,15 @@ class UserService
                 $user = Auth::user();
                 $district = Location::find($request->district);
                 $ward = Location::find($request->ward);
+                if($request->status == 1)
+                {
+                    $addressStatus = [
+                        '0' => false, 
+                        '1' => true, 
+                    ];
+
+                    Address::where('user_id', $user->id)->update(['is_default' => $addressStatus['0']]);
+                }
 
                 $address = $this->addressRepository->create([
                     'user_id' => $user->id,

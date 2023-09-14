@@ -167,8 +167,9 @@
     background-color: rgb(255, 255, 255);
     width: 220px;
     z-index: 9999;
-    border-radius: 10px;
+    border-radius: 7px;
     border: 1px solid rgb(175, 139, 139);
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
 }
 .user-dropdown::after{
     content: '';

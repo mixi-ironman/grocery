@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
+    <link>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="csrf-token" content="{{ csrf_token() }}">
+        <link rel="icon" href="https://i.pinimg.com/originals/b2/57/81/b2578191becd55a7ebbc3aa9cfda9a7a.jpg" type = "image/x-icon">
+
         <link
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -27,7 +29,8 @@
         <link rel="stylesheet" href="{{ asset('client/assets/css/main.css') }}" />
         <link rel="stylesheet" href="{{ asset('client/assets/css/detail.css') }}" />
         <link rel="stylesheet" href="{{ url('client') }}/assets/css/filter.css" />
-        <title>Mixi-Market</title>
+        <title>Mixi...</title>
+
     </head>
     <body>
         <div class="app">

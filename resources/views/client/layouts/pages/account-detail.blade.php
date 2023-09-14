@@ -280,10 +280,14 @@
                                 <p style="font-size:20px; "><i style="color:red;cursor: pointer;" class="fa-solid fa-circle-xmark icon-close-overlay"></i></p>
                             </div>
                             <div class="card-body">
+                                {{-- {{ isset($category) ? route('categories.update', $category->id) : route('categories.store') }} --}}
                                 <form action="{{ route('customer.store') }}" method="POST">
                                     @csrf
+                                    {{-- @if(isset($category))
+                                        @method('put')
+                                    @endif --}}
                                     <div class="mb-3">
-                                        <label class="form-label">Họ tên</label>
+                                        <label class="form-label url_" data-url_ = "{{ route('user.get-ward') }}">Họ tên</label>
                                         <input
                                             type="text"
                                             class="form-control"
@@ -419,7 +423,7 @@
                                             <td style="text-align: center; vertical-align: middle;">
                                                 {{-- {{ route('order.view', ['id' => $order->id]) }} --}}
                                                 <a class="icon-overlay" id="view-order" href="{{ route('customer.view-order',['id' => $order->id]) }}">
-                                                    {{ $order->name }}
+                                                    {{ $order->name ?? '' }}
                                                 </a>
                                             </td>
                                             <td style="text-align: center;vertical-align:middle;"><span class=" display:inline-block" style="margin:0">{{ $order?->status}}</span></td>
@@ -468,6 +472,7 @@
             ajax: {
                 type: 'GET',
                 url: 'http://mixi.com:8000/admin/user/get-ward',
+                // url: '{{ route('user.get-ward') }}',
                 data: function (params) {
                     var query = {
                         parent_id: $('#district').val(),

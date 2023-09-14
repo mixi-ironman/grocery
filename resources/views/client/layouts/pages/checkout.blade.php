@@ -64,7 +64,7 @@
                                 <label for="order_note" class="form-label">Ghi chú(nếu có)</label>
                                 <textarea class="form-control" id="order_note"  name="order_note" rows="3"></textarea>
                             </div>
-
+                            <input readonly type = "hidden" name="total_amount" class="total_amount" value="{{ isset($total_discount) ? $total_discount : ''}}" style="max-width:160px; letter-spacing:2px;font-weight:600;font-size:17px;border-top-left-radius: 12px;border-bottom-right-radius: 12px;border:2px solid green;text-align:center;outline:none;padding:5px">
                             <div class="d-grid gap-2" style="display:flex !important;justify-content:space-between">
                                 {{-- <button type="submit" class="btn btn-primary">Place Order</button> --}}
                                 <a href="{{ route('show-cart') }}" class="translatex"  style="width:200px;background-color:rgba(221, 131, 229, 0.8);display:block; padding:10px 15px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);border-top-left-radius: 12px;border-bottom-right-radius: 12px;color:black;font-weight:600;font-size:16px;position:relative"><i class="bi bi-arrow-left me-2"></i>Giỏ hàng</a>
@@ -114,15 +114,14 @@
                                 <div class="divider-2 mt-3 mb-3"></div>
                             </td>
                         </tr>
-                        
                         </tbody>
                     </table>
                 </div>
                 <div style="display:flex;align-content: center;vertical-align:middle;margin-top:15px;">
                     <h6 class="text-muted" style="margin:0; font-weight:bold;font-size:20px; width:130px">Giá phải trả</h6>
                     <p class="cart_total_amount"  style="text-align:center;vertical-align:middle">
-                        <input readonly type = "hidden" name="total_amount" class="total_amount" value="{{ $total}}" style="max-width:160px; letter-spacing:2px;font-weight:600;font-size:17px;border-top-left-radius: 12px;border-bottom-right-radius: 12px;border:2px solid green;text-align:center;outline:none;padding:5px">
-                        <input readonly type = "text" name="total_amount_" class="total_amount_" value="{{ number_format($total)}} đ" style="max-width:160px; letter-spacing:2px;font-weight:600;font-size:17px;border-top-left-radius: 12px;border-bottom-right-radius: 12px;border:2px solid green;text-align:center;outline:none;padding:5px">
+                        {{-- <input readonly type = "hidden" name="total_amount" class="total_amount" value="{{ isset($total_discount) ? $total_discount : $total}}" style="max-width:160px; letter-spacing:2px;font-weight:600;font-size:17px;border-top-left-radius: 12px;border-bottom-right-radius: 12px;border:2px solid green;text-align:center;outline:none;padding:5px"> --}}
+                        <input readonly type = "text" name="total_amount_" class="total_amount_" value="{{ isset($total_discount) ? number_format($total_discount) : number_format($total)}} đ" style="max-width:160px; letter-spacing:2px;font-weight:600;font-size:17px;border-top-left-radius: 12px;border-bottom-right-radius: 12px;border:2px solid green;text-align:center;outline:none;padding:5px">
                     </p>
                 </div>    
             </div>

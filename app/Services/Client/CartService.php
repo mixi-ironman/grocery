@@ -32,5 +32,17 @@ class CartService
     //             $email->to($mail,$name);
     //         });
     // }
+
+    public function getTotal()
+    {
+        $cart = session()->get('cart', []);
+        $total = 0;
+
+        foreach ($cart as $item) {
+            $total += $item['quantity'] * $item['price'];
+        }
+
+        return $total;
+    }
   
 }

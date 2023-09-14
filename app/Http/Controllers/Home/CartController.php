@@ -8,6 +8,11 @@ use App\Services\Client\ProductService;
 use App\Services\OrderService;
 use App\Models\Category;
 use App\Models\Address;
+use App\Models\User;
+use App\Models\Coupon;
+use App\Models\UserCoupon;
+
+use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
@@ -119,11 +124,12 @@ class CartController extends Controller
 
       public function checkOut(Request $request)
       {
+            $total_discount = request()->query('total');
             $carts = session()->get('cart',[]);
             $address = Address::where('is_default', 1)->first();
 
             $categoryList = Category::where('parent_id', 0)->get();
-            return view('client.layouts.pages.checkout',['address' => $address,'carts' => $carts,'categoryList'=>$categoryList]);
+            return view('client.layouts.pages.checkout',['address' => $address,'carts' => $carts,'categoryList'=>$categoryList,'total_discount' => $total_discount]);
       }
 
       //thanh toán khi nhận hàng
@@ -146,16 +152,83 @@ class CartController extends Controller
             ]);
       }
 
-    //   public function proxyRequest()
-    //   {
-    //     $response = Http::get('https://sandbox.vnpayment.vn/paymentv2/vpcpay.html' . $request->getRequestUri());
+    public function applyCoupon(Request $request)
+    {
+        if(Auth::check())
+        {
+            $user = Auth::user();
+            $user = User::find($user->id); 
+            $coupon = Coupon::where('name' , $request->coupon_code)->first(); 
+            $userCoupons = $user->userCoupons;
+            $isCouponValid = $userCoupons->contains('name', $request->coupon_code);
+            $total = $this->getTotal();
 
-    //     // Chuyển hướng đến route của VNPAY với dữ liệu tương ứng
-    //     return redirect()->route('vnpay', [
-    //         'order_id' => $response['order_id'],
-    //         'amount' => $response['amount']
-    //     ]);
-    //   }
+            if(!$isCouponValid)
+            {
+                if($coupon)
+                {
+                    $percentAmount = 0;
+                    $coupons = UserCoupon::create([
+                        'user_id' => $user->id,
+                        'coupon_id' => $coupon->id,
+                        'value' => $coupon->value
+                    ]);
 
+                    if($coupon->type == 'money')
+                    {
+                        $discount =$total - $coupon->value; 
+                        $percentAmount = $coupon->value;
+                    }else if($coupon->type == 'percent'){
+                        $discount =$total - ($total * $coupon->value / 100);
+                        $percentAmount = $total * $coupon->value / 100 ;
+                    }
 
-}
+        
+                    return response()->json([
+                        'code'=>200,
+                        'msg'=>'Áp mã thành công!',
+                        'coupons' => $coupons,
+                        'total' => $total,
+                        'discount' => $discount,
+                        'percentAmount' => $percentAmount
+                    ]);
+                }else{
+                    return response()->json([
+                        'code'=>500,
+                        'msg'=>'Coupon không tồn tại!',
+                    ]);
+                }
+            }else{
+                return response()->json([
+                    'code'=>500,
+                    'msg'=>'Coupon đã dùng hoặc không tồn tại!',
+                ]);
+            }
+
+        }
+
+        // $name = $request->input('coupon_code');
+        // $coupon = $this->discountServices->firstWithExperyDate($name,auth()->user()->id);
+
+        // if($coupon)
+        // {
+        //     $message = 'Áp mã giảm giá thành công!';
+        // }else{
+        //     $message = 'Mã giảm giá không tồn tại hoặc hết hạn!';
+        // }
+
+    }
+
+    public function getTotal()
+    {
+        $cart = session()->get('cart', []);
+        $total = 0;
+
+        foreach ($cart as $item) {
+            $total += $item['quantity'] * $item['price'];
+        }
+
+        return $total;
+    }
+
+}  
