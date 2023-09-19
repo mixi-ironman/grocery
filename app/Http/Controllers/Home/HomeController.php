@@ -97,4 +97,9 @@ class HomeController extends Controller
 
         // dd($productsWithRating);
     }
+
+    public function pageThankYou(Request $request)
+    {
+        return view('client.layouts.pages.thank-you');
+    }
 }

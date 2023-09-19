@@ -84,7 +84,7 @@
                         <p style="font-size: 20px"><strong>Thông tin đơn hàng</strong></p>
                         <table class="table no-border">
                             <tbody>
-                                <tr>
+                                {{-- <tr>
                                     <td class="cart_total_label" style="width: 120px">
                                         <h6 class="text-muted">Giá tạm tính</h6>
                                     </td>
@@ -96,21 +96,8 @@
                                     <td scope="col" colspan="2">
                                         <div class="divider-2 mt-3 mb-3"></div>
                                     </td>
-                                </tr>
-                                <tr>
-                                    <td class="cart_total_label" style="width: 100%">
-                                       {{-- <h6 class="text-muted">Coupons</h6> --}}
-                                        <div class="mb-3" style="width:150px;">
-                                            <label for="exampleFormControlInput1" class="form-label">Voucher</label>
-                                            <input style="width: 200px;" type="text" name="coupon_code" class="form-control" id="discount_code" placeholder="Nhập mã giảm giá">
-                                            <p style="width:300px" id="notification_coupon"></p>
-                                        </div>
-                                        <a href="{{route('apply-coupon')}}" id="apply_discount_btn" class="translatex hover-top"  style="background-color:rgb(93,168,138,0.8);display:inline-block; padding:5px 10px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);border-top-left-radius: 12px;border-bottom-right-radius: 12px;color:black;font-weight:600;font-size:14px;position:relative">Áp dụng mã</a>
-                                    </td>
-                                   
-                                </tr>
-                            
-                                
+                                </tr> --}}
+                                       
                                 <tr>
                                     <td class="cart_total_label" >
                                         <h6 class="text-muted">Giá tạm tính</h6>
@@ -137,11 +124,25 @@
                                         <h4 style="width:165px" class="text-primary text-end" id="price-to-pay">{{ number_format($total)}} đ</h4>
                                     </td>
                                 </tr>
+                                @if(Auth::check())
+                                <tr>
+                                    <td class="cart_total_label" style="width: 100%">
+                                       {{-- <h6 class="text-muted">Coupons</h6> --}}
+                                        <div class="mb-3" style="width:150px;">
+                                            <label for="exampleFormControlInput1" class="form-label">Voucher</label>
+                                            <input style="width: 200px;" type="text" name="coupon_code" class="form-control" id="discount_code" placeholder="Nhập mã giảm giá">
+                                            <p style="width:300px" id="notification_coupon"></p>
+                                        </div>
+                                        <a href="{{route('apply-coupon')}}" id="apply_discount_btn" class="translatex hover-top"  style="background-color:rgb(93,168,138,0.8);display:inline-block; padding:5px 10px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);border-top-left-radius: 12px;border-bottom-right-radius: 12px;color:black;font-weight:600;font-size:14px;position:relative">Áp dụng mã</a>
+                                    </td>
+                                   
+                                </tr>
+                                @endif
                             </tbody>
                         </table>
                     </div>
                     {{-- <a href="#" class="btn mb-2 w-100">Proceed To CheckOut<i class="bi bi-box-arrow-right ms-2"></i></a> --}}
-                    <a href="{{ route('check-out') }}" class="translatex" id="checkout_button"  style="background-color:rgba(221, 131, 229, 0.8);display:inline-block; padding:10px 15px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);border-top-left-radius: 12px;border-bottom-right-radius: 12px;color:black;font-weight:600;font-size:16px;position:relative"><i class="bi bi-arrow-left me-2"></i>Thanh Toán</a>
+                    <a href="{{ route('check-out') }}" class="translatex" id="checkout_button"  style="background-color:rgba(221, 131, 229, 0.8);display:inline-block; padding:10px 15px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);border-top-left-radius: 12px;border-bottom-right-radius: 12px;color:black;font-weight:600;font-size:16px;position:relative;"><i class="bi bi-arrow-left me-2"></i>Thanh Toán</a>
                 </div>
             </div>
             @else 
@@ -288,11 +289,13 @@ $(document).ready(function () {
                 $('#price-to-pay').html('<p style="color: rgb(13,110,253);">' + number_format(response['discount']) + '</p>');
             } else if (response['code'] === 500) {
                 $('#notification_coupon').html('<p style="color: red;">' + response['msg'] + '</p>');
+            } else if(response['status'] == 'outofdate'){
+                $('#notification_coupon').html('<p style="color: red;">' + response['msg'] + '</p>');
             }
             },
             error: function (error) {
                 console.error('Đã có lỗi xảy ra ', error);
-                // window.location.replace('{{ route('home') }}');
+                window.location.replace('{{ route('home') }}');
             }
         });
     }

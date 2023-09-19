@@ -77,12 +77,12 @@
                         </p>
                     </div> -->
                     <div class="product-unit">
-                        <p class="title">Unit :</p>
-                        <p class="value">Pack</p>
+                        <p class="title">Đơn vị :</p>
+                        <p class="value">1</p>
                     </div>
                     <div class="product-vendor">
-                        <p class="vendor-title">Vendor :</p>
-                        <p class="vendor-name">Suite</p>
+                        <p class="vendor-title">Xuất xứ :</p>
+                        <p class="vendor-name">Việt Nam</p>
                     </div>
                     <div class="product-category">
                         <p class="category-title">Loại :</p>
@@ -157,7 +157,7 @@
 
     <!-- Tab content -->
 
-    <div class="tab-pane active">
+    <div class="tab-pane_desc tab-pane active">
         {{-- <h2>{{ $product->name }}</h2> --}}
         <p>
            {!! $product->content !!}
@@ -361,6 +361,7 @@ const app_ = {
         const minusBtn = $('.icon-minus');
         const plusBtn = $('.icon-flus');
         const quantityInput_ = $('.input-quantity');
+        let stockProduct = $('#product-stock').attr('data-quantity');
         const addCartBtn = $('.btn-add-cart');
         let stock = $('#product-stock').data('quantity');
 
@@ -394,6 +395,11 @@ const app_ = {
             }
 
         });
+
+        if(stockProduct < 1)
+        {
+            addCartBtn.prop('disabled', true);
+        }
     },
 
     toggleTabUi() {

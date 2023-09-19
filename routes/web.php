@@ -44,12 +44,14 @@ use App\Http\Controllers\Home\UserController;
     Route::get('/load-product',[HomeController::class,'loadProduct'])->name('load-product');
     Route::get('/autocomplete-ajax',[HomeController::class,'autocompleteAjax'])->name('autocomplete-ajax');
     Route::get('/category-product',[HomeController::class,'viewCategory'])->name('viewCategory');
+    Route::get('/thank-you',[HomeController::class,'pageThankYou'])->name('thanh-you');
 
     //Product
     Route::prefix('product')->group(function (){
-    Route::get('/{id}-{slug}.html',[ProductController::class,'index'])->name('view-product');
-    Route::get('/load-comment',[ProductController::class,'loadComment'])->name('load-comment');
-    Route::post('/send-comment',[ProductController::class,'sentComment'])->name('send-comment');
+        Route::get('/{id}-{slug}.html',[ProductController::class,'index'])->name('view-product');
+        Route::get('/load-comment',[ProductController::class,'loadComment'])->name('load-comment');
+        Route::post('/send-comment',[ProductController::class,'sentComment'])->name('send-comment');
+        Route::get('/add-to-favorites/{id}',[ProductController::class,'addToFavorites'])->name('add-to-favorites');
     });
 
     //Category

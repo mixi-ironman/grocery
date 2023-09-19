@@ -140,7 +140,8 @@ class OrderService
                 return redirect()->route('vnpay', ['order_id' => $orderId, 'amount' => $totalAmount]);
             }
 
-            return redirect()->route('home');
+            return redirect()->route('thanh-you');
+            
 
             // return response()->json([
             //     'status' => 'success',
@@ -182,6 +183,23 @@ class OrderService
             $randomString .= $characters[$index];
         }
         return $randomString;
+    }
+
+    function updateStatus($request,$orderId)
+    {
+        $newStatus = $request->status;
+        try {
+            $order = Order::find($orderId);
+            $order->status = $newStatus;
+            $order->save();
+            return response()->json([
+                'code' => 200,
+                'success' => 'Cập nhật trạng thái thành công',
+                'status' => $newStatus
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Có lỗi xảy ra: ' . $e->getMessage()], 500);
+        }
     }
 
 }

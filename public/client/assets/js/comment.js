@@ -90,14 +90,18 @@ $(document).ready(function () {
                 },
 
                 success: function (data) {
-                    $(".cmt-notification").html(
-                        '<p style="color:green;font-size:15px;font-weight:600">Thêm bình luận thành công</p>'
-                    );
-                    $(".cmt-notification").fadeOut(1500);
-                    $("#cmt-name").val("");
-                    $("#cmt-content").val("");
-
-                    loadloadComment();
+                    if (data.code == '200') {
+                        $(".cmt-notification").html('<p style="color:green;font-size:15px;font-weight:600">Thêm bình luận thành công</p>');
+                        $(".cmt-notification").fadeOut(1500);
+                        $("#cmt-name").val("");
+                        $("#cmt-content").val("");
+                        loadloadComment();
+                    }
+                
+                    if (data.code == '500') {
+                        alert('Bạn phải Login để sử dụng chức năng này');
+                        window.location.replace('http://mixi.com:8000/customer/login-page');
+                    }
                 },
 
                 error: function (error) {

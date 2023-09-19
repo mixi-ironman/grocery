@@ -24,6 +24,32 @@ $(document).ready(function () {
     $(document).on("click", ".btn_add_to_cart-quick", addToCart);
 });
 
+function addToFavorites(event) {
+    event.preventDefault();
+    let urlFavorites = $(this).data("url");
+    $.ajax({
+        method: "GET",
+        url: urlFavorites,
+        dataType: "json",
+        success: function (data) {
+
+            if(data.status == 'error')
+            {
+                alert('Bạn phải Login để sử dụng chức năng này');
+                window.location.replace('http://mixi.com:8000/customer/login-page');
+            }else if(data.status == 'exits'){
+                alert('Sản phẩm này bạn đã thêm rồi');
+            }
+        },
+        error: function () {
+            alert("Lỗi ở ajax");
+        },
+    });
+}
+$(document).ready(function () {
+    $(document).on("click", ".btn_add_to_favorites-quick", addToFavorites);
+});
+
 // $(".btn_add_to_cart").on("click", addToCart);
 
 // $(".btn_add_to_cart").on("click", function (e) {

@@ -117,6 +117,23 @@ li {
 .hover-top:hover::after {
     width: 100%;
 }
+
+.hover-top_::before {
+    content: "";
+    position: absolute;
+    display: block;
+    width: 30%;
+    height: 3px;
+
+    background: linear-gradient(to right, #ffffff, #e21111);
+    top: -8px;
+    left: 0;
+    z-index: 3;
+    transition: all 0.4s;
+}
+.hover-top_:hover::before {
+    width: 100%;
+}
 /* Stick header */
 .sticky {
     width: 100%;
@@ -173,4 +190,8 @@ service php-fpm restart */
 ::-webkit-scrollbar-thumb {
     background-color: #acecb6; /* Màu của nút kéo */
     border-radius: 5px; 
+}
+
+.cc{
+    color:red;
 }

@@ -25,7 +25,7 @@
                             <ul class="product-category-list" data-name="category" data-columns="2">
                                 @foreach($categoryList as $index => $categoryParent)
                                 
-                                <div style="margin-bottom:10px;box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.05);">
+                                <div class="tab-wrap" style="margin-bottom:10px;box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.05);">
                                     <li class="product-category-item">
                                         <a
                                             href="{{ route('category-product',['id' => $categoryParent?->id, 'slug' => Str::slug($categoryParent->name),'category_type' => 'parent']) }}"
@@ -38,11 +38,11 @@
                                             
                                         </a>
                                         @if($categoryParent->childrentCategory->count())
-                                            <span style="font-size:16px;font-weight:bold;color:black;margin-left:10px"><i class="fa-solid fa-water"></i></span>
+                                            <span style="font-size:16px;font-weight:bold;color:black;margin-left:10px"><i class="fa-solid fa-water icon-category open"></i><i class="fa-solid fa-circle-xmark close" style="display:none"></i></span>
                                         @endif
                                     </li>
                                     @if($categoryParent->childrentCategory->count())
-                                    <ul class="menu-list menu-sub-list" style="width:100% !important;box-shadow:none !important">
+                                    <ul class="menu-list_ menu-sub-list" style="width:100% !important;box-shadow:none !important">
                                         @foreach($categoryParent->childrentCategory as $index => $categoryChild)
                                         <li class="menu-sub-item_" >
                                             <a href="{{ route('category-product',['id' => $categoryChild?->id, 'slug' => Str::slug($categoryChild->name),'category_type' => 'child']) }}" class="menu-sub-item_link" style="font-size:14px;font-weight:400">{{ $categoryChild->name }}</a>
@@ -184,6 +184,43 @@
 </div>        
 @endsection
 @push('custom-script')
+<script>
+        function acordion(e) {
+            // $(this).find
+            var parent = $(this).parent();
+            if (parent.next().hasClass('menu-list_')) {
+                parent.next('.menu-list_').css('display', 'block');
+            }
+
+            // $('.open').css('display', 'none');
+            // $('.close').css('display', 'block');
+
+        }
+        $(document).on("mouseenter", ".product-category-link",acordion)
+
+        // function accordion_(e) {
+        //     $('.menu-list_').css('display', 'none');
+        // }
+
+        // $(document).on('click', function(e) {
+        //     // Kiểm tra xem phần tử được click có class 'product-category-item' không
+        //     if (!$(e.target).hasClass('product-category-item')) {
+        //         // Nếu không có class 'product-category-item', ẩn '.menu-list_'
+        //         $('.menu-list_').css('display', 'none');
+        //     }
+        // });
+
+        function activeTab(e) {
+            let listItem = $(this).closest('li.product-category-item');
+
+            // Tìm phần tử cha của listItem có class tab-wrap
+            let tabWrap = listItem.closest('.tab-wrap');
+            let secondChild = tabWrap.children().eq(1);
+                secondChild.css('display', 'none');
+        }
+        $(document).on("click", ".icon-category",activeTab)
+
+</script>
     <script>
         const app = {
             
@@ -221,5 +258,6 @@
         };
 
         app.run();
+
     </script>
 @endpush

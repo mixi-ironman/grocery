@@ -84,7 +84,6 @@ class PaymentController extends Controller
             }
 
             session()->forget('cart');
-            return redirect()->route('home');
-        
+            return redirect()->route('thanh-you');
     }
 }

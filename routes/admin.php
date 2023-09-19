@@ -5,6 +5,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SliderController;
 use App\Http\Controllers\ProductImageController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\OrderDetailController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\DashboardController;
@@ -81,11 +82,16 @@ Route::group(['prefix' => 'tags', 'as' => 'tags.'], function () {
     // Route::post('/create-tag', [TagController::class, 'createTag'])->name('create-tag');
 });
 
-//Order
-Route::prefix('order')->name('order.')->group(function () {
+//Orderdetail
+Route::prefix('order-detail')->name('order-detail.')->group(function () {
     Route::get('/', [OrderDetailController::class, 'index'])->name('index');
     Route::get('view-order/{id}',[OrderDetailController::class,'show'])->name('view');
     Route::delete('/destroy/{id}', [OrderDetailController::class, 'destroy'])->name('destroy');
+});
+
+//Order
+Route::prefix('order')->name('order.')->group(function () {
+    Route::put('/update-order-status/{id}', [OrderController::class, 'updateStatus'])->name('update-order-status');
 });
 
 //Coupon

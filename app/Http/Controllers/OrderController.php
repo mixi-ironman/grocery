@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Services\OrderService;
 
-class OrderDetailController extends Controller
+class OrderController extends Controller
 {
     public function __construct(readonly OrderService $orderService)
     {
@@ -17,5 +17,10 @@ class OrderDetailController extends Controller
         // // dd($orders);
 
         // return view('admin.order.index',['orders'=>$orders]);
+    }
+
+    public function updateStatus(Request $request, String $id)
+    {
+        return $status = $this->orderService->updateStatus($request, $id);
     }
 }

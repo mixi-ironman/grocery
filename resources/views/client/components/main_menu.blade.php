@@ -22,7 +22,7 @@
                 <ul class="menu-list menu-sub-list">
                     @foreach($categoryParent->childrentCategory as $index => $categoryChild)
                     <li class="menu-sub-item ">
-                        <a href="{{ route('category-product',['id' => $categoryChild?->id, 'slug' => Str::slug($categoryChild->name),'category_type' => 'child']) }}" class="menu-sub-item_link ">{{ $categoryChild->name }}</a>
+                        <a href="{{ route('category-product',['id' => $categoryChild?->id, 'slug' => Str::slug($categoryParent->name),'category_type' => 'child','name-category' => $categoryParent->name]) }}" class="menu-sub-item_link ">{{ $categoryChild->name }}</a>
                     </li>
                     @endforeach
                    

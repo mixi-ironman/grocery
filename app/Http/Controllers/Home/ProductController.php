@@ -6,10 +6,13 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Services\Client\ProductService;
 use App\Services\Client\CommentService;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use App\Models\Comment;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Tag;
+use App\Models\FavoriteProduct;
 
 
 use App\Services\CategoryService;
@@ -93,8 +96,57 @@ class ProductController extends Controller
 
     public function sentComment(Request $request)
     {
-      $comments = $this->commentService->store($request);
-      
+        return $comments = $this->commentService->store($request);
+    }
+
+    public function addToFavorites(Request $request, String $id)
+    {
+        DB::beginTransaction();
+
+        try {
+           
+            $user = Auth::user();
+
+            if (Auth::check()) {
+                $user_id = $user->id;
+                $userFavorites = DB::table('favorite_products')
+                    ->where('user_id', $user_id)
+                    ->pluck('product_id')
+                    ->all();
+
+                $isProductFavorite = in_array($id, $userFavorites);
+                if($isProductFavorite)
+                {
+                    return response()->json([
+                        'status' => 'exits',
+                        'msg' => 'Sản phẩm này đã tồn tại',
+                    ]);
+                }else{
+                    $favorite = FavoriteProduct::create([
+                        'user_id' => $user_id,
+                        'product_id' => $id
+                    ]);
+                    DB::commit();
+                    return response()->json([
+                        'status' => 'success',
+                        'msg' => 'Thêm sản phẩm yêu thích thành công',
+                    ], 200);
+                }
+            }else{
+                return response()->json([
+                    'status' => 'error',
+                    'msg' => 'Thêm sản phẩm yêu thích thất bại',
+                ]);
+            }
+            
+        } catch (\Exception $e) {
+            // Nếu có lỗi xảy ra, hủy bỏ các thay đổi và không lưu vào cơ sở dữ liệu
+            DB::rollback();
+            return response()->json([
+                'status' => 'error',
+                'msg' => 'Có lỗi xảy ra. Vui lòng thử lại sau',
+            ], 500);
+        }
     }
 
   

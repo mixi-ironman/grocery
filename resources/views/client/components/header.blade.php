@@ -206,7 +206,7 @@
                         <div class="header_mega-container">
                             <div class="navleft-container">
                                 
-                                    <div class="mega-menu-title hover-top">
+                                    <div class="mega-menu-title hover-top_">
                                         <!-- <i class="fa-solid fa-face-grin-tongue-wink menu-icon"></i> -->
                                         <i class="fa-solid fa-chart-gantt menu-icon"></i>
                                         <a href="{{ route('viewCategory') }}">

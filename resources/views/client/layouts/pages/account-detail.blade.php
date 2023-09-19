@@ -432,7 +432,7 @@
                                             <td style="text-align: center;vertical-align:middle;">{{ $order->created_at->format('d/m/Y h:i:s') }}</td>
                                            
                                             {{-- <td style="text-align:center;vertical-align:middle;">
-                                                <form action="{{ route('order.destroy',['id'=>$order->id]) }}" method="post" style="display:block;padding:10px">
+                                                <form action="{{ route('order-detail.destroy',['id'=>$order->id]) }}" method="post" style="display:block;padding:10px">
                                                     @csrf
                                                     @method('DELETE')
                                                     <a class="btn btn-primary" href="#" style="margin:0 5px 0 0;"><i class="fa-solid fa-pen-to-square"></i></a>
@@ -559,32 +559,7 @@
         }
 
         $(document).on("click", ".change-address-default",setDefaultAddress)
-
-        //Xóa địa chỉ
-        function deleteAddress(e) {
-            e.preventDefault();
-            let addressId = $(this).attr('data-id');
-            let url = $(this).attr('href');
-            $.ajax({
-                type: 'Delete',
-                url: url,
-                data: {
-                    _token: '{{ csrf_token() }}',
-                    addressId : addressId,
-                },
-                dataType: 'json',
-                success: function (response) {
-                    if(response['code'] == 200){
-                        alert(response['msg']);
-                        // window.location.replace('{{ route('customer.profile') }}');
-                        $("#wraper_address-item").html(response['address_item']);
-                    }
-                }
-            });
-        }
-
-        $(document).on("click", ".delete-address",deleteAddress)
-
+       
         //Xem chi tiết đơn hàng
         function viewOrder(even) {
             even.preventDefault();
@@ -620,6 +595,48 @@
         }
 
         $(document).on("click", "#view-order",viewOrder)
+
+            //toas modal
+            function toastModal(e) 
+        {
+                e.preventDefault();
+                $('.modal-toast').addClass('active')  
+                let addressId = $(this).attr('data-id');
+                let url = $(this).attr('href');
+
+                //Xóa địa chỉ
+                function deleteAddress(e) {
+                    e.preventDefault();
+                    
+                    $.ajax({
+                        type: 'Delete',
+                        url: url,
+                        data: {
+                            _token: '{{ csrf_token() }}',
+                            addressId : addressId,
+                        },
+                        dataType: 'json',
+                        success: function (response) {
+                            if(response['code'] == 200){
+                                // alert(response['msg']);
+                                $('.modal-toast').removeClass('active')
+                                // window.location.replace('{{ route('customer.profile') }}');
+                                $("#wraper_address-item").html(response['address_item']);
+                            }
+                        }
+                    });
+
+                }
+            $(document).on("click", ".btn-yes",deleteAddress)
+
+            function hideModal(e) 
+            {
+                $('.modal-toast').removeClass('active')
+            }
+            $(document).on("click", ".btn-no",hideModal)
+
+        }
+        $(document).on("click", ".delete-address",toastModal) 
     })
     
 </script>

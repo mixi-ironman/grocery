@@ -7,6 +7,8 @@ use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
+
 use App\Repositories\Client\CommentRepository;
 
 class CommentService
@@ -20,19 +22,23 @@ class CommentService
     {
          try {
             DB::beginTransaction();
-            $product_id = $request->product_id;
-           
-            $comment = $this->commentRepository->create([
-                'name' => $request->name,
-                'content' => $request->content,
-                'rating' => $request->selectedIndex,
-                'commentable_type' => 'product',
-                'commentable_id' => $request->product_id,
-            ]);
+            if(Auth::check())
+            {
+                $product_id = $request->product_id;
+            
+                $comment = $this->commentRepository->create([
+                    'name' => $request->name,
+                    'content' => $request->content,
+                    'rating' => $request->selectedIndex,
+                    'commentable_type' => 'product',
+                    'commentable_id' => $request->product_id,
+                ]);
+                DB::commit();
+                return response()->json(['message' => 'Bình luận đã được lưu!', 'code' => '200'], 200);
+            }else{
+                return response()->json(['message' => 'Bình luận chưa được lưu!', 'code' => '500']);
+            }
 
-            DB::commit();
-
-            // return Redirect::route('products.index')->with('success', 'Created Product Successfully!');
         } catch (\Exception $e) {
             DB::rollBack();
             return Redirect::back()->withErrors(['create' => 'Something Wrong!'])->withInput();

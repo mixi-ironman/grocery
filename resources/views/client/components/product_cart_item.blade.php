@@ -20,12 +20,10 @@
                             src="https://img.icons8.com/external-ddara-fill-ddara/64/external-eye-eye-ddara-fill-ddara.png"
                             alt="external-eye-eye-ddara-fill-ddara"
                         />
+                    </a> 
+                    <a href="#" class="product-action-icon btn_add_to_favorites btn_add_to_favorites-quick" data-url="{{ route('add-to-favorites',['id' => $product->id]) }}">
+                        <i class="fa-solid fa-heart-circle-plus"></i>
                     </a>
-                    <button style="display:none" class="product-action-icon">
-                        <img  class="translatex"
-                            width="37"
-                            height="37" src="https://img.icons8.com/external-creatype-glyph-colourcreatype/64/external-eye-essential-ui-v2-creatype-glyph-colourcreatype-2.png" alt="external-eye-essential-ui-v2-creatype-glyph-colourcreatype-2"/>
-                    </button>
                     <a href="#" class="product-action-icon btn_add_to_cart btn_add_to_cart-quick" data-url="{{ route('add-to-cart',['id' => $product->id]) }}">
                         <img
                             class="translatex"

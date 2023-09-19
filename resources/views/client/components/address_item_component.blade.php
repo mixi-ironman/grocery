@@ -23,7 +23,7 @@
         <a class="change-address-default" data-id="{{ $address->id ?? '' }}" href="#" style="display:inline-block;padding:6px 10px;background-color:pink;border-radius:5px;margin-right:5px;">Đặt làm mặc định</a>
         @endif
         {{-- <a><i class="fa-solid fa-pen"></i></a> --}}
-        <a class="delete-address" href="{{ route('customer.destroy',['id' => $address->id ]) }}" data-id="{{ $address->id }}" style="margin-left: 10px"><i class="fa-solid fa-trash"></i></a>
+        <a class="delete-address" href="{{ route('customer.destroy',['id' => $address->id ]) }}" data-id="{{ $address->id }}" style="padding: 10px"><i class="fa-solid fa-trash"></i></a>
     </div>
 </div>
 @endforeach

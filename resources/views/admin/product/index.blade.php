@@ -35,14 +35,14 @@
 
                     @foreach($products as $key => $product)
                         <tr>
-                            <td scope="row" style="text-align: justify;vertical-align:middle;max-width:200px;white-space: wrap;overflow: hidden; text-overflow: ellipsis;">{{ $product->id }}</td>
-                            <td style="max-width:200px; text-align: justify;vertical-align:middle;max-width:150;white-space: wrap;overflow: hidden; text-overflow: ellipsis;">{{ $product->name }}</td>
+                            <td scope="row" style="text-align: center;vertical-align:middle;max-width:200px;white-space: wrap;overflow: hidden; text-overflow: ellipsis;">{{ $product->id }}</td>
+                            <td style="max-width:200px; text-align: center;vertical-align:middle;max-width:150;white-space: wrap;overflow: hidden; text-overflow: ellipsis;">{{ $product->name }}</td>
                             <td style="text-align: center;vertical-align:middle;max-width:200px;white-space: wrap;overflow: hidden; text-overflow: ellipsis;">
                                 {{-- <img style="width:180px;height:120px;line-height:120px;object-fit: cover;border-radius:5px;border:1px solid rgb(247, 181, 181);box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);object-position: center;" src="{{ asset('uploads/') }}/{{ $product->image }}" > --}}
                                 <img style="width:130px;object-fit: contain;height:130px;line-height:130px;border-radius:5px;border:1px solid rgb(247, 181, 181);box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);" src="{{ asset('uploads/') }}/{{ $product->image }}" >
                                 
                             </td>
-                            <td style="text-align: justify;vertical-align:middle;max-width:200px;white-space: wrap;overflow: hidden; text-overflow: ellipsis;">{{ $product->slug }}</td>
+                            <td style="text-align: center;vertical-align:middle;max-width:200px;white-space: wrap;overflow: hidden; text-overflow: ellipsis;">{{ $product->slug }}</td>
                             <td style="text-align: center;vertical-align:middle;max-width:100px;white-space: wrap;overflow: hidden; text-overflow: ellipsis;">{{ $product->category->name }}</td>
                             <td style="text-align: center;vertical-align:middle;max-width:200px;white-space: wrap;overflow: hidden; text-overflow: ellipsis;">{{ number_format($product->price) }}đ</td>
                             <td style="text-align: center;vertical-align:middle;max-width:200px;white-space: wrap;overflow: hidden; text-overflow: ellipsis;">{{ number_format($product->old_price) }}đ</td>

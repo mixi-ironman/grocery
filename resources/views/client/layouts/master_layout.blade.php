@@ -63,6 +63,20 @@
             <div id="toast"></div>
             <!-- --End Toast Messeage -->
 
+            <!-- --Modal Toast Messeage -->
+            <div class="modal-toast">
+                <div class="content-toast-wrap">
+                    <div class="wrap-title">
+                        <p class="title-toast">Bạn có chắc muốn xóa</p>
+                    </div>
+
+                    <div class="wrap-action-toast">
+                        <a class="translatey_ btn-yes" href="#">Có</a>
+                        <a class="translatey_ btn-no" href="#">Không</a>
+                    </div>
+                </div>
+            </div>
+
         </div>
         
 

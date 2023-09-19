@@ -11,7 +11,7 @@ use App\Models\Address;
 use App\Models\User;
 use App\Models\Coupon;
 use App\Models\UserCoupon;
-
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
@@ -126,8 +126,14 @@ class CartController extends Controller
       {
             $total_discount = request()->query('total');
             $carts = session()->get('cart',[]);
-            $address = Address::where('is_default', 1)->first();
-
+            if(Auth::check())
+            {
+                $user = Auth::user();
+                $address = Address::where('is_default', 1)->where('user_id', $user->id)->first();
+            }else{
+                $address = [];
+            }
+            // dd($address);
             $categoryList = Category::where('parent_id', 0)->get();
             return view('client.layouts.pages.checkout',['address' => $address,'carts' => $carts,'categoryList'=>$categoryList,'total_discount' => $total_discount]);
       }
@@ -167,31 +173,44 @@ class CartController extends Controller
             {
                 if($coupon)
                 {
-                    $percentAmount = 0;
-                    $coupons = UserCoupon::create([
-                        'user_id' => $user->id,
-                        'coupon_id' => $coupon->id,
-                        'value' => $coupon->value
-                    ]);
+                    // Lấy ngày hết hạn từ cơ sở dữ liệu hoặc bất kỳ nguồn dữ liệu nào khác
+                    $expirationDate = Carbon::parse($coupon->expery_date); // Giả sử $coupon->expiration_date là ngày hết hạn của mã giảm giá
+                    // Lấy thời gian hiện tại
+                    $currentDate = Carbon::now();
+                    // So sánh ngày hết hạn với thời gian hiện tại
+                    if ($expirationDate->greaterThan($currentDate)) {
+                        $percentAmount = 0;
+                        $coupons = UserCoupon::create([
+                            'user_id' => $user->id,
+                            'coupon_id' => $coupon->id,
+                            'value' => $coupon->value
+                        ]);
 
-                    if($coupon->type == 'money')
-                    {
-                        $discount =$total - $coupon->value; 
-                        $percentAmount = $coupon->value;
-                    }else if($coupon->type == 'percent'){
-                        $discount =$total - ($total * $coupon->value / 100);
-                        $percentAmount = $total * $coupon->value / 100 ;
+                        if($coupon->type == 'money')
+                        {
+                            $discount =$total - $coupon->value; 
+                            $percentAmount = $coupon->value;
+                        }else if($coupon->type == 'percent'){
+                            $discount =$total - ($total * $coupon->value / 100);
+                            $percentAmount = $total * $coupon->value / 100 ;
+                        }
+
+            
+                        return response()->json([
+                            'code'=>200,
+                            'msg'=>'Áp mã thành công!',
+                            'coupons' => $coupons,
+                            'total' => $total,
+                            'discount' => $discount,
+                            'percentAmount' => $percentAmount
+                        ]);
+                    } else {
+                        return response()->json([
+                            'status' => 'outofdate',
+                            'msg'=>'Coupon đã hết hạn!',
+                        ]);
                     }
-
-        
-                    return response()->json([
-                        'code'=>200,
-                        'msg'=>'Áp mã thành công!',
-                        'coupons' => $coupons,
-                        'total' => $total,
-                        'discount' => $discount,
-                        'percentAmount' => $percentAmount
-                    ]);
+                    
                 }else{
                     return response()->json([
                         'code'=>500,
