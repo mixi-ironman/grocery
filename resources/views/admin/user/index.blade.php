@@ -8,7 +8,7 @@
             </div>
             <div class="card-body">
                 <a class="btn btn-outline-primary" href="{{ route('user.create') }}"><i class="fa-brands fa-openid"></i> Add User</a>
-                <table class="table">
+                <table class="table" id="myTable_User">
                     <thead>
                     <tr>
                         <th scope="col"style="text-align: center;vertical-align:middle;">#</th>
@@ -17,6 +17,7 @@
                         <th scope="col"style="text-align: center;vertical-align:middle;">Phone</th>
                         <th scope="col"style="text-align: center;vertical-align:middle;">Địa chỉ</th>
                         <th scope="col"style="text-align: center;vertical-align:middle;">Status</th>
+                        <th scope="col"style="text-align: center;vertical-align:middle;">Create at</th>
                         <td style="text-align: center;vertical-align:middle;">Action</td>
                     </tr>
                     </thead>
@@ -57,7 +58,7 @@
                 </table>
             </div>
             <div class="card-footer">
-                {{ $users->links() }}
+                {{-- {{ $users->links() }} --}}
             </div>
         </div>
     </div>

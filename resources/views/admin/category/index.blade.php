@@ -8,7 +8,7 @@
             </div>
             <div class="card-body">
                 <a class="btn btn-outline-primary" href="{{ route('categories.create') }}"><i class="fa-brands fa-openid"></i> Add Category</a>
-                <table class="table">
+                <table class="table" id="myTable_Cate">
                     <thead>
                     <tr>
                         <th scope="col"style="text-align: center;vertical-align:middle;">#</th>
@@ -58,7 +58,7 @@
                 </table>
             </div>
             <div class="card-footer">
-                {{ $categories->links() }}
+                {{-- {{ $categories->links() }} --}}
             </div>
         </div>
     </div>

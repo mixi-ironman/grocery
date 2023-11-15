@@ -53,6 +53,7 @@ class ProductService
             } else {
                 $imagePath = null; 
             }
+
             // cách khác
             // $product = $this->getById($id);
             // $product->create([]);
@@ -243,6 +244,28 @@ class ProductService
         if($id != 0)
         {
             $product = $this->productRepository->delete($id);
+        }
+    }
+
+    //upload ảnh cục bộ trên ckeditor
+    public function ckeditor_image( $request)
+    {
+        if($request->hasFile('upload'))
+        {
+            $originName = $request->file('upload')->getClientOriginalName();
+            // chỉ lấy tên file ảnh vd 123.jpg thì chỉ lấy 123
+            $fileName = pathinfo($originName, PATHINFO_FILENAME);
+
+            //lấy đuôi hình ảnh
+            $extension = $request->file('upload')->getClientOriginalExtension();
+            $fileName = 'image-ckupload'.'_'.time().'.'.$extension;
+            $request->file('upload')->move(public_path('uploads/ckeditor_image'), $fileName);
+            $CKEditorFuncNum = $request->input('CKEditorFuncNum');
+            $url = asset('uploads/ckeditor_image').'/'.$fileName;
+            $message = 'Tải ảnh lên thành công';
+            $response = "<script>window.parent.CKEDITOR.tools.callFunction($CKEditorFuncNum, '$url', '$message')</script>";
+            header('Content-type: text/html; charset=utf-8');
+            echo $response;
         }
     }
 }

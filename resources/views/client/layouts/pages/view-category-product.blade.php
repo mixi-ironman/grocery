@@ -32,7 +32,7 @@
                                             class="product-category-link"
                                             data-id="1"
                                             data-value="Adidas"
-                                            
+                                            style="font-size:18px;font-weight: 600"
                                             >{{ $categoryParent->name }} 
                                             {{-- <span class="quantity-product" style="opacity:0;">30</span> --}}
                                             
@@ -45,7 +45,7 @@
                                     <ul class="menu-list_ menu-sub-list" style="width:100% !important;box-shadow:none !important">
                                         @foreach($categoryParent->childrentCategory as $index => $categoryChild)
                                         <li class="menu-sub-item_" >
-                                            <a href="{{ route('category-product',['id' => $categoryChild?->id, 'slug' => Str::slug($categoryChild->name),'category_type' => 'child']) }}" class="menu-sub-item_link" style="font-size:14px;font-weight:400">{{ $categoryChild->name }}</a>
+                                            <a href="{{ route('category-product',['id' => $categoryChild?->id, 'slug' => Str::slug($categoryChild->name),'category_type' => 'child']) }}" class="menu-sub-item_link translatex_" style="font-size:18px;font-weight:500">{{ $categoryChild->name }}</a>
                                         </li>
                                         @endforeach
                                        

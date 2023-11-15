@@ -7,7 +7,7 @@
                 <h4 class="card-title">Danh sách đơn hàng</h4>
             </div>
             <div class="card-body">
-                <table class="table">
+                <table class="table" id="myTable_Order">
                     <thead>
                     <tr>
                         <th scope="col"style="text-align: center;vertical-align:middle;">Stt</th>

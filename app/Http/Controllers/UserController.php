@@ -16,7 +16,7 @@ class UserController extends Controller
 
     public function index()
     {
-        $users = $this->userRepository->getPaginate();
+        $users = $this->userRepository->getAll();
         return view('admin.user.index',['users' => $users]);
     }
 
@@ -65,8 +65,12 @@ class UserController extends Controller
         if ($request->parent_id == 0) {
             return response()->json([]); // Trả về JSON trống nếu parent_id = 0
         }
+        $parent_id = $request['parent_id'];
+        // dd($parent_id);
+        $wards = Location::where('parent_id', $parent_id)->get();
 
-        $wards = Location::where('parent_id', $request['parent_id'])->get();
+        //Muốn lấy dữ liệu thì cần
+        //Kết quả cuối cùng cần là gì
         $childWard = $wards->map(function ($ward) {
             return [
                 'id' => $ward->id,

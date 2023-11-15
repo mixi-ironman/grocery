@@ -24,6 +24,11 @@ class OrderDetailController extends Controller
     {
         // $orderDetail = $this->orderDetailService->getOrderDetail();
         $orderDetails = $this->orderDetailService->getOrderDetailById($id);
+        // foreach($orderDetails as $item)
+        // {
+        //     dd($item->product);
+        // }
+        // dd($orderDetails);
         // $order = Order::find($id);
         // dd($order->orderDetails);
         // $orderDetails->detach(8);

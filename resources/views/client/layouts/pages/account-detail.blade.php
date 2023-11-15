@@ -63,7 +63,7 @@
                                     d="M12.136.326A1.5 1.5 0 0 1 14 1.78V3h.5A1.5 1.5 0 0 1 16 4.5v9a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 13.5v-9a1.5 1.5 0 0 1 1.432-1.499L12.136.326zM5.562 3H13V1.78a.5.5 0 0 0-.621-.484L5.562 3zM1.5 4a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-13z"
                                 ></path>
                             </svg>
-                            <span>Lịch sử giao dịch</span>
+                            <span>Lịch sử mua hàng</span>
                         </a>
                     </li>
 
@@ -287,7 +287,7 @@
                                         @method('put')
                                     @endif --}}
                                     <div class="mb-3">
-                                        <label class="form-label url_" data-url_ = "{{ route('user.get-ward') }}">Họ tên</label>
+                                        <label class="form-label url_"  >Họ tên</label>
                                         <input
                                             type="text"
                                             class="form-control"
@@ -328,7 +328,7 @@
                 
                                     <div class="mb-3">
                                         <label for="district" class="form-label">Quận/Huyện</label>
-                                        <select style="width:100%" class="form-select select2" id="district" name="district" aria-label="Default select example">
+                                        <select style="width:100%" class="form-select select2" id="district_" name="district" aria-label="Default select example">
                                             <option value="0">---Chọn---</option>
                                             @foreach($districts as $district)
                                                 <option value="{{ $district->id }}">{{ $district->name }}</option>
@@ -338,8 +338,8 @@
                 
                                     <div class="mb-3">
                                         <label for="ward" class="form-label">Phường Xã</label>
-                                        <select style="width:100%" class="form-select select2" id="ward" name="ward" aria-label="Default select example">
-                                            {{-- <option value="0">---Chọn---</option> --}}
+                                        <select style="width:100%" class="form-select select2" id="ward_" name="ward" aria-label="Default select example">
+                                            <option value="0">---Chọn---</option>
                                         </select>
                                     </div>
     
@@ -467,20 +467,20 @@
             theme: 'bootstrap-5'
         });
 
-        $('#ward').select2({
+        $('#ward_').select2({
             theme: 'bootstrap-5',
             ajax: {
                 type: 'GET',
-                url: 'http://mixi.com:8000/admin/user/get-ward',
-                // url: '{{ route('user.get-ward') }}',
+                url: '{{ route('user.get-ward') }}',
+                dataType: 'json',
+
                 data: function (params) {
                     var query = {
-                        parent_id: $('#district').val(),
+                        parent_id: $('#district_').val(),
                         _token: '{{ csrf_token() }}'
                     }
                     return query;
                 },
-                dataType: 'json',
                 processResults: function (res, params) {
                     return {
                         results: res,
@@ -524,7 +524,6 @@
                 $(".address-wraper").removeClass("active");
             });
         }
-
         $(document).on("click", ".add-address", iconActive);
 
         //set địa chỉ mặc định
@@ -557,7 +556,6 @@
                 }
             });
         }
-
         $(document).on("click", ".change-address-default",setDefaultAddress)
        
         //Xem chi tiết đơn hàng
@@ -593,40 +591,39 @@
                 }
             });
         }
-
         $(document).on("click", "#view-order",viewOrder)
 
             //toas modal
-            function toastModal(e) 
+        function toastModal(e) 
         {
+            e.preventDefault();
+            $('.modal-toast').addClass('active')  
+            let addressId = $(this).attr('data-id');
+            let url = $(this).attr('href');
+
+            //Xóa địa chỉ
+            function deleteAddress(e) {
                 e.preventDefault();
-                $('.modal-toast').addClass('active')  
-                let addressId = $(this).attr('data-id');
-                let url = $(this).attr('href');
-
-                //Xóa địa chỉ
-                function deleteAddress(e) {
-                    e.preventDefault();
-                    
-                    $.ajax({
-                        type: 'Delete',
-                        url: url,
-                        data: {
-                            _token: '{{ csrf_token() }}',
-                            addressId : addressId,
-                        },
-                        dataType: 'json',
-                        success: function (response) {
-                            if(response['code'] == 200){
-                                // alert(response['msg']);
-                                $('.modal-toast').removeClass('active')
-                                // window.location.replace('{{ route('customer.profile') }}');
-                                $("#wraper_address-item").html(response['address_item']);
-                            }
+                
+                $.ajax({
+                    type: 'Delete',
+                    url: url,
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                        addressId : addressId,
+                    },
+                    dataType: 'json',
+                    success: function (response) {
+                        if(response['code'] == 200){
+                            // alert(response['msg']);
+                            $('.modal-toast').removeClass('active')
+                            // window.location.replace('{{ route('customer.profile') }}');
+                            $("#wraper_address-item").html(response['address_item']);
                         }
-                    });
+                    }
+                });
 
-                }
+            }
             $(document).on("click", ".btn-yes",deleteAddress)
 
             function hideModal(e) 
@@ -635,6 +632,13 @@
             }
             $(document).on("click", ".btn-no",hideModal)
 
+            $(document).on("click", ".modal-toast", function (event) {
+            // Kiểm tra xem phần tử click có chứa cart-sidebar hay không
+            if (!$(event.target).closest(".content-toast-wrap").length) {
+                // Nếu không chứa, ẩn cart-sidebar
+                $(".modal-toast").removeClass("active");
+            }
+        });
         }
         $(document).on("click", ".delete-address",toastModal) 
     })

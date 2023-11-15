@@ -8,7 +8,18 @@
             </div>
             <div class="card-body">
                 <a class="btn btn-outline-primary" href="{{ route('products.create') }}"><i class="fa-brands fa-openid"></i> Add product</a>
-                <table class="table">
+                {{-- <form >
+                    <div class="mb-3">
+                        <label for="search_product" class="form-label">Tìm kiếm</label>
+                        <select class="form-select select2" id="search_product" name="search_product" aria-label="Default select example">
+                            <option value="0">------</option>
+                            @foreach($products_ as $product_)
+                            <option value="{{ $product_->id }}">{{ $product_->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </form> --}}
+                <table class="table" id="myTable_">
                     <thead>
                     <tr>
                         <th scope="col"style="text-align: center;vertical-align:middle;">#</th>
@@ -19,6 +30,7 @@
                         <th scope="col"style="text-align: center;vertical-align:middle;">Price</th>
                         <th scope="col"style="text-align: center;vertical-align:middle;">Old Price</th>
                         <th scope="col"style="text-align: center;vertical-align:middle;">Stock</th>
+                        <th scope="col"style="text-align: center;vertical-align:middle;">Sold</th>
                         <th scope="col"style="text-align: center;vertical-align:middle;">IsActive</th>
                         <th scope="col"style="text-align: center;vertical-align:middle;">Is_onsale</th>
                         <th scope="col"style="display:none;text-align: center;vertical-align:middle;">Is_popular</th>
@@ -47,6 +59,7 @@
                             <td style="text-align: center;vertical-align:middle;max-width:200px;white-space: wrap;overflow: hidden; text-overflow: ellipsis;">{{ number_format($product->price) }}đ</td>
                             <td style="text-align: center;vertical-align:middle;max-width:200px;white-space: wrap;overflow: hidden; text-overflow: ellipsis;">{{ number_format($product->old_price) }}đ</td>
                             <td style="text-align: center;vertical-align:middle;max-width:200px;white-space: wrap;overflow: hidden; text-overflow: ellipsis;">{{ $product->stock }}</td>
+                            <td style="text-align: center;vertical-align:middle;max-width:200px;white-space: wrap;overflow: hidden; text-overflow: ellipsis;">{{ $product->product_sold }}</td>
 
                             <td style="text-align: center;vertical-align:middle;max-width:200px;white-space: wrap;overflow: hidden; text-overflow: ellipsis;">
                                 <a href="{{ route('products.update', ['id' => $product->id]) }}" class="change-status" data-status = "{{ $product->is_active }}">
@@ -101,8 +114,8 @@
                     </tbody>
                 </table>
             </div>
-            <div class="card-footer">
-                {{ $products->links() }}
+            <div class="card-footer" style="display:none">
+                {{-- {{ $products->links() }} --}}
             </div>
         </div>
     </div>
@@ -111,6 +124,9 @@
 @push('custom-script')
     <script>
         $(document).ready(function () {
+            $('.select2').select2({
+                theme: 'bootstrap-5'
+            });
             $(document).on("click", ".change-status", function (e) {
                 e.preventDefault();
     

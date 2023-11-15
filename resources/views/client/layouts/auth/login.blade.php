@@ -37,7 +37,7 @@
 
           <!-- Password input -->
           <div class="form-outline mb-4">
-            <label class="form-label" for="password">Password</label>
+            <label class="form-label" for="password">Mật khẩu</label>
             <input type="password" name="password" id="password" class="form-control form-control-lg" />
             {{-- @if($error->has('msg'))
                 {{ $errors->first('msg') }}

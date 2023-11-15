@@ -40,7 +40,7 @@ Route::prefix('products')->name('products.')->group(function () {
     Route::get('/edit/{id}', [ProductController::class, 'edit'])->name('edit');
     Route::put('/update/{id}', [ProductController::class, 'update'])->name('update');
     Route::delete('/destroy/{id}', [ProductController::class, 'destroy'])->name('destroy');
- 
+    Route::post('upload-image', [ProductController::class, 'ckeditor_image'])->name('upload-ckeditor');
 });
 
 //sliders
@@ -63,7 +63,6 @@ Route::prefix('product')->name('product.')->group(function () {
     Route::put('images/update/{id}', [ProductImageController::class, 'update'])->name('images.update');
     Route::post('upload-image', [ProductImageController::class, 'uploadImage'])->name('upload-image');
     Route::delete('images/destroy/{id}', [ProductImageController::class, 'destroy'])->name('images.destroy');
-
     // Route::get('images/{id}', [ProductImageController::class, 'show'])->name('product.image.show');
     // Cập nhật hình ảnh sản phẩm
     // Route::put('images/{id}', [ProductImageController::class, 'update'])->name('product.image.update');

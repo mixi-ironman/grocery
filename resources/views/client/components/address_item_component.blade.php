@@ -9,9 +9,13 @@
         </div>
         <div class="address-user">
             <span class="title_">Địa chỉ: </span>
-            <p class="address-user_detail" style="font-weight: 600;color: rgba(0,0,0,.54);">{{ $address->address_details }}</p>
-            <p style="margin:0 5px 0 15px; ">  <i class="fa-solid fa-map-location-dot"></i>  </p>
-            <p class="" style="display:block; font-weight: 600;color: rgba(0,0,0,.54);">{{ $address->province ?? ''  }}, {{ $address->district ?? '' }}, {{ $address->ward }}</p>
+            <div style="display: flex;flex-direction:column">
+                <p class="address-user_detail" style="font-weight: 600;color: rgba(0,0,0,.54);">{{ $address->address_details }}</p>
+                <div style="display: flex;"> 
+                    <p style="margin-right:5px"><i class="fa-solid fa-map-location-dot text-warning"></i></p>
+                    <p class="" style="display:block; font-weight: 600;color: rgba(0,0,0,.54);">{{ $address->province ?? ''  }}, {{ $address->district ?? '' }}, {{ $address->ward }}</p>
+                </div>
+            </div>
         </div>
         <p class="address-user_phone" style="color: rgba(0,0,0,.54);"><span class="title_">Sđt: </span>{{ $address->phone ?? '' }}</p>
         <p class="address-user_email" style="color: rgba(0,0,0,.54);">

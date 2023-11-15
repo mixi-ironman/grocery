@@ -5,24 +5,23 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Services\ProductService;
 use App\Services\CategoryService;
+use App\Repositories\ProductRepository;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 class ProductController extends Controller
 {
-    private $productService;
-    private $categoryService;
 
-    public function __construct(ProductService $productService,CategoryService $categoryService)
+    public function __construct(readonly ProductService $productService,readonly CategoryService $categoryService,readonly ProductRepository $productRepository)
     {
-        $this->productService = $productService;
-        $this->categoryService = $categoryService;
+
     }
 
     public function index()
     {
         $products = $this->productService->getAllProduct();
+        $products_ = $this->productRepository->getAll();
         // dd($products);
-        return view('admin.product.index', ['products' => $products]);
+        return view('admin.product.index', ['products' => $products,'products_' => $products_]);
     }
 
  
@@ -52,9 +51,10 @@ class ProductController extends Controller
     }
 
 
-    public function edit(string $id)
+    public function edit(Request $request,string $id)
     {
         $product = $this->productService->getByProductId($id);
+
         $categories = $this->categoryService->getAll();
         // dd($categories);
         return view('admin.product.edit',[
@@ -89,5 +89,12 @@ class ProductController extends Controller
 
         }
         return response()->json(['error' => 'Image upload failed'], 400);
+    }
+
+    //upload ảnh cục bộ trên ckeditor
+    public function ckeditor_image(Request $request)
+    {
+        return $this->productService->ckeditor_image($request);
+       
     }
 }

@@ -131,7 +131,7 @@
     position: absolute;
     width: 1px;
     height: 56px;
-    top: 18px;
+    top: 23px;
     left: 20px;
     background-color: #ffc6d0;
 }
@@ -1347,12 +1347,12 @@ chuyển dịch từ giữa ra 2 bên */
 
 /* list-brands */
 .list-brands {
+    /* display:none; */
     margin-top: 30px;
-    background: linear-gradient(to right, #f29bdf, #b0facd);
-    /* padding: 20px 10px; */
+    /* background: linear-gradient(to right, #f29bdf, #b0facd); */
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
     border-radius: 5px;
-    padding: 10px 0;
+    padding: 10px 5px;
 }
 
 .list-brand-title {
@@ -1707,17 +1707,26 @@ p {
     /* white-space: nowrap; */
 }
 
-.cart-product-des div,
+/* .cart-product-des div,
 span {
     color: #6f6c7a;
     font-size: 14px;
     font-weight: 500;
+} */
+
+.product-sold{
+    font-size: 18px;
+    display:inline-block;
+    vertical-align: middle;
+    line-height: 32px;
+    color:gray;
+    font-weight:bold;
 }
 
 .cart-product-meta h3 a {
     display: block;
     color: #000000;
-}
+}J
 .product-quantity {
     display: flex;
     align-items: center;
@@ -1957,7 +1966,8 @@ span {
 /* Scroll-Animation */
 @keyframes slideInFromLeft {
     from {
-        transform: translateY(120%);
+        /* transform: translateY(120%); */
+        transform: translateY(60%);
         visibility: visible;
     }
     to {

@@ -72,7 +72,7 @@ class HomeController extends Controller
         $data= $request->all();
         if($data['query'])
         {
-            $products = Product::where('is_active',1)->where('name','LIKE','%'.$data['query'].'%')->get();
+            $products = Product::where('is_active',1)->where('name','LIKE',$data['query'].'%')->get();
             $product_component =  view('client.components.dropdown-input',['products_search'=>$products ])->render();
            
         }

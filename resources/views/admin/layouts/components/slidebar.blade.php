@@ -92,7 +92,7 @@
                   class="ni ni-single-copy-04 text-warning text-sm opacity-10"
                 ></i>
               </div>
-              <span class="nav-link-text ms-1">Coupon</span>
+              <span class="nav-link-text ms-1">Mã giảm giá</span>
             </a>
           </li> 
           <li class="nav-item">

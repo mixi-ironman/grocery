@@ -77,15 +77,6 @@
                         </label>
                     </div>
 
-                        {{-- <textarea name="content" id="content" rows="10" cols="80">
-                        
-                    </textarea>
-                    <script>
-                        // Replace the <textarea id="editor1"> with a CKEditor 4
-                        // instance, using default configuration.
-                        CKEDITOR.replace( 'content' );
-                    </script> --}}
-
                     <button type="submit" class="btn btn-primary">Save</button>
                 </form>
             </div>
@@ -99,13 +90,15 @@
     <script>
     
     $(document).ready(function () {
-        CKEDITOR.replace( 'content' );
+        CKEDITOR.replace( 'content',{
+            // filebrowserImageUploadUrl: '{{ route("products.upload-ckeditor") }}',
+            filebrowserImageUploadUrl : "{{ url('admin/products/upload-image?_token='.csrf_token()) }}",
+            filebrowserUploadMethod: 'form',
+        } );
 
-        $(document).ready(function () {
-            $('.category_id').select2({
-                theme: 'bootstrap-5'
-            });
-        })
+        $('.category_id').select2({
+            theme: 'bootstrap-5'
+        });
 
         $('.select2').select2({
             theme: 'bootstrap-5'

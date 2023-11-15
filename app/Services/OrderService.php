@@ -14,6 +14,7 @@ use App\Models\Order;
 use App\Models\Product;
 use App\Models\OrderDetail;
 use App\Services\ProductService;
+use App\Services\OrderDetailService;
 use App\Repositories\OrderRepository;
 use Illuminate\Support\Facades\Auth;
 
@@ -21,7 +22,7 @@ class OrderService
 {
 
 
-    public function __construct(readonly OrderRepository $orderRepository,readonly ProductService $productService)
+    public function __construct(readonly OrderRepository $orderRepository,readonly ProductService $productService,readonly OrderDetailService $orderDetailService)
     {
     }
 
@@ -59,12 +60,13 @@ class OrderService
             foreach ($carts as $id => $cart) {        
                 $product = Product::find($id);  
                 if ($cart['quantity'] > 10) {
-                    return response()->json([
-                        'status' => 'error',
-                        'code' => 400,
-                        'product_id' => $id,
-                        'msg' => 'Một sản phẩm bạn chỉ mua tối đa 10 sản phẩm ^.^',
-                    ]);
+                    return back()->with('fail','Một sản phẩm bạn chỉ mua tối đa được 10 sản phẩm');
+                    // return response()->json([
+                    //     'status' => 'error',
+                    //     'code' => 400,
+                    //     'product_id' => $id,
+                    //     'msg' => 'Một sản phẩm bạn chỉ mua tối đa 10 sản phẩm ^.^',
+                    // ]);
                 }
 
                 if (!$product || $cart['quantity'] > $product->stock) {
@@ -76,21 +78,23 @@ class OrderService
                     DB::rollback();
 
                     if (!$product) {
-                        return response()->json([
-                            'status' => 'error',
-                            'code' => 400,
-                            'msg' => 'Sản phẩm không tồn tại: ' . $cart['name'],
-                        ]);
+                        return back()->with('fail','Sản phẩm không tồn tại');
+                        // return response()->json([
+                        //     'status' => 'error',
+                        //     'code' => 400,
+                        //     'msg' => 'Sản phẩm không tồn tại: ' . $cart['name'],
+                        // ]);
                     } else {
                         $quantityShortage = $cart['quantity'] - $product->stock;
+                        return back()->with('fail','Số lượng sản phẩm trong kho không đủ');
                         
-                        return response()->json([
-                            'status' => 'error',
-                            'code' => 400,
-                            'product_id'=>$id,
-                            // 'msg' => 'Số lượng sản phẩm "' . $product->name . '" trong kho không đủ. Thiếu ' . $quantityShortage . ' sản phẩm.',
-                            'msg' => 'Số lượng sản phẩm "' . $product->name . '" trong kho không đủ ^.^',
-                        ]);
+                        // return response()->json([
+                        //     'status' => 'error',
+                        //     'code' => 400,
+                        //     'product_id'=>$id,
+                        //     // 'msg' => 'Số lượng sản phẩm "' . $product->name . '" trong kho không đủ. Thiếu ' . $quantityShortage . ' sản phẩm.',
+                        //     'msg' => 'Số lượng sản phẩm "' . $product->name . '" trong kho không đủ ^.^',
+                        // ]);
                     }
                 }
             }
@@ -139,7 +143,7 @@ class OrderService
             {
                 return redirect()->route('vnpay', ['order_id' => $orderId, 'amount' => $totalAmount]);
             }
-
+            session()->forget('cart');
             return redirect()->route('thanh-you');
             
 
@@ -187,8 +191,19 @@ class OrderService
 
     function updateStatus($request,$orderId)
     {
+        
         $newStatus = $request->status;
         try {
+            if($newStatus == "Đang xử lý"){
+                $orderDetails = $this->orderDetailService->getOrderDetailById($orderId);
+                foreach($orderDetails as $item)
+                {
+                    $product = Product::find($item->product->id);
+                    $product->product_sold += $item->quantity;
+                    $product->save();
+                }
+            }
+
             $order = Order::find($orderId);
             $order->status = $newStatus;
             $order->save();

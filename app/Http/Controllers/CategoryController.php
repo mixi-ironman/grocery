@@ -28,7 +28,7 @@ class CategoryController extends Controller
         //bên view vào nút bên sidebar {{ request()->routeIs('categories.index') ? active : '' }}
         // nut to ngoài cùng: {{ request()->routeIs('categories.*') ? true : false }}
 
-        $categories = $this->categoryService->getAllCategory();
+        $categories = $this->categoryService->getAll();
 
         return view('admin.category.index', ['categories' => $categories]);
     }

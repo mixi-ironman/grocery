@@ -236,9 +236,9 @@
                                 <li class="features-box_item">
                                     <a href="#">Giới thiệu</a>
                                 </li>
-                                <li class="features-box_item">
+                                {{-- <li class="features-box_item">
                                     <a href="#">Liên hệ</a>
-                                </li>
+                                </li> --}}
                             </ul>
                             <div class="contact">
                                 <!-- <i class="fa-solid fa-id-card-clip contact-icon"></i> -->

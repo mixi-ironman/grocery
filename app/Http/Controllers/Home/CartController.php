@@ -31,8 +31,8 @@ class CartController extends Controller
 
     public function addToCart(Request $request, $id)
     {
+        // để update số lượng trên icon cart
         $quantity_input = $request->quantity ? $request->quantity : 1;
-    
         $product = $this->productService->getProductById($id);
     
         if (!$product) {
@@ -144,7 +144,7 @@ class CartController extends Controller
         $carts = session()->get('cart',[]);
         if (isset($carts))
         {
-            session()->forget('cart');
+            // session()->forget('cart');
             return $this->orderService->add($request,$carts);
         }
       }
@@ -195,7 +195,6 @@ class CartController extends Controller
                             $percentAmount = $total * $coupon->value / 100 ;
                         }
 
-            
                         return response()->json([
                             'code'=>200,
                             'msg'=>'Áp mã thành công!',

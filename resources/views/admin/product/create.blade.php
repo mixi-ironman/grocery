@@ -15,13 +15,13 @@
                     </div>
 
                     {{-- parent category --}}
-                     <div class="mb-3">
+                    <div class="mb-3">
                         <label for="parent_category_id" class="form-label">Parent Category</label>
                         <select class="form-select select2" id="parent_id" name="parent_id" aria-label="Default select example">
                             <option value="0">---Chọn---</option>
-                        @foreach($parentCategories as $category)
+                            @foreach($parentCategories as $category)
                             <option value="{{ $category->id }}">{{ $category->name }}</option>
-                        @endforeach
+                            @endforeach
                         </select>
 
                         @if($errors->has('parent_id'))

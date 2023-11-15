@@ -251,7 +251,6 @@ const app = {
         $("#keyword_search").keyup(function (e) {
             let query = $(this).val();
             let url = $(this).data("url");
-            // console.log("click");
             if (query != "") {
                 $.ajax({
                     method: "GET",
@@ -268,10 +267,9 @@ const app = {
                         // $(".header-action_dropdown").show();
                         $(".header-action_dropdown").fadeIn();
                         // $(".header-action_dropdown").css("display", "block");
-                        console.log(data.product_component);
-                        $(".wrapper_input-dropdown").html(
-                            data.product_component
-                        );
+                        $(".wrapper_input-dropdown").html(data.product_component);
+                        
+                            console.log(data.product_component);
                         // Ngăn chặn sự kiện nổi bọt
                         // e.stopImmediatePropagation();
                     },
@@ -296,30 +294,32 @@ const app = {
         $(document).on("blur", ".search-box", function (e) {
             let query = $(this).val();
             // headerDropdown.removeClass("show");
-            $(".search-box").val(query);
+            $(".search-box").val('');
             $(".header-action_dropdown").fadeOut();
             // Ngăn chặn sự kiện nổi bọt
             // e.stopImmediatePropagation();
         });
     },
 
-    scrollAnimation() {
-        // Xử lý sự kiện cuộn trang
-        window.addEventListener("scroll", () => {
-            const scrollAnimationElements =
-                document.querySelectorAll(".scroll-animation");
-            scrollAnimationElements.forEach((element) => {
-                const elementTop = element.getBoundingClientRect().top;
-                const windowHeight = window.innerHeight;
-                // console.log("win" + windowHeight * 0.75);
-                // console.log("e" + elementTop);
-
-                // Kiểm tra khi nào phần tử nằm trong khung hiển thị
-                if (elementTop < windowHeight * 0.85) {
-                    element.classList.add("animate");
-                }
-            });
+    handleScrollAnimation() {
+        const scrollAnimationElements =
+            document.querySelectorAll(".scroll-animation");
+        scrollAnimationElements.forEach((element) => {
+            const elementTop = element.getBoundingClientRect().top;
+            const windowHeight = window.innerHeight;
+            // Kiểm tra khi nào phần tử nằm trong khung hiển thị
+            if (elementTop < windowHeight * 0.85) {
+                element.classList.add("animate");
+            }
         });
+    },
+
+    scrollAnimation() {  
+        // Gọi hàm khi trang web được nạp
+        document.addEventListener("DOMContentLoaded", this.handleScrollAnimation);
+
+        // Gọi hàm khi người dùng cuộn trang
+        window.addEventListener("scroll", this.handleScrollAnimation);  
     },
 
     beforeunload() {

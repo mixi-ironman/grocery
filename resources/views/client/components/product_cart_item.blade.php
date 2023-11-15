@@ -21,9 +21,9 @@
                             alt="external-eye-eye-ddara-fill-ddara"
                         />
                     </a> 
-                    <a href="#" class="product-action-icon btn_add_to_favorites btn_add_to_favorites-quick" data-url="{{ route('add-to-favorites',['id' => $product->id]) }}">
+                    {{-- <a href="#" class="product-action-icon btn_add_to_favorites btn_add_to_favorites-quick" data-url="{{ route('add-to-favorites',['id' => $product->id]) }}">
                         <i class="fa-solid fa-heart-circle-plus"></i>
-                    </a>
+                    </a> --}}
                     <a href="#" class="product-action-icon btn_add_to_cart btn_add_to_cart-quick" data-url="{{ route('add-to-cart',['id' => $product->id]) }}">
                         <img
                             class="translatex"

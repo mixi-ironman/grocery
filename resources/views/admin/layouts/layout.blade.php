@@ -52,6 +52,9 @@
         {{-- Add Select2 --}}
         <link rel="stylesheet" href="{{ asset('libs/select2/css/select2.min.css') }}">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
+
+        {{-- Add datatable --}}
+        <link rel="stylesheet" href="//cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
     </head>
 
     <body class="g-sidenav-show bg-gray-100">
@@ -260,9 +263,21 @@
 
         {{-- thêm select2 --}}
         <script src="{{ asset('libs/select2/js/select2.min.js') }}"></script>
+
+        {{-- thêm datatable --}}
+        <script src="//cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
         
         {{-- add tinymce như ckeditor --}}
         <script src="{{ asset('tinymce/tinymce.min.js') }}"></script>
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $('#myTable_').DataTable();
+                $('#myTable_User').DataTable();
+                $('#myTable_Cate').DataTable();
+                $('#myTable_Coupon').DataTable();
+                $('#myTable_Order').DataTable();
+            })
+        </script>
 
         <script>
             var ctx1 = document.getElementById("chart-line").getContext("2d");

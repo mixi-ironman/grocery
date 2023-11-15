@@ -22,6 +22,7 @@ class Product extends Model
         'is_onsale',
         'is_featured',
         'stock',
+        'product_sold',
     ];
 
     /*

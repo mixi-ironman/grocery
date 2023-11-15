@@ -16,7 +16,7 @@ class ProductRepository extends BaseRepository
 
     public function getProducts()
     {
-        return $this->model->orderByDesc('created_at')->paginate(10);
+        return $this->model->orderByDesc('created_at')->get();
         // return $this->model->paginate(5);
         // return $this->model->all();
 

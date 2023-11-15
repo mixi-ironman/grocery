@@ -62,7 +62,7 @@
                             <span ><strong style="color:red;display:inline-block;margin:5px 0 0 10px">{{ $rating }}/5</strong></span> 
                               
                         </div>
-                        {{-- <span>32 reviews</span> --}}
+                        <span class = "product-sold">{{ $product->product_sold }} Đã bán</span>
                     </div>
                     <div class="product-price-current">
                         {{-- <p class="special-price">{{ number_format($product->price) }}</p>

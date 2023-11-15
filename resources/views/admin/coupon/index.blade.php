@@ -8,7 +8,7 @@
             </div>
             <div class="card-body">
                 <a class="btn btn-outline-primary" href="{{ route('coupons.create') }}"><i class="fa-brands fa-openid"></i> Add coupon</a>
-                <table class="table">
+                <table class="table" id="myTable_Coupon">
                     <thead>
                     <tr>
                         <th scope="col"style="text-align: center;vertical-align:middle;">#</th>
