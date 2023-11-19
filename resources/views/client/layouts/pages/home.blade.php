@@ -68,7 +68,7 @@
                         <div class="col-md-12">
                             <div class="slider-item-product">
                                 <div class="product-title popular-product-title">
-                                    <h3 class="hover_  name-category-popular scroll-animation" style="position: relative">Sản phẩm nổi bật</h3>
+                                    <h3 class="hover_  name-category-popular scroll-animation" style="position: relative">Sản phẩm mới</h3>
                                     {{-- <h3 class="name-category-popular">Sản phẩm phổ biến</h3> --}}
                                     <ul class="nav-tab" style="opacity: 0">
                                         <li class="nav-item">
@@ -90,7 +90,7 @@
                         <div class="col-md-12">
                             <div class="product-grid row g-3" id="list-product">
                                 {{-- @include('client.components.product_cart_item',[@include('cart-products', ['cartProducts' => $cartProducts, 'itemsPerRow' => 3])]) --}}
-                                @include('client.components.product_cart_item', ['itemsPerRow' =>'1-5'])
+                                @include('client.components.product_cart_item', ['itemsPerRow' =>'1-5','products'=>$productNew])
                             </div>
                             <div class="product-grid row g-3 btn_load-more " >
                                 <input type="hidden" value="1" id ="page" name = "page">
@@ -142,7 +142,7 @@
                                 />
                             </div>
                             <div class="product-grid row product-featured">
-                                @include('client.components.product_cart_item', ['itemsPerRow' =>'3'])
+                                @include('client.components.product_cart_item', ['itemsPerRow' =>'3','products' => $productFeatured])
                             </div>
                         </div>
                     </div>
@@ -178,7 +178,7 @@
                                 />
                             </div>
                             <div class="product-grid row g-3 product-featured">
-                                @include('client.components.product_cart_item', ['itemsPerRow' =>'3']) 
+                                @include('client.components.product_cart_item', ['itemsPerRow' =>'3','products' => $productTopSale]) 
                             </div>
                         </div>
 

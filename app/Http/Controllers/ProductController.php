@@ -5,16 +5,19 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Services\ProductService;
 use App\Services\CategoryService;
+use App\Services\BrandService;
 use App\Repositories\ProductRepository;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 class ProductController extends Controller
 {
 
-    public function __construct(readonly ProductService $productService,readonly CategoryService $categoryService,readonly ProductRepository $productRepository)
-    {
-
-    }
+    public function __construct(
+        readonly ProductService $productService,
+        readonly CategoryService $categoryService,
+        readonly BrandService $brandService,
+        readonly ProductRepository $productRepository
+    ){}
 
     public function index()
     {
@@ -30,9 +33,11 @@ class ProductController extends Controller
         //lấy ra danh sách category
         $parentCategories = $this->categoryService->getParentCategory();
         $categories = $this->categoryService->getAll();
+        $brands = $this->brandService->getAllBrand();
         return view('admin.product.create',[
             'title'=>'Add Product',
             'categories' => $categories,
+            'brands' => $brands,
             'parentCategories' => $parentCategories
         ]);
     }
@@ -54,6 +59,8 @@ class ProductController extends Controller
     public function edit(Request $request,string $id)
     {
         $product = $this->productService->getByProductId($id);
+        $brands = $this->brandService->getAllBrand();
+        $parentCategories = $this->categoryService->getParentCategory();
 
         $categories = $this->categoryService->getAll();
         // dd($categories);
@@ -62,6 +69,9 @@ class ProductController extends Controller
             // 'category_parent' => $category_parent,
             'product' => $product,
             'categories' => $categories,
+            'brands' => $brands,
+            'parentCategories' => $parentCategories
+
         ]);
     }
 

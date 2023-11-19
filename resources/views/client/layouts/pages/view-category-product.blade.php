@@ -32,20 +32,20 @@
                                             class="product-category-link"
                                             data-id="1"
                                             data-value="Adidas"
-                                            style="font-size:18px;font-weight: 600"
+                                            style="font-size:18px;font-weight: 500;"
                                             >{{ $categoryParent->name }} 
                                             {{-- <span class="quantity-product" style="opacity:0;">30</span> --}}
                                             
                                         </a>
                                         @if($categoryParent->childrentCategory->count())
-                                            <span style="font-size:16px;font-weight:bold;color:black;margin-left:10px"><i class="fa-solid fa-water icon-category open"></i><i class="fa-solid fa-circle-xmark close" style="display:none"></i></span>
+                                            <span style="font-size:13px;font-weight:bold;color:black;margin-left:10px"><i class="fa-solid fa-circle-half-stroke icon-category open"></i></span>
                                         @endif
                                     </li>
                                     @if($categoryParent->childrentCategory->count())
                                     <ul class="menu-list_ menu-sub-list" style="width:100% !important;box-shadow:none !important">
                                         @foreach($categoryParent->childrentCategory as $index => $categoryChild)
                                         <li class="menu-sub-item_" >
-                                            <a href="{{ route('category-product',['id' => $categoryChild?->id, 'slug' => Str::slug($categoryChild->name),'category_type' => 'child']) }}" class="menu-sub-item_link translatex_" style="font-size:18px;font-weight:500">{{ $categoryChild->name }}</a>
+                                            <a href="{{ route('category-product',['id' => $categoryChild?->id, 'slug' => Str::slug($categoryChild->name),'category_type' => 'child']) }}" class="menu-sub-item_link translatex_" style="font-size:16px;font-weight:500;color:gray">{{ $categoryChild->name }}</a>
                                         </li>
                                         @endforeach
                                        

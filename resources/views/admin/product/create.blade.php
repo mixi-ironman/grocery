@@ -14,6 +14,17 @@
                         <input type="text" class="form-control"  name="name_product" aria-describedby="emailHelp">
                     </div>
 
+                    {{-- brand --}}
+                    <div class="mb-3">
+                        <label for="brand" class="form-label">Thương hiệu</label>
+                        <select class="form-select select2" id="brand" name="brand" aria-label="Default select example">
+                            <option value="0">---Chọn---</option>
+                            @foreach($brands as $brand)
+                            <option value="{{ $brand->id }}">{{ $brand->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
                     {{-- parent category --}}
                     <div class="mb-3">
                         <label for="parent_category_id" class="form-label">Parent Category</label>

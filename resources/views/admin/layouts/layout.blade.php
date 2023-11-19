@@ -55,6 +55,39 @@
 
         {{-- Add datatable --}}
         <link rel="stylesheet" href="//cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
+        <style>
+            .dashboard-stats{
+
+            }
+            .dashboard-stat-information{
+                display:flex;
+                justify-content:space-evenly;
+            }
+            .dashboard-stat{
+                display:flex;
+                align-items:center;
+                /* min-width:320px; */
+                padding:10px 10px;
+                border-radius:10px;
+                margin-right:10px;     
+            }
+
+            .information-left{
+                width:10%;
+                text-align:center;
+                align-self: flex-end;
+            }
+
+            .information-right{
+                flex:1;
+                padding:20px 0px;
+                text-align:center
+            }
+
+            .information-left i{
+                font-size:30px;
+            }
+        </style>
     </head>
 
     <body class="g-sidenav-show bg-gray-100">
@@ -279,6 +312,9 @@
             })
         </script>
 
+        {{-- add chartjs --}}
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        
         <script>
             var ctx1 = document.getElementById("chart-line").getContext("2d");
 

@@ -21,7 +21,8 @@ class Order extends Model
         'order_code',
         // 'order_date',
         'user_id',
-        'order_destroy'
+        'order_destroy',
+        'area_ship'
     ];
 
     public function orderDetails()

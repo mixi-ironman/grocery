@@ -134,7 +134,6 @@
                                     type="number"
                                     class="form-control"
                                     name="phone"
-                                    readonly
                                     value="{{ $user->phone }}"
                                     style="color: rgb(164, 160, 160)"
                                 />

@@ -11,7 +11,7 @@
     padding: 0;
     box-sizing: border-box;
     color: black;
-    font-family: "Ubuntu", sans-serif;
+    font-family: "Ubuntu", sans-serif ;
 }
 
 /* body {
@@ -173,8 +173,8 @@ service php-fpm restart */
 }
 
 ::-webkit-scrollbar-thumb {
-    background-color: #acecb6; /* Màu của nút kéo */
-    border-radius: 5px; 
+    background-color: red; /* Màu của nút kéo */
+    border-radius: 7px; 
 }
 
 ::-webkit-scrollbar-track {
@@ -188,8 +188,8 @@ service php-fpm restart */
 
 /* Nút kéo của thanh cuộn dọc */
 ::-webkit-scrollbar-thumb {
-    background-color: #acecb6; /* Màu của nút kéo */
-    border-radius: 5px; 
+    background-color: red; /* Màu của nút kéo */
+    border-radius: 7px; 
 }
 
 .cc{

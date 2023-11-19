@@ -50,6 +50,7 @@ class OrderService
                 'email' => $request->email,
                 'phone' => $request->phone,
                 'shipping_address' => $request->shipping_address,
+                'area_ship' => $request->area_ship,
                 'payment_method' => $request->payment_method,
                 'order_note' => $request->order_note,
                 'order_code' => $orderCode,

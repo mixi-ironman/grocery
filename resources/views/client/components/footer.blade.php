@@ -92,9 +92,9 @@
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="des-address">
-                                            <h3>Your store</h3>
-                                            <p>Monday - Friday: 9:00 - 20:00</p>
-                                            <p>Saturady: 11:00 - 15:00</p>
+                                            <h3>Mixi store</h3>
+                                            <p>Thứ 2 - Thứ 7: 9:00 - 20:00</p>
+                                            <p>Chủ nhật: 11:00 - 15:00</p>
                                         </div>
                                     </div>
                                     <div class="col-md-4">

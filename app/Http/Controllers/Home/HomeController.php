@@ -22,11 +22,14 @@ class HomeController extends Controller
     public function index()
     {
         $products = $this->productService->getProducts();
+        $productNew = Product::latest()->limit(10)->get();
+        $productFeatured = Product::where('is_featured', 1)->get();
+        $productTopSale =  Product::where('is_onsale', 1)->get();
         $carts = session()->get('cart',[]);
         // dd($carts);
         $categoryList = Category::where('parent_id', 0)->get();
 
-        //get rating product
+        //get rating product dùng quan hệ trong model thay vì
         $productsWithRating = DB::table('products')
         ->select('products.id', 'products.name', DB::raw('AVG(comments.rating) as average_rating'))
         ->leftJoin('comments', function ($join) {
@@ -37,7 +40,15 @@ class HomeController extends Controller
         ->get();
 
         // dd($productsWithRating);
-        return view('client.layouts.pages.home',['products' => $products, 'carts' => $carts,'categoryList'=>$categoryList,'rating' => $productsWithRating]); 
+        return view('client.layouts.pages.home',[
+            'products' => $products,
+             'carts' => $carts,
+             'categoryList'=>$categoryList,
+             'rating' => $productsWithRating,
+             'productNew' =>$productNew,
+             'productFeatured' => $productFeatured,
+             'productTopSale' => $productTopSale
+        ]);  
     }
 
     //load product

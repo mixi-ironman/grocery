@@ -17,15 +17,23 @@
                         @php
                             if(Auth::check())
                             {
+                                $province = $address->province;
+                                $district = $address->district;
+                                $ward = $address->ward;
                                 $name = $address->name;
                                 $email = $address->email;
                                 $phone = $address->phone;
                                 $address = $address->address_details;
+                                $area_ship = $province .', '. $district .', '. $ward;
                             }else{
                                 $name = '';
                                 $email = '';
                                 $phone = '';
                                 $address = '';
+                                $area_ship = '';
+                                $province = '';
+                                $district = '';
+                                $ward = '';
                             }
                         @endphp
                         <div class="mb-3">
@@ -47,6 +55,11 @@
                             <label for="order_date" class="form-label">Order Date</label>
                             <input type="date" class="form-control" id="order_date" />
                         </div> --}}
+
+                        <div class="mb-3">
+                            <label for="area_ship" class="form-label">Khu vực giao hàng</label>
+                            <input type="text" class="form-control area_ship" id="area_ship" name="area_ship" placeholder="Khu vực giao hàng..." value="{{ $area_ship }}">
+                        </div>
 
                         <div class="mb-3">
                             <label for="shipping_address" class="form-label">Địa chỉ</label>

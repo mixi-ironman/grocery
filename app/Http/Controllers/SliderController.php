@@ -20,7 +20,6 @@ class SliderController extends Controller
     public function index()
     {
         $sliders = $this->sliderService->getAllSlider();
-
         return view('admin.slider.index',['sliders' => $sliders]);
     }
 

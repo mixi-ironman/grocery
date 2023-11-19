@@ -66,7 +66,6 @@ class ProductService
             // dd($category->childrentCategory->isEmpty());
             if ($category->childrentCategory->isEmpty()) {
                 $category_id = $category->id;
-
                 $product = $this->productRepository->create([
                     'name' => $request->input('name_product'),
                     'slug' => Str::slug($request->input('name_product'), '-'),
@@ -74,6 +73,7 @@ class ProductService
                     'content' => $request->input('content'),
                     'category_id' => $category_id,
                     'price' => $request->input('price'),
+                    'brand_id' => $request->input('brand'),
                     'old_price' => $request->input('old_price'),
                     'stock' => $request->input('stock'),
                     'image' => $imagePath,
@@ -104,6 +104,7 @@ class ProductService
                     'category_id' => $request->input('category_id'),
                     'price' => $request->input('price'),
                     'old_price' => $request->input('old_price'),
+                    'brand_id' => $request->input('brand'),
                     'stock' => $request->input('stock'),
                     'image' => $imagePath,
                     'is_active' => $request->input('is_active'),
@@ -203,13 +204,14 @@ class ProductService
                 $imagePath = $product->image;
             }
 
-            $category = $this->productRepository->update($id, [
+            $product = $this->productRepository->update($id, [
                 'name' => $request->input('name_product'),
                 'slug' => Str::slug($request->input('name_product'), '-'),
                 'description' => $request->input('description'),
                 'content' => $request->input('content'),
                 'category_id' => $request->input('category_id'),
                 'price' => $request->input('price'),
+                'brand_id' => $request->input('brand'),
                 'old_price' => $request->input('old_price'),
                 'stock' => $request->input('stock'),
                 'image' => $imagePath,

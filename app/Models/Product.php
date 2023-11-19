@@ -23,6 +23,7 @@ class Product extends Model
         'is_featured',
         'stock',
         'product_sold',
+        'brand_id',
     ];
 
     /*
@@ -34,6 +35,11 @@ class Product extends Model
     public function category()
     {
         return $this->belongsTo(Category::class, 'category_id', 'id');
+    }
+
+    public function brand()
+    {
+        return $this->belongsTo(Brand::class, 'brand_id', 'id');
     }
 
     public function media(): MorphMany

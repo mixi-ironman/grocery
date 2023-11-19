@@ -16,14 +16,41 @@
                         <input type="text" class="form-control"  name="name_product" aria-describedby="emailHelp" value="{{ $product->name }}">
                     </div>
 
+                    {{-- brand --}}
                     <div class="mb-3">
-                        <label for="category_id" class="form-label">Category</label>
-                        <select class="form-select category_id" id="category_id" name="category_id" aria-label="Default select example">
+                        <label for="brand" class="form-label">Thương hiệu</label>
+                        <select class="form-select select2" id="brand_" name="brand" aria-label="Default select example">
                             <option value="0">---Chọn---</option>
-                            @foreach($categories as $category)
-                                <option value="{{ $category->id }}" {{ ($category->id == $product->category_id) ? 'selected' : '' }}>{{ $category->name }}</option>
+                            @foreach($brands as $brand)
+                            <option value="{{ $brand->id }}">{{ $brand->name }}</option>
                             @endforeach
                         </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="parent_category_id" class="form-label">Parent Category</label>
+                        <select class="form-select select2" id="parent_id" name="parent_id" aria-label="Default select example">
+                            <option value="0">---Chọn---</option>
+                            @foreach($parentCategories as $category)
+                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                            @endforeach
+                        </select>
+
+                        @if($errors->has('parent_id'))
+                            {{ $errors->first('parent_id') }}
+                        @endif
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="category" class="form-label">Category</label>
+                        <select class="form-select select2" id="category_" name="category_id" aria-label="Default select example">
+                            @foreach($categories as $category)
+                            <option value="{{ $category->id }}" {{ ($category->id == $product->category_id) ? 'selected' : '' }}>{{ $category->name }}</option>
+                            @endforeach
+                        </select>
+                        @if($errors->has('parent_id'))
+                            {{ $errors->first('parent_id') }}
+                        @endif
                     </div>
 
                     <div class="mb-3">
@@ -170,7 +197,7 @@
         });
 
         //get category theo parentCategory
-        $('#category').select2({
+        $('#category_').select2({
             theme: 'bootstrap-5',
             ajax: {
                 url: '{{ route('categories.get-children') }}',

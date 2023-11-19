@@ -42,7 +42,8 @@ class ProductController extends Controller
         
         $carts = session()->get('cart',[]);
         $categories = Category::with(['products'])->find($product->category_id); // Tải trước danh sách sản phẩm của tất cả các danh mục
-
+        //
+        $productRelated = Product::where('category_id', $product->category_id)->limit(5)->get();
         // $rating = Comment::where('commentable_id',$id)->where('commentable_type','product')->get();
         $rating = Comment::where('commentable_id',$id)->where('commentable_type','product')->avg('rating');
         if($rating === null){
@@ -51,9 +52,17 @@ class ProductController extends Controller
 
         $rating = round($rating);
       
-        return view('client.layouts.pages.view-product-detail',['product' => $product, 'categories' => $categories->products, 'carts' => $carts, 'rating' => $rating,'categoryList'=>$categoryList]);
+        return view('client.layouts.pages.view-product-detail',[
+            'product' => $product,
+            'categories' => $categories->products, 
+            'carts' => $carts, 
+            'rating' => $rating,
+            'categoryList'=> $categoryList,
+            'productRelated' => $productRelated
+        ]);
     }
-  
+    
+    //load more
     public function loadComment(Request $request)
     {
         $product_id = $request->product_id;

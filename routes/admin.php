@@ -10,6 +10,7 @@ use App\Http\Controllers\OrderDetailController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CouponController;
 
 
@@ -32,6 +33,16 @@ Route::prefix('categories')->name('categories.')->group(function () {
     Route::get('/children', [CategoryController::class, 'getChildrenByParent_id'])->name('get-children');
 });
 
+//brands
+Route::prefix('brand')->name('brand.')->group(function () {
+    Route::get('/', [BrandController::class, 'index'])->name('index');
+    Route::get('/create', [BrandController::class, 'create'])->name('create');
+    Route::post('/store', [BrandController::class, 'store'])->name('store');
+    Route::get('/edit/{id}', [BrandController::class, 'edit'])->name('edit');
+    Route::put('/update/{id}', [BrandController::class, 'update'])->name('update');
+    Route::delete('/destroy/{id}', [BrandController::class, 'destroy'])->name('destroy');
+});
+
 //Product
 Route::prefix('products')->name('products.')->group(function () {
     Route::get('/', [ProductController::class, 'index'])->name('index');
@@ -52,6 +63,7 @@ Route::prefix('sliders')->name('sliders.')->group(function () {
     Route::put('/update/{id}', [SliderController::class, 'update'])->name('update');
     Route::delete('/destroy/{id}', [SliderController::class, 'destroy'])->name('destroy');
 });
+
 
 //Product
 Route::prefix('product')->name('product.')->group(function () {

@@ -481,6 +481,10 @@
     color: black;
 }
 
+.menu-sub-item_link:hover {
+    color: red !important;
+}
+
 .sub-menu-item::after {
     content: '';
     display: block;
@@ -1129,7 +1133,6 @@ chuyển dịch từ giữa ra 2 bên */
     text-decoration: none;
     color: black !important;
     font-size: 18px;
-    font-weight: 700;
     line-height: 1.3;
     letter-spacing: 2px;
     /* font-family: "Satisfy", cursive; */
@@ -1289,7 +1292,7 @@ chuyển dịch từ giữa ra 2 bên */
 
 .des-top p {
     margin-bottom: 0;
-    font-size: 120px;
+    font-size: 80px;
     line-height: 115px;
     font-family: "Poppins", sans-serif;
     font-weight: 600;
@@ -2281,5 +2284,4 @@ span {
     border-top-left-radius: 10px;
     border-bottom-right-radius: 10px;
 }
-
 

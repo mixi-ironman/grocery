@@ -98,15 +98,15 @@
                             <div class="full-left">
                                 <div class="quantity">
                                     <button type="button">
-                                        <i class="fa-solid fa-minus icon-minus"></i>
+                                        <i class="fa-solid fa-minus icon-minus" style="color:white;border-top-left-radius: 12px;border-bottom-right-radius: 12px"></i>
                                     </button>
                                     <!-- <input type="number" name="quatity" id="" value="1" max-length="12" /> -->
                                     <input type="text" inputmode="numeric" name="quatity" id="input-quantity" value="1" max-length="12" class="input-quantity">
                                     <button type="button">
-                                        <i class="fa-solid fa-plus icon-flus"></i>
+                                        <i class="fa-solid fa-plus icon-flus" style="color:white;border-top-left-radius: 12px;border-bottom-right-radius: 12px"></i>
                                     </button>
                                 </div>
-                                <button type="button" name="add-to-cart" class="btn-add-cart btn_add_to_cart btn_add_to_cart-detail" data-url="{{ route('add-to-cart',['id' => $product->id]) }}" data-product_id = "{{ $product->id }}">
+                                <button style="color:white;border-top-left-radius: 12px;border-bottom-right-radius: 12px" type="button" name="add-to-cart" class="btn-add-cart btn_add_to_cart btn_add_to_cart-detail translatex_" data-url="{{ route('add-to-cart',['id' => $product->id]) }}" data-product_id = "{{ $product->id }}">
                                     <i class="fa-solid fa-cart-shopping"></i><span class="btn-add">Thêm vào giỏ hàng</span>
                                 </button>
                             </div>
@@ -180,7 +180,8 @@
                     {{-- <form action="#" id="comment-form">
                         @csrf --}}
                         <div class="comment-form-rating">
-                            <label for="rating">Your rating &nbsp;</label>
+                            {{-- <label for="rating">Chọn sao để đánh giá sản phẩm&nbsp;</label> --}}
+                            <p class="text-start">Chọn sao để đánh giá sản phẩm&nbsp;</p>
                             <ul class="list-line rating" title="Average Rating" style="display:flex;margin:0;padding:0">
                                 @for($count=1; $count<=5; $count++)
                                     @php
@@ -208,7 +209,7 @@
                         <div class="row">
                             <div class="col-md-6" style="margin:20px 0;">
                                 <div class="form-group comment-form-author">
-                                    <input class="form-control" type="text" name="cmt-name" id="cmt-name" value="" placeholder="Name...">
+                                    <input class="form-control" type="text" name="cmt-name" id="cmt-name" value="" placeholder="Tên...">
                                 </div>
                             </div>
                             <div class="col-md-6" style="display:none">
@@ -218,13 +219,13 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group comment-form-comment">
-                                    <textarea class="form-control" name="cmt-content" id="cmt-content" cols="30" rows="6" placeholder="Write comment..."></textarea>
+                                    <textarea class="form-control" name="cmt-content" id="cmt-content" cols="30" rows="6" placeholder="Nội dung đánh giá..."></textarea>
                                 </div>
                             </div>
                             <div class="cmt-notification" ></div>
 
                             <div class="form-group btn-form-submit" id="send-comment" data-url="{{ route('send-comment') }}">
-                                <button class="button-contactForm" data-count="0" id="submit-cmt" style="width:100px;font-size:18px;font-weight:500">Gửi</button>
+                                <button class="button-contactForm translatex" data-count="0" id="submit-cmt" style="font-size:18px;font-weight:500">Gửi đánh giá</button>
                             </div>
                         </div>
                     {{-- </form> --}}
@@ -240,7 +241,7 @@
             <div class="col-md-12">
                 <div class="related-text-content">
                     <p>Produced</p>
-                    <h4><span>Related Product</span></h4>
+                    <h4><span style="font-size:30px">Sản phẩm liên quan</span></h4>
                     <div class="related-line"></div>
                 </div>
             </div>
@@ -248,7 +249,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="product-grid row g-3">
-                    @foreach($categories as $products)
+                    @foreach($productRelated as $products)
                     <div class="col-lg-1-5">
                         <div class="product-cart">
                             <div class="product-img-action">
@@ -291,7 +292,7 @@
                                 <h2 class="product-name">
                                     <a href={{ route('view-product',['id' => $products->id, 'slug' => Str::slug($product->name)]) }}>{{ $products->name }}</a>
                                 </h2>
-                                <div class="product-rate-cover">
+                                <div class="product-rate-cover" style="display:none">
                                     <div class="product-rate">
                                         <i class="fa-regular fa-star"></i>
                                         <i class="fa-regular fa-star"></i>
