@@ -32,7 +32,7 @@ class ProductController extends Controller
     {
         $product = Product::with(['category'])->find($id);
         $categoryList = Category::where('parent_id', 0)->get();
-
+        $tags = $product->tags;
         
         //lấy tag theo product
         // foreach($product->tags as $productTag)
@@ -58,9 +58,10 @@ class ProductController extends Controller
             'carts' => $carts, 
             'rating' => $rating,
             'categoryList'=> $categoryList,
-            'productRelated' => $productRelated
+            'productRelated' => $productRelated,
+            'productTags' => $tags
         ]);
-    }
+    } 
     
     //load more
     public function loadComment(Request $request)
@@ -158,5 +159,17 @@ class ProductController extends Controller
         }
     }
 
-  
+    public function tag(Request $request, String $product_tag)
+    {
+        $carts = session()->get('cart',[]);
+        // $products = Product::where('is_active',1)->where('name','LIKE',$product_tag.'%')->get();
+        $products = Product::where('is_active', 1)
+        ->whereHas('tags', function ($query) use ($product_tag) {
+            $query->where('name', 'LIKE', '%' . $product_tag . '%');
+        })
+        ->get();
+
+        $categoryList = Category::where('parent_id', 0)->get();
+        return view('client.layouts.pages.view-category-product',['carts' => $carts,'categoryList'=>$categoryList,'products'=>$products]);
+    }
 }

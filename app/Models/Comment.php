@@ -13,6 +13,7 @@ class Comment extends Model
         'name',
         'content',
         'rating',
+        'email',
         'commentable_type',
         'commentable_id',
     ];

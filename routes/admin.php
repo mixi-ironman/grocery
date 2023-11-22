@@ -12,6 +12,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CouponController;
+use App\Http\Controllers\CommentController;
 
 
 // Route::group(['prefix' => 'categories', 'as' => 'categories.'], function () {
@@ -54,6 +55,12 @@ Route::prefix('products')->name('products.')->group(function () {
     Route::post('upload-image', [ProductController::class, 'ckeditor_image'])->name('upload-ckeditor');
 });
 
+//Comment
+Route::prefix('comments')->name('comment.')->group(function () {
+    Route::delete('/destroy/{id}', [CommentController::class, 'destroy'])->name('destroy');
+    Route::get('/comment', [CommentController::class, 'index'])->name('index');
+});
+
 //sliders
 Route::prefix('sliders')->name('sliders.')->group(function () {
     Route::get('/', [SliderController::class, 'index'])->name('index');
@@ -67,7 +74,6 @@ Route::prefix('sliders')->name('sliders.')->group(function () {
 
 //Product
 Route::prefix('product')->name('product.')->group(function () {
-
     Route::get('/', [ProductImageController::class, 'index'])->name('images.index');
     Route::get('images/create', [ProductImageController::class, 'create'])->name('images.create');
     Route::post('images/store', [ProductImageController::class, 'store'])->name('images.store');

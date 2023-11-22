@@ -134,9 +134,9 @@ const app = {
 
                 // dùng append-child thay vì dùng position
                 prevArrow:
-                    '<button type="button" class="slick-prev " style="margin-left:10px;"><img class="translatey rounded-circle" width="30" height="30" src="https://img.icons8.com/bubbles/50/right.png" alt="right" /></button>',
+                    '<button type="button" class="slick-prev" style="margin-left:10px;"><img class="translatey rounded-circle" width="30" height="30" src="https://img.icons8.com/bubbles/50/right.png" alt="right" /></button>',
                 nextArrow:
-                    '<button type="button" class="slick-next "><img class="translatey rounded-circle" width="30" height="30" src="https://img.icons8.com/bubbles/50/000000/long-arrow-left.png" alt="long-arrow-left" /></button>',
+                    '<button type="button" class="slick-next"><img class="translatey rounded-circle" width="30" height="30" src="https://img.icons8.com/bubbles/50/000000/long-arrow-left.png" alt="long-arrow-left" /></button>',
                 autoplaySpeed: 1400,
             });
 
@@ -167,6 +167,19 @@ const app = {
                 infinite: true,
                 autoplay: true,
                 autoplaySpeed: 1400,
+            });
+
+            $(".slider_list_banner").slick({
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                infinite: true,
+                autoplay: true,
+                prevArrow:
+                    '<button type="button" class="slick-prev_ " ><i class="fa-solid fa-arrow-right"></i></button>',
+                nextArrow:
+                    '<button type="button" class="slick-next_ "><i class="fa-solid fa-arrow-left" style="transform: translateX(-5px);"></i></button>',
+
+                autoplaySpeed: 2000,
             });
         });
     },
@@ -393,7 +406,7 @@ const app = {
     run: function () {
         this.beforeunload();
 
-        // app.typingAnimation();
+        app.typingAnimation();
         this.headerScroll();
         this.titleScroll();
         this.hiddenText();

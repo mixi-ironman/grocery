@@ -14,7 +14,9 @@ return new class extends Migration
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
             $table->string('name')->nullable();
+            $table->string('email')->nullable();
             $table->text('content');
+            $table->integer('rating')->nullable();
             $table->string('commentable_type'); // Tên bảng (sản phẩm hoặc bài viết)
             $table->unsignedBigInteger('commentable_id'); // ID của bản ghi trong bảng tương ứng
             $table->timestamps();

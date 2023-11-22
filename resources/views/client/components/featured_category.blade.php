@@ -59,7 +59,7 @@
                                 <img class="slider-item-img" src="{{ url('client') }}/assets/img/apple.png" alt="" />
                             </a>
                         </figure>
-                        <h6>Apple</h6>
+                        <h6>Trái cây</h6>
                         {{-- <p>2 items</p> --}}
                     </div>
                     <div class="slider-product-item scroll-animation col-md-1 bg-3">
@@ -68,7 +68,7 @@
                                 <img class="slider-item-img" src="{{ url('client') }}/assets/img/dautay.png" alt="" />
                             </a>
                         </figure>
-                        <h6>Strawberry</h6>
+                        <h6>Trái cây</h6>
                         {{-- <p>26 items</p> --}}
                     </div>
                     <div class="slider-product-item scroll-animation col-md-1 bg-4">
@@ -77,7 +77,7 @@
                                 <img class="slider-item-img" src="{{ url('client') }}/assets/img/kiwi.png" alt="" />
                             </a>
                         </figure>
-                        <h6>Oganic Kiwi</h6>
+                        <h6>Trái cây</h6>
                         {{-- <p>16 items</p> --}}
                     </div>
                     <div class="slider-product-item scroll-animation col-md-1 bg-5">
@@ -86,7 +86,7 @@
                                 <img class="slider-item-img" src="{{ url('client') }}/assets/img/vegable.png" alt="" />
                             </a>
                         </figure>
-                        <h6>Vegetables</h6>
+                        <h6>Rau củ</h6>
                         {{-- <p>21 items</p> --}}
                     </div>
                     <div class="slider-product-item scroll-animation col-md-1 bg-6">
@@ -104,7 +104,7 @@
                                 <img class="slider-item-img" src="{{ url('client') }}/assets/img/peach.png" alt="" />
                             </a>
                         </figure>
-                        <h6>Peach</h6>
+                        <h6>Trái cây</h6>
                         {{-- <p>26 items</p> --}}
                     </div>
         
@@ -124,7 +124,7 @@
                                 <img class="slider-item-img" src="{{ url('client') }}/assets/img/vegable.png" alt="" />
                             </a>
                         </figure>
-                        <h6>Vegetables</h6>
+                        <h6>Rau của</h6>
                         {{-- <p>21 items</p> --}}
                     </div>
                     <div class="slider-product-item scroll-animation col-md-1 bg-10">
@@ -142,7 +142,7 @@
                                 <img class="slider-item-img" src="{{ url('client') }}/assets/img/peach.png" alt="" />
                             </a>
                         </figure>
-                        <h6>Peach</h6>
+                        <h6>Trái cây</h6>
                         {{-- <p>26 items</p> --}}
                     </div>
                 </div>

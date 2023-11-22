@@ -118,7 +118,7 @@
                         <div class="col-md-9 ">
                             <div class="row g-3 product-featured-desciption ">
                                 <div class="des-top">
-                                    <p class="scrolling-text scroll-animation">Product</p>
+                                    <p class="scrolling-text scroll-animation">Products</p>
                                 </div>
                                 <div class="des-bottom">
                                     <span>Sản phẩm</span>
@@ -154,10 +154,10 @@
                         <div class="col-md-9">
                             <div class="row g-3 product-featured-desciption">
                                 <div class="des-top">
-                                    <p class="scrolling-text_ scroll-animation">Product</p>
+                                    <p class="scrolling-text_ scroll-animation">Products</p>
                                 </div>
                                 <div class="des-bottom">
-                                    <span>Products</span>
+                                    <span>Sản phẩm</span>
                                     <h2>Top Sale</h2>
                                 </div>
                             </div>
@@ -192,10 +192,10 @@
                 <div class="container list-brands ">
                     <div class="row ">
                         <!-- Brands Favorite -->
-                        <h4 class="list-brand-title">Shop by brands</h4>
+                        <h4 class="list-brand-title">Thương hiệu</h4>
                     </div>
                     <div class="row g-3 brand-list ">
-                        <div class="col-md-2">
+                        {{-- <div class="col-md-2">
                             <div class="brand-item scroll-animation">
                                 <a href="#">
                                     <img src="{{ url('client') }}/assets/img/brand_3.png" alt="" />
@@ -237,8 +237,16 @@
                                     <img src="{{ url('client') }}/assets/img/brand_5.png" alt="" />
                                 </a>
                             </div>
+                        </div> --}}
+                        @foreach($brands as $brand)
+                        <div class="col-md-2">
+                            <div class="brand-item scroll-animation">
+                                <a href="#">
+                                    <img style="height:200px !important;" src="{{ asset('uploads/') }}/{{ $brand->image }}" alt="" />
+                                </a>
+                            </div>
                         </div>
-
+                        @endforeach
                         <div class="brand-direction">
                             <img
                                 class="translatey"

@@ -42,7 +42,7 @@
                         </button>
                     </form>
                     <!-- <h3 class="mixi">From mixi with love</h3> -->
-                    {{-- <h3 class="mixi">Wellcome to Mixi-Chill</h3> --}}
+                    <h3 class="mixi">Wellcome to Mixi-grocery</h3>
 
                         
                 </div>
@@ -210,7 +210,7 @@
                                         <!-- <i class="fa-solid fa-face-grin-tongue-wink menu-icon"></i> -->
                                         <i class="fa-solid fa-chart-gantt menu-icon"></i>
                                         <a href="{{ route('viewCategory') }}">
-                                            <h3 class="categories-button-active">Mixi Grocery</h3>
+                                            <h3 class="categories-button-active">Danh mục sản phẩm</h3>
                                         </a>
                                         
                                         <!-- sub-category -->

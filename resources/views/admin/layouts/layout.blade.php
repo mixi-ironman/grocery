@@ -87,6 +87,10 @@
             .information-left i{
                 font-size:30px;
             }
+            
+            .navbar-vertical.navbar-expand-xs .navbar-collapse{
+                height:max-content !important;
+            }
         </style>
     </head>
 

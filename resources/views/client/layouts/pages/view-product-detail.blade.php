@@ -84,6 +84,12 @@
                         <p class="vendor-title">Xuất xứ :</p>
                         <p class="vendor-name">Việt Nam</p>
                     </div>
+                    @if($product->brand?->name)
+                    <div class="product-vendor">
+                        <p class="vendor-title">Thương hiệu :</p>
+                        <p class="vendor-name">{{ $product->brand?->name }}</p>
+                    </div>
+                    @endif
                     <div class="product-category">
                         <p class="category-title">Loại :</p>
                         <p class="category-name">{{ $product->category->name }}</p>
@@ -134,6 +140,16 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="product_tag" style="padding:0px 20px 20px;">
+                    @if($productTags->isNotEmpty())
+                    <p style="font-size:20px;font-weight:bold">Tags</p>
+                        <i class="fa-solid fa-tags"></i>
+                        @foreach($productTags as $tag)
+                        <a href="{{ route('product-tags', ['product_tag' => $tag->name]) }}" class="product_item" style="display:inline-block;padding:3px 4px;background-color:rgb(172, 225, 172);margin:2px 2px ;border-radius:5px;">{{ $tag->name }}</a>
+                        @endforeach
+                    @endif
+                </div>
             </div>
         </div>
     </div>
@@ -176,7 +192,15 @@
                 <div class="review-form-res">
                     <h2>Viết đánh giá</h2>
                     <hr>
-
+                    @php
+                            if(Auth::check())
+                            {
+                                $user = Auth::user();
+                                $email = $user->email;
+                            }else{
+                                $email = " ";
+                            }
+                    @endphp
                     {{-- <form action="#" id="comment-form">
                         @csrf --}}
                         <div class="comment-form-rating">
@@ -212,9 +236,9 @@
                                     <input class="form-control" type="text" name="cmt-name" id="cmt-name" value="" placeholder="Tên...">
                                 </div>
                             </div>
-                            <div class="col-md-6" style="display:none">
+                            <div class="col-md-6">
                                 <div class="form-group comment-form-email">
-                                    <input class="form-control" type="text" name="email" id="email" value="" placeholder="Email...">
+                                    <input readonly class="form-control" type="email" name="cmt-email" id="cmt-email" value="{{ $email }}" placeholder="Email...">
                                 </div>
                             </div>
                             <div class="col-md-12">
@@ -449,7 +473,6 @@ const app_ = {
     event.preventDefault();
     let urlCart = $(this).data("url");
     let inputValue = $('#input-quantity').val();
-    console.log('input'+inputValue)
     // $('#product-stock').data('quantity', stock); //cách này lấy value thay đổi route
 
     // alert(urlCart);

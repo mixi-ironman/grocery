@@ -1,8 +1,6 @@
 /* Header */
 
 /* --Header-top */
-.header {
-}
 
 .header-top {
     padding: 8px 0;
@@ -103,13 +101,14 @@
 }
 
 .mixi {
-    display: none;
+    /* display: none; */
     position: absolute;
     z-index: 1;
     transition: all 0.5s ease-in-out;
     font-size: 15px;
     top: 52px;
     font-family: "Dancing Script", cursive;
+    transform:translate3d(-68px,-6px,0);
 }
 
 /* --header-wishlist */
@@ -122,7 +121,7 @@
     height: 100%;
     /* border-left: 1px solid #8e8d82; */
     position: relative;
-    padding-right:15px;
+    /* padding-right:15px; */
 }
 
 .header-cart_wishlist::after {
@@ -260,7 +259,6 @@
         rgb(214, 97, 112)
     ); */
     /* background-color: rgb(93, 168, 138); */
-    padding: 10px;
     transition: all 1s;
 }
 .nav-container_center {
@@ -525,9 +523,9 @@
     padding: 10px 0px;
     margin-right: 5px;
     text-decoration: none;
-    font-size: 20px;
+    font-size: 20px !important;
     color: black;
-    font-weight: 600;
+    font-weight: 500;
     position: relative;
     transition: all 0.7s;
     /* z-index: 1; */
@@ -539,8 +537,8 @@
     position: absolute;
     width: 0%;
     height: 2px;
-    background: linear-gradient(to right, #3db827, #ff6f98);
-
+    background-color:rgb(196, 39, 208) ;
+    /* background: linear-gradient(to right, #3db827, #ff6f98); */
     bottom: 8px;
     z-index: 2;
     left: 50%;
@@ -2285,3 +2283,42 @@ span {
     border-bottom-right-radius: 10px;
 }
 
+.slick-cloned img{
+    /* width:100% !important;
+    height:200px !important; */
+    object-fit: contain;
+}
+
+.slider_list_banner .slick-next_ {
+    width:30px;
+    height:30px;
+    position: absolute;
+    top: 50%;
+    right: 0;
+    z-index: 10;
+    border-radius: 50%;
+    border: none;
+    transition: 0.5s;
+    transform: translateX(-10%);
+}
+
+.slider_list_banner .slick-prev_ {
+    width:30px;
+    height:30px;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    z-index: 10;
+    transform: translateX(10%);
+    border: none;
+    border-radius: 50%;
+    transition: 0.5s;
+}
+
+.slider_list_banner:hover.slick-prev_ {
+    transform: translate(50%, -50%);
+}
+
+.slider_list_banner:hover.slick-next_ {
+    transform: translate(-50%, -50%);
+}

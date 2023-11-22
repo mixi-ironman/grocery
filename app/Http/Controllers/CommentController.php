@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Comment;
 
 class CommentController extends Controller
 {
@@ -11,7 +12,8 @@ class CommentController extends Controller
      */
     public function index()
     {
-        //
+        $comments = Comment::get();
+        return view('admin.comment.index', ['comments' => $comments]);
     }
 
     /**
@@ -59,6 +61,8 @@ class CommentController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $comment = Comment::find($id);
+        $comment->delete();
+        return redirect()->route('comment.index')->with('success', 'Xóa comment thành công!');
     }
 }

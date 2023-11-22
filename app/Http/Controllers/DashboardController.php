@@ -50,7 +50,7 @@ class DashboardController extends Controller
         $sumProduct = Product::count();
         // $excludedStatus = ['Chờ xử lý', 'Hủy đơn'];
         // $revenue = Order::whereNotIn('status', $excludedStatus)->sum('total_amount');
-        $revenue = Order::sum('total_amount');
+        $revenue = Order::whereNotIn('status', ['Chờ xử lý'])->sum('total_amount');
         $orderNew = Order::where('status', 'Chờ xử lý')->count();
         $totalUser = User::whereNotIn('status', ['0'])->count();
         return view('admin.welcome',[

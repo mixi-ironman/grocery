@@ -183,7 +183,7 @@
                   'rgba(153, 182, 200, 0.2)',
                   'rgba(255, 159, 164, 0.2)'
                 ],
-                borderWidth: 1
+                borderWidth: 7
             }]
         },
         options: {

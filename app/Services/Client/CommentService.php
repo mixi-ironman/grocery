@@ -30,6 +30,7 @@ class CommentService
                     'name' => $request->name,
                     'content' => $request->content,
                     'rating' => $request->selectedIndex,
+                    'email' => $request->email,
                     'commentable_type' => 'product',
                     'commentable_id' => $request->product_id,
                 ]);

@@ -76,7 +76,7 @@ $(document).ready(function () {
             let url_cmt = $("#send-comment").data("url");
             let name = $("#cmt-name").val();
             let content = $("#cmt-content").val();
-
+            let email = $("#cmt-email").val();
             $.ajax({
                 method: "POST",
                 url: url_cmt,
@@ -85,6 +85,7 @@ $(document).ready(function () {
                     name: name,
                     content: content,
                     selectedIndex: selectedIndex,
+                    email: email,
                     // Gửi CSRF token kèm theo dữ liệu
                     _token: $('meta[name="csrf-token"]').attr("content"),
                 },
@@ -95,6 +96,7 @@ $(document).ready(function () {
                         $(".cmt-notification").fadeOut(1500);
                         $("#cmt-name").val("");
                         $("#cmt-content").val("");
+                        $("#cmt-email").val("");
                         loadloadComment();
                     }
                 

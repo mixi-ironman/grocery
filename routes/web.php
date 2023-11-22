@@ -52,6 +52,7 @@ use App\Http\Controllers\Home\UserController;
         Route::get('/load-comment',[ProductController::class,'loadComment'])->name('load-comment');
         Route::post('/send-comment',[ProductController::class,'sentComment'])->name('send-comment');
         Route::get('/add-to-favorites/{id}',[ProductController::class,'addToFavorites'])->name('add-to-favorites');
+        Route::get('/tags/{product_tag}',[ProductController::class,'tag'])->name('product-tags');
     });
 
     //Category

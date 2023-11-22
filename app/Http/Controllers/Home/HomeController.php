@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\View\Composers\MenuComposer;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\Brand;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Services\Client\ProductService;
@@ -26,28 +27,16 @@ class HomeController extends Controller
         $productFeatured = Product::where('is_featured', 1)->get();
         $productTopSale =  Product::where('is_onsale', 1)->get();
         $carts = session()->get('cart',[]);
-        // dd($carts);
         $categoryList = Category::where('parent_id', 0)->get();
-
-        //get rating product dùng quan hệ trong model thay vì
-        $productsWithRating = DB::table('products')
-        ->select('products.id', 'products.name', DB::raw('AVG(comments.rating) as average_rating'))
-        ->leftJoin('comments', function ($join) {
-            $join->on('products.id', '=', 'comments.commentable_id')
-                ->where('comments.commentable_type', '=', 'product');
-        })
-        ->groupBy('products.id', 'products.name', /* Thêm các cột khác mà bạn đã chọn */)
-        ->get();
-
-        // dd($productsWithRating);
+        $brands = Brand::where('status', 1)->get();
         return view('client.layouts.pages.home',[
             'products' => $products,
              'carts' => $carts,
              'categoryList'=>$categoryList,
-             'rating' => $productsWithRating,
              'productNew' =>$productNew,
              'productFeatured' => $productFeatured,
-             'productTopSale' => $productTopSale
+             'productTopSale' => $productTopSale,
+             'brands' => $brands
         ]);  
     }
 
@@ -75,7 +64,7 @@ class HomeController extends Controller
         $carts = session()->get('cart',[]);
         $products = Product::where('is_active',1)->orderByDesc('created_at')->get();
         $categoryList = Category::where('parent_id', 0)->get();
-      return view('client.layouts.pages.view-category-product',['carts' => $carts,'categoryList'=>$categoryList,'products'=>$products]);
+        return view('client.layouts.pages.view-category-product',['carts' => $carts,'categoryList'=>$categoryList,'products'=>$products]);
     }
 
     public function autocompleteAjax(Request $request)
