@@ -24,7 +24,7 @@
             class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4"
             id="navbar"
           >
-            <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+            <div class="ms-md-auto pe-md-3 d-flex align-items-center" style="opacity:0;">
               <div class="input-group">
                 <span class="input-group-text text-body"
                   ><i class="fas fa-search" aria-hidden="true"></i
@@ -66,7 +66,7 @@
                   ></i>
                 </a>
               </li>
-              <li class="nav-item dropdown pe-2 d-flex align-items-center">
+              <li class="nav-item dropdown pe-2 d-flex align-items-center" style="opacity: 0">
                 <a
                   href="javascript:;"
                   class="nav-link text-white p-0"

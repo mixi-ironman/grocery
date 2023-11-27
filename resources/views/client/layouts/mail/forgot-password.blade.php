@@ -7,6 +7,6 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Thanh toán này</h1>
+    <p>HiHi</p>
 </body>
 </html>

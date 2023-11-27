@@ -180,7 +180,6 @@
                 // let tagId = e.params.args.data.id;
                 // console.log(tagId);
                 if (tagName) {
-
                     $.ajax({
                         url: '{{ route('tags.store') }}',
                         type: 'POST',

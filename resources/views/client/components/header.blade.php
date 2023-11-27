@@ -42,7 +42,7 @@
                         </button>
                     </form>
                     <!-- <h3 class="mixi">From mixi with love</h3> -->
-                    <h3 class="mixi">Wellcome to Mixi-grocery</h3>
+                    {{-- <h3 class="mixi">Wellcome to Mixi-grocery</h3> --}}
 
                         
                 </div>
@@ -230,15 +230,15 @@
                                 <li class="features-box_item">
                                     <a href="{{ route('viewCategory') }}">Sản phẩm</a>
                                 </li>
-                                <li class="features-box_item">
+                                <li class="features-box_item" style="opacity:0;">
                                     <a href="#">Tin tức</a>
                                 </li>
                                 <li class="features-box_item">
-                                    <a href="#">Giới thiệu</a>
+                                    <a href="{{ route("contact.about-us") }}">Giới thiệu</a>
                                 </li>
-                                {{-- <li class="features-box_item">
-                                    <a href="#">Liên hệ</a>
-                                </li> --}}
+                                <li class="features-box_item">
+                                    <a href="{{ route("contact.show-form") }}">Liên hệ</a>
+                                </li>
                             </ul>
                             <div class="contact">
                                 <!-- <i class="fa-solid fa-id-card-clip contact-icon"></i> -->
@@ -250,7 +250,7 @@
                                     src="https://img.icons8.com/bubbles/50/phone-not-being-used.png"
                                     alt="phone-not-being-used"
                                 />
-                                <span>0123.456.789</span>
+                                <span>0931.012.321</span>
                             </div>
                         </div>
                     </div>

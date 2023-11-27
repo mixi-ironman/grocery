@@ -9,9 +9,7 @@ use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\Home\AuthController;
 use App\Http\Controllers\Home\PaymentController;
 use App\Http\Controllers\Home\UserController;
-
-
-
+use App\Http\Controllers\Home\ContactController;
 
 
 // --------------------------------------------------------------------
@@ -90,4 +88,12 @@ Route::prefix('customer')->name('customer.')->group(function () {
     Route::put('/update/{id}',[UserController::class,'update'])->name('update');
     Route::delete('/destroy/{id}', [UserController::class, 'destroy'])->name('destroy');
     Route::put('/address-default', [UserController::class, 'setDefaultAddress'])->name('address-default');
+});
+
+//Order
+Route::prefix('contact')->name('contact.')->group(function () {
+    Route::get('/lien-he', [ContactController::class, 'index'])->name('index');
+    Route::get('/about-us', [ContactController::class, 'aboutUs'])->name('about-us');
+    Route::get('/lien-he', [ContactController::class, 'showForm'])->name('show-form');
+    Route::post('/lien-he', [ContactController::class, 'submitForm'])->name('store');
 });

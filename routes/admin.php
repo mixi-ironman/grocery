@@ -13,6 +13,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CouponController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\ContactController;
 
 
 // Route::group(['prefix' => 'categories', 'as' => 'categories.'], function () {
@@ -131,4 +132,11 @@ Route::prefix('user')->name('user.')->group(function () {
     Route::delete('/destroy/{id}', [UserController::class, 'destroy'])->name('destroy');
     Route::get('/get-ward', [UserController::class, 'getWard'])->name('get-ward');
 });
+
+Route::prefix('contact')->name('contact.')->group(function () {
+    Route::get('/lien-he', [ContactController::class, 'index'])->name('index');
+    Route::delete('/destroy/{id}', [ContactController::class, 'destroy'])->name('destroy');
+
+});
+
 

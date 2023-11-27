@@ -76,24 +76,28 @@
                             beatae corporis quis tenetur debitis quod,
                         </p>
                     </div> -->
-                    <div class="product-unit">
+                    <div class="product-category">
+                        <p class="category-title">Loại :</p>
+                        <p class="category-name">{{ $product->category->name }}</p>
+                    </div>
+
+                    {{-- <div class="product-unit">
                         <p class="title">Đơn vị :</p>
                         <p class="value">1</p>
-                    </div>
+                    </div> --}}
+
                     <div class="product-vendor">
                         <p class="vendor-title">Xuất xứ :</p>
                         <p class="vendor-name">Việt Nam</p>
                     </div>
+
                     @if($product->brand?->name)
                     <div class="product-vendor">
                         <p class="vendor-title">Thương hiệu :</p>
                         <p class="vendor-name">{{ $product->brand?->name }}</p>
                     </div>
                     @endif
-                    <div class="product-category">
-                        <p class="category-title">Loại :</p>
-                        <p class="category-name">{{ $product->category->name }}</p>
-                    </div>
+                    
                     <div class="product-availability">
                         <p class="availability-title">Tình trạng :</p>
                         <p class="in-stock" id="product-stock" data-quantity="{{ $product->stock }}">{{ $product->stock }} in stock</p>

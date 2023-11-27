@@ -1,9 +1,10 @@
 <div class="slider-wraper row slider_list_banner" style="flex-wrap: nowrap !important;overflow: hidden;padding:0px 12px;">
     {{-- <!-- <div class="col-md-12" style="padding: 0"> --> --}}
+    @foreach($sliders as $slider)
     <div class="col-md-12 slider-wraper-list">
         {{-- <div class="slider-wraper-list"> --}}
             <div class="slider-wraper_item">
-                <div class="slider-item_img"></div>
+                <div class="slider-item_img" style="background-image: url('{{ asset('uploads/') }}/{{ $slider->image}}')"></div>
                 <div class="slider-item_description">
                     <p>Tiện hơn tiền mặt</p>
                     <p>Lợi hơn tiền mặt</p>
@@ -34,8 +35,8 @@
             </div>
         {{-- </div> --}}
     </div>
-    <div class="col-md-12 slider-wraper-list">
-        {{-- <div class="slider-wraper-list"> --}}
+    @endforeach
+    {{-- <div class="col-md-12 slider-wraper-list">
             <div class="slider-wraper_item">
                 <div class="slider-item_img"></div>
                 <div class="slider-item_description">
@@ -68,6 +69,5 @@
                     />
                 </div>
             </div>
-        {{-- </div> --}}
-    </div>
+    </div> --}}
 </div>

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Services\UserService;
 use App\Repositories\UserRepository;
 use App\Models\Location;
+use App\Models\User;
 
 class UserController extends Controller
 {
@@ -57,7 +58,14 @@ class UserController extends Controller
 
     public function destroy(string $id)
     {
-        //
+        $user = User::find($id);
+    
+        if ($user) {
+            $user->delete();
+            return redirect()->route('user.index')->with('success', 'Xóa người dùng công!');
+        } else {
+            return "Không tìm thấy bản ghi để xóa.";
+        }
     }
 
     public function getWard(Request $request)

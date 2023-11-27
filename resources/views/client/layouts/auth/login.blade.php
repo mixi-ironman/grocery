@@ -26,6 +26,11 @@
           class="img-fluid" alt="Phone image">
       </div>
       <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+        @if($errors->has('message'))
+            <div class="alert alert-danger">
+                {{ $errors->first('message') }}
+            </div>
+        @endif
         <form action="{{ route('customer.login') }}" method="POST">
           @csrf
           <!-- Email input -->

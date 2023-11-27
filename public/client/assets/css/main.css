@@ -258,7 +258,7 @@
         rgb(163, 222, 192),
         rgb(214, 97, 112)
     ); */
-    /* background-color: rgb(93, 168, 138); */
+    /* background-color: rgb(144, 203, 180); */
     transition: all 1s;
 }
 .nav-container_center {
@@ -273,6 +273,8 @@
     height: 100%;
     /* max-width: 1240px; */
     /* margin: auto !important; */
+    padding: 8px 10px;
+
     height: 100%;
 }
 
@@ -612,7 +614,7 @@ chuyển dịch từ giữa ra 2 bên */
 .slider-item_img {
     /* background-image: url("https://w.wallhaven.cc/full/9m/wallhaven-9mjoy1.png"); */
     /* background-image: url(../img/slider_4.jpg); */
-    background-image: url("https://pendecor.vn/uploads/files/2022/04/18/thiet-ke-cua-hang-tien-loi-9.jpg");
+    /* background-image: url("https://pendecor.vn/uploads/files/2022/04/18/thiet-ke-cua-hang-tien-loi-9.jpg"); */
     /* filter: blur(0px); */
     padding-top: 45%;
     background-repeat: no-repeat;

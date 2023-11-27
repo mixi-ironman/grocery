@@ -32,7 +32,7 @@
                                                     src="https://img.icons8.com/bubbles/50/phone--v1.png"
                                                     alt="phone--v1"
                                             /></span>
-                                            <h3>0123.456.789</h3>
+                                            <h3>0931.012.321</h3>
                                         </div>
                                     </div>
                                     <div class="col-md-3">
@@ -107,7 +107,7 @@
                         </div>
 
                         <div class="row site-footer_bottom">
-                            <p>© 2023,<span>Mixi-Grocery</span></p>
+                            <p>© 2023, <span>Mixi-Grocery</span></p>
                         </div>
                     </div>
                 </div>

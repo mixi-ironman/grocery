@@ -7,6 +7,7 @@ use App\Http\View\Composers\MenuComposer;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\Brand;
+use App\Models\Slider;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Services\Client\ProductService;
@@ -29,6 +30,8 @@ class HomeController extends Controller
         $carts = session()->get('cart',[]);
         $categoryList = Category::where('parent_id', 0)->get();
         $brands = Brand::where('status', 1)->get();
+        $sliders = Slider::where('is_active', 1)->get(); 
+
         return view('client.layouts.pages.home',[
             'products' => $products,
              'carts' => $carts,
@@ -36,7 +39,8 @@ class HomeController extends Controller
              'productNew' =>$productNew,
              'productFeatured' => $productFeatured,
              'productTopSale' => $productTopSale,
-             'brands' => $brands
+             'brands' => $brands,
+             'sliders' => $sliders
         ]);  
     }
 

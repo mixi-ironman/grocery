@@ -9,7 +9,7 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class OrderSuccessMail extends Mailable
+class ForgotPassword extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -27,7 +27,7 @@ class OrderSuccessMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'MixiShop__',
+            subject: 'Forgot Password',
         );
     }
 
@@ -37,7 +37,7 @@ class OrderSuccessMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'client.layouts.mail.order-success',
+            view: 'view.name',
         );
     }
 

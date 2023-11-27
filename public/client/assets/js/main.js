@@ -406,7 +406,7 @@ const app = {
     run: function () {
         this.beforeunload();
 
-        app.typingAnimation();
+        // app.typingAnimation();
         this.headerScroll();
         this.titleScroll();
         this.hiddenText();

@@ -29,22 +29,19 @@ class AuthController extends Controller
         // Thử đăng nhập
         if (Auth::attempt($credentials, $request->remember)) {
             $user = Auth::user();
-            return redirect()->route('home');
-            // if ($user->status != 1) {
-            //     // Trường hợp tài khoản đã bị khóa
-            //     Auth::logout(); // Đăng xuất người dùng
-            //     return redirect()->route('customer.login-page')->with('msg', 'Tài khoản của bạn đã bị khóa.');
-            // }
+            if ($user->status != 1) {
+                // Trường hợp tài khoản đã bị khóa
+                Auth::logout(); // Đăng xuất người dùng
+                return redirect()->route('customer.login-page')->withErrors(['message' => 'Tài khoản của bạn nằm trong danh sách khóa của shop!']);
+            }
     
-            // if ($user->role == 1) {
-            //     // Trường hợp là người dùng bình thường
-            //     return redirect()->route('home');
-            // } else {
-            //     // Trường hợp là admin
-            // }
+            if ($user->status == 1) {
+                // Trường hợp là người dùng bình thường
+                return redirect()->route('home');
+            } 
         } else {
             // Đăng nhập thất bại
-            return redirect()->route('customer.login-page')->with('msg', 'Đăng nhập thất bại. Vui lòng kiểm tra lại thông tin đăng nhập.');
+            return redirect()->route('customer.login-page')->withErrors(['message' => 'Đăng nhập thất bại. Vui lòng kiểm tra lại thông tin đăng nhập!']);
         }
     }
 

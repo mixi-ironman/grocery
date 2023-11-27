@@ -379,8 +379,8 @@
 
             {{-- History order --}}
             <div class="tab-pane-history tab-pane-common">
-                <div class="header-view-order">
-                    <ul class="tab-title-list">
+                <div class="header-view-order" >
+                    <ul class="tab-title-list" style="display:none">
                         <li class="tab-title-item">
                             <a href="#" class="tab-title-link">Tất cả</a>
                         </li>

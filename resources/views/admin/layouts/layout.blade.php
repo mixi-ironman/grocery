@@ -313,6 +313,7 @@
                 $('#myTable_Cate').DataTable();
                 $('#myTable_Coupon').DataTable();
                 $('#myTable_Order').DataTable();
+                $('#myTable_Contact').DataTable();
             })
         </script>
 

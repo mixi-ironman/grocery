@@ -50,7 +50,7 @@
                                 <img class="slider-item-img" src="{{ url('client') }}/assets/img/cake-milk.png" alt="" />
                             </a>
                         </figure>
-                        <h6>Cake & Milk</h6>
+                        <h6>Bánh kẹo</h6>
                         {{-- <p>26 items</p> --}}
                     </div>
                      <div class="slider-product-item scroll-animation col-md-1 bg-2">
@@ -114,7 +114,7 @@
                                 <img class="slider-item-img" src="{{ url('client') }}/assets/img/cake-milk.png" alt="" />
                             </a>
                         </figure>
-                        <h6>Cake & Milk</h6>
+                        <h6>Banh kẹo</h6>
                         {{-- <p>26 items</p> --}}
                     </div>
         
