@@ -11,8 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('addresses', function (Blueprint $table) {
-            $table->boolean('is_default')->default(false);
+        Schema::table('orders', function (Blueprint $table) {
+            $table->foreign('user_id')
+                ->references('id')->on('users')
+                ->onDelete('CASCADE')
+                ->onUpdate('CASCADE');
         });
     }
 
@@ -21,8 +24,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('addresses', function (Blueprint $table) {
-            $table->dropColumn('is_default');
+        Schema::table('orders', function (Blueprint $table) {
+            //
         });
     }
 };

@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Redirect;
 use App\Models\Category;
 use App\Models\Location;
 use App\Models\Address;
-use App\Models\Orderdetail;
+use App\Models\Order;
 use App\Services\OrderDetailService;
 use App\Services\Client\UserService;
 class UserController extends Controller
@@ -142,6 +142,37 @@ class UserController extends Controller
             'order_item' => $result,
 
         ]);
-       
+
+    }
+
+    public function orderSearch(Request $request)
+    {
+        $textStatusOrder = $request->textStatusOrder;
+        $orders = [];
+    
+        if ($textStatusOrder == 'Tất cả') {
+            if (Auth::check()) {
+                $user = Auth::user();
+                $orders = $this->orderDetailService->getOrderByUserId($user->id) ?? [];
+            }
+        } else {
+            // Nếu tình trạng không phải là 'Tất cả', thì tìm kiếm theo tình trạng
+            $orders = Order::where('status', $textStatusOrder)->get();
+        }
+    
+        if(count($orders) != 0){
+            $result = view('client.components.order-detail_component',['orders' => $orders,])->render();
+            return response()->json([
+                    'code'=>200,
+                    'msg'=>'Load số lượng sản phẩm thành công!',
+                    'ordersFilter' => $result,
+                    '$orders' => $orders,
+            ]);
+        }else{
+            return response()->json([
+                'code'=> 'error',
+                'msg'=>'Không có đơn hàng nào',
+            ]);
+        }
     }
 }

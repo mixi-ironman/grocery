@@ -7,6 +7,7 @@ use App\Services\SliderService;
 use App\Services\CategoryService;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
+use App\Models\Slider;
 
 class SliderController extends Controller
 {
@@ -77,6 +78,13 @@ class SliderController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $slider = Slider::find($id);
+    
+        if ($slider) {
+            $slider->delete();
+            return redirect()->route('sliders.index')->with('success', 'Xóa thành công!');
+        } else {
+            return "Không tìm thấy bản ghi để xóa.";
+        }
     }
 }

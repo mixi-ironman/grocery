@@ -17,7 +17,7 @@
     <div class="row filter-product">
         <div class="col-md-3">
             <div class="sidebar-area-wrap">
-                <form name="product-filter" class="product-filter" method="POST">
+                {{-- <form name="product-filter" class="product-filter" method="POST"> --}}
                     <!-- filer product category -->
                     <div class="filter-category-name">
                         <h4>Danh mục</h4>
@@ -38,7 +38,7 @@
                                             
                                         </a>
                                         @if($categoryParent->childrentCategory->count())
-                                            <span style="font-size:13px;font-weight:bold;color:black;margin-left:10px"><i class="fa-solid fa-circle-half-stroke icon-category open"></i></span>
+                                            <span style="font-size:13px;font-weight:bold;color:black;margin-left:10px"><i class="fa-brands fa-airbnb icon-category open"></i></span>
                                         @endif
                                     </li>
                                     @if($categoryParent->childrentCategory->count())
@@ -59,20 +59,29 @@
                         </div>
                     </div>
                     <!-- filter product frice -->
-                    <div class="price-slider sidebar-widget" style="opacity:0;">
-                        <div class="price-ranger">
-                            <h4>Filter By Price</h4>
-                            <div
-                                id="price-slider"
-                                style="border: 1px solid #ccc; border-radius: 4px"
-                            ></div>
-                            <div class="filter-price">
-                                <div class="show-value-range">
-                                    Price: $<span class="min_">0</span> - $<span class="max_">100</span>
-                                </div>
-                                <button class="btn-filter-price translate" type="submit">Filter</button>
+                    <div class="price-slider sidebar-widget" >
+                    `    <form id="filterForm" class="product-filter">
+                            <div class="price-ranger">
+                                <h4>Tìm kiếm theo giá</h4>
+                                <div
+                                    id="price-slider"
+                                    style="border: 1px solid #ccc; border-radius: 4px"
+                                ></div>
+                                <form>
+                                    <div style="display: flex; flex-direction: column;margin:10px 0">
+                                        
+                                        <div style="display: flex;text-align:center;"><label for="currency-range">Từ:</label><span id="selected-currency" class="value_ranger">0</span>&nbsp<span id="price">vnd</span></div>
+                                        <input class="vnd currency-range" type="range" value = "0" min="0" max="1000000" step="10000" require/>
+                                    </div>
+                        
+                                    <div style="display: flex; flex-direction: column">
+                                        <div style="display: flex;text-align:center;"><label for="currency-range">Đến:</label><span id="selected-currency_" class="value_ranger_">0</span>&nbsp<span id="price_">vnd</span></div>
+                                        <input class="vnd currency-range_" type="range" value = "0" min="0" max="2000000" step="10000" require/>
+                                    </div>
+                                    <button style="margin:10px 0 0 0px;" class="btn-filter-price translate" data-url="{{ route('filter-price') }}">Tìm</button>
+                                </form>
                             </div>
-                        </div>
+                        </form>
                     </div>
                     <!-- filter brand name -->
                     <div class="filter-brand-wrap" style="opacity: 0">
@@ -106,7 +115,7 @@
                             </ul>
                         </div>
                     </div>
-                </form>
+                {{-- </form> --}}
             </div>
         </div>
 
@@ -172,8 +181,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="product-grid row product-filter g-3">
-                    @include('client.components.product_cart_item', ['products'=>$products,'itemsPerRow' =>'3'])
+                <div id="products_filter" class="product-grid row product-filter g-3">
+                        @include('client.components.product_cart_item', ['products'=>$products,'itemsPerRow' =>'3'])
                 </div>
                 {{-- <div >
                     {{$products->links()}}
@@ -184,6 +193,7 @@
 </div>        
 @endsection
 @push('custom-script')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
 <script>
         function acordion(e) {
             // $(this).find
@@ -220,44 +230,121 @@
         }
         $(document).on("click", ".icon-category",activeTab)
 
-</script>
-    <script>
-        const app = {
-            
-            inputRange() {
-                const $ = document.querySelector.bind(document);
-                const $$ = document.querySelectorAll.bind(document);
-                const priceSlider = document.getElementById('price-slider');
-                const start_ = $('.min_');
-                const end_ = $('.max_');
-                noUiSlider.create(priceSlider, {
-                    start: [0, 100],
-                    connect: true,
-                    range: {
-                        min: 0,
-                        max: 100,
-                    },
-                });
+        //handle input type ranger
+        $('.currency-range').on('input', function () {
+            var valueRanger = $(this).val();
+            if (valueRanger == 1000000) {
+                $('.currency-range_').attr('min', 1100000);
+            }
 
-                priceSlider.noUiSlider.on('update', function (values, handle) {
-                    start_.innerText = Math.round(values[0]);
-                    end_.innerText = Math.round(values[1]);
+            $('#selected-currency').text(valueRanger);
+        });
 
-                    // Gọi hàm filter sản phẩm dựa trên giá trị tối thiểu và tối đa
-                    filterProductsByPriceRange(values[0], values[1]);
-                });
+        $('.currency-range_').on('input', function () {
+            var valueRanger = $(this).val();
+            $('#selected-currency_').text(valueRanger);
+        });
 
-                function filterProductsByPriceRange(minPrice, maxPrice) {
-                    // Thực hiện các thao tác filter sản phẩm với giá trị tối thiểu và tối đa đã chọn
+        function countOccurrences(str, target) {
+            // Sử dụng split để chuyển chuỗi thành một mảng các ký tự
+            // Sử dụng filter để giữ lại các ký tự bằng với target
+            // Sử dụng length để đếm số lượng ký tự bằng với target
+            // return str.split('').filter(char => char === target).length;
+            let count = 0;
+            for (let i = 0; i < str.length; i++) {
+                if (str[i] === target) {
+                    count++;
                 }
-            },
+            }
 
-            run() {
-                this.inputRange();
-            },
-        };
+            return count;
+        }
 
-        app.run();
+        $('.vnd').on('input', function () {
+            var vl = $(this).val();
 
-    </script>
+            var unformattedValue = vl.replace(/[^0-9]/g, ''); // Lấy giá trị chỉ chứa số
+            var formattedValue = numeral(unformattedValue).format('0,0'); // Định dạng theo định dạng tiền tệ
+            if ($(this).hasClass('currency-range')) {
+                $('#selected-currency').text(formattedValue);
+            } else {
+                $('#selected-currency_').text(formattedValue);
+            }
+        });
+
+        function filterProduct(even) 
+        {
+            event.preventDefault();
+            // var formData = $(this).serialize();
+            let urlFilterByPrice = $('.btn-filter-price').data('url');
+            let vl = $('.value_ranger').text().replaceAll(',', '');
+            let vl_ = $('.value_ranger_').text().replaceAll(',', '');
+
+            $.ajax({
+                type: 'GET',
+                url: urlFilterByPrice,
+                data: {
+                    vl,
+                    vl_
+                },
+                success: function (data) {
+                    if (data.code === 200) {
+                        $("#products_filter").html(data.products_filter_by_price)
+                    }else{
+                        alert("Không có sản phẩm nào!")
+                        location.reload();
+                    }
+                },
+                error: function (error) {
+                    console.error('Error:', error);
+                }
+            });
+        }
+        
+        $(document).on('submit','#filterForm', filterProduct);
+        // $('#filterForm').submit(function (event) {
+        //         event.preventDefault();
+        //         var formData = $(this).serialize();
+        // });
+
+</script>
+<script>
+    const app = {
+        
+        inputRange() {
+            const $ = document.querySelector.bind(document);
+            const $$ = document.querySelectorAll.bind(document);
+            const priceSlider = document.getElementById('price-slider');
+            const start_ = $('.min_');
+            const end_ = $('.max_');
+            noUiSlider.create(priceSlider, {
+                start: [0, 100],
+                connect: true,
+                range: {
+                    min: 0,
+                    max: 100,
+                },
+            });
+
+            priceSlider.noUiSlider.on('update', function (values, handle) {
+                start_.innerText = Math.round(values[0]);
+                end_.innerText = Math.round(values[1]);
+
+                // Gọi hàm filter sản phẩm dựa trên giá trị tối thiểu và tối đa
+                filterProductsByPriceRange(values[0], values[1]);
+            });
+
+            function filterProductsByPriceRange(minPrice, maxPrice) {
+                // Thực hiện các thao tác filter sản phẩm với giá trị tối thiểu và tối đa đã chọn
+            }
+        },
+
+        run() {
+            this.inputRange();
+        },
+    };
+
+    app.run();
+
+</script>
 @endpush

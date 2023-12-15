@@ -8,11 +8,10 @@ use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
+
 use App\Models\ProductTag;
 use App\Models\Category;
-
-
-
 class ProductService
 {
     private $productRepository;
@@ -42,6 +41,44 @@ class ProductService
     {
         try {
             DB::beginTransaction();
+            // Tùy chỉnh các thông báo lỗi
+            $customMessages = [
+                'name_product.required' => 'Vui lòng nhập tên sản phẩm.',
+                // 'name_product.regex' => 'Họ và tên không được chứa dấu cách và chỉ chấp nhận chữ cái.',
+                'brand.required' => 'Vui lòng chọn một thương hiệu từ trường chọn.',
+                'parent_id.required' => 'Vui lòng chọn một category cha từ trường chọn.',
+                'category_id.required' => 'Vui lòng chọn một category con từ trường chọn.',
+                'description.required' => 'Vui lòng nhập nội dung mô tả',
+                'content.required' => 'Vui lòng nhập nội dung mô tả sản phẩm',
+                'price.required' => 'Vui lòng nhập giá bán',
+                'old_price.required' => 'Vui lòng nhập giá niêm yết',
+                'stock.required' => 'Vui lòng nhập số lượng sản phẩm',
+                'image.required' => 'Vui lòng chọn hình ảnh',
+                'price.numeric' => 'Số chỉ có thể chứa các ký tự số.',
+                'price.min' => 'Số phải là số dương.',
+            ];
+            
+            // Validate dữ liệu với các thông báo tùy chỉnh
+            $validator = Validator::make($request->all(), [
+                'name_product' => 'required',
+                'brand' => 'required',
+                'parent_id' => 'required',
+                'category_id' => 'required',
+                'description' => 'required',
+                'content' => 'required',
+                'price' => 'required|numeric|min:0',
+                'old_price' => 'required|numeric|min:0',
+                'stock' => 'required|numeric|min:0',
+                'image' => 'required|image',
+            ], $customMessages);
+
+            // Kiểm tra nếu có lỗi
+            if ($validator->fails()) {
+                return redirect()->back()
+                    ->withErrors($validator)
+                    ->withInput();
+            }
+            
             // Xử lý file hình ảnh
             if ($request->hasFile('image') && $request->file('image')->isValid()) {
                 $imagePath = 'image'.time().'-'.uniqid().'.'.$request->file('image')->extension();
@@ -126,7 +163,7 @@ class ProductService
                 DB::commit();
             }
 
-            return Redirect::route('products.index')->with('success', 'Thêm sản phẩm thành công!');
+            // return Redirect::route('products.index')->with('success', 'Thêm sản phẩm thành công!');
         } catch (\Exception $e) {
             DB::rollBack();
             return Redirect::back()->withErrors(['create' => 'Thêm sản phẩm thất bại ^.^'])->withInput();
@@ -140,6 +177,7 @@ class ProductService
 
             // Lấy thông tin sản phẩm hiện tại từ cơ sở dữ liệu
             $product = $this->productRepository->getById($id);
+            
             if ($request->ajax()) {
                 $product = $this->productRepository->getById($id);
                 if ($product) {
@@ -195,10 +233,10 @@ class ProductService
             //     Storage::delete($product->image);
             // }
 
-            // Xóa hình ảnh cũ nếu có
-            if ($product->image && file_exists(public_path('uploads/' . $product->image))) {
-                unlink(public_path('uploads/' . $product->image));
-            }
+                // Xóa hình ảnh cũ nếu có
+                if ($product->image && file_exists(public_path('uploads/' . $product->image))) {
+                    unlink(public_path('uploads/' . $product->image));
+                }
             } else {
                 // Nếu người dùng không tải lên hình ảnh mới, giữ nguyên đường dẫn hình ảnh hiện tại
                 $imagePath = $product->image;

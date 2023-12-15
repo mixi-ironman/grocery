@@ -241,8 +241,8 @@
                         @foreach($brands as $brand)
                         <div class="col-md-2">
                             <div class="brand-item scroll-animation">
-                                <a href="#">
-                                    <img style="height:200px !important;" src="{{ asset('uploads/') }}/{{ $brand->image }}" alt="" />
+                                <a href="{{ route('products.filterByBrand', $brand->slug) }}">
+                                    <img src="{{ asset('uploads/') }}/{{ $brand->image }}" alt="" />
                                 </a>
                             </div>
                         </div>
@@ -297,7 +297,7 @@
                 </div>
             </div>
         </div>
-                      {{-- thêm jquery --}}
+        {{-- thêm jquery --}}
         <script src="{{ asset('js/jquery-3.7.0.min.js') }}"></script>
         {{-- <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script> --}}
 

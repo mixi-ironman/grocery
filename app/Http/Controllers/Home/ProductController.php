@@ -12,6 +12,7 @@ use App\Models\Comment;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Tag;
+use App\Models\Brand;
 use App\Models\FavoriteProduct;
 
 
@@ -169,6 +170,51 @@ class ProductController extends Controller
         })
         ->get();
 
+        $categoryList = Category::where('parent_id', 0)->get();
+        return view('client.layouts.pages.view-category-product',['carts' => $carts,'categoryList'=>$categoryList,'products'=>$products]);
+    }
+
+    public function filterByPrice(Request $request)
+    {
+        $minPrice = $request->vl;
+        $maxPrice = $request->vl_;
+        if ($minPrice == 0 && $maxPrice == 0) {
+            // Trường hợp 1: Cả $minPrice và $maxPrice đều bằng 0
+            $products = Product::all();
+            
+        } elseif ($minPrice != 0 && $maxPrice == 0) {
+            // Trường hợp 2: $minPrice khác 0 và $maxPrice bằng 0
+            $products = Product::where('price', '<=', $minPrice)
+                    ->orderBy('price', 'asc')
+                    ->get();
+        } else {
+            // Trường hợp 3: $minPrice và $maxPrice có giá trị khác 0
+            $products = Product::whereBetween('price', [$minPrice, $maxPrice])
+                    ->orderBy('price', 'asc')
+                    ->get();
+        }
+
+        if(count($products) != 0){
+            $result = view('client.components.product_cart_item',['products' => $products,'itemsPerRow' =>'3'])->render();
+            return response()->json([
+                    'code'=>200,
+                    'msg'=>'Load số lượng sản phẩm thành công!',
+                    'products_filter_by_price' => $result,
+                    '$products' => $products,
+            ]);
+        }else{
+            return response()->json([
+                'code'=> 'error',
+                'msg'=>'Không có sản phẩm',
+            ]);
+        }
+    }
+
+    public function filterByBrand(Request $request,string $brandSlug)
+    {
+        $brand = Brand::where('slug', $brandSlug)->firstOrFail();
+        $products = Product::where('brand_id', $brand->id)->get();
+        $carts = session()->get('cart',[]);
         $categoryList = Category::where('parent_id', 0)->get();
         return view('client.layouts.pages.view-category-product',['carts' => $carts,'categoryList'=>$categoryList,'products'=>$products]);
     }

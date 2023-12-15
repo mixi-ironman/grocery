@@ -13,13 +13,16 @@ return new class extends Migration
     {
         Schema::create('addresses', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id'); // Khóa ngoại tham chiếu đến bảng Users
+            // $table->unsignedBigInteger('user_id'); // Khóa ngoại tham chiếu đến bảng Users
             $table->string('name'); 
             $table->string('province'); // Tỉnh hoặc thành phố
             $table->string('district'); // Quận hoặc huyện
             $table->string('ward'); // Xã hoặc phường
-
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->boolean('is_default')->default(false);
+            $table->string('address_details')->nullable();
+            $table->string('email')->nullable();
+            $table->string('phone')->nullable();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
         });
     }

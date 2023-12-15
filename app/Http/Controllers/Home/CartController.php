@@ -94,7 +94,6 @@ class CartController extends Controller
                 'cart_component' => $cartComponent,
                 'cartList' => $cartList
             ]);
-
         }
        
      }

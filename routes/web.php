@@ -10,7 +10,7 @@ use App\Http\Controllers\Home\AuthController;
 use App\Http\Controllers\Home\PaymentController;
 use App\Http\Controllers\Home\UserController;
 use App\Http\Controllers\Home\ContactController;
-
+use App\Http\Controllers\Auth\ForgotPasswordController;
 
 // --------------------------------------------------------------------
     Route::get('/home', function () {
@@ -18,10 +18,18 @@ use App\Http\Controllers\Home\ContactController;
         
     });
 
+    Route::get('/forgot-password', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
+    Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
+    Route::get('/reset-password/{token}', [ForgotPasswordController::class, 'resetLinkEmail'])->name('password.reset');
+    Route::post('/reset-password', [ForgotPasswordController::class, 'resetPassword'])->name('password.update');
+
     // admin auth
     Route::get('admin/login',[AdminAuthController::class,'viewLogin'])->name('admin-login');
     Route::post('admin/login',[AdminAuthController::class,'login'])->name('admin-auth');
     Route::get('admin/logout',[AdminAuthController::class,'logout'])->name('admin-logout');
+    Route::get('/register-page',[AdminAuthController::class,'registerForm'])->name('register-page');
+    Route::post('/register',[AdminAuthController::class,'register'])->name('register');
+    Route::get('/logout',[AdminAuthController::class,'logout'])->name('logout');
 
     //client auth
     Route::prefix('customer')->name('customer.')->group(function () {
@@ -43,7 +51,6 @@ use App\Http\Controllers\Home\ContactController;
     Route::get('/autocomplete-ajax',[HomeController::class,'autocompleteAjax'])->name('autocomplete-ajax');
     Route::get('/category-product',[HomeController::class,'viewCategory'])->name('viewCategory');
     Route::get('/thank-you',[HomeController::class,'pageThankYou'])->name('thanh-you');
-
     //Product
     Route::prefix('product')->group(function (){
         Route::get('/{id}-{slug}.html',[ProductController::class,'index'])->name('view-product');
@@ -51,6 +58,8 @@ use App\Http\Controllers\Home\ContactController;
         Route::post('/send-comment',[ProductController::class,'sentComment'])->name('send-comment');
         Route::get('/add-to-favorites/{id}',[ProductController::class,'addToFavorites'])->name('add-to-favorites');
         Route::get('/tags/{product_tag}',[ProductController::class,'tag'])->name('product-tags');
+        Route::get('/filter-price', [ProductController::class, 'filterByPrice'])->name('filter-price');
+        Route::get('/products/{brand}', [ProductController::class, 'filterByBrand'])->name('products.filterByBrand');
     });
 
     //Category
@@ -88,6 +97,8 @@ Route::prefix('customer')->name('customer.')->group(function () {
     Route::put('/update/{id}',[UserController::class,'update'])->name('update');
     Route::delete('/destroy/{id}', [UserController::class, 'destroy'])->name('destroy');
     Route::put('/address-default', [UserController::class, 'setDefaultAddress'])->name('address-default');
+    Route::get('/orders/search',[UserController::class,'orderSearch'])->name('order-search');
+
 });
 
 //Order

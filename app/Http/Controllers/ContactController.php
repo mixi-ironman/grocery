@@ -15,14 +15,13 @@ class ContactController extends Controller
 
     public function destroy($id)
     {
-        $post = Contact::find($id);
+        $contact = Contact::find($id);
     
-        if ($post) {
-            $post->delete();
+        if ($contact) {
+            $contact->delete();
             return redirect()->route('contact.index')->with('success', 'Xóa phản hồi thành công!');
         } else {
             return "Không tìm thấy bản ghi để xóa.";
         }
     }
-    
 }

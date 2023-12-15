@@ -33,7 +33,7 @@
               >
                 <i class="ni ni-tv-2 text-primary text-sm opacity-10"></i>
               </div>
-              <span class="nav-link-text ms-1">Dashboard</span>
+              <span class="nav-link-text ms-1">Thống kê</span>
             </a>
           </li>
           <li class="nav-item">

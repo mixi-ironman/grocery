@@ -19,7 +19,6 @@ return new class extends Migration
             $table->integer('quantity');
             $table->decimal('total_price', 10, 2);
 
-            // Thiết lập khóa ngoại
             $table->foreign('order_id')->references('id')->on('orders');
             $table->foreign('product_id')->references('id')->on('products');
             $table->timestamps();

@@ -37,7 +37,6 @@
           <div class="form-outline mb-4">
             <label class="form-label" for="email">Email</label>
             <input type="text" name="email" id="email" value="{{ old('email') }}" class="form-control form-control-lg" />
-          
           </div>
 
           <!-- Password input -->
@@ -55,18 +54,17 @@
               <input class="form-check-input" type="checkbox" name="remember" id="form1Example3"  />
               <label class="form-check-label" for="form1Example3"> Remember me </label>
             </div>
-            <a href="#!">Quên mật khẩu?</a>
+            <a href="{{ route('password.request') }}">Quên mật khẩu?</a>
             <a href="{{ route("customer.register-page") }}">Đăng ký!</a>
           </div>
 
           <!-- Submit button -->
-          <button style="width:100%" type="submit" class="btn btn-primary btn-lg btn-block">Sign in</button>
+          <button style="width:100%" type="submit" class="btn btn-primary btn-lg btn-block">Đăng nhập</button>
 
           <div style="opacity:0;">
             <div class="divider d-flex align-items-center my-4">
               <p class="text-center fw-bold mx-3 mb-0 text-muted">OR</p>
             </div>
-  
             <a class="btn btn-primary btn-lg btn-block" style="background-color: #3b5998" href="#!"
               role="button">
               <i class="fab fa-facebook-f me-2"></i>Continue with Facebook
@@ -75,7 +73,6 @@
               role="button">
               <i class="fab fa-twitter me-2"></i>Continue with Twitter</a>
           </div>
-
         </form>
       </div>
     </div>

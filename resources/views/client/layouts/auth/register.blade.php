@@ -39,10 +39,13 @@
                           <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                           <div class="form-outline flex-fill mb-0">
                             <label class="form-label" for="form3Example1c">Họ và tên</label>
-                            <input type="text" id="form3Example1c" name="username" values="{{ old('username') }}" class="form-control" placeholder="Họ và tên"/>
+                            <input type="text" id="form3Example1c" name="username" value="{{ old('username') }}" class="form-control {{ $errors->has('username') ? 'is-invalid' : '' }}" placeholder="Họ và tên"/>
                             {{-- @if($error->has('username'))
                                 {{ $errors->first('username') }}
                             @endif --}}
+                            @error('username')
+                              <p class="error alert alert-danger" style="margin-top:5px">{{ $message }}</p>
+                            @enderror
                           </div>
                         </div>
       
@@ -50,7 +53,10 @@
                           <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
                           <div class="form-outline flex-fill mb-0">
                             <label class="form-label" for="form3Example3c">Email</label>
-                            <input type="email" id="form3Example3c" values="{{ old('email') }}" name="email" class="form-control" placeholder="Nhập địa chỉ email"/>
+                            <input type="email" id="form3Example3c" value="{{ old('email') }}" name="email" class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}" placeholder="Nhập địa chỉ email"/>
+                            @error('email')
+                              <p class="error alert alert-danger" style="margin-top:5px">{{ $message }}</p>
+                            @enderror
                           </div>
                         </div>
       
@@ -58,26 +64,15 @@
                           <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
                           <div class="form-outline flex-fill mb-0">
                             <label class="form-label" for="form3Example4c">Mật khẩu</label>
-                            <input type="password" id="form3Example4c" name="password" class="form-control" placeholder="Nhập password"/>
+                            <input type="password" id="form3Example4c" name="password" class="form-control {{ $errors->has('password') ? 'is-invalid' : '' }}" placeholder="Nhập password"/>
+                            @error('password')
+                              <p class="error alert alert-danger" style="margin-top:5px">{{ $message }}</p>
+                            @enderror
                           </div>
                         </div>
+                        <a href={{route('customer.login-page')}} style="margin:15px;display:block">Đăng nhập</a>
       
-                        {{-- <div class="d-flex flex-row align-items-center mb-4">
-                          <i class="fas fa-key fa-lg me-3 fa-fw"></i>
-                          <div class="form-outline flex-fill mb-0">
-                            <input type="password" id="form3Example4cd" class="form-control" />
-                            <label class="form-label" for="form3Example4cd">Repeat your password</label>
-                          </div>
-                        </div> --}}
-      
-                        {{-- <div class="form-check d-flex justify-content-center mb-5">
-                          <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3c" />
-                          <label class="form-check-label" for="form2Example3">
-                            I agree all statements in <a href="#!">Terms of service</a>
-                          </label>
-                        </div> --}}
-      
-                        <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                        <div class="d-flex justify -content-center mx-4 mb-3 mb-lg-4">
                           <button type="submit" class="btn btn-primary btn-lg btn-register">Đăng ký</button>
                         </div>
       
@@ -99,5 +94,16 @@
       </section>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
+@if($errors->any())
+  <script>
+      // Sử dụng JavaScript để đặt focus vào ô input đầu tiên không hợp lệ
+      document.addEventListener('DOMContentLoaded', function() {
+          let firstErrorInput = document.querySelector('.is-invalid');
+          if (firstErrorInput) {
+              firstErrorInput.focus();
+          }
+      });
+  </script>
+@endif
 </body>
 </html>

@@ -11,7 +11,10 @@
                     @csrf
                     <div class="mb-3">
                         <label  class="form-label">Name Product</label>
-                        <input type="text" class="form-control"  name="name_product" aria-describedby="emailHelp">
+                        <input type="text" class="form-control" value="{{ old('name_product') }}" name="name_product" aria-describedby="emailHelp">
+                        @error('name_product')
+                            <p class="error">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     {{-- brand --}}
@@ -23,6 +26,9 @@
                             <option value="{{ $brand->id }}">{{ $brand->name }}</option>
                             @endforeach
                         </select>
+                        {{-- @error('name_product')
+                            <p class="error">{{ $message }}</p>
+                        @enderror --}}
                     </div>
 
                     {{-- parent category --}}
@@ -60,27 +66,27 @@
 
                     <div class="mb-3">
                         <label  class="form-label">Mô tả</label>
-                        <textarea class="form-control" name="description" rows="3"></textarea>
+                        <textarea class="form-control" name="description" rows="3">{{ old('description') }}</textarea>
                     </div>
 
                     <div class="mb-3">
                         <label  class="form-label">Mô tả chi tiết</label>
-                        <textarea name="content" id="content" rows="10" cols="80"></textarea>
+                        <textarea name="content" id="content" rows="10" cols="80">{{ old('content') }}</textarea>
                     </div>
 
                     <div class="mb-3">
                         <label  class="form-label">Giá</label>
-                        <input type="text" class="form-control"  name="price" aria-describedby="emailHelp">
+                        <input type="text" class="form-control" value="{{ old('price') }}" name="price" aria-describedby="emailHelp">
                     </div>
 
                     <div class="mb-3">
                         <label  class="form-label">Old Price</label>
-                        <input type="text" class="form-control"  name="old_price" aria-describedby="emailHelp">
+                        <input type="text" class="form-control" value="{{ old('old_price') }}" name="old_price" aria-describedby="emailHelp">
                     </div>
 
                     <div class="mb-3">
                         <label  class="form-label">Số lượng</label>
-                        <input type="number" class="form-control"  name="stock" aria-describedby="emailHelp">
+                        <input type="number" class="form-control" value="{{ old('stock') }}" name="stock" aria-describedby="emailHelp">
                     </div>
 
                     <div class="mb-3">
@@ -133,7 +139,6 @@
     <script>
        
         // CKEDITOR.replace( 'content' );
-
         $(document).ready(function () {
 
             $('.select2').select2({
@@ -177,8 +182,6 @@
             var existingTags = [];
             $('.tag-select').on('select2:selecting', function (e) {
                 let tagName = e.params.args.data.text;
-                // let tagId = e.params.args.data.id;
-                // console.log(tagId);
                 if (tagName) {
                     $.ajax({
                         url: '{{ route('tags.store') }}',

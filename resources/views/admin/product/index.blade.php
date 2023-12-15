@@ -168,7 +168,6 @@
                     data: updateData,
                     dataType: 'json',
                     success: function (data) {
-                        // console.log(data)
                         if (is_active != undefined) {
                             _this.attr('data-status', data.changed_attributes.is_active);
                             _this.empty();

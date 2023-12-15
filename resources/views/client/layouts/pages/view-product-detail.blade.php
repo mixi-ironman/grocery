@@ -474,32 +474,32 @@ const app_ = {
         },
     });
     function addToCart(event) {
-    event.preventDefault();
-    let urlCart = $(this).data("url");
-    let inputValue = $('#input-quantity').val();
-    // $('#product-stock').data('quantity', stock); //cách này lấy value thay đổi route
+        event.preventDefault();
+        let urlCart = $(this).data("url");
+        let inputValue = $('#input-quantity').val();
+        // $('#product-stock').data('quantity', stock); //cách này lấy value thay đổi route
 
-    // alert(urlCart);
-    $.ajax({
-        method: "GET",
-        url: urlCart,
-        dataType: "json",
-        data: {
+        // alert(urlCart);
+        $.ajax({
+            method: "GET",
+            url: urlCart,
+            dataType: "json",
+            data: {
                 quantity: inputValue,  
                 _token: $('meta[name="csrf-token"]').attr("content"),
-        },
-        success: function (data) {
-            let count = 0;
- 
-            if (data.code === 200) {
-                $("#count_number").text(data.count_number)
-                $("#cart_list_wrapper").html(data.cartList);
-                // console.log(data.cartList);
-            }
-        },
-        error: function () {
-            alert("Lỗi ở ajax");
-        },
+            },
+            success: function (data) {
+                let count = 0;
+    
+                if (data.code === 200) {
+                    $("#count_number").text(data.count_number)
+                    $("#cart_list_wrapper").html(data.cartList);
+                    // console.log(data.cartList);
+                }
+            },
+            error: function () {
+                alert("Lỗi ở ajax");
+            },
     });
 }
 

@@ -380,70 +380,23 @@
             {{-- History order --}}
             <div class="tab-pane-history tab-pane-common">
                 <div class="header-view-order" >
-                    <ul class="tab-title-list" style="display:none">
-                        <li class="tab-title-item">
-                            <a href="#" class="tab-title-link">Tất cả</a>
-                        </li>
-                        <li class="tab-title-item">
-                            <a href="#" class="tab-title-link">Chờ xử lý</a>
-                        </li>
-                        <li class="tab-title-item">
-                            <a href="#" class="tab-title-link">Vận Chuyển</a>
-                        </li>
+                    <ul class="tab-title-list">
                         <li class="tab-title-item active">
-                            <a href="#" class="tab-title-link">Hoàn Thành</a>
+                            <a href="#" class="tab-title-link tab-title-link_order">Tất cả</a>
+                        </li>
+                        <li class="tab-title-item">
+                            <a href="#" class="tab-title-link tab-title-link_order">Chờ xử lý</a>
+                        </li>
+                        <li class="tab-title-item">
+                            <a href="#" class="tab-title-link tab-title-link_order">Đang vận chuyển</a>
+                        </li>
+                        <li class="tab-title-item">
+                            <a href="#" class="tab-title-link tab-title-link_order">Đã Giao</a>
                         </li>
                     </ul>
 
-                    <div class="order-detail">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title">Danh sách đơn hàng</h4>
-                            </div>
-                            <div class="card-body">
-                                <table class="table">
-                                    <thead>
-                                    <tr>
-                                        <th scope="col"style="text-align: center;vertical-align:middle;">Stt</th>
-                                        <th scope="col"style="text-align: center;vertical-align:middle;">Tên người nhận</th>
-                                        <th scope="col"style="text-align: center;vertical-align:middle;">Trạng thái</th></th>
-                                        <th scope="col"style="text-align: center;vertical-align:middle;">Địa chỉ</th>
-                                        <th scope="col"style="text-align: center;vertical-align:middle;">Tổng tiền</th></th>
-                                        <th scope="col"style="text-align: center;vertical-align:middle;">Ngày đặt</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    @php
-                                        $index = 1;
-                                    @endphp
-                                    @foreach($orders as $key => $order)
-                                        <tr>
-                                            <td scope="row" style="text-align: center;vertical-align:middle;">{{ $index++ }}</td>
-                                            <td style="text-align: center; vertical-align: middle;">
-                                                {{-- {{ route('order.view', ['id' => $order->id]) }} --}}
-                                                <a class="icon-overlay" id="view-order" href="{{ route('customer.view-order',['id' => $order->id]) }}">
-                                                    {{ $order->name ?? '' }}
-                                                </a>
-                                            </td>
-                                            <td style="text-align: center;vertical-align:middle;"><span class=" display:inline-block" style="margin:0">{{ $order?->status}}</span></td>
-                                            <td style="text-align: center;vertical-align:middle;">{{ $order?->shipping_address }}</td>
-                                            <td style="text-align: center;vertical-align:middle;">{{ number_format($order?->total_amount) }}</td>
-                                            <td style="text-align: center;vertical-align:middle;">{{ $order->created_at->format('d/m/Y h:i:s') }}</td>
-                                           
-                                            {{-- <td style="text-align:center;vertical-align:middle;">
-                                                <form action="{{ route('order-detail.destroy',['id'=>$order->id]) }}" method="post" style="display:block;padding:10px">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <a class="btn btn-primary" href="#" style="margin:0 5px 0 0;"><i class="fa-solid fa-pen-to-square"></i></a>
-                                                </form>
-                                            </td> --}}
-                                        </tr>
-                                    @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
-                            
-                        </div>
+                    <div class="order-detail_component">
+                        @include('client.components.order-detail_component',['orders' => $orders])
                     </div>
                 </div>
 
@@ -625,21 +578,63 @@
             }
             $(document).on("click", ".btn-yes",deleteAddress)
 
-            function hideModal(e) 
-            {
-                $('.modal-toast').removeClass('active')
-            }
-            $(document).on("click", ".btn-no",hideModal)
+                function hideModal(e) 
+                {
+                    $('.modal-toast').removeClass('active')
+                }
+                $(document).on("click", ".btn-no",hideModal)
 
-            $(document).on("click", ".modal-toast", function (event) {
-            // Kiểm tra xem phần tử click có chứa cart-sidebar hay không
-            if (!$(event.target).closest(".content-toast-wrap").length) {
-                // Nếu không chứa, ẩn cart-sidebar
-                $(".modal-toast").removeClass("active");
-            }
-        });
+                $(document).on("click", ".modal-toast", function (event) {
+                // Kiểm tra xem phần tử click có chứa cart-sidebar hay không
+                if (!$(event.target).closest(".content-toast-wrap").length) {
+                    // Nếu không chứa, ẩn cart-sidebar
+                    $(".modal-toast").removeClass("active");
+                }
+            });
         }
-        $(document).on("click", ".delete-address",toastModal) 
+        $(document).on("click", ".delete-address",toastModal)
+        
+        //set địa chỉ mặc định
+        function setActive(e) {
+            e.preventDefault();
+            console.log();
+            if ($(this).hasClass('tab-title-item active')) {
+                $(this).removeClass('active');
+            }else{
+                $('.tab-title-item').removeClass('active');
+                $(this).addClass('active');
+            }
+            // $(this).toggleClass('active');
+        }
+        $(document).on("click", ".tab-title-item",setActive)
+
+        //Tình trạng đơn hàng
+        function filterOrderDetail(e) {
+                e.preventDefault();
+                // var urlStatusOrder = $(this).data('url');
+                var textStatusOrder = $(this).text();
+                
+                $.ajax({
+                    type: 'GET',
+                    url: '{{ route('customer.order-search') }}',
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                        textStatusOrder : textStatusOrder
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+                        if(data['code'] == 200){
+                            // window.location.replace('{{ route('customer.profile') }}');
+                            $(".order-detail_component").html(data.ordersFilter);
+                        }else if(data['code'] == 'error')
+                        {
+                            $(".order-detail_component").html('<p style="font-size: 24px; text-align: center; color: red;">Không có đơn hàng nào</p>');
+                        }
+                    }
+                });
+
+            }
+            $(document).on("click", ".tab-title-link_order",filterOrderDetail)
     })
     
 </script>

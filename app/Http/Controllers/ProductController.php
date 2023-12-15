@@ -44,9 +44,8 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
-        return $this->productService->store($request);
-        // return Redirect::route('products.index')->with('success', 'Thêm sản phẩm thành công!');
-        // return Redirect::route('products.index')->with('success', 'Created Product Successfully!');
+        $this->productService->store($request);
+        return Redirect::route('products.index')->with('success', 'Thêm sản phẩm thành công!');
     }
 
 
@@ -77,13 +76,13 @@ class ProductController extends Controller
 
     public function update(Request $request, string $id)
     {
-        return $this->productService->update($request,$id);
-        return redirect()->route('products.index')->with('success', 'Update Product Successfully!');
+       return $this->productService->update($request, $id);
+        // return redirect()->route('products.index')->with('success', 'Cập nhật sản phẩm thành công!');
     }
 
     public function destroy($id)
     {
-        return $this->productService->destroy($id);
+        $this->productService->destroy($id);
         return redirect()->route('products.index')->with('success', 'Delete Product Successfully!');
     }
 

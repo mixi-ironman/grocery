@@ -17,13 +17,13 @@
                         @php
                             if(Auth::check())
                             {
-                                $province = $address->province;
-                                $district = $address->district;
-                                $ward = $address->ward;
-                                $name = $address->name;
-                                $email = $address->email;
-                                $phone = $address->phone;
-                                $address = $address->address_details;
+                                $province = $address?->province;
+                                $district = $address?->district;
+                                $ward = $address?->ward;
+                                $name = $address?->name;
+                                $email = $address?->email;
+                                $phone = $address?->phone;
+                                $address = $address?->address_details;
                                 $area_ship = $province .', '. $district .', '. $ward;
                             }else{
                                 $name = '';
@@ -38,17 +38,26 @@
                         @endphp
                         <div class="mb-3">
                             <label for="name" class="form-label">Họ và tên</label>
-                            <input type="text" class="form-control fullname" id="name" name="name" placeholder="full name..." value="{{ $name }}">
+                            <input type="text" class="form-control fullname {{ $errors->has('name') ? 'is-invalid' : '' }}" id="name" name="name" placeholder="full name..." value="{{ $name }}">
+                            @error('name')
+                                <p class="error alert alert-danger" style="margin-top:5px">{{ $message }}</p>
+                            @enderror
                         </div>
 
                         <div class="mb-3">
                             <label for="email" class="form-label">Email </label>
-                            <input type="email" class="form-control email" id="email" name="email" placeholder="email..." value="{{ $email }}">
+                            <input type="email" class="form-control email {{ $errors->has('email') ? 'is-invalid' : '' }}" id="email" name="email" placeholder="email..." value="{{ $email }}">
+                            @error('email')
+                                <p class="error alert alert-danger" style="margin-top:5px">{{ $message }}</p>
+                            @enderror
                         </div>
 
                         <div class="mb-3">
                             <label for="phone" class="form-label">Điện thoại</label>
-                            <input type="text" class="form-control phone" id="phone" name="phone" placeholder="phone..." value="{{ $phone }}">
+                            <input type="text" class="form-control phone {{ $errors->has('phone') ? 'is-invalid' : '' }}" id="phone" name="phone" placeholder="phone..." value="{{ $phone }}">
+                            @error('phone')
+                                <p class="error alert alert-danger" style="margin-top:5px">{{ $message }}</p>
+                            @enderror
                         </div>
 
                         {{-- <div class="mb-3">
@@ -58,12 +67,18 @@
 
                         <div class="mb-3">
                             <label for="area_ship" class="form-label">Khu vực giao hàng</label>
-                            <input type="text" class="form-control area_ship" id="area_ship" name="area_ship" placeholder="Khu vực giao hàng..." value="{{ $area_ship }}">
+                            <input type="text" class="form-control area_ship {{ $errors->has('area_ship') ? 'is-invalid' : '' }}" id="area_ship" name="area_ship" placeholder="Khu vực giao hàng..." value="{{ $area_ship }}">
+                            @error('area_ship')
+                                <p class="error alert alert-danger" style="margin-top:5px">{{ $message }}</p>
+                            @enderror
                         </div>
 
                         <div class="mb-3">
                             <label for="shipping_address" class="form-label">Địa chỉ</label>
-                            <input type="text" class="form-control shipping_address" id="shipping_address" name="shipping_address" placeholder="address..." value="{{ $address }}">
+                            <input type="text" class="form-control shipping_address {{ $errors->has('shipping_address') ? 'is-invalid' : '' }}" id="shipping_address" name="shipping_address" placeholder="address..." value="{{ $address }}">
+                            @error('shipping_address')
+                                <p class="error alert alert-danger" style="margin-top:5px">{{ $message }}</p>
+                            @enderror
                         </div>
 
                         <div class="mb-3">
@@ -138,6 +153,17 @@
         </div>
     </div>
 </div>
+@if($errors->any())
+  <script>
+      // Sử dụng JavaScript để đặt focus vào ô input đầu tiên không hợp lệ
+      document.addEventListener('DOMContentLoaded', function() {
+          let firstErrorInput = document.querySelector('.is-invalid');
+          if (firstErrorInput) {
+              firstErrorInput.focus();
+          }
+      });
+  </script>
+@endif
 
 @endsection
 

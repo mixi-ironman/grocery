@@ -26,18 +26,27 @@
           class="img-fluid" alt="Phone image">
       </div>
       <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+        @if($errors->has('login'))
+            <p class="alert alert-danger">{{ $errors->first('login') }}</p>
+        @endif
         <form action="{{ route('admin-auth') }}" method="POST">
           @csrf
           <!-- Email input -->
           <div class="form-outline mb-4">
-            <input type="text" name="username" id="username" value="{{ old('username') }}" class="form-control form-control-lg" />
             <label class="form-label" for="username">Username</label>
+            <input type="text" name="username" id="username" value="{{ old('username') }}" class="form-control form-control-lg" required/>
+            @error('username')
+              <p class="error alert alert-danger" style="margin-top:5px">{{ $message }}</p>
+            @enderror
           </div>
 
           <!-- Password input -->
           <div class="form-outline mb-4">
-            <input type="password" name="password" id="password" class="form-control form-control-lg" />
             <label class="form-label" for="password">Password</label>
+            <input type="password" name="password" id="password" class="form-control form-control-lg" required/>
+            @error('password')
+              <p class="error alert alert-danger" style="margin-top:5px">{{ $message }}</p>
+            @enderror
           </div>
 
           <div class="d-flex justify-content-around align-items-center mb-4">
@@ -47,6 +56,7 @@
               <label class="form-check-label" for="form1Example3"> Remember me </label>
             </div>
             <a href="#!">Forgot password?</a>
+            <a href="{{ route("register-page") }}">Đăng ký!</a>
           </div>
 
           <!-- Submit button -->

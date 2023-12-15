@@ -8,7 +8,7 @@
             <hr>
             <div style="font-size:20px;font-style:italic">
                 <h3>Thông tin cửa hàng</h3>
-                <strong>Cửa hàng tiện lợi HT Mini mart</strong>
+                <strong>Cửa hàng tiện lợi Mini mart</strong>
                 <p>Địa chỉ: Yên xá Tân Triều Hà Nội</p>
                 <p>SDT: 0931012321</p>
                 <p>Email: phamvannam.mixi@gmail.com</p>

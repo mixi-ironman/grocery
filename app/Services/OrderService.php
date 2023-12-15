@@ -17,6 +17,7 @@ use App\Services\ProductService;
 use App\Services\OrderDetailService;
 use App\Repositories\OrderRepository;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class OrderService
 {
@@ -33,6 +34,33 @@ class OrderService
         DB::beginTransaction();
 
         try {
+            $customMessages = [
+                'name.required' => 'Vui lòng nhập thông tin !',
+                'name.min' => 'Vui lòng nhập tối thiểu 5 ký tự !',
+                'name.max' => 'Vui lòng nhập tối đa 12 ký tự !',
+                'email.required' => 'Vui lòng nhập thông tin !',
+                'phone.required' => 'Vui lòng nhập thông tin !',
+                'area_ship.required' => 'Vui lòng nhập thông tin !',
+                'shipping_address.required' => 'Vui lòng nhập thông tin !',
+                
+            ];
+            
+            // Validate dữ liệu với các thông báo tùy chỉnh
+            $validator = Validator::make($request->all(), [
+                'name' => 'required|min:5|max:20', // kiểm tra độ dài, chỉ chấp nhận chữ cái, số, và dấu gạch dưới
+                'email' => 'required',
+                'phone' => 'required',
+                'area_ship' => 'required',
+                'shipping_address' => 'required',
+            ], $customMessages);
+    
+            // Kiểm tra nếu có lỗi
+            if ($validator->fails()) {
+                return redirect()->back()
+                    ->withErrors($validator)
+                    ->withInput();
+            }
+    
             // Tạo mã đơn hàng ngẫu nhiên (UUID)
             $orderCode = $this->generateOrderCode();
             $totalAmount = 0;

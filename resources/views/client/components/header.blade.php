@@ -7,7 +7,8 @@
                 <!-- Header-logo -->
                 <div class="header-logo">
                     <a href="{{ route('home') }}">
-                        <img src="{{ url('client') }}/assets/img/nlogo.png" alt="logo" />
+                        {{-- <img src="{{ url('client') }}/assets/img/nlogo.png" alt="logo" /> --}}
+                        <img src="{{ url('client') }}/assets/img/mixi.jpg.webp" alt="logo" />
                     </a>
                 </div>
                 <!-- End header-logo -->

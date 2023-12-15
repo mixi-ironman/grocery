@@ -14,6 +14,7 @@ use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CouponController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\AdminAuthController;
 
 
 // Route::group(['prefix' => 'categories', 'as' => 'categories.'], function () {
@@ -24,6 +25,7 @@ use App\Http\Controllers\ContactController;
 Route::prefix('dashboard')->name('dashboard.')->group(function () {
 Route::get('/', [DashboardController::class, 'index'])->name('index');
 });
+
 //Categories
 Route::prefix('categories')->name('categories.')->group(function () {
     Route::get('/', [CategoryController::class, 'index'])->name('index');

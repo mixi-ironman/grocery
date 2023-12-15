@@ -68,7 +68,6 @@ class Product extends Model
         if ($this->sale_price) {
             return $this->sale_price;
         }
-
         return $this->price;
     }
 

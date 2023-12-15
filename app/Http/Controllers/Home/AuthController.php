@@ -32,7 +32,7 @@ class AuthController extends Controller
             if ($user->status != 1) {
                 // Trường hợp tài khoản đã bị khóa
                 Auth::logout(); // Đăng xuất người dùng
-                return redirect()->route('customer.login-page')->withErrors(['message' => 'Tài khoản của bạn nằm trong danh sách khóa của shop!']);
+                return redirect()->route('customer.login-page')->withErrors(['message' => 'Tài khoản của bạn nằm trong danh sách chặn của shop!']);
             }
     
             if ($user->status == 1) {
@@ -40,7 +40,6 @@ class AuthController extends Controller
                 return redirect()->route('home');
             } 
         } else {
-            // Đăng nhập thất bại
             return redirect()->route('customer.login-page')->withErrors(['message' => 'Đăng nhập thất bại. Vui lòng kiểm tra lại thông tin đăng nhập!']);
         }
     }
@@ -48,21 +47,32 @@ class AuthController extends Controller
     //Register
     public function register(Request $request)
     {
-        // $request->validate([
-        //     'username' => 'required|min:6|max:30|alpha',
-        //     'email' => 'required|email',
-        //     'password' => 'required|min:6|max:20',
-        // ]);
 
-        // if($request->hasFile('avatar'))
-        // {
-        //     $file = $request->file('avatar');
-        //     $destination_Path = public_path('image/avatar');
-        //     $file_Name = time().'_'.$file->getClientOriginalName();
-        //     $file->move($destination_Path, $file_Name);
-        // }else{
-        //     $file_Name = "default-user.png";
-        // }
+        $customMessages = [
+            'email.required' => 'Vui lòng nhập thông tin !',
+            'username.required' => 'Vui lòng nhập thông tin !',
+            'username.alpha_dash' => 'Vui lòng nhập tên không chứa ký tự đặc biệt!',
+            'username.unique' => 'Tài khoản đã tồn tại!',
+            'password.required' => 'Vui lòng nhập thông tin !',
+            'username.min' => 'Vui lòng nhập tối thiểu 5 ký tự !',
+            'username.max' => 'Vui lòng nhập tối đa 12 ký tự !',
+            'password.min' => 'Vui lòng nhập tối thiểu 5 ký tự !',
+            'password.max' => 'Vui lòng nhập tối đa 12 ký tự !',
+        ];
+        
+        // Validate dữ liệu với các thông báo tùy chỉnh
+        $validator = Validator::make($request->all(), [
+            'username' => 'required|min:5|max:20|unique:users,email,', // kiểm tra độ dài, chỉ chấp nhận chữ cái, số, và dấu gạch dưới
+            'email' => 'required',
+            'password' => 'required|min:5|max:12',
+        ], $customMessages);
+
+        // Kiểm tra nếu có lỗi
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
 
         // Kiểm tra xem email đã tồn tại chưa
         $user = User::where('email', $request->email)->first();

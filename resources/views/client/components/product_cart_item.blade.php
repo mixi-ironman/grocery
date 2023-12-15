@@ -1,3 +1,4 @@
+@if($products->isNotEmpty())
 @foreach($products as $product)
 <div class="col-lg-{{ $itemsPerRow }} col-md-{{ $itemsPerRow }} scroll-animation">
     <div class="product-cart ">
@@ -84,8 +85,12 @@
         </div>
     </div>
 </div>
-
 @endforeach
+@else
+<div class="col-md-12">
+    <h3 style="text-align:center">Không có sản phẩm...</h3>
+</div>
+@endif
 
 {{-- @push('custom-script')
 <!-- Khai báo HTML -->

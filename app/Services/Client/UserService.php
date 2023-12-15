@@ -23,7 +23,8 @@ class UserService
 
     public function store($request)
     {
-         try {
+        // dd($request->all());
+        try {
             DB::beginTransaction();
             
             if (Auth::check()) {
@@ -51,7 +52,6 @@ class UserService
                     'address_details' => $request->address,
                     'is_default' => $request->status,
                 ]);
-    
                 DB::commit();
             } else {
                 // Người dùng chưa đăng nhập.

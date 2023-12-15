@@ -170,7 +170,6 @@ $(document).ready(function () {
         $.ajax({
             method: 'GET',
             dataType: 'JSON',
-
             data: {
                 'id': id,
                 'quantity':quantity
