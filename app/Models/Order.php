@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
 class Order extends Model
 {
     use HasFactory;
-     protected $fillable = [
+    protected $fillable = [
         'name',
         'email',
         'phone',
@@ -28,6 +28,10 @@ class Order extends Model
     public function orderDetails()
     {
         return $this->hasMany(OrderDetail::class);
+    }
+
+    public function product() {
+        return $this->belongsTo(Product::class);
     }
 
     //Mutator

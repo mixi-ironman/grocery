@@ -8,6 +8,7 @@ use App\Models\Product;
 use App\Models\Category;
 use App\Models\Brand;
 use App\Models\Slider;
+use App\Models\Coupon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Services\Client\ProductService;
@@ -24,13 +25,18 @@ class HomeController extends Controller
     public function index()
     {
         $products = $this->productService->getProducts();
-        $productNew = Product::latest()->limit(10)->get();
-        $productFeatured = Product::where('is_featured', 1)->get();
-        $productTopSale =  Product::where('is_onsale', 1)->get();
+        $productNew = Product::where('is_active', 1)->latest()->limit(10)->get();
+        $productFeatured = Product::where('is_featured', 1)->where('is_active', 1)->get();
+        $productTopSale =  Product::where('is_onsale', 1)->where('is_active', 1)->get();
         $carts = session()->get('cart',[]);
-        $categoryList = Category::where('parent_id', 0)->get();
-        $brands = Brand::where('status', 1)->get();
+        $categoryList = Category::where('parent_id', 0)->where('is_active', 1)->get();
+        $brands = Brand::where('status', 1)->where('status', 1)->get();
+        // $brands = Brand::where([
+        //     ['status', 1],
+        //     ['is_active', 1],
+        // ])->get();
         $sliders = Slider::where('is_active', 1)->get(); 
+        $coupons = Coupon::where('expery_date', '>=', now())->get(); 
 
         return view('client.layouts.pages.home',[
             'products' => $products,
@@ -40,6 +46,7 @@ class HomeController extends Controller
              'productFeatured' => $productFeatured,
              'productTopSale' => $productTopSale,
              'brands' => $brands,
+             'coupons' => $coupons,
              'sliders' => $sliders
         ]);  
     }

@@ -84,7 +84,12 @@
                     <td style="text-align: center;vertical-align:middle;">{{ $orderDetail?->order?->name }}</td>
                 </tr>
             </tbody> --}}
-            </table>
+        </table>
+        <form action="{{ route('excel-export') }}" >
+            @csrf
+            <input type="submit" value="Xuất Excel" name="export_excel" class="btn btn-success">
+            {{-- <button type="submit" class="btn btn-primary">Xuất Excel</button> --}}
+         </form>
     </div>
    
 @endsection

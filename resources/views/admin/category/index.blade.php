@@ -47,7 +47,7 @@
                                     @csrf
                                     @method('DELETE')
                                     <a class="btn btn-primary" href="{{ route('categories.edit',['id'=>$category->id]) }}" style="margin:0 5px 0 0;"><i class="fa-solid fa-pen-to-square"></i></a>
-                                    <button type="submit" class="btn btn-info" style="margin:0;"><i class="fa-solid fa-trash"></i></button>
+                                    <button onclick="return confirm('Bạn có chắc muốn xóa?')" type="submit" class="btn btn-info" style="margin:0;"><i class="fa-solid fa-trash"></i></button>
                                 </form>
                             </td>
                         </tr>

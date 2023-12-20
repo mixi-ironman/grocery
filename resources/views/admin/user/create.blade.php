@@ -4,34 +4,50 @@
     <div class="col-md-12">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title">Categories</h4>
+                <h4 class="card-title">Người dùng</h4>
             </div>
             <div class="card-body">
+               
                 <form action="{{ route('user.store') }}" method="POST">
                     @csrf
                     <div class="mb-3">
                         <label  class="form-label">Name User</label>
-                        <input type="text" class="form-control"  name="name_user" aria-describedby="emailHelp">
+                        <input type="text" class="form-control" value="{{ old('name_user') }}" name="name_user" aria-describedby="emailHelp">
+                        @error('name_user')
+                            <p class="error error text-danger" style="margin-top:5px">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <div class="mb-3">
                         <label  class="form-label">Email</label>
-                        <input type="text" class="form-control"  name="email" aria-describedby="emailHelp">
+                        <input type="text" class="form-control" value="{{ old('email') }}" name="email" aria-describedby="emailHelp">
+                        @error('email')
+                            <p class="error error text-danger" style="margin-top:5px">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <div class="mb-3">
                         <label  class="form-label">Password</label>
-                        <input type="text" class="form-control"  name="password" aria-describedby="emailHelp">
+                        <input type="password" class="form-control"  name="password" aria-describedby="emailHelp">
+                        @error('password')
+                            <p class="error error text-danger" style="margin-top:5px">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <div class="mb-3">
                         <label  class="form-label">Phone</label>
-                        <input type="text" class="form-control"  name="phone" aria-describedby="emailHelp">
+                        <input type="text" class="form-control" value="{{ old('phone') }}" name="phone" aria-describedby="emailHelp">
+                        @error('phone')
+                            <p class="error error text-danger" style="margin-top:5px">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <div class="mb-3">
                         <label  class="form-label">Address</label>
-                        <textarea class="form-control" name="address" rows="3"></textarea>
+                        <textarea class="form-control" name="address" rows="3">{{ old('address') }}</textarea>
+                        @error('address')
+                            <p class="error error text-danger" style="margin-top:5px">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <div class="mb-3">

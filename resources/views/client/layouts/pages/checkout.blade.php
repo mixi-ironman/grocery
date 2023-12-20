@@ -154,15 +154,15 @@
     </div>
 </div>
 @if($errors->any())
-  <script>
-      // Sử dụng JavaScript để đặt focus vào ô input đầu tiên không hợp lệ
-      document.addEventListener('DOMContentLoaded', function() {
-          let firstErrorInput = document.querySelector('.is-invalid');
-          if (firstErrorInput) {
-              firstErrorInput.focus();
-          }
-      });
-  </script>
+<script>
+    // Sử dụng JavaScript để đặt focus vào ô input đầu tiên không hợp lệ
+    document.addEventListener('DOMContentLoaded', function() {
+        let firstErrorInput = document.querySelector('.is-invalid');
+        if (firstErrorInput) {
+            firstErrorInput.focus();
+        }
+});
+</script>
 @endif
 
 @endsection

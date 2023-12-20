@@ -110,6 +110,15 @@ const app = {
                 autoplaySpeed: 1400,
             });
 
+            $(".discount-container").slick({
+                slidesToShow: 6,
+                slidesToScroll: 1,
+                arrows: false,
+                infinite: true,
+                autoplay: true,
+                autoplaySpeed: 1400,
+            });
+
             //slickSetOption là một phương thức trong Slick Slider để thay đổi các tùy chọn (options) của slider sau khi nó đã được khởi tạo.
             // $('.product-featured').slick('slickSetOption', 'slidesToShow', 3, true);
 

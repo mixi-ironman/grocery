@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Services\OrderDetailService;
 use App\Models\Order;
-
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class OrderDetailController extends Controller
 {
@@ -34,4 +34,11 @@ class OrderDetailController extends Controller
         // $orderDetails->detach(8);
         return view('admin.order.list-order',[ 'orderDetail' => $orderDetails]);
     }
+
+    // public function printOrder($id)
+    // {
+    //     $pdf = App::make('dompdf.wrapper');
+    //     $pdf->loadHTML('<h1>Test</h1>');
+    //     return $pdf->stream();
+    // }
 }

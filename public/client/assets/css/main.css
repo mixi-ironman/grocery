@@ -1803,6 +1803,17 @@ span {
     border-top-right-radius: 12px;
 }
 
+/* //clert coupon icon */
+
+.icon-rf-coupon{
+    display:none;
+    position:absolute; 
+    top:62%;
+    right:-20%
+}
+.shows{
+    display:block;
+}
 /* =========Toast Message ============*/
 
 /* ======= Buttons ======== */
@@ -2332,4 +2343,52 @@ span {
 
 .slider_list_banner:hover.slick-next_ {
     transform: translate(-50%, -50%);
+}
+
+/* //Coupon */
+.list-coupons{
+    margin-top: 30px;
+    /* background: linear-gradient(to right, #f29bdf, #b0facd); */
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+    padding:20px 10px;
+}
+
+.discount-container {
+    width:100%;
+    display: inline-flex !important;
+    overflow: hidden;
+    flex-wrap: nowrap;
+}
+
+.discount-item {
+    width:100%;
+    display: flex !important;
+    justify-content: space-between;
+    align-items: center;
+    margin-right:10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.discount-code {
+    display: inline-block;
+    width: 130px;
+    font-weight: bold;
+    /* display: -webkit-box; */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
+    text-overflow: ellipsis;
+}
+
+.copy-button {
+    cursor: pointer;
+    padding: 5px 10px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 3px;
 }

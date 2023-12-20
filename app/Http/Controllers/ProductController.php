@@ -45,7 +45,7 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $this->productService->store($request);
-        return Redirect::route('products.index')->with('success', 'Thêm sản phẩm thành công!');
+        return Redirect::route('products.create')->with('success', 'Thêm sản phẩm thành công!');
     }
 
 
@@ -76,14 +76,14 @@ class ProductController extends Controller
 
     public function update(Request $request, string $id)
     {
-       return $this->productService->update($request, $id);
+        return $this->productService->update($request, $id);
         // return redirect()->route('products.index')->with('success', 'Cập nhật sản phẩm thành công!');
     }
 
     public function destroy($id)
     {
         $this->productService->destroy($id);
-        return redirect()->route('products.index')->with('success', 'Delete Product Successfully!');
+        return redirect()->route('products.index')->with('success', 'Xóa thành công!');
     }
 
     public function uploadImage(Request $request)
@@ -97,13 +97,12 @@ class ProductController extends Controller
             return response()->json(['location' => asset('upload/'.$imagePath)]);
 
         }
-        return response()->json(['error' => 'Image upload failed'], 400);
+        return response()->json(['error' => 'Tải hình ảnh thất bại'], 400);
     }
 
     //upload ảnh cục bộ trên ckeditor
     public function ckeditor_image(Request $request)
     {
         return $this->productService->ckeditor_image($request);
-       
     }
 }

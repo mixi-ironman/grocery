@@ -177,35 +177,51 @@ class CartController extends Controller
                     // Lấy thời gian hiện tại
                     $currentDate = Carbon::now();
                     // So sánh ngày hết hạn với thời gian hiện tại
-                    if ($expirationDate->greaterThan($currentDate)) {
-                        $percentAmount = 0;
-                        $coupons = UserCoupon::create([
-                            'user_id' => $user->id,
-                            'coupon_id' => $coupon->id,
-                            'value' => $coupon->value
-                        ]);
+                    if ($coupon->canBeUsed()) {
+                        if ($expirationDate->greaterThan($currentDate)) {
+                            $percentAmount = 0;
+                            //Check cho chỉ sử dụng coupon 1 lần
+                            $coupons = UserCoupon::create([
+                                'user_id' => $user->id,
+                                'coupon_id' => $coupon->id,
+                                'value' => $coupon->value
+                            ]);
 
-                        if($coupon->type == 'money')
-                        {
-                            $discount =$total - $coupon->value; 
-                            $percentAmount = $coupon->value;
-                        }else if($coupon->type == 'percent'){
-                            $discount =$total - ($total * $coupon->value / 100);
-                            $percentAmount = $total * $coupon->value / 100 ;
+                            $coupon->update([
+                                'usage_count' => $coupon->usage_count + 1,
+                                // 'expiry_date' => $date_, // Giữ nguyên giá trị cũ
+                            ]);
+
+                            if($coupon->type == 'money')
+                            {
+                                $discount =$total - $coupon->value; 
+                                $percentAmount = $coupon->value;
+                            }else if($coupon->type == 'percent'){
+                                $discount =$total - ($total * $coupon->value / 100);
+                                $percentAmount = $total * $coupon->value / 100 ;
+                            }
+
+                            return response()->json([
+                                'code'=>200,
+                                'msg'=>'Áp mã thành công!',
+                                // 'coupons' => $coupons,
+                                'total' => $total,
+                                'discount' => $discount,
+                                'percentAmount' => $percentAmount,
+                                'user_id' => $user->id,
+                                'coupon_id' => $coupon->id
+                            ]);
+                        } else {
+                            return response()->json([
+                                'status' => 'outofdate',
+                                'msg'=>'Coupon đã hết hạn!',
+                            ]);
                         }
 
+                    }else {
                         return response()->json([
-                            'code'=>200,
-                            'msg'=>'Áp mã thành công!',
-                            'coupons' => $coupons,
-                            'total' => $total,
-                            'discount' => $discount,
-                            'percentAmount' => $percentAmount
-                        ]);
-                    } else {
-                        return response()->json([
-                            'status' => 'outofdate',
-                            'msg'=>'Coupon đã hết hạn!',
+                            'code'=>500,
+                            'msg' => 'Coupon đã sử dụng hết lượt!',
                         ]);
                     }
                     
@@ -218,7 +234,7 @@ class CartController extends Controller
             }else{
                 return response()->json([
                     'code'=>500,
-                    'msg'=>'Coupon đã dùng hoặc không tồn tại!',
+                    'msg'=>'Coupon đã dùng!',
                 ]);
             }
 

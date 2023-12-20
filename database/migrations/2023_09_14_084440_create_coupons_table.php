@@ -16,7 +16,9 @@ return new class extends Migration
             $table->string('name')->unique;
             $table->string('type');
             $table->double('value');
-            $table->timestamp('expery_date'); //ngày hết hạn
+            $table->integer('usage_limit')->nullable();
+            $table->integer('usage_count')->default(0);
+            $table->date('expery_date'); //ngày hết hạn
             $table->timestamps();
         });
     }

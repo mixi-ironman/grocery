@@ -62,6 +62,14 @@ class Product extends Model
         return $this->belongsToMany(Tag::class, 'product_tags', 'product_id', 'tag_id');
     }
 
+    public function orderDetails() {
+        return $this->hasMany(OrderDetail::class);
+    }
+
+    public function orders() {
+        return $this->hasMany(Order::class, 'product_id');
+    }
+
     //lấy giá ưu dãi nếu có
     public function getCartPriceAttribute()
     {

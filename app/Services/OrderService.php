@@ -36,8 +36,8 @@ class OrderService
         try {
             $customMessages = [
                 'name.required' => 'Vui lòng nhập thông tin !',
-                'name.min' => 'Vui lòng nhập tối thiểu 5 ký tự !',
-                'name.max' => 'Vui lòng nhập tối đa 12 ký tự !',
+                // 'name.min' => 'Vui lòng nhập tối thiểu 5 ký tự !',
+                // 'name.max' => 'Vui lòng nhập tối đa 12 ký tự !',
                 'email.required' => 'Vui lòng nhập thông tin !',
                 'phone.required' => 'Vui lòng nhập thông tin !',
                 'area_ship.required' => 'Vui lòng nhập thông tin !',
@@ -47,7 +47,7 @@ class OrderService
             
             // Validate dữ liệu với các thông báo tùy chỉnh
             $validator = Validator::make($request->all(), [
-                'name' => 'required|min:5|max:20', // kiểm tra độ dài, chỉ chấp nhận chữ cái, số, và dấu gạch dưới
+                'name' => 'required', // kiểm tra độ dài, chỉ chấp nhận chữ cái, số, và dấu gạch dưới
                 'email' => 'required',
                 'phone' => 'required',
                 'area_ship' => 'required',
@@ -150,7 +150,7 @@ class OrderService
                 OrderDetail::create($orderDetail);
 
                 // Cập nhật số lượng sản phẩm trong bảng products
-                $product->decrement('stock', $cart['quantity']);
+                // $product->decrement('stock', $cart['quantity']);
                 
                 if($request->total_amount)
                 {
@@ -223,12 +223,13 @@ class OrderService
         
         $newStatus = $request->status;
         try {
-            if($newStatus == "Đang xử lý"){
+            if($newStatus == "Đã giao"){
                 $orderDetails = $this->orderDetailService->getOrderDetailById($orderId);
                 foreach($orderDetails as $item)
                 {
                     $product = Product::find($item->product->id);
                     $product->product_sold += $item->quantity;
+                    $product->decrement('stock', $item->quantity);
                     $product->save();
                 }
             }

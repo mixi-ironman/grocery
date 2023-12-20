@@ -36,13 +36,19 @@
           <!-- Email input -->
           <div class="form-outline mb-4">
             <label class="form-label" for="email">Email</label>
-            <input type="text" name="email" id="email" value="{{ old('email') }}" class="form-control form-control-lg" />
+            <input type="email" name="email" id="email" value="{{ old('email') }}" class="form-control form-control-lg" />
+            @error('email')
+                <p class="error alert alert-danger" style="margin-top:5px">{{ $message }}</p>
+            @enderror
           </div>
 
           <!-- Password input -->
           <div class="form-outline mb-4">
             <label class="form-label" for="password">Mật khẩu</label>
             <input type="password" name="password" id="password" class="form-control form-control-lg" />
+            @error('password')
+                <p class="error alert alert-danger" style="margin-top:5px">{{ $message }}</p>
+            @enderror
             {{-- @if($error->has('msg'))
                 {{ $errors->first('msg') }}
             @endif --}}

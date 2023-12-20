@@ -43,7 +43,7 @@
                                     @csrf
                                     @method('DELETE')
                                     <a class="btn btn-primary" href="{{ route('product.images.edit',['id'=>$productImage->id]) }}" style="margin:0 5px 0 0;"><i class="fa-solid fa-pen-to-square"></i></a>
-                                    <button type="submit" class="btn btn-info" style="margin:0;"><i class="fa-solid fa-trash"></i></button>
+                                    <button type="submit" class="btn btn-info" style="margin:0;"><i class="fa-solid fa-trash" onclick="return confirm('Bạn có chắc muốn xóa?')"></i></button>
                                 </form>
                             </td>
                         </tr>

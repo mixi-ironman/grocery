@@ -7,6 +7,7 @@
                 <h4 class="card-title">Categories</h4>
             </div>
             <div class="card-body">
+               
                 <form action="{{ route('categories.store') }}" method="POST">
                     @csrf
                     <div class="mb-3">

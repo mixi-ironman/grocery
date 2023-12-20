@@ -14,6 +14,9 @@
                     <div class="mb-3">
                         <label  class="form-label">Name coupon</label>
                         <input type="text" class="form-control"  name="name_coupon" value="{{ $coupon->name }}" aria-describedby="emailHelp" style="text-transform: uppercase;">
+                        @error('name_coupon')
+                            <p class="error text-danger">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <div class="mb-3">
@@ -23,11 +26,26 @@
                             <option {{ $coupon->type == 'money' ? 'selected' : '' }} value="money">Money</option>
                             <option {{ $coupon->type == 'percent' ? 'selected' : '' }} value="percent">Phần trăm</option>
                         </select>
+                        @error('type')
+                            <p class="error text-danger">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <div class="mb-3">
                         <label  class="form-label">Value</label>
                         <input type="number" class="form-control" value="{{ $coupon->value }}"  name="value_coupon" aria-describedby="emailHelp">
+                        @error('value_coupon')
+                        <p class="error text-danger">{{ $message }}</p>
+                    @enderror
+                    </div>
+
+                    <div class="mb-3">
+                        <label  class="form-label">Giới hạn</label>
+                        <input type="number" class="form-control {{ $errors->has('usage_limit') ? 'is-invalid' : '' }}" value="{{ old('usage_limit') }}" name="usage_limit" >
+                        @error('usage_limit')
+                            <p class="error text-danger">{{ $message }}</p>
+                        @enderror
+                        
                     </div>
 
                     <div class="mb-3">

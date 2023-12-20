@@ -279,6 +279,17 @@
                                 <p style="font-size:20px; "><i style="color:red;cursor: pointer;" class="fa-solid fa-circle-xmark icon-close-overlay"></i></p>
                             </div>
                             <div class="card-body">
+                                @if($errors->any())
+                                <script>
+                                    // Sử dụng JavaScript để đặt focus vào ô input đầu tiên không hợp lệ
+                                    document.addEventListener('DOMContentLoaded', function() {
+                                        let firstErrorInput = document.querySelector('.is-invalid');
+                                        if (firstErrorInput) {
+                                            firstErrorInput.focus();
+                                        }
+                                    });
+                                </script>
+                                @endif
                                 {{-- {{ isset($category) ? route('categories.update', $category->id) : route('categories.store') }} --}}
                                 <form action="{{ route('customer.store') }}" method="POST">
                                     @csrf
@@ -292,27 +303,39 @@
                                             class="form-control"
                                             name="name_user"
                                             aria-describedby="emailHelp"
+                                            value = "{{ old('name_user') }}"
                                         />
+                                        @error('name_user')
+                                            <p class="error alert alert-danger" style="margin-top:5px">{{ $message }}</p>
+                                        @enderror
                                     </div>
     
                                     <div class="mb-3">
                                         <label class="form-label">Email</label>
                                         <input
-                                            type="text"
+                                            type="email"
                                             class="form-control"
                                             name="email"
                                             aria-describedby="emailHelp"
+                                            value = "{{ old('email') }}"
                                         />
+                                        @error('email')
+                                            <p class="error alert alert-danger" style="margin-top:5px">{{ $message }}</p>
+                                        @enderror
                                     </div>
     
                                     <div class="mb-3">
                                         <label class="form-label">Phone</label>
                                         <input
-                                            type="text"
+                                            type="number"
                                             class="form-control"
                                             name="phone"
                                             aria-describedby="emailHelp"
+                                            value = "{{ old('phone') }}"
                                         />
+                                        @error('phone')
+                                            <p class="error alert alert-danger" style="margin-top:5px">{{ $message }}</p>
+                                        @enderror
                                     </div>
     
                                     <div class="mb-3">
@@ -344,7 +367,10 @@
     
                                     <div class="mb-3">
                                         <label class="form-label">Số nhà / Tên đường</label>
-                                        <textarea class="form-control" name="address" rows="3"></textarea>
+                                        <textarea class="form-control" name="address" rows="3">{{ old('address') }}</textarea>
+                                        @error('address')
+                                            <p class="error alert alert-danger" style="margin-top:5px">{{ $message }}</p>
+                                        @enderror
                                     </div>
     
                                     <p>Đặt làm địa chỉ mặc định</p>
@@ -369,7 +395,10 @@
                                     </div>
     
                                     {{-- <a href="#" class="translatex " id="btn-destroy-cart" style="background-color:rgb(93,168,138,0.8);display:inline-block; padding:7px 20px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);border-top-right-radius: 12px;border-bottom-left-radius: 12px;color:black;font-weight:600;font-size:16px;position:relative; margin-top:10px"><i class="bi bi-arrow-left me-2"></i>Cập nhật</a> --}}
-                                    <button type="submit" class="translatex" style="background-color:rgb(93,168,138,0.8);display:inline-block; padding:7px 20px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);border-top-right-radius: 12px;border-bottom-left-radius: 12px;color:black;font-weight:600;font-size:16px;position:relative; margin-top:10px"><i class="bi bi-arrow-left me-2">Cập nhật</button>
+                                    <button type="submit" class="translatex" style="background-color:rgb(93,168,138,0.8);display:inline-block; padding:7px 20px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);border-top-right-radius: 12px;border-bottom-left-radius: 12px;color:black;font-weight:600;font-size:16px;position:relative; margin-top:10px">
+                                        <i class="bi bi-arrow-left me-2">
+                                        Cập nhật
+                                    </button>
                                 </form>
                             </div>
                         </div>
@@ -412,7 +441,6 @@
 @endsection
 
 @push('custom-script')
-
 <script>
     $(document).ready(function () {
         $('.select2').select2({

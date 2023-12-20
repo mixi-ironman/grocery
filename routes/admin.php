@@ -14,6 +14,7 @@ use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CouponController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\OrderExportExcellController;
 use App\Http\Controllers\AdminAuthController;
 
 
@@ -141,4 +142,5 @@ Route::prefix('contact')->name('contact.')->group(function () {
 
 });
 
-
+// Excel
+Route::get('/export-statistics', [OrderExportExcellController::class, 'exportStatistics'])->name('excel-export');

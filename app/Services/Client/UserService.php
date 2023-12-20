@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 use App\Models\Location;
 use App\Models\Address;
 use App\Repositories\Client\UserRepository;
@@ -25,6 +26,29 @@ class UserService
     {
         // dd($request->all());
         try {
+            $customMessages = [
+                'name_user.required' => 'Vui lòng nhập thông tin!',
+                'name_user.string' => 'Vui lòng nhập chuỗi ký tự!',
+                'email.required' => 'Vui lòng nhập thông tin',
+                'address.required' => 'Vui lòng nhập thông tin!',
+                'phone.required' => 'Vui lòng nhập giá trị!',
+                'phone.numeric' => 'Chỉ có thể chứa các ký tự số.',
+            ];
+            
+            // Validate dữ liệu với các thông báo tùy chỉnh
+            $validator = Validator::make($request->all(), [
+                'name_user' => 'required|string',
+                'email' => 'required',
+                'phone' => 'required|numeric',
+                'address' => 'required',
+            ], $customMessages);
+
+            // Kiểm tra nếu có lỗi
+            if ($validator->fails()) {
+                return redirect()->back()
+                    ->withErrors($validator)
+                    ->withInput();
+            }
             DB::beginTransaction();
             
             if (Auth::check()) {

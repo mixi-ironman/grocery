@@ -4,7 +4,7 @@
     <div class="col-md-12">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title">Categories</h4>
+                <h4 class="card-title">Người dùng</h4>
             </div>
             <div class="card-body">
                 <form action="{{ route('user.update',['id' => $user->id]) }}" method="POST">
@@ -13,11 +13,17 @@
                     <div class="mb-3">
                         <label  class="form-label">Name User</label>
                         <input type="text" class="form-control" value="{{ $user->name }}" name="name_user" aria-describedby="emailHelp">
+                        @error('name_user')
+                            <p class="error error text-danger" style="margin-top:5px">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <div class="mb-3">
                         <label  class="form-label">Email</label>
-                        <input type="text" class="form-control" value="{{ $user->email }}"  name="email" aria-describedby="emailHelp">
+                        <input type="email" class="form-control" value="{{ $user->email }}"  name="email" aria-describedby="emailHelp">
+                        @error('email')
+                            <p class="error error text-danger" style="margin-top:5px">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <div class="mb-3">
@@ -28,11 +34,17 @@
                     <div class="mb-3">
                         <label  class="form-label">Phone</label>
                         <input type="text" class="form-control" value="{{ $user->phone }}"  name="phone" aria-describedby="emailHelp">
+                        @error('phone')
+                            <p class="error error text-danger" style="margin-top:5px">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <div class="mb-3">
                         <label  class="form-label">Address</label>
                         <textarea class="form-control" name="address" rows="3">{{ $user->address }}</textarea>
+                        @error('address')
+                            <p class="error error text-danger" style="margin-top:5px">{{ $message }}</p>
+                        @enderror
                     </div>
             
                     <p>Active</p>

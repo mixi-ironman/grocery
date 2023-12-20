@@ -8,7 +8,7 @@
             <div class="col-md-3">
               <div class="dashboard-stat" style="background: linear-gradient(to bottom, #deb8e6, #9ce9ad);" >
                 <div class="information-left">
-                  <i class="fa-dashed fa-dumpster-fire"></i>
+                  <i class="fa-solid fa-people-carry-box"></i>
                 </div>
                 <div class="information-right">
                   <h5 style="margin:0">Tổng số sản phẩm hiện có</h5>
@@ -19,7 +19,7 @@
             <div class="col-md-3">
               <div class="dashboard-stat" style="background: linear-gradient(to left, #bbe6b8, rgb(233, 156, 210));">
                 <div class="information-left">
-                  <i class="fa-dashed fa-sack-dollar"></i>
+                  <i class="fa-solid fa-money-check-dollar"></i>
                 </div>
                 <div class="information-right">
                   <h5 style="margin:0">Tổng số doanh thu</h5>
@@ -30,7 +30,7 @@
             <div class="col-md-3">
               <div class="dashboard-stat" style="background:  linear-gradient(to bottom, #b8dce6, #9ce9ad);">
                 <div class="information-left">
-                  <i class="fa-dashed fa-cart-plus"></i>
+                  <i class="fa-solid fa-cart-plus"></i>
                 </div>
                 <div class="information-right">
                   <h5 style="margin:0">Tổng số đơn hàng mới</h5>
@@ -41,7 +41,7 @@
             <div class="col-md-3">
               <div class="dashboard-stat" style="background: linear-gradient(to left, #d7cfc1, #d5b9e9);">
                 <div class="information-left">
-                  <i class="fa-dashed fa-user"></i> 
+                  <i class="fa-solid fa-user"></i> 
                 </div>
                 <div class="information-right">
                   <h5 style="margin:0">Tổng số người dùng</h5>

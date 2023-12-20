@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use App\Repositories\UserRepository;
 use App\Models\Address;
 use App\Models\Location;
+use Illuminate\Support\Facades\Validator;
 
 
 class UserService
@@ -29,17 +30,34 @@ class UserService
             $province = $request->input('parent_id');
             $district = $request->input('district');
             $ward = $request->input('ward');
+            $customMessages = [
+                'name_user.required' => 'Vui lòng nhập thông tin!',
+                'email.required' => 'Vui lòng nhập thông tin!',
+                'address.required' => 'Vui lòng nhập thông tin!',
+                'status.required' => 'Vui lòng nhập thông tin!',
+                'email.required' => 'Vui lòng nhập thông tin!',
+                'name_user.string' => 'Vui lòng chỉ nhập chuỗi!',
+                'phone.numeric' => 'Định dạng chỉ chứa ký tự số.',
+                'phone.min' => 'Nhập tối thiểu 10 số',
+            ];
+            
+            // Validate dữ liệu với các thông báo tùy chỉnh
+            $validator = Validator::make($request->all(), [
+                'name_user' => 'required|string',
+                // 'email' => 'required|email|unique:users,email',
+                'email' => 'required',
+                'password' => 'required|min:6',
+                'phone' => 'required|numeric|min:10',
+                'address' => 'required',
+                'status' => 'required',
+            ], $customMessages);
 
-            // $validator = Validator::make($request->all(), [
-            //     'name_user' => 'required|string',
-            //     'email' => 'required|email|unique:users,email',
-            //     'password' => 'required|min:8',
-            //     'phone' => 'required',
-            //     'address' => 'required',
-            //     'status' => 'required',
-            //     'district' => 'exists:locations,id',
-            //     'ward' => 'exists:locations,id',
-            // ]);
+            // Kiểm tra nếu có lỗi
+            if ($validator->fails()) {
+                return redirect()->back()
+                    ->withErrors($validator)
+                    ->withInput();
+            }
 
             $user = $this->userRepository->create([
                 'name' => $request->input('name_user'),
@@ -76,7 +94,6 @@ class UserService
     {
         try {
             DB::beginTransaction();
-
             if ($request->ajax()) {
                 $user = $this->userRepository->update($id, [
                     'status' => $request['status'],
@@ -91,6 +108,37 @@ class UserService
                     'status' => $user->status,
                 ]);
             }
+            // $customMessages = [
+            //     'name_user.required' => 'Vui lòng nhập thông tin!',
+            //     'email.required' => 'Vui lòng nhập thông tin!',
+            //     'phone.required' => 'Vui lòng nhập thông tin!',
+            //     'password.required' => 'Vui lòng nhập thông tin!',
+            //     'address.required' => 'Vui lòng nhập thông tin!',
+            //     'status.required' => 'Vui lòng nhập thông tin!',
+            //     'email.required' => 'Vui lòng nhập thông tin!',
+            //     'name_user.string' => 'Vui lòng chỉ nhập chuỗi!',
+            //     'phone.numeric' => 'Định dạng chỉ chứa ký tự số.',
+            //     'phone.min' => 'Nhập tối thiểu 9 số',
+            //     'password.min' => 'Nhập tối thiểu 6 số',
+            // ];
+            
+            // // Validate dữ liệu với các thông báo tùy chỉnh
+            // $validator = Validator::make($request->all(), [
+            //     'name_user' => 'required|string',
+            //     // 'email' => 'required|email|unique:users,email',
+            //     'email' => 'required',
+            //     'password' => 'required|min:6',
+            //     'phone' => 'required|numeric',
+            //     'address' => 'required',
+            //     'status' => 'required',
+            // ], $customMessages);
+
+            // // Kiểm tra nếu có lỗi
+            // if ($validator->fails()) {
+            //     return redirect()->back()
+            //         ->withErrors($validator)
+            //         ->withInput();
+            // }
 
             $user = $this->userRepository->update($id, [
                 'name' => $request->input('name_user'),

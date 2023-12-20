@@ -188,6 +188,26 @@
                     </div>
                 </div>
 
+                <!-- List Coupons -->
+                <div class="container list-coupons ">
+                    <div class="row ">
+                        <!-- Brands Favorite -->
+                        <h4 class="list-brand-title">Coupons</h4>
+                    </div>
+                    <div class="discount-container row g-3">
+                        @foreach($coupons as $coupon)
+                        <div class="discount-item col-md-2">
+                            <div style="display:flex;flex-direction:column">
+                            <span class="discount-code">{{$coupon?->name}}</span>
+                            <p style="display: inline-block; color: red;" class="discount-code">
+                                Giảm: {{ ($coupon?->type == 'money') ? $coupon?->value . 'vnd' : $coupon?->value . '%' }}
+                            </p>
+                            </div>
+                            <button class="copy-button" onclick="copyToClipboard('{{$coupon->name}}')">Copy</button>
+                        </div>
+                        @endforeach
+                    </div>
+                </div>
                 <!-- List Brands -->
                 <div class="container list-brands ">
                     <div class="row ">
@@ -195,49 +215,6 @@
                         <h4 class="list-brand-title">Thương hiệu</h4>
                     </div>
                     <div class="row g-3 brand-list ">
-                        {{-- <div class="col-md-2">
-                            <div class="brand-item scroll-animation">
-                                <a href="#">
-                                    <img src="{{ url('client') }}/assets/img/brand_3.png" alt="" />
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="brand-item scroll-animation">
-                                <a href="#">
-                                    <img src="{{ url('client') }}/assets/img/brand4.png" alt="" />
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="brand-item scroll-animation">
-                                <a href="#">
-                                    <img src="{{ url('client') }}/assets/img/brand_5.png" alt="" />
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="col-md-2">
-                            <div class="brand-item scroll-animation">
-                                <a href="#">
-                                    <img src="{{ url('client') }}/assets/img/brand_3.png" alt="" />
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="brand-item scroll-animation">
-                                <a href="#">
-                                    <img src="{{ url('client') }}/assets/img/brand4.png" alt="" />
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="brand-item scroll-animation">
-                                <a href="#">
-                                    <img src="{{ url('client') }}/assets/img/brand_5.png" alt="" />
-                                </a>
-                            </div>
-                        </div> --}}
                         @foreach($brands as $brand)
                         <div class="col-md-2">
                             <div class="brand-item scroll-animation">
@@ -329,6 +306,17 @@
         <script src="{{ asset('libs/select2/js/select2.min.js') }}"></script>
 
         <script src="{{ url('client') }}/assets/js/add_cart.js"></script>
+        <script>
+            function copyToClipboard(text) {
+                var textarea = document.createElement('textarea');
+                textarea.value = text;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+                alert('Đã sao chép mã giảm giá: ' + text);
+            }
+        </script>
         @stack('custom-script')
     </body>
 </html>

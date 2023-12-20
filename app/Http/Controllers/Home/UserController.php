@@ -156,8 +156,11 @@ class UserController extends Controller
                 $orders = $this->orderDetailService->getOrderByUserId($user->id) ?? [];
             }
         } else {
+            if (Auth::check()) {
+                $user = Auth::user();
+                $orders = Order::where('status', $textStatusOrder)->where('user_id',$user->id)->get();
+            }
             // Nếu tình trạng không phải là 'Tất cả', thì tìm kiếm theo tình trạng
-            $orders = Order::where('status', $textStatusOrder)->get();
         }
     
         if(count($orders) != 0){

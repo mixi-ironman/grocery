@@ -40,7 +40,10 @@
                             <td  style="text-align:center;vertical-align:middle"><img style="height:130px !important;border-radius:5px;border:1px solid rgb(247, 181, 181);box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);" src="{{ asset('uploads/') }}/{{ $cart['image'] }}" ></td>
 
                             {{-- <td style="text-align:center;vertical-align:middle;" ><input type = "number" class="quantity" value="{{ $cart['quantity'] }}" style="width:60px;border-top-left-radius: 12px;border-bottom-right-radius: 12px;border:2px solid green;text-align:center;outline:none" min="1" max="100"></td> --}}
-                            <td style="text-align:center;vertical-align:middle;" ><input type = "number" class="quantity" value="{{ $cart['quantity'] }}" min = "1" max = "10" style="width:60px;border-top-left-radius: 12px;border-bottom-right-radius: 12px;border:2px solid green;text-align:center;outline:none"></td>
+                            <td style="text-align:center;vertical-align:middle;" >
+                                <input type = "number" id="nonNegativeNumber" class="quantity" value="{{ $cart['quantity'] }}" min = "1" max = "10" style="width:60px;border-top-left-radius: 12px;border-bottom-right-radius: 12px;border:2px solid green;text-align:center;outline:none">
+                                <span id="error" class="error"></span>
+                            </td>
 
                             {{-- <td>
                                 <div class="detail-extralink mr-15">
@@ -127,15 +130,28 @@
                                 @if(Auth::check())
                                 <tr>
                                     <td class="cart_total_label" style="width: 100%">
-                                       {{-- <h6 class="text-muted">Coupons</h6> --}}
-                                        <div class="mb-3" style="width:150px;">
+                                        {{-- <h6 class="text-muted">Coupons</h6> --}}
+                                        <p id="notification_coupon"></p>
+                                        <div class="mb-3" style="width:150px; position:relative">
                                             <label for="exampleFormControlInput1" class="form-label">Voucher</label>
-                                            <input style="width: 200px;" type="text" name="coupon_code" class="form-control" id="discount_code" placeholder="Nhập mã giảm giá">
-                                            <p style="width:300px" id="notification_coupon"></p>
+                                            <input style="width: 200px;" type="text" name="coupon_code" class="form-control apply-coupon" id="discount_code" placeholder="Nhập mã giảm giá">
+                                            <i class="fa-solid fa-circle-xmark icon-rf-coupon"></i>
                                         </div>
                                         <a href="{{route('apply-coupon')}}" id="apply_discount_btn" class="translatex hover-top"  style="background-color:rgb(93,168,138,0.8);display:inline-block; padding:5px 10px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);border-top-left-radius: 12px;border-bottom-right-radius: 12px;color:black;font-weight:600;font-size:14px;position:relative">Áp dụng mã</a>
                                     </td>
-                                   
+                                </tr>
+                                @else
+                                <tr>
+                                    <td class="cart_total_label" style="width: 100%">
+                                        {{-- <h6 class="text-muted">Coupons</h6> --}}
+                                        <div class="mb-3" style="width:150px;">
+                                            <label for="exampleFormControlInput1" class="form-label">Voucher</label>
+                                            <input style="width: 200px;" type="text" name="coupon_code" class="form-control apply-coupon" id="discount_code" placeholder="Nhập mã giảm giá">
+                                            <p style="width:300px" id="notification_coupon"></p>
+                                            {{-- <i class="fa-solid fa-circle-xmark icon-rf-coupon"></i> --}}
+                                        </div>
+                                        <a href="{{ route('customer.login-page') }}" onclick="return confirm('Bạn phải đăng nhập')" class="translatex hover-top"  style="background-color:rgb(93,168,138,0.8);display:inline-block; padding:5px 10px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);border-top-left-radius: 12px;border-bottom-right-radius: 12px;color:black;font-weight:600;font-size:14px;position:relative">Áp dụng mã</a>
+                                    </td>
                                 </tr>
                                 @endif
                             </tbody>
@@ -144,6 +160,7 @@
                     {{-- <a href="#" class="btn mb-2 w-100">Proceed To CheckOut<i class="bi bi-box-arrow-right ms-2"></i></a> --}}
                     <a href="{{ route('check-out') }}" class="translatex" id="checkout_button"  style="background-color:rgba(221, 131, 229, 0.8);display:inline-block; padding:10px 15px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);border-top-left-radius: 12px;border-bottom-right-radius: 12px;color:black;font-weight:600;font-size:16px;position:relative;">Thanh Toán</a>
                 </div>
+                {{-- <div>Ghi chú</div> --}}
             </div>
             @else 
                 <div class="row" >
@@ -269,38 +286,72 @@ $(document).ready(function () {
     function applyCoupon(even) 
     {
         even.preventDefault();
+        $('.icon-rf-coupon').addClass('shows');
         let coupon_code = $('#discount_code').val();
         let url = $('#apply_discount_btn').attr('href');
-        $.ajax({
-            method: 'POST',
-            url: url,
-            data: {
-                _token: $('meta[name="csrf-token"]').attr('content'),
-                'coupon_code' : coupon_code
-            },
-            dataType: 'json',
-            success: function (response) {
-            if (response['code'] === 200) {
-                $('#checkout_button').attr("href", "{{ route('check-out') }}?total=" + response['discount']);
+        if(coupon_code){
+            $.ajax({
+                method: 'POST',
+                url: url,
+                data: {
+                    _token: $('meta[name="csrf-token"]').attr('content'),
+                    'coupon_code' : coupon_code
+                },
+                dataType: 'json',
+                success: function (response) {
+                if (response['code'] === 200) {
+                    $('#checkout_button').attr("href", "{{ route('check-out') }}?total=" + response['discount']);
 
-                $('#notification_coupon').html('<p style="color: green;">' + response['msg'] + '</p>');
-                $('#discount_cart').html('<p style="color: rgb(13,110,253);">-' + number_format(response['percentAmount']) + '</p>');
-                $('#price-to-pay').html('<p style="color: rgb(13,110,253);">' + number_format(response['discount']) + '</p>');
-            } else if (response['code'] === 500) {
-                $('#notification_coupon').html('<p style="color: red;">' + response['msg'] + '</p>');
-            } else if(response['status'] == 'outofdate'){
-                $('#notification_coupon').html('<p style="color: red;">' + response['msg'] + '</p>');
-            }
-            },
-            error: function (error) {
-                console.error('Đã có lỗi xảy ra ', error);
-                window.location.replace('{{ route('home') }}');
-            }
-        });
+                    $('#notification_coupon').html('<p style="color: green;">' + response['msg'] + '</p>');
+                    $('#discount_cart').html('<p style="color: rgb(13,110,253);">-' + number_format(response['percentAmount']) + '</p>');
+                    $('#price-to-pay').html('<p style="color: rgb(13,110,253);">' + number_format(response['discount']) + '</p>');
+                } else if (response['code'] === 500) {
+                    $('#notification_coupon').html('<p style="color: red;">' + response['msg'] + '</p>');
+                } else if(response['status'] == 'outofdate'){
+                    $('#notification_coupon').html('<p style="color: red;">' + response['msg'] + '</p>');
+                }
+                },
+                error: function (error) {
+                    console.error('Đã có lỗi xảy ra ', error);
+                    window.location.replace('{{ route('home') }}');
+                }
+            });
+        }else{
+            $('#notification_coupon').html('<p style="color: red;">Bạn chưa nhập mã!</p>');
+        }
     }
 
     $(document).on('click', '#apply_discount_btn', applyCoupon);
 
+    document.getElementById('nonNegativeNumber').addEventListener('input', function() {
+      var inputElement = this;
+      var inputValue = inputElement.value;
+
+      // Kiểm tra xem giá trị nhập vào có phải là số không âm hay không
+      if (!isNonNegativeNumber(inputValue)) {
+        document.getElementById('error').textContent = 'Vui lòng nhập số không âm.';
+        inputElement.value = ''; // Xóa giá trị nhập nếu là số âm
+      } else {
+        document.getElementById('error').textContent = '';
+      }
+    });
+
+    // Hàm kiểm tra xem giá trị có phải là số không âm hay không
+    function isNonNegativeNumber(value) {
+      var number = parseFloat(value);
+      return !isNaN(number) && number >= 0;
+    }
+
+    //sử lý coupon nhập nhiều lần
+    function checkUseCoupon(even) 
+    {
+        even.preventDefault();
+        // let id = $(this).data('id');
+        // let urlUpdateCart = $('.update_cart_url').data('url');
+        // let quantity = $(this).parents('tr').find('input.quantity').val();
+        location.reload();
+    }
+    $(document).on('click', '.icon-rf-coupon', checkUseCoupon);
 });
 
 </script>

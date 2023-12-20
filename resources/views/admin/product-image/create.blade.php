@@ -7,6 +7,7 @@
                 <h4 class="card-title">Product Images</h4>
             </div>
             <div class="card-body">
+                
                 <form action="{{ route('product.images.store') }}" enctype="multipart/form-data" method="POST">
                     @csrf
                     

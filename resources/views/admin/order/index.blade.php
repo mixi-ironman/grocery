@@ -16,6 +16,7 @@
                         <th scope="col"style="text-align: center;vertical-align:middle;">Địa chỉ</th>
                         <th scope="col"style="text-align: center;vertical-align:middle;">Tổng tiền</th></th>
                         <th scope="col"style="text-align: center;vertical-align:middle;">Trạng thái</th></th>
+                        <th scope="col"style="text-align: center;vertical-align:middle;">Phương thức</th></th>
                         <th scope="col"style="text-align: center;vertical-align:middle;">Ghi chú</th>
                         <th scope="col"style="text-align: center;vertical-align:middle;">Ngày đặt</th>
                         <th scope="col"style="text-align: center;vertical-align:middle;">Action</th>
@@ -47,6 +48,14 @@
                                     </ul>
                                 </span>
                             </td>
+                            <td style="text-align: center; vertical-align: middle;">
+                                @if($order && $order->payment_method == 'cash')
+                                    Tiền mặt
+                                @elseif($order && $order->payment_method == 'online')
+                                    Online
+                                @endif
+                            </td>
+                            {{-- <td style="text-align: center;vertical-align:middle;">{{ $order?->payment_method }}</td> --}}
                             <td style="text-align: center;vertical-align:middle;">{{ $order?->order_note }}</td>
                             <td style="text-align: center;vertical-align:middle;">{{ $order->created_at->format('d/m/Y h:i:s') }}</td>
                            

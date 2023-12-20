@@ -7,6 +7,7 @@
                 <h4 class="card-title">Sliders</h4>
             </div>
             <div class="card-body">
+               
                 <form action="{{ route('sliders.store') }}" enctype="multipart/form-data" method="POST">
                     @csrf
                     <div class="mb-3">

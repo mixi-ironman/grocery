@@ -89,22 +89,22 @@ use App\Http\Controllers\Auth\ForgotPasswordController;
     Route::get('vnpay',[PaymentController::class,'vnpay'])->name('vnpay');
     Route::get('vnpay-return',[PaymentController::class,'vnpayReturn'])->name('vnpay-return');
 
-//customer
-Route::prefix('customer')->name('customer.')->group(function () {
-    Route::get('/profile',[UserController::class,'index'])->name('profile');
-    Route::get('/view-order/{id}',[UserController::class,'viewOrder'])->name('view-order');
-    Route::post('/profile_',[UserController::class,'store'])->name('store');
-    Route::put('/update/{id}',[UserController::class,'update'])->name('update');
-    Route::delete('/destroy/{id}', [UserController::class, 'destroy'])->name('destroy');
-    Route::put('/address-default', [UserController::class, 'setDefaultAddress'])->name('address-default');
-    Route::get('/orders/search',[UserController::class,'orderSearch'])->name('order-search');
+    //customer
+    Route::prefix('customer')->name('customer.')->group(function () {
+        Route::get('/profile',[UserController::class,'index'])->name('profile');
+        Route::get('/view-order/{id}',[UserController::class,'viewOrder'])->name('view-order');
+        Route::post('/profile_',[UserController::class,'store'])->name('store');
+        Route::put('/update/{id}',[UserController::class,'update'])->name('update');
+        Route::delete('/destroy/{id}', [UserController::class, 'destroy'])->name('destroy');
+        Route::put('/address-default', [UserController::class, 'setDefaultAddress'])->name('address-default');
+        Route::get('/orders/search',[UserController::class,'orderSearch'])->name('order-search');
 
-});
+    });
 
-//Order
-Route::prefix('contact')->name('contact.')->group(function () {
-    Route::get('/lien-he', [ContactController::class, 'index'])->name('index');
-    Route::get('/about-us', [ContactController::class, 'aboutUs'])->name('about-us');
-    Route::get('/lien-he', [ContactController::class, 'showForm'])->name('show-form');
-    Route::post('/lien-he', [ContactController::class, 'submitForm'])->name('store');
-});
+    //Order
+    Route::prefix('contact')->name('contact.')->group(function () {
+        Route::get('/lien-he', [ContactController::class, 'index'])->name('index');
+        Route::get('/about-us', [ContactController::class, 'aboutUs'])->name('about-us');
+        Route::get('/lien-he', [ContactController::class, 'showForm'])->name('show-form');
+        Route::post('/lien-he', [ContactController::class, 'submitForm'])->name('store');
+    });

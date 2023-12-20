@@ -41,15 +41,19 @@ class ProductService
     {
         try {
             DB::beginTransaction();
+            // dd($request->all());
             // Tùy chỉnh các thông báo lỗi
             $customMessages = [
                 'name_product.required' => 'Vui lòng nhập tên sản phẩm.',
+                'name_product.unique' => 'Sản phẩm đã tồn tại!',
+                'name_product.min' => 'Nhập tối thiểu 10 ký tự!',
                 // 'name_product.regex' => 'Họ và tên không được chứa dấu cách và chỉ chấp nhận chữ cái.',
-                'brand.required' => 'Vui lòng chọn một thương hiệu từ trường chọn.',
                 'parent_id.required' => 'Vui lòng chọn một category cha từ trường chọn.',
                 'category_id.required' => 'Vui lòng chọn một category con từ trường chọn.',
+                // 'brand.required' => 'Vui lòng chọn ',
                 'description.required' => 'Vui lòng nhập nội dung mô tả',
                 'content.required' => 'Vui lòng nhập nội dung mô tả sản phẩm',
+                'content.min' => 'Chỉ được nhập tối đa 300 ký tự',
                 'price.required' => 'Vui lòng nhập giá bán',
                 'old_price.required' => 'Vui lòng nhập giá niêm yết',
                 'stock.required' => 'Vui lòng nhập số lượng sản phẩm',
@@ -60,12 +64,13 @@ class ProductService
             
             // Validate dữ liệu với các thông báo tùy chỉnh
             $validator = Validator::make($request->all(), [
-                'name_product' => 'required',
-                'brand' => 'required',
+                // required|unique:products,name_product
+                'name_product' => 'required|min:10|unique:products,name',
                 'parent_id' => 'required',
+                // 'brand' => 'required',
                 'category_id' => 'required',
                 'description' => 'required',
-                'content' => 'required',
+                'content' => 'required|min:300',
                 'price' => 'required|numeric|min:0',
                 'old_price' => 'required|numeric|min:0',
                 'stock' => 'required|numeric|min:0',

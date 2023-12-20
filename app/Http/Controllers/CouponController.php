@@ -34,8 +34,8 @@ class CouponController extends Controller
      */
     public function store(Request $request)
     {
-        $this->couponService->store($request);
-        return redirect()->route('coupons.index')->with('success', 'Created Coupon Successfully!'); 
+        return $this->couponService->store($request);
+        return redirect()->route('coupons.create')->with('success', 'Tạo thành công!'); 
     }
 
     /**
@@ -60,7 +60,8 @@ class CouponController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $this->couponService->update($request, $id);
+        return redirect()->route('coupons.index')->with('success', 'Cập nhật thành công!'); 
     }
 
     /**

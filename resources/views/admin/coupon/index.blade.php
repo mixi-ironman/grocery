@@ -14,8 +14,10 @@
                         <th scope="col"style="text-align: center;vertical-align:middle;">#</th>
                         <th scope="col"style="text-align: center;vertical-align:middle;">Name</th>
                         <th scope="col"style="text-align: center;vertical-align:middle;">Type</th>
-                        <th scope="col"style="text-align: center;vertical-align:middle;">value</th>
-                        <th scope="col"style="text-align: center;vertical-align:middle;">Expery Date</th>
+                        <th scope="col"style="text-align: center;vertical-align:middle;">Value</th>
+                        <th scope="col"style="text-align: center;vertical-align:middle;">Giới hạn</th>
+                        <th scope="col"style="text-align: center;vertical-align:middle;">Lượt dùng</th>
+                        <th scope="col"style="text-align: center;vertical-align:middle;">Ngày hết hạn</th>
                         <td style="text-align: center;vertical-align:middle;">Action</td>
                     </tr>
                     </thead>
@@ -33,15 +35,16 @@
                             <td style="text-align: center;vertical-align:middle;max-width:200px;white-space: wrap;overflow: hidden; text-overflow: ellipsis;">{{ $coupon->value }}%</td>
                             @endif
                             {{-- ->format('d/m/Y h:i:s') --}}
-                            <td style="text-align: center;vertical-align:middle;max-width:200px;white-space: wrap;overflow: hidden; text-overflow: ellipsis;">{{  $coupon->expery_date }}</td>
                             {{-- @endif --}}
-
+                            <td style="text-align: center;vertical-align:middle;max-width:200px;white-space: wrap;overflow: hidden; text-overflow: ellipsis;">{{ $coupon->usage_limit }}</td>
+                            <td style="text-align: center;vertical-align:middle;max-width:200px;white-space: wrap;overflow: hidden; text-overflow: ellipsis;">{{ $coupon->usage_count }}</td>
+                            <td style="text-align: center;vertical-align:middle;max-width:200px;white-space: wrap;overflow: hidden; text-overflow: ellipsis;">{{  $coupon->expery_date }}</td>
                             <td style="text-align:center;vertical-align:middle" >
                                 {{-- <form action="{{ route('coupons.destroy',['id'=>$coupon->id]) }}" method="post" style="display:block;padding:10px">
                                     @csrf
                                     @method('DELETE') --}}
                                     <a class="btn btn-primary" href="{{ route('coupons.edit',['id'=>$coupon->id]) }}" style="margin:0 5px 0 0;"><i class="fa-solid fa-pen-to-square"></i></a>
-                                    <a class="btn btn-primary delete-coupon" href="{{ route('coupons.destroy',['id'=>$coupon->id]) }}" style="margin:0 5px 0 0;"><i class="fa-solid fa-trash"></i></a>
+                                    <a class="btn btn-primary delete-coupon" href="{{ route('coupons.destroy',['id'=>$coupon->id]) }}" style="margin:0 5px 0 0;" onclick="return confirm('Bạn có chắc muốn xóa?')"><i class="fa-solid fa-trash"></i></a>
                                     {{-- <button type="submit" class="btn btn-info" style="margin:0;"><i class="fa-solid fa-trash"></i></button> --}}
                                     
                                 {{-- </form> --}}

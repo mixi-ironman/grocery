@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 use App\Models\User;
 
 class AuthController extends Controller
@@ -24,6 +25,24 @@ class AuthController extends Controller
     //Login
     public function login(Request $request)
     {
+        $customMessages = [
+            'email.required' => 'Vui lòng nhập thông tin !',
+            'password.required' => 'Vui lòng nhập thông tin !',
+        ];
+        
+        // Validate dữ liệu với các thông báo tùy chỉnh
+        $validator = Validator::make($request->all(), [
+            'email' => 'required',
+            'password' => 'required',
+        ], $customMessages);
+
+        // Kiểm tra nếu có lỗi
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
         // Kiểm tra dữ liệu đầu vào
         $credentials = $request->only('email', 'password');
         // Thử đăng nhập
@@ -52,7 +71,7 @@ class AuthController extends Controller
             'email.required' => 'Vui lòng nhập thông tin !',
             'username.required' => 'Vui lòng nhập thông tin !',
             'username.alpha_dash' => 'Vui lòng nhập tên không chứa ký tự đặc biệt!',
-            'username.unique' => 'Tài khoản đã tồn tại!',
+            'email.unique' => 'Email đã tồn tại!',
             'password.required' => 'Vui lòng nhập thông tin !',
             'username.min' => 'Vui lòng nhập tối thiểu 5 ký tự !',
             'username.max' => 'Vui lòng nhập tối đa 12 ký tự !',
@@ -62,8 +81,8 @@ class AuthController extends Controller
         
         // Validate dữ liệu với các thông báo tùy chỉnh
         $validator = Validator::make($request->all(), [
-            'username' => 'required|min:5|max:20|unique:users,email,', // kiểm tra độ dài, chỉ chấp nhận chữ cái, số, và dấu gạch dưới
-            'email' => 'required',
+            'username' => 'required|min:5|max:20', 
+            'email' => 'required|unique:users,email',
             'password' => 'required|min:5|max:12',
         ], $customMessages);
 
@@ -82,6 +101,7 @@ class AuthController extends Controller
                 'name' => $request->username,
                 'email' => $request->email,
                 'password' => bcrypt($request->password),
+                'remember_token' => Str::random(60),
             ]);
             return redirect()->route('customer.login-page')->with('msg', 'Bạn đã tạo tài khoản thành công');
         } else {
@@ -99,3 +119,17 @@ class AuthController extends Controller
     }
 
 }
+
+// INSERT INTO locations (name, parent_id, type)
+// VALUES
+// ('Phường Hạ Đình', 10, 3),
+// ('Phường Kim Giang', 10, 3),
+// ('Phường Khương Đình', 10, 3),
+// ('Phường Khương Mai', 10, 3),
+// ('Phường Khương Trung', 10, 3),
+// ('Phường Nhân Chính', 10, 3),
+// ('Phường Phương Liệt', 10, 3),
+// ('Phường Thanh Xuân Bắc', 10, 3),
+// ('Phường Thanh Xuân Nam', 10, 3),
+// ('Phường Thanh Xuân Trung', 10, 3),
+// ('Phường Thượng Đình', 10, 3);

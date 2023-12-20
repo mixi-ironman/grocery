@@ -7,13 +7,14 @@
                 <h4 class="card-title">Products</h4>
             </div>
             <div class="card-body">
+                
                 <form action="{{ route('products.store') }}" enctype="multipart/form-data" method="POST">
                     @csrf
                     <div class="mb-3">
                         <label  class="form-label">Name Product</label>
                         <input type="text" class="form-control" value="{{ old('name_product') }}" name="name_product" aria-describedby="emailHelp">
                         @error('name_product')
-                            <p class="error">{{ $message }}</p>
+                            <p class="error text-danger">{{ $message }}</p>
                         @enderror
                     </div>
 
@@ -21,40 +22,43 @@
                     <div class="mb-3">
                         <label for="brand" class="form-label">Thương hiệu</label>
                         <select class="form-select select2" id="brand" name="brand" aria-label="Default select example">
-                            <option value="0">---Chọn---</option>
+                            <option value="">---Chọn---</option>
                             @foreach($brands as $brand)
                             <option value="{{ $brand->id }}">{{ $brand->name }}</option>
                             @endforeach
                         </select>
-                        {{-- @error('name_product')
-                            <p class="error">{{ $message }}</p>
-                        @enderror --}}
+                        @error('brand')
+                            <p class="error text-danger">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     {{-- parent category --}}
                     <div class="mb-3">
                         <label for="parent_category_id" class="form-label">Parent Category</label>
                         <select class="form-select select2" id="parent_id" name="parent_id" aria-label="Default select example">
-                            <option value="0">---Chọn---</option>
+                            <option value="">---Chọn---</option>
                             @foreach($parentCategories as $category)
                             <option value="{{ $category->id }}">{{ $category->name }}</option>
                             @endforeach
                         </select>
+                        @error('parent_id')
+                            <p class="error text-danger">{{ $message }}</p>
+                        @enderror
 
-                        @if($errors->has('parent_id'))
+                        {{-- @if($errors->has('parent_id'))
                             {{ $errors->first('parent_id') }}
-                        @endif
+                        @endif --}}
                     </div>
 
                     {{-- category --}}
                     <div class="mb-3">
                         <label for="category" class="form-label">Category</label>
                         <select class="form-select select2" id="category" name="category_id" aria-label="Default select example">
-                            <option value="0">----------</option>
+                            <option value="">----------</option>
                         </select>
-                        @if($errors->has('parent_id'))
-                            {{ $errors->first('parent_id') }}
-                        @endif
+                        @error('category_id')
+                            <p class="error text-danger">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <div class="mb-3">
@@ -62,36 +66,57 @@
                         <select class="select2 form-select tag-select" id="tags" name="tags[]" multiple>
                             <option value="0">---Chọn---</option>
                         </select>
+                        {{-- @error('tags')
+                            <p class="error text-danger">{{ $message }}</p>
+                        @enderror --}}
                     </div>
 
                     <div class="mb-3">
                         <label  class="form-label">Mô tả</label>
                         <textarea class="form-control" name="description" rows="3">{{ old('description') }}</textarea>
+                        @error('description')
+                            <p class="error text-danger">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <div class="mb-3">
                         <label  class="form-label">Mô tả chi tiết</label>
                         <textarea name="content" id="content" rows="10" cols="80">{{ old('content') }}</textarea>
+                        @error('content')
+                            <p class="error text-danger">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <div class="mb-3">
                         <label  class="form-label">Giá</label>
                         <input type="text" class="form-control" value="{{ old('price') }}" name="price" aria-describedby="emailHelp">
+                        @error('price')
+                            <p class="error text-danger">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <div class="mb-3">
                         <label  class="form-label">Old Price</label>
                         <input type="text" class="form-control" value="{{ old('old_price') }}" name="old_price" aria-describedby="emailHelp">
+                        @error('old_price')
+                            <p class="error text-danger">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <div class="mb-3">
                         <label  class="form-label">Số lượng</label>
                         <input type="number" class="form-control" value="{{ old('stock') }}" name="stock" aria-describedby="emailHelp">
+                        @error('stock')
+                            <p class="error text-danger">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <div class="mb-3">
                         <label for="image"  class="form-label">Ảnh</label>
-                        <input type="file" class="form-control" id="image" name="image" aria-describedby="emailHelp">
+                        <input  type="file" class="form-control" id="image" name="image" aria-describedby="emailHelp">
+                        @error('image')
+                            <p class="error text-danger">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <p>Active</p>
