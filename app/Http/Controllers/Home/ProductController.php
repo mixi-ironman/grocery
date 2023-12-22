@@ -218,4 +218,71 @@ class ProductController extends Controller
         $categoryList = Category::where('parent_id', 0)->get();
         return view('client.layouts.pages.view-category-product',['carts' => $carts,'categoryList'=>$categoryList,'products'=>$products]);
     }
+
+    //check số lượng trong giỏ hàng
+    public function checkQuantity(Request $request)
+    {
+        $productId = $request->input('productId');
+        $newQuantity = $request->input('quantity');
+
+        $product = Product::find($productId);
+        // Kiểm tra số lượng tồn kho
+        $cart = $request->session()->get('cart');
+        if ($newQuantity > $product->stock) {
+
+            // Kiểm tra xem sản phẩm có trong giỏ hàng hay không
+            if (array_key_exists($productId, $cart)) {
+                // Sản phẩm đã có trong giỏ hàng, cập nhật số lượng
+                $cart[$productId]['quantity'] = $product->stock;
+
+                // Cập nhật giỏ hàng trong session
+                $request->session()->put('cart', $cart);
+                $cartComponent = view('client.components.cart_component',['carts' => $cart])->render();
+                $cartList = view('client.components.cart_list', ['carts' => $cart])->render();
+                return response()->json([
+                    'newQuantity' => $product->stock,
+                    'message' => 'Số lượng đã được cập nhật.' . $product->stock . '-' . $product->id,
+                    'cart_component' => $cartComponent,
+                    'cartList' => $cartList
+                ]);
+            } else {
+                // Sản phẩm chưa có trong giỏ hàng, không cần thực hiện gì cả
+                return response()->json([
+                    'newQuantity' => $product->stock,
+                    'message' => 'Số lượng đã được cập nhật.' . $product->stock . '-' . $product->id
+                ]);
+            }
+            // Nếu số lượng mới lớn hơn tồn kho, cập nhật thành tồn kho hiện tại
+            // return response()->json([
+            //     'newQuantity' => $product->stock,
+            //     'message' => 'Số lượng đã được cập nhật.'.$product->stock .'-'.$product->id
+            // ]);
+        } else {
+            if (array_key_exists($productId, $cart)) {
+                // Sản phẩm đã có trong giỏ hàng, cập nhật số lượng
+                $cart[$productId]['quantity'] = $newQuantity;
+
+                // Cập nhật giỏ hàng trong session
+                $request->session()->put('cart', $cart);
+                $cartComponent = view('client.components.cart_component',['carts' => $cart])->render();
+                $cartList = view('client.components.cart_list', ['carts' => $cart])->render();
+                return response()->json([
+                    'newQuantity' => $newQuantity,
+                    'message' => 'Số lượng đã được cập nhật.' . $product->stock . '-' . $product->id,
+                    'cart_component' => $cartComponent,
+                    'cartList' => $cartList
+                ]);
+            } else {
+                // Sản phẩm chưa có trong giỏ hàng, không cần thực hiện gì cả
+                return response()->json([
+                    'newQuantity' => $product->stock,
+                    'message' => 'Số lượng đã được cập nhật.' . $product->stock . '-' . $product->id
+                ]);
+            }
+            return response()->json([
+                'newQuantity' => $newQuantity,
+                'message' => 'Số lượng'
+            ]);
+        }
+    }
 }

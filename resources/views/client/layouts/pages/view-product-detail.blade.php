@@ -100,7 +100,7 @@
                     
                     <div class="product-availability">
                         <p class="availability-title">Tình trạng :</p>
-                        <p class="in-stock" id="product-stock" data-quantity="{{ $product->stock }}">{{ $product->stock }} in stock</p>
+                        <p class="in-stock" id="product-stock" data-quantity="{{ $product->stock }}">{{ $product->stock }} sản phẩm có sẵn</p>
                     </div>
                     @if($product->price != 0)
                     <div class="add-to-cart">
@@ -412,8 +412,7 @@ const app_ = {
 
         plusBtn.on('click', function () {
             let quantity = parseInt(quantityInput_.val());
-            // console.log(quantity)
-            if (quantity < 10 || quantity < 0) {
+            // if (quantity < 10 || quantity < 0) {
                 quantity += 1;
                 quantityInput_.val(quantity);
                 if (quantity > stock) {
@@ -421,7 +420,7 @@ const app_ = {
                 } else {
                     addCartBtn.prop('disabled', false);
                 }
-            }
+            // }
 
         });
 

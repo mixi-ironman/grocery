@@ -78,8 +78,11 @@ class PaymentController extends Controller
             {
                 //gửi mail
                 Mail::to($order->email)
-                ->send(new OrderSuccessMail());
+                    ->send(new OrderSuccessMail($order));
                 }
+
+                // Mail::to($order->email)
+                // ->queue(new OrderSuccessMail($order));
             // dd($request->all());
             }
 

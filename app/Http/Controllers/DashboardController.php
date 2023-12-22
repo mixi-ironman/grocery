@@ -23,27 +23,6 @@ class DashboardController extends Controller
                             ->select(DB::raw('MONTH(order_details.created_at) as month'), DB::raw('SUM(order_details.quantity) as total'))
                             ->groupBy('month')
                             ->get();
-                  
-        // $productsSoldByMonth = OrderDetail::select(DB::raw('MONTH(created_at) as month'), DB::raw('sum(quantity) as total'))
-        //                   ->groupBy('month')
-        //                   ->get();
-
-        // $productsSoldByDay = Order::select(DB::raw('DATE(created_at) as date'), DB::raw('count(*) as total'))
-        //                 ->groupBy('date')
-        //                 ->get();
-        
-        // $productsSoldByDay = OrderDetail::select(DB::raw('DATE(created_at) as date'), DB::raw('sum(quantity) as total'))
-        // ->groupBy('date')
-        // ->get();
-
-        // $revenueByDay = Order::select(DB::raw('DATE(created_at) as date'), DB::raw('sum(total_amount) as total'))
-        //              ->groupBy('date')
-        //              ->get();
-
-        // $revenueByMonth = Order::select(DB::raw('MONTH(created_at) as month'), DB::raw('sum(total_amount) as total'))
-        //                ->groupBy('month')
-        //                ->get();
-        //Doanh thu theo ngày
 
         $revenueByDay = Order::where('status', 'Đã giao')
             ->select(DB::raw('DATE(created_at) as date'), DB::raw('SUM(total_amount) as total'))

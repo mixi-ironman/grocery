@@ -8,5 +8,6 @@
 </head>
 <body>
     <h1>Thanh toán này</h1>
+    <p>{{ $order->name }}</p>
 </body>
 </html>

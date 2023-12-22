@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Tag;
 use App\Services\TagService;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
 
 class TagController extends Controller
 {
@@ -85,17 +87,44 @@ class TagController extends Controller
 
     public function edit(string $id)
     {
-        //
+        $tag = Tag::findOrFail($id);
+        // dd($product);
+        return view('admin.tag.edit',[
+            'tag' => $tag,
+        ]);
     }
 
     public function update(Request $request, string $id)
     {
-        //
+        try {
+            DB::beginTransaction();
+
+            Tag::where('id', $id)->update(['name' => $request->tag_name,]);
+
+            DB::commit();
+            return redirect()->route('tags.list-tag')->with('success', 'Cập nhật thành công!');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return Redirect::back()->withErrors(['update' => 'Something Wrong!'])->withInput();
+        }
     }
 
     public function destroy(string $id)
     {
-        //
+        $tag = Tag::find($id);
+    
+        if ($tag) {
+            $tag->delete();
+            return redirect()->route('tags.list-tag')->with('success', 'Xóa thành công!');
+        } else {
+            return "Không tìm thấy bản ghi để xóa.";
+        }
+    }
+
+    public function listTag(Request $request)
+    {
+        $tags = Tag::all();
+        return view('admin.tag.index',['tags' => $tags]);
     }
 }
 

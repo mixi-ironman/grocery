@@ -42,7 +42,6 @@
                                                 class="cart-product-quantity-input"
                                                 value="1"
                                                 min="0"
-                                                max="10"
                                                 inputmode="numeric"
                                                 onchange="()=>{
                                                     saveInputValue(this)

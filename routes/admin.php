@@ -95,11 +95,14 @@ Route::prefix('product')->name('product.')->group(function () {
 //Tag
 Route::group(['prefix' => 'tags', 'as' => 'tags.'], function () {
     Route::get('/', [TagController::class, 'index'])->name('index');
+    Route::get('/list-tag', [TagController::class, 'listTag'])->name('list-tag');
     Route::get('/create', [TagController::class, 'create'])->name('create');
     Route::get('/{id}', [TagController::class, 'show'])->name('show');
-    Route::get('/update/{id}', [TagController::class, 'edit'])->name('edit');
     Route::post('/', [TagController::class, 'store'])->name('store');
+    Route::get('/update/{id}', [TagController::class, 'edit'])->name('edit');
     Route::put('/{id}', [TagController::class, 'update'])->name('update');
+    Route::delete('/destroy/{id}', [TagController::class, 'destroy'])->name('destroy');
+
     // Route::post('/create-tag', [TagController::class, 'createTag'])->name('create-tag');
 });
 

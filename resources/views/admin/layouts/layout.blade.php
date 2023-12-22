@@ -314,6 +314,7 @@
                 $('#myTable_Coupon').DataTable();
                 $('#myTable_Order').DataTable();
                 $('#myTable_Contact').DataTable();
+                $('#myTable_Tag').DataTable();
             })
         </script>
 

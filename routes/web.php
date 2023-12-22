@@ -51,6 +51,7 @@ use App\Http\Controllers\Auth\ForgotPasswordController;
     Route::get('/autocomplete-ajax',[HomeController::class,'autocompleteAjax'])->name('autocomplete-ajax');
     Route::get('/category-product',[HomeController::class,'viewCategory'])->name('viewCategory');
     Route::get('/thank-you',[HomeController::class,'pageThankYou'])->name('thanh-you');
+
     //Product
     Route::prefix('product')->group(function (){
         Route::get('/{id}-{slug}.html',[ProductController::class,'index'])->name('view-product');
@@ -60,6 +61,7 @@ use App\Http\Controllers\Auth\ForgotPasswordController;
         Route::get('/tags/{product_tag}',[ProductController::class,'tag'])->name('product-tags');
         Route::get('/filter-price', [ProductController::class, 'filterByPrice'])->name('filter-price');
         Route::get('/products/{brand}', [ProductController::class, 'filterByBrand'])->name('products.filterByBrand');
+        Route::post('/check-quantity}', [ProductController::class, 'checkQuantity'])->name('products.check-quantity');
     });
 
     //Category

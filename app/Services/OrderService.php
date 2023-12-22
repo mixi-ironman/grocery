@@ -18,7 +18,6 @@ use App\Services\OrderDetailService;
 use App\Repositories\OrderRepository;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
-
 class OrderService
 {
 
@@ -88,15 +87,15 @@ class OrderService
 
             foreach ($carts as $id => $cart) {        
                 $product = Product::find($id);  
-                if ($cart['quantity'] > 10) {
-                    return back()->with('fail','Một sản phẩm bạn chỉ mua tối đa được 10 sản phẩm');
-                    // return response()->json([
-                    //     'status' => 'error',
-                    //     'code' => 400,
-                    //     'product_id' => $id,
-                    //     'msg' => 'Một sản phẩm bạn chỉ mua tối đa 10 sản phẩm ^.^',
-                    // ]);
-                }
+                // if ($cart['quantity'] > 10) {
+                //     return back()->with('fail','Một sản phẩm bạn chỉ mua tối đa được 10 sản phẩm');
+                //     // return response()->json([
+                //     //     'status' => 'error',
+                //     //     'code' => 400,
+                //     //     'product_id' => $id,
+                //     //     'msg' => 'Một sản phẩm bạn chỉ mua tối đa 10 sản phẩm ^.^',
+                //     // ]);
+                // }
 
                 if (!$product || $cart['quantity'] > $product->stock) {
                     // Số lượng sản phẩm trong kho không đủ hoặc sản phẩm không tồn tại
@@ -167,6 +166,15 @@ class OrderService
 
             // Nếu không có lỗi, lưu các thay đổi vào cơ sở dữ liệu
             DB::commit();
+
+            //Gửi mail
+            // $order = Order::find($orderId);
+            // if($order)
+            // {
+            //     //gửi mail
+            //     Mail::to($order->email)
+            //         ->send(new OrderSuccessMail($order));
+            // }
 
             if($request->payment_method == 'online')
             {

@@ -41,7 +41,7 @@
 
                             {{-- <td style="text-align:center;vertical-align:middle;" ><input type = "number" class="quantity" value="{{ $cart['quantity'] }}" style="width:60px;border-top-left-radius: 12px;border-bottom-right-radius: 12px;border:2px solid green;text-align:center;outline:none" min="1" max="100"></td> --}}
                             <td style="text-align:center;vertical-align:middle;" >
-                                <input type = "number" id="nonNegativeNumber" class="quantity" value="{{ $cart['quantity'] }}" min = "1" max = "10" style="width:60px;border-top-left-radius: 12px;border-bottom-right-radius: 12px;border:2px solid green;text-align:center;outline:none">
+                                <input type = "number" id="nonNegativeNumber" data-id = {{ $id }} class="quantity" value="{{ $cart['quantity'] }}" min = "1" max = "100" style="width:60px;border-top-left-radius: 12px;border-bottom-right-radius: 12px;border:2px solid green;text-align:center;outline:none">
                                 <span id="error" class="error"></span>
                             </td>
 
@@ -177,6 +177,7 @@
 @push('custom-script')
 <script>
 $(document).ready(function () {
+    checkQuantity();
 
     function updateCart(even) 
     {
@@ -323,24 +324,70 @@ $(document).ready(function () {
 
     $(document).on('click', '#apply_discount_btn', applyCoupon);
 
-    document.getElementById('nonNegativeNumber').addEventListener('input', function() {
-      var inputElement = this;
-      var inputValue = inputElement.value;
+    function checkQuantity(event) {
+        var inputElement = this;
+        var inputValue = inputElement.value;
+        var idUsingData = $(this).data('id');
+        var this_ = $(this);
 
-      // Kiểm tra xem giá trị nhập vào có phải là số không âm hay không
-      if (!isNonNegativeNumber(inputValue)) {
-        document.getElementById('error').textContent = 'Vui lòng nhập số không âm.';
-        inputElement.value = ''; // Xóa giá trị nhập nếu là số âm
-      } else {
-        document.getElementById('error').textContent = '';
-      }
-    });
+        // Kiểm tra xem giá trị nhập vào có phải là số không âm hay không
+        if (!isNonNegativeNumber(inputValue)) {
+            // Nếu không phải là số không âm, xóa giá trị nhập và hiển thị thông báo lỗi
+            this_.val(''); // Hoặc inputElement.value = '';
+            // document.getElementById('error').textContent = 'Vui lòng nhập số không âm.';
+            return;
+        }else if(isNonNegativeNumber(inputValue) == '')
+        {
+            this_.val(1); // Hoặc inputElement.value = '';
+            return;
+        }else {
+            document.getElementById('error').textContent = '';
+        }
 
-    // Hàm kiểm tra xem giá trị có phải là số không âm hay không
-    function isNonNegativeNumber(value) {
-      var number = parseFloat(value);
-      return !isNaN(number) && number >= 0;
+        $.ajax({
+            url: '{{ route('products.check-quantity') }}',
+            method: 'POST',
+            data: { productId: idUsingData, quantity: inputValue, _token: '{{ csrf_token() }}' },
+            success: function(response) {
+                if (response['newQuantity'] !== inputValue) {
+                    // Nếu newQuantity khác với giá trị nhập, cập nhật giá trị
+                    // this_.val(response['newQuantity']);
+                    $(".cart_wrapper").html(response.cart_component);
+                    $("#cart_list_wrapper").html(response.cartList);
+                } else {
+                    // Ngược lại, giữ nguyên giá trị nhập
+                    // this_.val(inputValue);
+                    $(".cart_wrapper").html(response.cart_component);
+                    $("#cart_list_wrapper").html(response.cartList);
+                }
+                // $('#message').text(response.message);
+                console.log(response['newQuantity'])    
+                console.log(response['message'])    
+            },
+            error: function(error) {
+                // Xử lý lỗi Ajax
+                console.error(error);
+            }
+        });
     }
+    $(document).on('input', '.quantity', checkQuantity);
+
+    function checkNull(event) 
+    {
+        var inputElement = this;
+        var inputValue = inputElement.value;
+        if(inputValue == '')
+        {
+            inputElement.value = 1;
+        }
+    }
+    $(document).on('focusout', '.quantity', checkNull);
+
+    function isNonNegativeNumber(value) {
+        // Kiểm tra xem giá trị có phải là số không âm hay không
+        return /^\d+$/.test(value) && parseInt(value, 10) >= 0;
+    }
+
 
     //sử lý coupon nhập nhiều lần
     function checkUseCoupon(even) 
