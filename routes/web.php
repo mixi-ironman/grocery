@@ -15,7 +15,7 @@ use App\Http\Controllers\Auth\ForgotPasswordController;
 // --------------------------------------------------------------------
     Route::get('/home', function () {
         return view('client.layouts.master_layout');
-        
+
     });
 
     Route::get('/forgot-password', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
@@ -77,7 +77,7 @@ use App\Http\Controllers\Auth\ForgotPasswordController;
         Route::get('/delete-cart',[CartController::class,'deleteCart'])->name('delete-cart');
         Route::post('/apply-coupon',[CartController::class,'applyCoupon'])->name('apply-coupon');
 
-        //checkout 
+        //checkout
         Route::get('/check-out',[CartController::class,'checkout'])->name('check-out');
         Route::post('/check-out-cash',[CartController::class,'addOrderCash'])->name('confirm-check-out');
     });
@@ -110,3 +110,4 @@ use App\Http\Controllers\Auth\ForgotPasswordController;
         Route::get('/lien-he', [ContactController::class, 'showForm'])->name('show-form');
         Route::post('/lien-he', [ContactController::class, 'submitForm'])->name('store');
     });
+    Route::get('generate-pdf', [\App\Http\Controllers\OrderExportExcellController::class, 'toPDF']);
