@@ -4,7 +4,7 @@
             <div class="col-lg-8 mb-2">
                 <h1 class="mb-3">Giỏ hàng</h1>
                 {{-- <div class="d-flex justify-content-between" style="display:none">
-                    <h6 class="text-muted">There are <span class="text-primary">3</span> products in your cart</h6>
+                    <h6 class="text-muted">There are <span class="">3</span> products in your cart</h6>
                     <h6 class="text-muted"><a href="#" class="text-muted"><i class="bi bi-trash me-2"></i>Clear Cart</a></h6>
                 </div> --}}
             </div>
@@ -72,9 +72,9 @@
                 <div class="divider-2 mb-3"></div>
                 
                 <div class="cart-action d-flex justify-content-between align-items-center mt-4">
-                    <a href="{{route('home')}}" class="translatex"  style="background-color:rgb(240, 240, 240);display:inline-block; padding:6px 15px;border-top-left-radius: 12px;border-bottom-right-radius: 12px;color:black;font-weight:600;font-size:16px;position:relative"><i class="bi bi-arrow-left me-2"></i>Quay lại trang chủ</a>
+                    <a href="{{route('home')}}" class="translatex hover-top"  style="background-color:rgb(240, 240, 240);display:inline-block; padding:6px 15px; color:black;font-weight:600;font-size:16px;position:relative"><i class="bi bi-arrow-left me-2"></i>Quay lại trang chủ</a>
                     <div class="wraper-btn-cart  d-flex justify-content-between align-items-center" style="padding: 0 15px">
-                        <a href="{{route('home')}}" class="translatex" id = "btn-destroy-cart"  style="background-color:rgb(240, 240, 240);display:inline-block; padding:6px 15px;border-top-right-radius: 12px;border-bottom-left-radius: 12px;color:black;font-weight:600;font-size:16px;position:relative"><i class="bi bi-arrow-left me-2"></i>Xóa giỏ hàng</a>
+                        <a href="{{route('home')}}" class="translatex" id = "btn-destroy-cart"  style="background-color:rgb(240, 240, 240);display:inline-block; padding:6px 15px;color:black;font-weight:600;font-size:16px;position:relative"><i class="bi bi-arrow-left me-2"></i>Xóa giỏ hàng</a>
                         <p style="margin-left:20px;text-align: right;font-size:20px;"><strong style="border-top-left-radius: 12px;border-bottom-right-radius: 12px;padding:3px 20px;border:4px solid rgb(240, 240, 240);">Tổng: {{ number_format($total).' đ' }}</strong></p>
                     </div>
                 </div>
@@ -92,7 +92,7 @@
                                         <h6 class="text-muted">Giá tạm tính</h6>
                                     </td>
                                     <td class="cart_total_amount">
-                                        <h4 class="text-primary text-end">{{ number_format($total)}}đ</h4>
+                                        <h4 class=" text-end">{{ number_format($total)}}đ</h4>
                                     </td>
                                 </tr>
                                 <tr>
@@ -106,7 +106,7 @@
                                         <h6 class="text-muted">Giá tạm tính</h6>
                                     </td>
                                     <td class="cart_total_amount" >
-                                        <h4 style="width:165px" class="text-primary text-end" id="temporary-price">{{ number_format($total)}} đ</h4>
+                                        <h4 style="width:165px" class=" text-end" id="temporary-price">{{ number_format($total)}} đ</h4>
                                     </td>
                                 </tr>
 
@@ -115,7 +115,7 @@
                                         <h6 class="text-muted">Khuyến mãi</h6>
                                     </td>
                                     <td class="cart_total_amount">
-                                        <h4 style="width:165px" class="text-primary text-end" id="discount_cart">0 đ</h4>
+                                        <h4 style="width:165px" class=" text-end" id="discount_cart">0 đ</h4>
                                     </td>
                                 </tr>
 
@@ -124,7 +124,7 @@
                                         <h6 class="text-muted">Giá phải trả</h6>
                                     </td>
                                     <td class="cart_total_amount" >
-                                        <h4 style="width:165px" class="text-primary text-end" id="price-to-pay">{{ number_format($total)}} đ</h4>
+                                        <h4 style="width:165px" class=" text-end" id="price-to-pay">{{ number_format($total)}} đ</h4>
                                     </td>
                                 </tr>
                                 @if(Auth::check())
@@ -158,7 +158,7 @@
                         </table>
                     </div>
                     {{-- <a href="#" class="btn mb-2 w-100">Proceed To CheckOut<i class="bi bi-box-arrow-right ms-2"></i></a> --}}
-                    <a href="{{ route('check-out') }}" class="translatex" id="checkout_button"  style="background-color:rgb(240, 240, 240);display:inline-block; padding:6px 15px;border-top-left-radius: 12px;border-bottom-right-radius: 12px;color:black;font-weight:600;font-size:16px;position:relative;">Thanh Toán</a>
+                    <a href="{{ route('check-out') }}" class="translatex" id="checkout_button"  style="background-color:rgb(240, 240, 240);display:inline-block; padding:6px 15px;color:black;font-weight:600;font-size:16px;position:relative;">Thanh Toán</a>
                 </div>
                 {{-- <div>Ghi chú</div> --}}
             </div>
@@ -166,7 +166,7 @@
                 <div class="row" >
                     <div class="col-md-12" style="height:200px;width:100%; d-flex justify-content-between align-items-center">
                         <h3 style="height:100%;width:100% ;text-align:center;vertical-align:middle">Giỏ hàng của bạn đang trống</h3>
-                        <a href="{{route('home')}}" class="translatex hover-top "  style="background-color:rgb(240, 240, 240); display:inline-block; padding:6px 15px ;border-top-right-radius: 12px;border-bottom-left-radius: 12px;color:black;font-weight:600;font-size:16px;position:relative"><i class="fa-solid fa-arrow-left" style="margin-right: 5px"></i>Quay lại trang chủ</a>
+                        <a href="{{route('home')}}" class="translatex hover-top "  style="background-color:rgb(240, 240, 240); display:inline-block; padding:6px 15px ;color:black;font-weight:600;font-size:16px;position:relative"><i class="fa-solid fa-arrow-left" style="margin-right: 5px"></i>Quay lại trang chủ</a>
                     </div>
                 </div>
             @endif
