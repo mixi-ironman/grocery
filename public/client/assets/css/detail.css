@@ -280,8 +280,6 @@
 }
 .tab-pane.active {
     display: block;
-    width:50%;
-    text-align:justify;
 }
 
 /* tab-item-common ------------*/
@@ -306,6 +304,11 @@
 
 .tab-pane.active .image {
     text-align:center;
+}
+
+.tab-pane_desc{
+    width:50%;
+    text-align:justify;
 }
 
 /* Phần img mô tả chi tiết sản phẩm */
@@ -424,17 +427,15 @@
 }
 
 .btn-form-submit button {
-    background: rgb(156, 206, 186);
-    padding: 3px 15px;
+    background: rgb(240, 240, 240);
+    padding: 6px 15px;
     outline: none;
     border: none;
-    border-radius: 5px;
+    /* border-radius: 5px; */
     cursor: pointer;
     font-size: 15px;
     font-weight: 400;
-    color:white;
-    border-top-left-radius: 12px;
-    border-bottom-right-radius: 12px
+    color:rgb(0, 0, 0);
 }
 
 /* Related Product */

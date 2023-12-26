@@ -360,9 +360,10 @@
     /* background: linear-gradient(to top, #f29bdf, #b0facd); */
     margin-bottom:0;
     width: 250px;
+    border:1px solid black;
     /* display:none;
     transition:all 0.4s; */
-    /* box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); */
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
 }
 
 .menu-list_ {
@@ -1788,6 +1789,11 @@ span {
 }
 .cart-total {
     margin-bottom: 20px;
+    font-weight:600;
+}
+
+.cart-total span {
+    font-weight:600;
 }
 .btn-cart {
     display: flex;
