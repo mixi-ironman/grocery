@@ -15,6 +15,7 @@ use App\Http\Controllers\CouponController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\OrderExportExcellController;
+use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\AdminAuthController;
 
 
@@ -142,8 +143,9 @@ Route::prefix('user')->name('user.')->group(function () {
 Route::prefix('contact')->name('contact.')->group(function () {
     Route::get('/lien-he', [ContactController::class, 'index'])->name('index');
     Route::delete('/destroy/{id}', [ContactController::class, 'destroy'])->name('destroy');
-
 });
 
 // Excel
 Route::get('/export-statistics', [OrderExportExcellController::class, 'exportStatistics'])->name('excel-export');
+
+Route::get('/generate-invoice/{id}', [InvoiceController::class, 'generateInvoice'])->name('pdf-export');

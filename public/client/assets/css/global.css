@@ -1,5 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Ubuntu&display=swap");
 
+/* rgb(240, 240, 240) */
+
 :root {
     --color-bgr: rgb(93, 168, 138);
     --color-primary: rgb(108, 176, 149);
@@ -12,8 +14,10 @@
     box-sizing: border-box;
     color: black;
     /* font-family: "Ubuntu", sans-serif ; */
+    font-family: system-ui,'Segoe UI',Roboto,Helvetica,Arial,sans-serif,'Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol';
+
     /* font-family: 'Roboto', sans-serif; */
-    font-family: "Helvetica Neue", Helvetica, Arial, 文泉驛正黑, "WenQuanYi Zen Hei", "Hiragino Sans GB", "儷黑 Pro", "LiHei Pro", "Heiti TC", 微軟正黑體, "Microsoft JhengHei UI", "Microsoft JhengHei", sans-serif;
+    /* font-family: "Helvetica Neue", Helvetica, Arial, 文泉驛正黑, "WenQuanYi Zen Hei", "Hiragino Sans GB", "儷黑 Pro", "LiHei Pro", "Heiti TC", 微軟正黑體, "Microsoft JhengHei UI", "Microsoft JhengHei", sans-serif; */
 }
 
 /* body {
@@ -147,8 +151,8 @@ li {
     float: left;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
     /* background: linear-gradient(to right, #8ce09d, #fff5c3) !important; */
-    background: linear-gradient(to right, #deb8e6, #9ce9ad) !important;
-
+    /* background: linear-gradient(to right, #deb8e6, #9ce9ad) !important; */
+    background-color: rgb(144, 203, 180);
     z-index: 100;
     animation: slideIndown 1s linear;
     /* transition: opacity .25s ease,transform .25s ease; */

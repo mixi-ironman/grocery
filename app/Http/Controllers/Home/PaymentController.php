@@ -8,6 +8,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\OrderSuccessMail;
 use App\Models\Order;
+use App\Jobs\SendEmailJob;
 
 class PaymentController extends Controller
 {
@@ -77,9 +78,10 @@ class PaymentController extends Controller
             if($order)
             {
                 //gửi mail
-                Mail::to($order->email)
-                    ->send(new OrderSuccessMail($order));
-                }
+                // Mail::to($order->email)
+                dispatch(new SendEmailJob($order));
+                //     ->send(new OrderSuccessMail($order));
+                // }
 
                 // Mail::to($order->email)
                 // ->queue(new OrderSuccessMail($order));
@@ -90,3 +92,4 @@ class PaymentController extends Controller
             return redirect()->route('thanh-you');
         }
     }
+}

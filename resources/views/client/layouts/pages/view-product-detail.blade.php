@@ -147,10 +147,10 @@
 
                 <div class="product_tag" style="padding:0px 20px 20px;">
                     @if($productTags->isNotEmpty())
-                    <p style="font-size:20px;font-weight:bold">Tags</p>
+                    <p style="font-size:20px;font-weight:bold;margin-bottom:15px;">Tags</p>
                         <i class="fa-solid fa-tags"></i>
                         @foreach($productTags as $tag)
-                        <a href="{{ route('product-tags', ['product_tag' => $tag->name]) }}" class="product_item" style="display:inline-block;padding:3px 4px;background-color:rgb(172, 225, 172);margin:2px 2px ;border-radius:5px;">{{ $tag->name }}</a>
+                        <a href="{{ route('product-tags', ['product_tag' => $tag->name]) }}" class="product_item" style="display:inline-block;padding:3px 5px;background-color:rgb(240, 240, 240);margin:2px 2px ;border-radius:5px;">{{ $tag->name }}</a>
                         @endforeach
                     @endif
                 </div>

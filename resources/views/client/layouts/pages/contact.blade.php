@@ -33,7 +33,7 @@
                             <div class="form-group comment-form-author">
                                 <input class="form-control" type="text" name="name" id="contact_name" value="{{ old('name') }}" placeholder="Tên...">
                                 @error('name')
-                                    <p class="error">{{ $message }}</p>
+                                    <p class="error" style="color:red;">{{ $message }}</p>
                                 @enderror
                             </div>
                         </div>
@@ -42,7 +42,7 @@
                             <div class="form-group comment-form-email">
                                 <input class="form-control" type="email" name="email" id="email" value="{{ old('email') }}" placeholder="Email...">
                                 @error('email')
-                                <p class="error">{{ $message }}</p>
+                                <p class="error" style="color:red;">{{ $message }}</p>
                                 @enderror
                             </div>
                         </div>
@@ -51,7 +51,7 @@
                         <div class="form-group comment-form-comment">
                             <textarea class="form-control" name="message" id="cmt-content" cols="30" rows="6" placeholder="Nội dung đánh giá...">{{ old('message') }}</textarea>
                             @error('message')
-                            <p class="error">{{ $message }}</p>
+                            <p class="error" style="color:red;">{{ $message }}</p>
                             @enderror
                         </div>
                     </div>
@@ -61,11 +61,11 @@
                         <button class="button-contactForm translatex"  style="font-size:18px;font-weight:500">Gửi phản hồi</button>
                     </div> --}}
                     @if(session('success'))
-                        <div id="success-alert" class="alert alert-success">
+                        <div style="color:red;" id="success-alert" class="alert alert-success">
                             {{ session('success') }}
                         </div>
                     @endif
-                    <button type="submit" class="translatex" style="padding:5px 8px; background-color:rgb(175, 220, 175);outline:none; border-radius:10px;">Gửi phản hồi</button>
+                    <button type="submit" class="translatex" style="padding:5px 8px; background-color:rgb(240, 240, 240);outline:none; border:none;">Gửi phản hồi</button>
                 </form>
             </div>
         </div>

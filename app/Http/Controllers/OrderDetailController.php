@@ -24,6 +24,7 @@ class OrderDetailController extends Controller
     {
         // $orderDetail = $this->orderDetailService->getOrderDetail();
         $orderDetails = $this->orderDetailService->getOrderDetailById($id);
+        // dd($orderDetails);
         // foreach($orderDetails as $item)
         // {
         //     dd($item->product);
@@ -32,7 +33,7 @@ class OrderDetailController extends Controller
         // $order = Order::find($id);
         // dd($order->orderDetails);
         // $orderDetails->detach(8);
-        return view('admin.order.list-order',[ 'orderDetail' => $orderDetails]);
+        return view('admin.order.list-order',[ 'orderDetail' => $orderDetails, 'order_id' => $id]);
     }
 
     // public function printOrder($id)

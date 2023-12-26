@@ -5,6 +5,11 @@
         <div class="card">
             <div class="card-header">
                 <h4 class="card-title">Danh sách đơn hàng</h4>
+                <form action="{{ route('excel-export') }}" >
+                    @csrf
+                    <input type="submit" value="Xuất Excel" name="export_excel" class="btn btn-success">
+                    {{-- <button type="submit" class="btn btn-primary">Xuất Excel</button> --}}
+                </form>
             </div>
             <div class="card-body">
                 <table class="table" id="myTable_Order">

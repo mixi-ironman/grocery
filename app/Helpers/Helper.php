@@ -50,7 +50,7 @@ class Helper
     public static function price($price = 0)
     {
         if ($price != 0) {
-            return '<p><strong style="font-size:20px;  letter-spacing: 1px;">' . number_format($price) .'₫</strong></p>';
+            return '<p style="font-size:20px;  letter-spacing: 1px;">' . number_format($price) .'₫</p>';
         } else {
             return '<a href="/lien-he.html">Liên hệ</a>';
         }

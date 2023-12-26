@@ -68,7 +68,7 @@
                         <div class="col-md-12">
                             <div class="slider-item-product">
                                 <div class="product-title popular-product-title">
-                                    <h3 class="hover_  name-category-popular scroll-animation" style="position: relative">Sản phẩm mới</h3>
+                                    <h3 class="hover_  name-category-popular scroll-animation" style="position: relative;font-size:24px;">Sản phẩm mới</h3>
                                     {{-- <h3 class="name-category-popular">Sản phẩm phổ biến</h3> --}}
                                     <ul class="nav-tab" style="opacity: 0">
                                         <li class="nav-item">
@@ -95,7 +95,7 @@
                             <div class="product-grid row g-3 btn_load-more " >
                                 <input type="hidden" value="1" id ="page" name = "page">
                                 <div class="col-md-12" >
-                                    <button type="button" data-url = {{ route('load-product') }} id="btn-load_product" class="scroll-animation translatex hover-top " style="background-color:rgb(93,168,138,0.8);display:inline-block; padding:4px 15px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);border-top-left-radius: 12px;border-bottom-right-radius: 12px;color:black;font-weight:600;position:relative" >Xem thêm...</button>
+                                    <button type="button" data-url = {{ route('load-product') }} id="btn-load_product" class="translatex" style="background-color:rgb(240, 240, 240);border:none;display:inline-block; padding:5px 15px;;border-top-left-radius: 12px;border-bottom-right-radius: 12px;color:black;font-weight:600;position:relative;outline:none;" >Xem thêm...</button>
                                 </div>
                             </div>
                         </div>

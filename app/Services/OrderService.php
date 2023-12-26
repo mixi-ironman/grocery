@@ -18,6 +18,7 @@ use App\Services\OrderDetailService;
 use App\Repositories\OrderRepository;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use App\Jobs\SendEmailJob;
 class OrderService
 {
 
@@ -168,17 +169,18 @@ class OrderService
             DB::commit();
 
             //Gửi mail
-            // $order = Order::find($orderId);
-            // if($order)
-            // {
-            //     //gửi mail
-            //     Mail::to($order->email)
-            //         ->send(new OrderSuccessMail($order));
-            // }
+            $order = Order::find($orderId);
+            
 
             if($request->payment_method == 'online')
             {
                 return redirect()->route('vnpay', ['order_id' => $orderId, 'amount' => $totalAmount]);
+            }else{
+                //gửi mail
+                // Mail::to($order->email)
+                //     ->send(new OrderSuccessMail($order));
+                //cách hay hơn sử dụng queue job
+                dispatch(new SendEmailJob($order));
             }
             session()->forget('cart');
             return redirect()->route('thanh-you');

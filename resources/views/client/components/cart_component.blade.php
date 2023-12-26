@@ -72,10 +72,10 @@
                 <div class="divider-2 mb-3"></div>
                 
                 <div class="cart-action d-flex justify-content-between align-items-center mt-4">
-                    <a href="{{route('home')}}" class="translatex hover-top"  style="background-color:rgb(93,168,138,0.8);display:inline-block; padding:10px 15px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);border-top-left-radius: 12px;border-bottom-right-radius: 12px;color:black;font-weight:600;font-size:16px;position:relative"><i class="bi bi-arrow-left me-2"></i>Quay lại trang chủ</a>
+                    <a href="{{route('home')}}" class="translatex"  style="background-color:rgb(240, 240, 240);display:inline-block; padding:6px 15px;border-top-left-radius: 12px;border-bottom-right-radius: 12px;color:black;font-weight:600;font-size:16px;position:relative"><i class="bi bi-arrow-left me-2"></i>Quay lại trang chủ</a>
                     <div class="wraper-btn-cart  d-flex justify-content-between align-items-center" style="padding: 0 15px">
-                        <a href="{{route('home')}}" class="translatex hover-top " id = "btn-destroy-cart"  style="background-color:rgb(93,168,138,0.8);display:inline-block; padding:7px 15px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);border-top-right-radius: 12px;border-bottom-left-radius: 12px;color:black;font-weight:600;font-size:16px;position:relative"><i class="bi bi-arrow-left me-2"></i>Xóa giỏ hàng</a>
-                        <p style="margin-left:20px;text-align: right;font-size:20px;"><strong style="box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);border-top-left-radius: 12px;border-bottom-right-radius: 12px;padding:5px 20px;border:4px solid rgb(93,168,138);">Tổng: {{ number_format($total).' đ' }}</strong></p>
+                        <a href="{{route('home')}}" class="translatex" id = "btn-destroy-cart"  style="background-color:rgb(240, 240, 240);display:inline-block; padding:6px 15px;border-top-right-radius: 12px;border-bottom-left-radius: 12px;color:black;font-weight:600;font-size:16px;position:relative"><i class="bi bi-arrow-left me-2"></i>Xóa giỏ hàng</a>
+                        <p style="margin-left:20px;text-align: right;font-size:20px;"><strong style="border-top-left-radius: 12px;border-bottom-right-radius: 12px;padding:3px 20px;border:4px solid rgb(240, 240, 240);">Tổng: {{ number_format($total).' đ' }}</strong></p>
                     </div>
                 </div>
            
@@ -134,10 +134,10 @@
                                         <p id="notification_coupon"></p>
                                         <div class="mb-3" style="width:150px; position:relative">
                                             <label for="exampleFormControlInput1" class="form-label">Voucher</label>
-                                            <input style="width: 200px;" type="text" name="coupon_code" class="form-control apply-coupon" id="discount_code" placeholder="Nhập mã giảm giá">
+                                            <input style="width: 200px;margin-bottom:30px;" type="text" name="coupon_code" class="form-control apply-coupon" id="discount_code" placeholder="Nhập mã giảm giá">
                                             <i class="fa-solid fa-circle-xmark icon-rf-coupon"></i>
                                         </div>
-                                        <a href="{{route('apply-coupon')}}" id="apply_discount_btn" class="translatex hover-top"  style="background-color:rgb(93,168,138,0.8);display:inline-block; padding:5px 10px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);border-top-left-radius: 12px;border-bottom-right-radius: 12px;color:black;font-weight:600;font-size:14px;position:relative">Áp dụng mã</a>
+                                        <a href="{{route('apply-coupon')}}" id="apply_discount_btn" class="translatex hover-top"  style="background-color:rgb(93,168,138,0.8);display:inline-block; padding:5px 10px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);border-top-left-radius: 12px;border-bottom-right-radius: 12px;color:black;font-weight:600;font-size:14px;position:relative;margin-bottom:10px;">Áp dụng mã</a>
                                     </td>
                                 </tr>
                                 @else
@@ -146,11 +146,11 @@
                                         {{-- <h6 class="text-muted">Coupons</h6> --}}
                                         <div class="mb-3" style="width:150px;">
                                             <label for="exampleFormControlInput1" class="form-label">Voucher</label>
-                                            <input style="width: 200px;" type="text" name="coupon_code" class="form-control apply-coupon" id="discount_code" placeholder="Nhập mã giảm giá">
+                                            <input style="width: 200px;margin-bottom:30px;" type="text" name="coupon_code" class="form-control apply-coupon" id="discount_code" placeholder="Nhập mã giảm giá">
                                             <p style="width:300px" id="notification_coupon"></p>
                                             {{-- <i class="fa-solid fa-circle-xmark icon-rf-coupon"></i> --}}
                                         </div>
-                                        <a href="{{ route('customer.login-page') }}" onclick="return confirm('Bạn phải đăng nhập')" class="translatex hover-top"  style="background-color:rgb(93,168,138,0.8);display:inline-block; padding:5px 10px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);border-top-left-radius: 12px;border-bottom-right-radius: 12px;color:black;font-weight:600;font-size:14px;position:relative">Áp dụng mã</a>
+                                        <a href="{{ route('customer.login-page') }}" onclick="return confirm('Bạn phải đăng nhập')" class="translatex hover-top"  style="background-color:rgb(93,168,138,0.8);display:inline-block; padding:5px 10px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);border-top-left-radius: 12px;border-bottom-right-radius: 12px;color:black;font-weight:600;font-size:14px;position:relative;margin-bottom:10px;text-align:right; ">Áp dụng mã</a>
                                     </td>
                                 </tr>
                                 @endif
@@ -158,7 +158,7 @@
                         </table>
                     </div>
                     {{-- <a href="#" class="btn mb-2 w-100">Proceed To CheckOut<i class="bi bi-box-arrow-right ms-2"></i></a> --}}
-                    <a href="{{ route('check-out') }}" class="translatex" id="checkout_button"  style="background-color:rgba(221, 131, 229, 0.8);display:inline-block; padding:10px 15px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);border-top-left-radius: 12px;border-bottom-right-radius: 12px;color:black;font-weight:600;font-size:16px;position:relative;">Thanh Toán</a>
+                    <a href="{{ route('check-out') }}" class="translatex" id="checkout_button"  style="background-color:rgb(240, 240, 240);display:inline-block; padding:6px 15px;border-top-left-radius: 12px;border-bottom-right-radius: 12px;color:black;font-weight:600;font-size:16px;position:relative;">Thanh Toán</a>
                 </div>
                 {{-- <div>Ghi chú</div> --}}
             </div>
@@ -166,7 +166,7 @@
                 <div class="row" >
                     <div class="col-md-12" style="height:200px;width:100%; d-flex justify-content-between align-items-center">
                         <h3 style="height:100%;width:100% ;text-align:center;vertical-align:middle">Giỏ hàng của bạn đang trống</h3>
-                        <a href="{{route('home')}}" class="translatex hover-top "  style="background-color:rgb(93,168,138,0.8);display:inline-block; padding:10px 15px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);border-top-right-radius: 12px;border-bottom-left-radius: 12px;color:black;font-weight:600;font-size:16px;position:relative"><i class="fa-solid fa-arrow-left" style="margin-right: 5px"></i>Quay lại trang chủ</a>
+                        <a href="{{route('home')}}" class="translatex hover-top "  style="background-color:rgb(240, 240, 240); display:inline-block; padding:6px 15px ;border-top-right-radius: 12px;border-bottom-left-radius: 12px;color:black;font-weight:600;font-size:16px;position:relative"><i class="fa-solid fa-arrow-left" style="margin-right: 5px"></i>Quay lại trang chủ</a>
                     </div>
                 </div>
             @endif

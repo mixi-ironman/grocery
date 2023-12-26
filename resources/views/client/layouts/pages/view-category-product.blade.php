@@ -70,15 +70,15 @@
                                 <form>
                                     <div style="display: flex; flex-direction: column;margin:10px 0">
                                         
-                                        <div style="display: flex;text-align:center;"><label for="currency-range">Từ:</label><span id="selected-currency" class="value_ranger">0</span>&nbsp<span id="price">vnd</span></div>
+                                        <div style="display: flex;text-align:center;"><label for="currency-range">Từ: &nbsp</label><span id="selected-currency" class="value_ranger">0</span>&nbsp<span id="price">đ</span></div>
                                         <input class="vnd currency-range" type="range" value = "0" min="0" max="1000000" step="10000" require/>
                                     </div>
                         
                                     <div style="display: flex; flex-direction: column">
-                                        <div style="display: flex;text-align:center;"><label for="currency-range">Đến:</label><span id="selected-currency_" class="value_ranger_">0</span>&nbsp<span id="price_">vnd</span></div>
+                                        <div style="display: flex;text-align:center;"><label for="currency-range">Đến: &nbsp</label><span id="selected-currency_" class="value_ranger_">0</span>&nbsp<span id="price_">đ</span></div>
                                         <input class="vnd currency-range_" type="range" value = "0" min="0" max="2000000" step="10000" require/>
                                     </div>
-                                    <button style="margin:10px 0 0 0px;" class="btn-filter-price translate" data-url="{{ route('filter-price') }}">Tìm</button>
+                                    <button style="margin:20px 0 0 0px;" class="btn-filter-price translatex" data-url="{{ route('filter-price') }}"><i class="fa-solid fa-magnifying-glass"></i></button>
                                 </form>
                             </div>
                         </form>

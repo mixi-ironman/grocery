@@ -24,7 +24,7 @@
     </div>
     <div class="address-item_action">
         @if(!$address->is_default)
-        <a class="change-address-default" data-id="{{ $address->id ?? '' }}" href="#" style="display:inline-block;padding:6px 10px;background-color:pink;border-radius:5px;margin-right:5px;">Đặt làm mặc định</a>
+        <a class="change-address-default" data-id="{{ $address->id ?? '' }}" href="#" style="background-color:white; display:inline-block;padding:6px 15px;color:red;border-radius:5px;margin-right:5px;border:1px solid rgb(247, 207, 207);box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);font-weight:600">Chọn</a>
         @endif
         {{-- <a><i class="fa-solid fa-pen"></i></a> --}}
         <a class="delete-address" href="{{ route('customer.destroy',['id' => $address->id ]) }}" data-id="{{ $address->id }}" style="padding: 10px"><i class="fa-solid fa-trash"></i></a>

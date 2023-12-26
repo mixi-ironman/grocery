@@ -254,13 +254,8 @@
 } */
 
 .nav-container {
-    background: linear-gradient(to left, #deb8e6, #9ce9ad);
-    /* background: linear-gradient(
-        to right,
-        rgb(163, 222, 192),
-        rgb(214, 97, 112)
-    ); */
-    /* background-color: rgb(144, 203, 180); */
+    /* background: linear-gradient(to left, #deb8e6, #9ce9ad); */
+    background-color: rgb(144, 203, 180);
     transition: all 1s;
 }
 .nav-container_center {
@@ -618,7 +613,7 @@ chuyển dịch từ giữa ra 2 bên */
     /* background-image: url(../img/slider_4.jpg); */
     /* background-image: url("https://pendecor.vn/uploads/files/2022/04/18/thiet-ke-cua-hang-tien-loi-9.jpg"); */
     /* filter: blur(0px); */
-    padding-top: 45%;
+    padding-top: 44%;
     background-repeat: no-repeat;
     background-size: cover;
     /* background-position: center center; */
@@ -626,6 +621,18 @@ chuyển dịch từ giữa ra 2 bên */
     /* filter: brightness(70%) blur(3px); */
     z-index: 1;
 }
+
+.slider-item_img__small {
+    /* height:246px; */
+    object-fit:cover; 
+    max-width:100%;
+    margin-bottom: 13px;
+}
+
+.img-small > *:nth-child(1) {
+    margin-bottom: 0px;
+}
+
 .slider-item_img::after {
     content: "";
     position: absolute;
@@ -636,7 +643,7 @@ chuyển dịch từ giữa ra 2 bên */
     background-color: rgba(26, 26, 26, 0.4);
 }
 .slider-item_description {
-    /* display: none; */
+    display: none;
     position: absolute;
     top: 70%;
     left: 30%;
@@ -747,7 +754,7 @@ chuyển dịch từ giữa ra 2 bên */
 /*---- Feature-Category------ */
 
 .feature-category {
-    margin-top: 30px;
+    margin-top: 15px;
 }
 .category {
 }
@@ -943,8 +950,9 @@ chuyển dịch từ giữa ra 2 bên */
 }
 
 .banner-wrapper-list {
+    display:none;
     /* overflow: hidden; */
-    display: flex;
+    /* display: flex; */
     flex-wrap: nowrap;
     white-space: nowrap;
     overflow-x: auto;
@@ -1183,8 +1191,9 @@ chuyển dịch từ giữa ra 2 bên */
     align-items: center;
 }
 
-.product-price p strong{
+.product-price p {
     color: rgb(235, 49, 49);
+    font-weight:600px;
     font-size: 18px !important;
 
   
@@ -1282,7 +1291,8 @@ chuyển dịch từ giữa ra 2 bên */
 
 /* Featured Product */
 .featured-product {
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    /* box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); */
+    background-color: rgb(240, 240, 240);
     margin-top: 30px;
     border-radius: 5px;
 }
@@ -1355,7 +1365,8 @@ chuyển dịch từ giữa ra 2 bên */
     /* display:none; */
     margin-top: 30px;
     /* background: linear-gradient(to right, #f29bdf, #b0facd); */
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    /* box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); */
+    background-color: rgb(240, 240, 240);
     border-radius: 5px;
     padding: 10px 5px;
 }
@@ -1785,9 +1796,10 @@ span {
 
 .btn-view-cart {
     color: #000000;
-    background-color: #e183ca;
+    background-color: rgb(155, 208, 165);
     padding: 6px 15px;
 
+    font-weight:600;
     border-top-left-radius: 12px;
     border-bottom-right-radius: 12px;
     /* opacity: 0; */
@@ -1795,8 +1807,10 @@ span {
 
 .btn-check-out {
     color: #000000;
-    background-color: rgb(93, 168, 138);
+    background-color: rgb(205, 142, 142);
     padding: 6px 15px;
+    font-weight:600;
+    /* box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); */
     /* border-radius: 5px; */
     font-size: 15px;
     border-bottom-left-radius: 12px;
@@ -2349,7 +2363,8 @@ span {
 .list-coupons{
     margin-top: 30px;
     /* background: linear-gradient(to right, #f29bdf, #b0facd); */
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    /* box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); */
+    background-color: rgb(240, 240, 240);
     border-radius: 5px;
     padding:20px 10px;
 }

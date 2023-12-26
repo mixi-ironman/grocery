@@ -147,7 +147,7 @@
                             </div>
 
                             {{-- <a href="#" class="translatex " id="btn-destroy-cart" style="background-color:rgb(93,168,138,0.8);display:inline-block; padding:7px 20px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);border-top-right-radius: 12px;border-bottom-left-radius: 12px;color:black;font-weight:600;font-size:16px;position:relative; margin-top:10px"><i class="bi bi-arrow-left me-2"></i>Cập nhật</a> --}}
-                            <button type="submit" class="translatex" style="background-color:rgb(93,168,138,0.8);display:inline-block; padding:7px 20px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);border-top-right-radius: 12px;border-bottom-left-radius: 12px;color:black;font-weight:600;font-size:16px;position:relative; margin-top:10px"><i class="bi bi-arrow-left me-2">Cập nhật</button>
+                            <button type="submit" class="translatex" style="background-color:rgb(240, 240, 240);display:inline-block;border:none; padding:4px 15px;border-top-right-radius: 12px;border-bottom-left-radius: 12px;color:black;font-weight:600;font-size:16px;position:relative; margin-top:10px"><i class="bi bi-arrow-left me-2">Cập nhật</button>
                         </form>
                     </div>
                 </div>

@@ -85,11 +85,11 @@
                 </tr>
             </tbody> --}}
         </table>
-        <form action="{{ route('excel-export') }}" >
+        <form action="{{ route('pdf-export', ['id' => $order_id]) }}" >
             @csrf
-            <input type="submit" value="Xuất Excel" name="export_excel" class="btn btn-success">
+            <input type="submit" value="Xuất Hóa đơn" name="export_pdf" class="btn btn-success">
             {{-- <button type="submit" class="btn btn-primary">Xuất Excel</button> --}}
-         </form>
+        </form>
     </div>
    
 @endsection

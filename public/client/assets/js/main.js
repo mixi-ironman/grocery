@@ -178,7 +178,7 @@ const app = {
                 autoplaySpeed: 1400,
             });
 
-            $(".slider_list_banner").slick({
+            $(".slider-wraper-list").slick({
                 slidesToShow: 1,
                 slidesToScroll: 1,
                 infinite: true,
@@ -329,6 +329,9 @@ const app = {
         scrollAnimationElements.forEach((element) => {
             const elementTop = element.getBoundingClientRect().top;
             const windowHeight = window.innerHeight;
+
+            console.log('top' + elementTop);
+            console.log(windowHeight * 0.85);
             // Kiểm tra khi nào phần tử nằm trong khung hiển thị
             if (elementTop < windowHeight * 0.85) {
                 element.classList.add("animate");
