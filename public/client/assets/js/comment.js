@@ -13,9 +13,6 @@ $(document).ready(function () {
             var $this = $(this);
             var index = $this.data("index");
             var product_id = $this.data("product_id");
-            console.log("---" + index);
-            // console.log("hover");
-
             selectedIndex = index;
             // $("#submit-cmt").data("count", index);
 
@@ -74,6 +71,7 @@ $(document).ready(function () {
         $(document).on("click", ".button-contactForm", function () {
             let product_id = $(".review-comment").data("id");
             let url_cmt = $("#send-comment").data("url");
+            var login_url = $("#send-comment").data("login");
             let name = $("#cmt-name").val();
             let content = $("#cmt-content").val();
             let email = $("#cmt-email").val();
@@ -102,7 +100,7 @@ $(document).ready(function () {
                 
                     if (data.code == '500') {
                         alert('Bạn phải Login để sử dụng chức năng này');
-                        window.location.replace('http://mixi.com:8000/customer/login-page');
+                        window.location.replace(login_url);
                     }
                 },
 

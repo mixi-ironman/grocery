@@ -252,7 +252,7 @@
                             </div>
                             <div class="cmt-notification" ></div>
 
-                            <div class="form-group btn-form-submit" id="send-comment" data-url="{{ route('send-comment') }}">
+                            <div class="form-group btn-form-submit" id="send-comment" data-url="{{ route('send-comment') }}" data-login="{{ route('customer.login-page') }}">
                                 <button class="button-contactForm translatex" data-count="0" id="submit-cmt" style="font-size:18px;font-weight:500">Gửi đánh giá</button>
                             </div>
                         </div>
